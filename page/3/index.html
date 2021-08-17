@@ -24,31 +24,28 @@
 
   <meta name="description" content="来者犹可追">
 <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://example.com/tags/index.html">
+<meta property="og:title" content="Erin枫">
+<meta property="og:url" content="http://example.com/page/3/index.html">
 <meta property="og:site_name" content="Erin枫">
 <meta property="og:description" content="来者犹可追">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-30T05:19:47.000Z">
-<meta property="article:modified_time" content="2021-07-30T05:22:27.688Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/">
+<link rel="canonical" href="http://example.com/page/3/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签 | Erin枫
-</title>
+  <title>Erin枫</title>
   
 
 
@@ -194,51 +191,126 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content index posts-expand">
             
-
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">标签
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">attribute关键字</a>
+        </h2>
 
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              暂无标签
-            </div>
-            <div class="tag-cloud-tags">
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
               
-            </div>
-          </div>
-        
-      </div>
+
+              <time title="创建时间：2021-08-01 19:10:03 / 修改时间：19:32:52" itemprop="dateCreated datePublished" datetime="2021-08-01T19:10:03+08:00">2021-08-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-      
+          <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
+<h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))</span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
+<li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
+<p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
+<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
+<hr>
+<p>于是本文的大体意思就清晰了，__attribute__((section(&quot;section_name&quot;)))，其作用是将作用的函数或数据放入指定为&quot;section_name&quot;对应的段中。</p>
+
       
     </div>
-    
 
     
     
     
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
