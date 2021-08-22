@@ -198,6 +198,140 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/01/C/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" class="post-title-link" itemprop="url">内存对齐</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-01 19:51:49" itemprop="dateCreated datePublished" datetime="2021-08-01T19:51:49+08:00">2021-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-02 00:07:47" itemprop="dateModified" datetime="2021-08-02T00:07:47+08:00">2021-08-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="字节对齐概念"><a href="#字节对齐概念" class="headerlink" title="字节对齐概念"></a>字节对齐概念</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
+<h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
+<li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
+<li><strong>结构体或者类的自身对齐值</strong>是其成员中自身对齐值最大的那个值。</li>
+<li><strong>指定对齐值</strong>：是指使用#pragma pack (value)时的指定对齐值value。</li>
+<li>数据成员、结构体和类的<strong>有效对齐值</strong>：自身对齐值和指定对齐值中小的那个值。</li>
+</ol>
+<h3 id="对齐原则"><a href="#对齐原则" class="headerlink" title="对齐原则"></a>对齐原则</h3><p>内存对齐主要遵循下面两个原则:</p>
+<ol>
+<li>结构体成员变量的起始地址能够被其成员变量<strong>有效对齐值</strong>整除。</li>
+<li>结构体总体大小能够被<strong>结构体有效对齐值</strong>整除，如不能则在后面补充字节。</li>
+</ol>
+<p>其实这里有点不严谨，编译器在编译的时候是可以指定对齐大小的，实际使用的有效对齐其实是取指定大小和自身大小的最小值，一般默认的对齐大小是4，这个模数是可以改变的，可以用预编译命令：</p>
+<p><code>#pragma pack(n)</code></p>
+<h3 id="数据类型占据字节数"><a href="#数据类型占据字节数" class="headerlink" title="数据类型占据字节数"></a>数据类型占据字节数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((align(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((align(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) = 8，刚好占的空间大小是8的整数倍1倍</p>
+<p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
+<p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
+<p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
+<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">uint32_t</span> f1;</span><br><span class="line">	<span class="keyword">uint8_t</span> f2;</span><br><span class="line">	<span class="keyword">uint8_t</span> f3;</span><br><span class="line">	<span class="keyword">uint32_t</span> f4;</span><br><span class="line">	<span class="keyword">uint64_t</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
+
+<p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
+<p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
+<p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
+<p>当align作用于结构体定义时会改变结构体的大小。结构体最终大小为aligned指定大小的整数倍</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,7 +510,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -440,12 +574,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19 分钟</span>
+    <span title="站点阅读时长">21 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
