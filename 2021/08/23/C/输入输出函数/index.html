@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="来者犹可追">
+  <meta name="description" content="错误报告标准库函数在一个外部整型变量errno(在errno.h中定义)中保存错误代码之后把这个信息传给用户程序，提示操作失败的准确原因。 perror函数简化向用户报告这些错误的过程，函数原型定义于stdio.h： void perror (char const *message); 如果messgae不是指向NULL并且指向一个非空字符串，就打印这个字符串，后面跟上一个分号和空格。 终止执行另">
 <meta property="og:type" content="article">
 <meta property="og:title" content="输入输出函数">
 <meta property="og:url" content="http://example.com/2021/08/23/C/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="来者犹可追">
+<meta property="og:description" content="错误报告标准库函数在一个外部整型变量errno(在errno.h中定义)中保存错误代码之后把这个信息传给用户程序，提示操作失败的准确原因。 perror函数简化向用户报告这些错误的过程，函数原型定义于stdio.h： void perror (char const *message); 如果messgae不是指向NULL并且指向一个非空字符串，就打印这个字符串，后面跟上一个分号和空格。 终止执行另">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-23T11:28:52.614Z">
-<meta property="article:modified_time" content="2021-08-23T11:29:21.570Z">
+<meta property="article:modified_time" content="2021-08-25T03:46:02.612Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
@@ -225,10 +225,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-08-23 19:28:52 / 修改时间：19:29:21" itemprop="dateCreated datePublished" datetime="2021-08-23T19:28:52+08:00">2021-08-23</time>
+              <time title="创建时间：2021-08-23 19:28:52" itemprop="dateCreated datePublished" datetime="2021-08-23T19:28:52+08:00">2021-08-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-25 11:46:02" itemprop="dateModified" datetime="2021-08-25T11:46:02+08:00">2021-08-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,14 +258,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -271,7 +277,126 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="错误报告"><a href="#错误报告" class="headerlink" title="错误报告"></a>错误报告</h2><p>标准库函数在一个外部整型变量errno(在errno.h中定义)中保存错误代码之后把这个信息传给用户程序，提示操作失败的准确原因。</p>
+<p>perror函数简化向用户报告这些错误的过程，函数原型定义于stdio.h：</p>
+<p><code>void perror (char const *message);</code></p>
+<p>如果messgae不是指向NULL并且指向一个非空字符串，就打印这个字符串，后面跟上一个分号和空格。</p>
+<h2 id="终止执行"><a href="#终止执行" class="headerlink" title="终止执行"></a>终止执行</h2><p>另一个函数exit，定义于stdlib.h，函数原型如下：</p>
+<p><code>void exit(int status);</code></p>
+<p>status参数传给操作系统，用于提示程序是否正常完成，这个函数经常用于perror发现错误后用来终止程序。</p>
+<h2 id="文本文件和二进制文件"><a href="#文本文件和二进制文件" class="headerlink" title="文本文件和二进制文件"></a>文本文件和二进制文件</h2><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>计算机的存储在物理上是二进制的，所以文本文件与二进制文件的区别并不是<strong>物理</strong>上的，而是<strong>逻辑</strong>上的。这两者只是在<strong>编码层次</strong>上有差异。 </p>
+<ul>
+<li><p>文本文件是基于字符编码的文件，常见编码方式由ASCII，UNICODE等。文本文件一般是定长编码，如ASCII是8个比特代表一个字符。</p>
+</li>
+<li><p>二进制文件是基于值编码的文件。二进制文件是变长编码，多少比特一个值由你决定。</p>
+</li>
+</ul>
+<p>以BMP文件为例，其头部是较为固定长度的文件头信息，前2字节用来记录文件为BMP格式，接下来的8个字节用来记录文件长度，再接下来的4字节用来 记录BMP文件头的长度，可以看出其编码是基于值的（不定长的，2、4、8字节长的值都有），所以BMP是二进制文件。 </p>
+<h3 id="读取过程"><a href="#读取过程" class="headerlink" title="读取过程"></a>读取过程</h3><p>文本工具打开一个文件的过程是怎样的呢？拿记事本来说，它首先读取文件物理上所对应的二进制比特流（前面已经说了，存储都是二进制的），然后按照你所选择 的解码方式来解释这个流，然后将解释结果显示出来。一般来说，你选取的解码方式会是ASCII码形式（ASCII码的一个字符是８个比特），接下来，它8 个比特8个比特地来解释这个文件流。</p>
+<p>例如对于这么一个文件流”01000000_01000001_01000010_01000011”(下划线 ‘’_’’，是我为了增强可读性，而手动添加的)，第一个8比特’’01000000’’按ASCII码来解码的话，所对应的字符是字符’’A’’，同理 其它3个8比特可分别解码为’’BCD’’，即这个文件流可解释成“ABCD”，然后记事本就将这个“ABCD”显示在屏幕上。</p>
+<p>记事本无论打开什么文件都按既定的字符编码工作（如ASCII码），所以当他打开二进制文件时，出现乱码 也是很必然的一件事情了，解码和译码不对应嘛。例如文件流’’00000000_00000000_00000000_00000001’’可能在二进制文件中对应的是一个四字节的整数int 1，在记事本里解释就变成了”NULL_NULL_NULL_SOH”这四个控制符。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>一般认为，文本文件编码基于字符定长，译码容易些；二进制文件编码是变长的，所以它灵活，存储利用率要高些，译码难一些（不同的二进制文件格式，有不同的译码方式）。</p>
+<p>很多书上还认为，文本文件的可读性要好些，存储要花费转换时间(读写要编译码)，而二进制文件可读性差，存储不存在转换时间（读写不要编解码，直接写值）。这里的可读性是从软件使用者角度来说的，因为我们用通用的记事本工具就几乎可以浏览所有文本文件，所以说文本文件可读性好；而读写一个具体的二进制 文件需要一个具体的文件解码器，所以说二进制文件可读性差，比如读BMP文件，必须用读图软件。而这里的存储转换时间应该是从编程的角度来说的，因为有些操作系统如windows需要对回车换行符进行转换(将’’/n’’，换成’’/r/n’’），所以文件读写时，操作系统需要一个一个字符的检查。<br>当前字符是不是’’/n’’或’’/r/n’’，这个在存储转换在Linux操作系统中并不需要，当然，当在两个不同的操作系统上共享文件时，这种存储 转换又可能出来(如Linux系统和Windows系统共享文本文件)。</p>
+<h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>C程序，所有I/O操作只是简单地从程序移进或移出字节的事情，这种字节流就叫做流（stream）。</p>
+<p>流是一个动态概念</p>
+<p>C将数据的输入输出看作是数据的流入和流出，不管是磁盘文件或者是物理设备都可看作一种流的源和目的，视他们为同一种东西，而不管其具体的物理结构，即对他们的操作，就是数据的流入和流出。</p>
+<p>绝大多数流是完全缓冲的，读取和写入实际上是从一块叫做缓冲区的内存区域来回复制数据。</p>
+<h3 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h3><p>既然流是一种动态概念，流的基本单位就可以进行分类。</p>
+<h4 id="文本流（字符流）"><a href="#文本流（字符流）" class="headerlink" title="文本流（字符流）"></a>文本流（字符流）</h4><p>文本流在不同系统中可能不同，比如说文本行最大长度，标准规定至少允许254个字符。另一个可能不同的就是文本行结束方式。例如Windows系统文本行以\r\n结尾，Unix以\n结尾。类似，在 Windows 平台上，文本流中的控制字符 ^Z（字符码 26），用来表示文本流的结束。并且在Windows系统中，输出时，文本中的换行符被写成一对回车/换行符，输入时，每遇到一个回车/换行就丢弃回车转化成换行，然后送到读缓冲区。</p>
+<h4 id="二进制流（字节流）"><a href="#二进制流（字节流）" class="headerlink" title="二进制流（字节流）"></a>二进制流（字节流）</h4><p>二进制流读写时，其不存在任何转换，直接将写缓冲区中数据写入文件。</p>
+<p>总的来说，从编程的角度来说，Ｃ中文本或二进制读写都是缓冲区与文件中二进制流的交互，只是文本读写时有回车换行的转换．所以当写缓冲区中无换行符”\n”(0AH)，文本写与二进制写的结果是一样的，同理，当文件中不存在“\r\n”(0DH0AH)时，文本读与二进制读的结果一样．</p>
+<h2 id="FILE结构体"><a href="#FILE结构体" class="headerlink" title="FILE结构体"></a>FILE结构体</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDIN_FILENO	0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDOUT_FILENO	1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDERR_FILENO	2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">char</span>	*_ptr;</span><br><span class="line">  <span class="keyword">int</span>	 _cnt;</span><br><span class="line">  <span class="keyword">char</span>	*_base;</span><br><span class="line">  <span class="keyword">int</span>	 _flag;</span><br><span class="line">  <span class="keyword">int</span>	 _file;</span><br><span class="line">  <span class="keyword">int</span>	 _charbuf;</span><br><span class="line">  <span class="keyword">int</span>	 _bufsiz;</span><br><span class="line">  <span class="keyword">char</span>	*_tmpfname;</span><br><span class="line">&#125; FILE;</span><br><span class="line"></span><br><span class="line">__MINGW_IMPORT FILE _iob[];	<span class="comment">/* An array of FILE imported from DLL. */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdin	(&amp;_iob[STDIN_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdout	(&amp;_iob[STDOUT_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stderr	(&amp;_iob[STDERR_FILENO])</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码摘取了stdio.h文件中关于FILE结构体的定义。FILE是一个数据结构，用于访问一个流，可以认为是辅助字节流动的一个结构。如果同时激活几个流，每个流都有一个FILE与他关联。。可以看出标准输入流，标准输出流，标准错误流名称分别为stdin,stdout,stderr，都是指向FILE结构体的指针。标准输入是缺省情况下输入的来源，标准输出是缺省情况下输出的来源。通常标准输入为键盘设备，标准输出为屏幕或者终端。缺省的标准输入输出设备可以被修改。</p>
+<h2 id="流I-O总览"><a href="#流I-O总览" class="headerlink" title="流I/O总览"></a>流I/O总览</h2><h3 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h3><ol>
+<li>声明一个FILE指针变量，辅助字节流动</li>
+<li>流通过fopen函数打开</li>
+<li>根据需要对文件进行读写</li>
+<li>调用fclose函数关闭流</li>
+</ol>
+<h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><p>不需要打开或者关闭</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>输入</th>
+<th>输出</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符</td>
+<td>getchar</td>
+<td>putchar</td>
+<td>读取（写入）单个字符</td>
+</tr>
+<tr>
+<td>文本行</td>
+<td>gets/scanf</td>
+<td>puts/printf</td>
+<td>文本行未格式化的输入（输出）/格式化的输入（输出）</td>
+</tr>
+<tr>
+<td>二进制数据</td>
+<td>fread</td>
+<td>fwrite</td>
+<td>读取（写入）二进制数据</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>家族名</th>
+<th>目的</th>
+<th>可用于所有流</th>
+<th>只用于stdin和stdout</th>
+<th>内存中的字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getchar</td>
+<td>字符输入</td>
+<td>fgetc，getc</td>
+<td>getchar</td>
+<td>对指针下标引用或者间接访问</td>
+</tr>
+<tr>
+<td>putchar</td>
+<td>字符输出</td>
+<td>fputc，putc</td>
+<td>putchar</td>
+<td>对指针下标引用或者间接访问</td>
+</tr>
+<tr>
+<td>gets</td>
+<td>文本行输入</td>
+<td>fgets</td>
+<td>gets</td>
+<td>使用strcpy函数</td>
+</tr>
+<tr>
+<td>puts</td>
+<td>文本行输出</td>
+<td>fputs</td>
+<td>puts</td>
+<td>使用strcpy函数</td>
+</tr>
+<tr>
+<td>scanf</td>
+<td>格式化输入</td>
+<td>fscanf</td>
+<td>scanf</td>
+<td>sscanf</td>
+</tr>
+<tr>
+<td>print</td>
+<td>格式化输出</td>
+<td>fprint</td>
+<td>print</td>
+<td>sprint</td>
+</tr>
+</tbody></table>
+
     </div>
 
     
@@ -419,6 +544,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%8A%A5%E5%91%8A"><span class="nav-number">1.</span> <span class="nav-text">错误报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E6%AD%A2%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">终止执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">文本文件和二进制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">读取过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.3.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81"><span class="nav-number">4.</span> <span class="nav-text">流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.2.</span> <span class="nav-text">流的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%B5%81%EF%BC%88%E5%AD%97%E7%AC%A6%E6%B5%81%EF%BC%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">文本流（字符流）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B5%81%EF%BC%88%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%89"><span class="nav-number">4.2.2.</span> <span class="nav-text">二进制流（字节流）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FILE%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">5.</span> <span class="nav-text">FILE结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81I-O%E6%80%BB%E8%A7%88"><span class="nav-number">6.</span> <span class="nav-text">流I&#x2F;O总览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6I-O"><span class="nav-number">6.1.</span> <span class="nav-text">文件I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86I-O"><span class="nav-number">6.2.</span> <span class="nav-text">标准I&#x2F;O</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -434,7 +560,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -498,12 +624,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">28k</span>
+    <span title="站点总字数">37k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">25 分钟</span>
+    <span title="站点阅读时长">33 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
