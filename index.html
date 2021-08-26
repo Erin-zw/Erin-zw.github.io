@@ -775,7 +775,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 11:46:02" itemprop="dateModified" datetime="2021-08-25T11:46:02+08:00">2021-08-25</time>
+                <time title="修改时间：2021-08-26 13:39:54" itemprop="dateModified" datetime="2021-08-26T13:39:54+08:00">2021-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -793,14 +793,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
+              <span>5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -828,12 +828,12 @@
 </ul>
 <p>以BMP文件为例，其头部是较为固定长度的文件头信息，前2字节用来记录文件为BMP格式，接下来的8个字节用来记录文件长度，再接下来的4字节用来 记录BMP文件头的长度，可以看出其编码是基于值的（不定长的，2、4、8字节长的值都有），所以BMP是二进制文件。 </p>
 <h3 id="读取过程"><a href="#读取过程" class="headerlink" title="读取过程"></a>读取过程</h3><p>文本工具打开一个文件的过程是怎样的呢？拿记事本来说，它首先读取文件物理上所对应的二进制比特流（前面已经说了，存储都是二进制的），然后按照你所选择 的解码方式来解释这个流，然后将解释结果显示出来。一般来说，你选取的解码方式会是ASCII码形式（ASCII码的一个字符是８个比特），接下来，它8 个比特8个比特地来解释这个文件流。</p>
-<p>例如对于这么一个文件流”01000000_01000001_01000010_01000011”(下划线 ‘’_’’，是我为了增强可读性，而手动添加的)，第一个8比特’’01000000’’按ASCII码来解码的话，所对应的字符是字符’’A’’，同理 其它3个8比特可分别解码为’’BCD’’，即这个文件流可解释成“ABCD”，然后记事本就将这个“ABCD”显示在屏幕上。</p>
-<p>记事本无论打开什么文件都按既定的字符编码工作（如ASCII码），所以当他打开二进制文件时，出现乱码 也是很必然的一件事情了，解码和译码不对应嘛。例如文件流’’00000000_00000000_00000000_00000001’’可能在二进制文件中对应的是一个四字节的整数int 1，在记事本里解释就变成了”NULL_NULL_NULL_SOH”这四个控制符。</p>
+<p>例如对于这么一个文件流”01000000_01000001_01000010_01000011”(下划线 “_”，是我为了增强可读性，而手动添加的)，第一个8比特“01000000”按ASCII码来解码的话，所对应的字符是字符“A”，同理 其它3个8比特可分别解码为“BCD”，即这个文件流可解释成“ABCD”，然后记事本就将这个“ABCD”显示在屏幕上。</p>
+<p>记事本无论打开什么文件都按既定的字符编码工作（如ASCII码），所以当他打开二进制文件出现乱码就很正常，解码和译码不对应嘛。例如文件流’’00000000_00000000_00000000_00000001’’可能在二进制文件中对应的是一个四字节的整数int 1，在记事本里解释就变成了”NULL_NULL_NULL_SOH”这四个控制符。</p>
 <h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>一般认为，文本文件编码基于字符定长，译码容易些；二进制文件编码是变长的，所以它灵活，存储利用率要高些，译码难一些（不同的二进制文件格式，有不同的译码方式）。</p>
 <p>很多书上还认为，文本文件的可读性要好些，存储要花费转换时间(读写要编译码)，而二进制文件可读性差，存储不存在转换时间（读写不要编解码，直接写值）。这里的可读性是从软件使用者角度来说的，因为我们用通用的记事本工具就几乎可以浏览所有文本文件，所以说文本文件可读性好；而读写一个具体的二进制 文件需要一个具体的文件解码器，所以说二进制文件可读性差，比如读BMP文件，必须用读图软件。而这里的存储转换时间应该是从编程的角度来说的，因为有些操作系统如windows需要对回车换行符进行转换(将’’/n’’，换成’’/r/n’’），所以文件读写时，操作系统需要一个一个字符的检查。<br>当前字符是不是’’/n’’或’’/r/n’’，这个在存储转换在Linux操作系统中并不需要，当然，当在两个不同的操作系统上共享文件时，这种存储 转换又可能出来(如Linux系统和Windows系统共享文本文件)。</p>
 <h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>C程序，所有I/O操作只是简单地从程序移进或移出字节的事情，这种字节流就叫做流（stream）。</p>
-<p>流是一个动态概念</p>
+<p>流是一个动态概念也是一个逻辑概念，是编程者和被访问的设备之间一层抽象的东西</p>
 <p>C将数据的输入输出看作是数据的流入和流出，不管是磁盘文件或者是物理设备都可看作一种流的源和目的，视他们为同一种东西，而不管其具体的物理结构，即对他们的操作，就是数据的流入和流出。</p>
 <p>绝大多数流是完全缓冲的，读取和写入实际上是从一块叫做缓冲区的内存区域来回复制数据。</p>
 <h3 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h3><p>既然流是一种动态概念，流的基本单位就可以进行分类。</p>
@@ -842,7 +842,7 @@
 <p>总的来说，从编程的角度来说，Ｃ中文本或二进制读写都是缓冲区与文件中二进制流的交互，只是文本读写时有回车换行的转换．所以当写缓冲区中无换行符”\n”(0AH)，文本写与二进制写的结果是一样的，同理，当文件中不存在“\r\n”(0DH0AH)时，文本读与二进制读的结果一样．</p>
 <h2 id="FILE结构体"><a href="#FILE结构体" class="headerlink" title="FILE结构体"></a>FILE结构体</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDIN_FILENO	0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDOUT_FILENO	1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDERR_FILENO	2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">char</span>	*_ptr;</span><br><span class="line">  <span class="keyword">int</span>	 _cnt;</span><br><span class="line">  <span class="keyword">char</span>	*_base;</span><br><span class="line">  <span class="keyword">int</span>	 _flag;</span><br><span class="line">  <span class="keyword">int</span>	 _file;</span><br><span class="line">  <span class="keyword">int</span>	 _charbuf;</span><br><span class="line">  <span class="keyword">int</span>	 _bufsiz;</span><br><span class="line">  <span class="keyword">char</span>	*_tmpfname;</span><br><span class="line">&#125; FILE;</span><br><span class="line"></span><br><span class="line">__MINGW_IMPORT FILE _iob[];	<span class="comment">/* An array of FILE imported from DLL. */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdin	(&amp;_iob[STDIN_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdout	(&amp;_iob[STDOUT_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stderr	(&amp;_iob[STDERR_FILENO])</span></span><br></pre></td></tr></table></figure>
 
-<p>上面代码摘取了stdio.h文件中关于FILE结构体的定义。FILE是一个数据结构，用于访问一个流，可以认为是辅助字节流动的一个结构。如果同时激活几个流，每个流都有一个FILE与他关联。。可以看出标准输入流，标准输出流，标准错误流名称分别为stdin,stdout,stderr，都是指向FILE结构体的指针。标准输入是缺省情况下输入的来源，标准输出是缺省情况下输出的来源。通常标准输入为键盘设备，标准输出为屏幕或者终端。缺省的标准输入输出设备可以被修改。</p>
+<p>上面代码摘取了stdio.h文件中关于FILE结构体的定义。FILE是一个数据结构，用于访问一个流，可以认为是辅助字节流动的一个结构。如果同时激活几个流，每个流都有一个FILE与他关联。可以看出标准输入流，标准输出流，标准错误流名称分别为stdin,stdout,stderr，都是指向FILE结构体的指针。标准输入是缺省情况下输入的来源，标准输出是缺省情况下输出的来源。通常标准输入为键盘设备，标准输出为屏幕或者终端。缺省的标准输入输出设备可以被修改。</p>
 <h2 id="流I-O总览"><a href="#流I-O总览" class="headerlink" title="流I/O总览"></a>流I/O总览</h2><h3 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h3><ol>
 <li>声明一个FILE指针变量，辅助字节流动</li>
 <li>流通过fopen函数打开</li>
@@ -931,6 +931,69 @@
 <td>sprint</td>
 </tr>
 </tbody></table>
+<h2 id="打开流"><a href="#打开流" class="headerlink" title="打开流"></a>打开流</h2><h3 id="fopen函数"><a href="#fopen函数" class="headerlink" title="fopen函数"></a>fopen函数</h3><p>fopen函数用于打开一个文件，并把一个流和这个文件关联，把所谓的流和文件绑定在一起。文件实际上可以看作一个物理设备，流就是文件这个物理设备和编程者之间的逻辑桥梁。</p>
+<p>函数原型：</p>
+<p><code>FILE *fopen(char const *name, char const *mode)</code></p>
+<p>第一个参数是文件或者设备的名字，第二个参数值打开模式</p>
+<p>模式如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>读取</th>
+<th>写入</th>
+<th>添加</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文本</td>
+<td>“r”</td>
+<td>“w”</td>
+<td>“a”</td>
+</tr>
+<tr>
+<td>二进制</td>
+<td>“rb”</td>
+<td>“wb”</td>
+<td>“ab”</td>
+</tr>
+</tbody></table>
+<p>如果一个文件打开用于读取那么文件原先必须存在。如果被用来写入，文件如果存在，写入时原内容删除，如果文件不存在就新建一个。如果文件被用来添加，文件如果存在，写入时原内容不被删除，如果文件不存在就新建一个。无论哪一种情况，只能从<strong>文件尾部</strong>写入。</p>
+<p>在添加模式下，流既可以读也可以写。如果已经读入了一些数据，那么你现在想写入数据，就必须调用文件定位函数。如果你先向文件写入数据之后又想读入数据，就要调用fflush函数或者文件定位函数。</p>
+<p>如果fopen函数失败返回NULL指针。所以必须要检查函数的返回值。</p>
+<p>fopen函数用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FILE *input;</span><br><span class="line">input = fopen(<span class="string">&quot;data3&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(input == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;data3&quot;</span>);<span class="comment">//在屏幕打印：data3: No such file or directory</span></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="freopen函数"><a href="#freopen函数" class="headerlink" title="freopen函数"></a>freopen函数</h3><p>函数原型</p>
+<p><code>FILE *freopen(char const *filename,char const *mode,FILE *name);</code></p>
+<p>这个函数用途就是将一个流重定向到其他文件或者物理设备。</p>
+<p>举个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* args[])</span></span>&#123;</span><br><span class="line">   freopen (<span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="built_in">stdout</span>);<span class="comment">//此处mode可以选择w或者a，选择r无效</span></span><br><span class="line">   <span class="built_in">puts</span>(<span class="string">&quot;nmsl&quot;</span>);</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>标准输出流stdout默认的关联输出设备是屏幕即终端，使用freopen函数后stdout就会重定向到b.txt文件，之后输出的字符都会到这个文件中。</p>
+<h2 id="关闭流"><a href="#关闭流" class="headerlink" title="关闭流"></a>关闭流</h2><p>流是用fclose函数关闭的，函数原型如下:<code>int flcose(FILE *f);</code></p>
+<p>对于输出流，fclose函数在文件关闭之前刷新缓冲区，如果执行成功返回零值，否则返回EOF</p>
+<p>关闭时要进行错误检查：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fclose(xx)!=<span class="number">0</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;fclose&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符I-O"><a href="#字符I-O" class="headerlink" title="字符I/O"></a>字符I/O</h2><p>当一个流被打开，可以用于输入也可以用于输出，最简单的形式就是字符I/O。</p>
+<p>字符输入函数原型：</p>
+<p><code>int fgetc(FILE *stream)</code></p>
+<p><code>int getc(FILE *stream)</code></p>
+<p><code>int getchar(void)</code>始终从标准输入读取</p>
+<p>fgetc和getc区别就是，fgetc是一个函数，getc是一个宏</p>
+<p>这些函数之所以返回int型而不是char是因为必须有一个字符用来表示EOF，所以EOF被定义为一个整型，它的值在任何可能出现的字符范围之外。</p>
+<p>字符输出函数原型：</p>
+<p><code>int fputc(int character, FILE *stream);</code></p>
+<p><code>int putc(int character, FILE *stream);</code></p>
+<p><code>int putchar(int character);</code></p>
+<p>由于任何一个原因函数失败了则返回EOF</p>
+<p><strong>使用注意点：</strong></p>
+<ul>
+<li>getc的参数不应当是具有副作用的表达式。有副作用的表达式，指的是表达式执行后，会改变表达式中某些变量的值。比如++i * ++i。这里就是所谓的宏的注意点。函数不会造成这种影响。</li>
+<li>因为fgetc一定是一个函数，所以可以得到其地址。这就允许将fgetc的地址作为一个参数传送给另一个函数即函数指针。</li>
+<li>调用fgetc所需时间很可能长于调用getc，因为调用函数通常所需的时间长于调用宏。</li>
+</ul>
 
       
     </div>
@@ -1624,12 +1687,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">38k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">33 分钟</span>
+    <span title="站点阅读时长">35 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
