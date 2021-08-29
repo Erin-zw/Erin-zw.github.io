@@ -548,7 +548,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-26 02:51:44" itemprop="dateModified" datetime="2021-08-26T02:51:44+08:00">2021-08-26</time>
+                <time title="修改时间：2021-08-27 00:40:53" itemprop="dateModified" datetime="2021-08-27T00:40:53+08:00">2021-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -585,7 +585,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
+          <p>[TOC]</p>
+<h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
 <p>而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。</p>
 <h2 id="线程栈"><a href="#线程栈" class="headerlink" title="线程栈"></a>线程栈</h2><p>在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里面一段连续的存储空间。栈的大小一般在启动文件或者链接脚本指定，最后由C库函数_main进行初始化。</p>
 <p>而在多线程系统中，每个线程都是独立的，互不干扰，所以要为每个线程分配独立的栈空间。有多少个线程就需要定义多少个栈。    </p>
@@ -632,7 +633,7 @@
 <h4 id="RT-ALIGN-DOWN宏定义讲解"><a href="#RT-ALIGN-DOWN宏定义讲解" class="headerlink" title="RT_ALIGN_DOWN宏定义讲解"></a>RT_ALIGN_DOWN宏定义讲解</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">int</span>      <span class="keyword">uint32_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">short</span>    <span class="keyword">uint16_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">char</span>     <span class="keyword">uint8_t</span>  ;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_DOWN(size, align)      ((size) &amp; ~((align) - 1))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_SIZE                    (4)</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">uint32_t</span> a;</span><br><span class="line">   a = <span class="number">5</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,RT_ALIGN_DOWN(a,RT_ALIGN_SIZE));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行上述程序可以得到4 4 4 ，这表明这个宏定义作用是将不是RT_ALIGN_SIZE倍数的数，向下变成RT_ALIGN_SIZE倍数的数。至于原因就是说一个为4的倍数的RT_ALIGN_SIZE，它的二进制最后两位减去一以后一定是11.然后进行&amp;操作时就是一个向下取倍数的效果。</p>
-
+<h2 id="实现就绪列表"><a href="#实现就绪列表" class="headerlink" title="实现就绪列表"></a>实现就绪列表</h2>
       
     </div>
 
@@ -1442,12 +1443,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">45k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">41 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
