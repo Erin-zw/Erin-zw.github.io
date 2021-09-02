@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="[TOC] 什么是线程在裸机系统中，系统的主体就是 main 函数里面顺序执行的无限循环，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。 而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。 线程栈在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，">
+  <meta name="description" content="什么是线程在裸机系统中，系统的主体就是 main 函数里面顺序执行的无限循环，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。 而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。 线程栈在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RTT线程建立">
 <meta property="og:url" content="http://example.com/2021/08/09/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="[TOC] 什么是线程在裸机系统中，系统的主体就是 main 函数里面顺序执行的无限循环，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。 而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。 线程栈在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，">
+<meta property="og:description" content="什么是线程在裸机系统中，系统的主体就是 main 函数里面顺序执行的无限循环，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。 而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。 线程栈在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9.jpg">
 <meta property="og:image" content="http://example.com/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://example.com/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/3.jpg">
 <meta property="og:image" content="http://example.com/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/4.jpg">
 <meta property="article:published_time" content="2021-08-09T14:44:53.533Z">
-<meta property="article:modified_time" content="2021-08-26T16:40:53.288Z">
+<meta property="article:modified_time" content="2021-09-02T01:46:18.700Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9.jpg">
@@ -240,7 +240,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 00:40:53" itemprop="dateModified" datetime="2021-08-27T00:40:53+08:00">2021-08-27</time>
+                <time title="修改时间：2021-09-02 09:46:18" itemprop="dateModified" datetime="2021-09-02T09:46:18+08:00">2021-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -284,8 +284,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[TOC]</p>
-<h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
+        <h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
 <p>而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。</p>
 <h2 id="线程栈"><a href="#线程栈" class="headerlink" title="线程栈"></a>线程栈</h2><p>在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里面一段连续的存储空间。栈的大小一般在启动文件或者链接脚本指定，最后由C库函数_main进行初始化。</p>
 <p>而在多线程系统中，每个线程都是独立的，互不干扰，所以要为每个线程分配独立的栈空间。有多少个线程就需要定义多少个栈。    </p>
@@ -496,7 +495,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
