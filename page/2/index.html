@@ -198,6 +198,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/16/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数指针与回调函数（转换表）</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-16 19:39:40" itemprop="dateCreated datePublished" datetime="2021-08-16T19:39:40+08:00">2021-08-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-22 00:37:56" itemprop="dateModified" datetime="2021-08-22T00:37:56+08:00">2021-08-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><h3 id="概念区分"><a href="#概念区分" class="headerlink" title="概念区分"></a>概念区分</h3><table>
+<thead>
+<tr>
+<th>声明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int f;</code></td>
+<td>一个整型变量</td>
+</tr>
+<tr>
+<td><code>int *f;</code></td>
+<td>一个指向整型的指针</td>
+</tr>
+<tr>
+<td><code>int f();</code></td>
+<td>一个返回值为整型函数</td>
+</tr>
+<tr>
+<td><code>int *f();</code></td>
+<td>一个返回值为指向整型指针的函数，可以把int*连在一起看</td>
+</tr>
+<tr>
+<td><code>int (*f)();</code></td>
+<td>一个指向函数的指即函数指针</td>
+</tr>
+<tr>
+<td><code>int *(*f)();</code></td>
+<td>一个指向 返回值为指向整型的指针的函数 的指针</td>
+</tr>
+<tr>
+<td><code>int f[];</code></td>
+<td>一个整型数组</td>
+</tr>
+<tr>
+<td><code>int *f[];</code></td>
+<td>一个存放指向整形的指针的数组</td>
+</tr>
+<tr>
+<td><code>int f()[];</code></td>
+<td><strong>非法</strong>，是一个返回值为数组的函数，但是函数只能返回标量值而不能返回数组</td>
+</tr>
+<tr>
+<td><code>int f[]();</code></td>
+<td><strong>非法</strong>，像是一个元素类型为返回值为整型的函数的数组，但是数组要求元素长度相同</td>
+</tr>
+<tr>
+<td><code>int (*f[])();</code></td>
+<td>一个元素为指向返回值为整型的函数的指针的数组</td>
+</tr>
+<tr>
+<td><code>int *(*f[])();</code></td>
+<td>一个元素为指向返回值为指向整型指针的函数的指针的数组</td>
+</tr>
+</tbody></table>
+<h3 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法"></a>声明方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*pf)(<span class="keyword">int</span>) = &amp;f;<span class="comment">//符号&amp;可加可不加，因为函数名被使用时总是由编译器把它转换为函数指针</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line">ans = f(<span class="number">25</span>);</span><br><span class="line">ans = (*pf)(<span class="number">25</span>);</span><br><span class="line">ans = pf(<span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p><strong>例子：在单链表中查找一个值</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">int</span> <span class="keyword">const</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;value == value)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了改善兼容性与便利性，能查找不同元素类型的链表如字符串或者数组而不只是整形，即能对任何类型的值进行比较。</p>
+<p><strong>修改一：</strong></p>
+<p>使用函数指针，编写一个比较两数大小的函数，将此函数指针作为参数传递给查找函数。</p>
+<p><strong>修改二：</strong></p>
+<p>向比较函数传递指针而不是值本身。</p>
+<hr>
+<p>使用这种技巧的函数被称为回调函数，因为用户把一个函数的指针作为参数传递给其他函数，后者将回调用户的函数。</p>
+<p>方便了不同时刻执行不同类型的工作。</p>
+<p><strong>修改后的查找函数：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">void</span> <span class="keyword">const</span> *value,<span class="keyword">int</span> (*compare)(<span class="keyword">void</span> <span class="keyword">const</span> *,<span class="keyword">void</span> <span class="keyword">const</span> *))</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(compare(&amp;node-&gt;value ,value) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用例子（整型）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_int</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> *a,<span class="keyword">void</span> <span class="keyword">const</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*(<span class="keyword">int</span> *)a == *(<span class="keyword">int</span>*)b)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,compare_int);</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">...</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,<span class="built_in">strcmp</span>);<span class="comment">//使用自带的字符串比较函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h2><p>假设要实现一个小型计算器，可以使用switch如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(oper)&#123;</span><br><span class="line">    <span class="keyword">case</span> ADD:</span><br><span class="line">        result = add(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SUB:</span><br><span class="line">        result = sub(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MUL:</span><br><span class="line">        result = mul(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DIV:</span><br><span class="line">        result = div(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了使用switch语句，操作符的代码必须是整数。如果他们是从零开始的整数，我们就可以使用<strong>转换表</strong>完成相同的任务。<strong>转换表</strong>就是一个<strong>函数指针数组</strong>。</p>
+<p>转换表声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sub</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">mul</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">div</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//其他运算函数声明</span></span><br><span class="line"><span class="keyword">double</span> (*oper_func[])(<span class="keyword">double</span>,<span class="keyword">double</span>) = &#123;add,sub,mul,div...&#125;;<span class="comment">//声明函数指针数组</span></span><br><span class="line"></span><br><span class="line">result = oper_func[oper](op1,op2);<span class="comment">//使用转换表</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C/%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1032,10 +1210,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-08-06 00:50:03 / 修改时间：00:59:31" itemprop="dateCreated datePublished" datetime="2021-08-06T00:50:03+08:00">2021-08-06</time>
+              <time title="创建时间：2021-08-06 00:50:03" itemprop="dateCreated datePublished" datetime="2021-08-06T00:50:03+08:00">2021-08-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-07 19:59:41" itemprop="dateModified" datetime="2021-09-07T19:59:41+08:00">2021-09-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1052,7 +1236,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>129</span>
+              <span>710</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1071,10 +1255,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;,&#x27;</span>,<span class="string">&#x27;ok?&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="number">100</span>+<span class="number">200</span>)</span><br><span class="line">//输出</span><br><span class="line">hello , ok?</span><br><span class="line"><span class="number">300</span></span><br></pre></td></tr></table></figure>
+          <h2 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h2><p>print函数接受多个字符串 ，字符串间逗号以空格代替</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;,&#x27;</span>,<span class="string">&#x27;ok?&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="number">100</span>+<span class="number">200</span>)</span><br><span class="line">//输出</span><br><span class="line">hello , ok?</span><br><span class="line"><span class="number">300</span></span><br></pre></td></tr></table></figure>
 
-<p>print函数接受多个字符串 ，字符串间逗号以空格代替</p>
-<h3 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h3>
+<p>行连接，使用反斜杠</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x = 1+    \</span></span><br><span class="line"><span class="string">2+\</span></span><br><span class="line"><span class="string">    3&#x27;</span>)</span><br><span class="line"><span class="comment">#输出x = 1+    2+    3</span></span><br></pre></td></tr></table></figure>
+
+<p>在看一个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span>;<span class="built_in">print</span>(<span class="string">&#x27;x is&#x27;</span>,    x)</span><br><span class="line"><span class="comment">#输出x is 5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = (<span class="string">&#x27;input your name:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello,&#x27;</span>,name)</span><br></pre></td></tr></table></figure>
+
+<p>当然了括号内也可以不加字符串</p>
+<h2 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>字符串是以’ ‘或” “括起来的任意文本。</p>
+<p>若括号内既有’ ’又有” ”可以使用转义字符,\n（换行）,\t（TAB)等都是转义字符，甚至\也是，代表\。如下面一条语句若I’m的’不加转义字符\，则会导致报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;I\&#x27;m &quot;ok&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这两条语句等价，’’’ ‘’’是允许多行字符串的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;f\n3\n4&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;&#x27;f</span></span><br><span class="line"><span class="string">3</span></span><br><span class="line"><span class="string">4&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Py中可以在字符串前加入r默认字符串内不转义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">r&#x27;f\n3\n4\n&#x27;</span>)<span class="comment">#输出f\n3\n4\n</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Py中字符串，数字都可以赋值给变量</p>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">9</span>/<span class="number">3</span>)<span class="comment">#3.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span>/<span class="number">3</span>)<span class="comment">#0.3333333333333333</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>//<span class="number">3</span>)<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>%<span class="number">3</span>)<span class="comment">#0</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -1226,97 +1432,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/matplotlib/matplotlib1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/matplotlib/matplotlib1/" class="post-title-link" itemprop="url">初识matplotlib</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-06 00:27:55" itemprop="dateCreated datePublished" datetime="2021-08-06T00:27:55+08:00">2021-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-10 21:00:29" itemprop="dateModified" datetime="2021-08-10T21:00:29+08:00">2021-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matplotlib/" itemprop="url" rel="index"><span itemprop="name">matplotlib</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1388,14 +1503,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1452,12 +1567,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">45k</span>
+    <span title="站点总字数">48k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41 分钟</span>
+    <span title="站点阅读时长">43 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
