@@ -198,6 +198,456 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E6%8C%87%E9%92%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/02/C/%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">指针</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-02 19:00:39 / 修改时间：23:28:58" itemprop="dateCreated datePublished" datetime="2021-08-02T19:00:39+08:00">2021-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>char* ，int* 都是一种类型，都是扩展类型。int*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。所以指针变量和整型变量是不一样的，不能相互赋值。如下所示是个错误赋值语句：</p>
+<p><code>d = 10- *d</code></p>
+<h3 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*<span class="number">100</span> = <span class="number">25</span>;</span><br><span class="line">*(<span class="keyword">int</span>*)<span class="number">100</span> = <span class="number">25</span>;</span><br></pre></td></tr></table></figure>
+
+<p>间接访问符号只能访问只能作用于指针类型，100是一个整型，所以是非法的。</p>
+<p>但是使用强制类型转换即可达到赋值的目的。</p>
+<h3 id="NULL指针"><a href="#NULL指针" class="headerlink" title="NULL指针"></a>NULL指针</h3><p>NULL指针不指向任何东西，要使一个指针变量为NULL可以给它赋零值，机器内部而言实际地址值可能不同。</p>
+<p><strong>对NULL指针解引用间接访问是非法的！</strong></p>
+<h3 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">...</span><br><span class="line">*a = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码指针变量a未进行初始化，a的初始值若是非法地址则报错，若为合法地址则修改了合法地址本来的值。</p>
+<p><strong>注意：所以对指针间接访问时，确保它们被初始化了！如果知道指针将被初始化为什么地址，就把它初始化为该值，如果不知道，就初始化为NULL指针。</strong></p>
+<h3 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">int</span>* b = &amp;a;</span><br><span class="line"><span class="keyword">int</span>** c = &amp;b;</span><br></pre></td></tr></table></figure>
+
+<p>int**实际上还是一种扩展类型，叫做指向整型变量的指针变量的指针类型。即指针的指针。int表明了指针的指针指向的类型。</p>
+<h3 id="指针左值和右值和指针表达式"><a href="#指针左值和右值和指针表达式" class="headerlink" title="指针左值和右值和指针表达式"></a>指针左值和右值和指针表达式</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
+<li>左值就是一个可被储存的单元，右值就是一个可被读取的数据。</li>
+<li>左值必须是<strong>一个被明确了地址的内存存储单元</strong>，可以用来被赋值；右值必须是一个能被读出来的确确实实的值，这个值可以是数据，可以是指针，可以是结构，反正只要能被读出来的，都可以定义为右值。</li>
+</ol>
+<p>通俗来说，右值指的是式子本身代表的值，左值代表存储式子的地址。左值即是等式左边的，右值即是等式右边的。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">112</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *d = &amp;a;</span><br><span class="line">b = *d;</span><br></pre></td></tr></table></figure>
+
+<p>d的值分为两种情况：<br>d左值：表达式 d 表示的是存储d这个指针变量本身的内存地址。<br>d右值：表达式 d 表示的是存储变量a的内存地址。<br>*d的值也分为两种情况：<br>*d左值：表达式 *d 表示的是存储变量a的内存地址。<br>*d右值：表达式 *d 表示的是存储变量a的内存地址中的所存的值。</p>
+<h4 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h4><p>声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">char</span> *cp = &amp;ch;</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>右值</th>
+<th>左值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;ch</td>
+<td>表示的是ch的地址可作为右值赋值</td>
+<td><strong>非法</strong>，相当于一个常量，没有指定地址，不能作为左值接受赋值</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>表示的是ch的地址可作为右值赋值</td>
+<td>表示cp指针变量所在的地址可以作为左值接受赋值</td>
+</tr>
+<tr>
+<td>&amp;cp</td>
+<td>表示cp的地址可以作为右值赋值</td>
+<td><strong>非法</strong>，相当于一个常量，没有清晰定义地址，不能作为左值</td>
+</tr>
+<tr>
+<td>*cp</td>
+<td>表示cp指向的值可以作为右值赋值</td>
+<td>表示cp存储的地址，可以作为左值</td>
+</tr>
+<tr>
+<td>*cp+1</td>
+<td>表示cp指向的值加一即’b’</td>
+<td><strong>非法</strong>，没有一个明确地址存放’b’这个值，就像b+25=a这种赋值</td>
+</tr>
+<tr>
+<td>*(cp+1)</td>
+<td>表示cp指向的地址加一指向的值</td>
+<td>表示cp指向的地址加一</td>
+</tr>
+<tr>
+<td>++cp</td>
+<td>表示cp指向的地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放加一以后的地址</td>
+</tr>
+<tr>
+<td>cp++</td>
+<td>表示cp指向的地址，但是之后地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放加一以后的cp的地址</td>
+</tr>
+<tr>
+<td>*++cp</td>
+<td>表示cp加一后指向地址的值</td>
+<td>表示cp加一后的地址</td>
+</tr>
+<tr>
+<td>*cp++</td>
+<td>表示cp指向地址的值，之后cp地址加一</td>
+<td>表示cp存放的地址</td>
+</tr>
+<tr>
+<td>++*cp</td>
+<td>表示cp指向的值加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+<tr>
+<td>(*cp)++</td>
+<td>表示cp指向的值，之后这个值加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+<tr>
+<td>++*++cp</td>
+<td>表示cp指向地址加一后的值加一</td>
+<td><strong>非法</strong>，没有明确地址存放</td>
+</tr>
+<tr>
+<td>++*cp++</td>
+<td>表示cp指向地址的值加一，之后cp存储的地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+</tbody></table>
+<p>就是说作为左值要有一个清晰明确的地址，比如&amp;ch这种就没有一个变量存储他的值，表示他的地址。</p>
+<p>作为左值时，实际上是右值对左值的地址进行赋值。</p>
+<h3 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h3><ul>
+<li>指针 ± 整数，目的地址 = 源地址 ± 整数*数据类型占据大小</li>
+<li>指针-指针，同一数组内可进行操作，得出的数据类型为ptrdiff_t，可以为负数。比如p1指向a[i],p2指向a[j],p1-p2得到i-j。</li>
+<li>&lt; &gt; ≥ ≤ 这些关系符最有可能用到。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E6%8C%87%E9%92%88%E8%A1%A5%E5%85%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/02/C/%E6%8C%87%E9%92%88%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">指针补充</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-02 16:12:36 / 修改时间：19:00:19" itemprop="dateCreated datePublished" datetime="2021-08-02T16:12:36+08:00">2021-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>290</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.指针变量就是地址！</p>
+<p>2.<code>char* p = char *p</code></p>
+<p>3.char* ，int* 都是一种类型，都是扩展类型。int*<strong>叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。</strong></p>
+<p>4.第一条语句相当于把app定义为一个指向字符的指针类型的数据类型。第二条语句使用这个新的数据类型app去定义a这个指针变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* app；</span><br><span class="line">app a；</span><br></pre></td></tr></table></figure>
+
+<p>5.定义指针类型的数据类型用typedef而不用#define 上面第二句只是将a定义为了指针变量而b是字符变量。所以定义一个新的数据类型最好用typedef</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> app char*；</span></span><br><span class="line">app a，b；</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E9%93%BE%E6%8E%A5%E5%B1%9E%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/02/C/%E9%93%BE%E6%8E%A5%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">链接属性和存储类型</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-02 12:49:56" itemprop="dateCreated datePublished" datetime="2021-08-02T12:49:56+08:00">2021-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-22 00:28:21" itemprop="dateModified" datetime="2021-08-22T00:28:21+08:00">2021-08-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="链接属性"><a href="#链接属性" class="headerlink" title="链接属性"></a>链接属性</h2><h3 id="什么是链接属性？"><a href="#什么是链接属性？" class="headerlink" title="什么是链接属性？"></a>什么是链接属性？</h3><p>当组成一个程序的各个源文件分别被编译后,所有的目标文件以及那些从一个或多个函数库中引用的函数链接在一起,形成可执行程序.</p>
+<p>标识符的链接属性决定如何处理在不同文件中出现的标识符.标识符作用域与它的链接属性有关,但这两个属性并不相同.</p>
+<h3 id="链接属性分为三种"><a href="#链接属性分为三种" class="headerlink" title="链接属性分为三种:"></a>链接属性分为三种:</h3><ol>
+<li>external(外部):external链接属性的标识符不管声明几次,存在于多少个源文件,都是属于一个个体.</li>
+<li>internal(内部):internal链接属性的标识符在同一个源文件内所有声明都是同一个个体,但在其他源文件中多个声明分属不同个体.</li>
+<li>none(无):没有链接属性的标识符(none)总是当成单独个体,也就是多次声明被当做多个不同的实体.</li>
+</ol>
+<p><strong>缺省情况下：</strong></p>
+<p>函数和代码块之外的标识符链接属性为external,代码块之内的标识符链接属性为none</p>
+<p>如下所示，b，c，f链接属性为external，其他的为none：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">c</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改链接属性的关键字："><a href="#修改链接属性的关键字：" class="headerlink" title="修改链接属性的关键字："></a>修改链接属性的关键字：</h3><p><strong>static:</strong></p>
+<ol>
+<li>对于缺省情况下为external链接属性的声明,在声明前加static,会使这个标识符变成这个源文件私有,这样可以防止它被其他源文件调用.</li>
+<li>对于缺省情况下为none链接属性的声明,在声明前加static,不会改变这个标识符的链接属性,也不会改变它的作用域,但会改变它的存储类型(生命周期),让它在程序执行的整个过程中一直存在.</li>
+</ol>
+<p><strong>extern:</strong></p>
+<ol>
+<li>在声明前加extern,会为这个标识符指定external链接属性.这样就可以在其他源文件声明的外部定义这个实体.</li>
+<li>如果标识符在第一次声明中已经指定了链接属性,那么extern在后面的第二次或以后的声明中,不会更改第一次声明所指定的链接属性.</li>
+</ol>
+<h2 id="存储类型"><a href="#存储类型" class="headerlink" title="存储类型"></a><strong>存储类型</strong></h2><p>变量的存储类型是指存储变量值的内存类型。有三个地方可以用于存储变量：普通内存、运行时堆栈、硬件寄存器。变量的缺省存储类型取决于它的声明位置。</p>
+<ol>
+<li>凡是在<strong>任何代码块之外声明的变量</strong>总是存储于静态内存中，也就是<strong>不属于堆栈</strong>的内存，这类变量称为<strong>静态(static)变量</strong>。静态变量在程序运行之前创建，更确切的说，是在将可执行文件加载到内存的时候创建，其在程序的整个执行期间始终存在。</li>
+<li>在<strong>代码块内部</strong>声明的变量的缺省存储类型是<strong>自动的(automatic)</strong>, 也就是说它存储于<strong>堆栈中</strong>，称为自动变量。有一个关键字auto就是用于修饰这种存储类型的，但它极少使用，因为代码块中的变量缺省情况下就是自动变量。在程序执行到声明自动变量的代码块时，自动变量才被创建，当程序的执行流离开代码块时，这些自动变量便自行销毁。在代码块内部声明的变量，如果给它加上static，可以使它的存储类型从自动变为静态。注意，修改变量的存储类型并不表示修改改变量的作用域。它任然只能在该代码块内部按名字访问。函数的形式参数不能声明为静态，因为实参总是在堆栈中传递给函数。</li>
+<li>关键字register(寄存器)可以用于自动变量的声明，提示它们应该存储于机器的硬件寄存器而不是内存中。</li>
+</ol>
+<p><strong>注意：</strong>静态变量未初始化会自动初始化为0，自动的不会并且初始化过程由链接器完成。</p>
+<h2 id="全局变量和局部变量"><a href="#全局变量和局部变量" class="headerlink" title="全局变量和局部变量"></a><strong>全局变量和局部变量</strong></h2><ol>
+<li>全局变量是定义在<strong>函数外部</strong>，通常是在程序的顶部。全局变量在整个程序生命周期内都是有效的，在任意的函数内部能访问全局变量。全局变量可以被任何函数访问。在程序中，局部变量和全局变量的名称可以相同，但是在函数内，如果两个名字相同，会使用局部变量值，全局变量不会被使用。</li>
+<li>在某个函数或块的内部声明的变量称为局部变量。它们只能被该函数或该代码块内部的语句使用。局部变量在函数外部是不可知的。</li>
+<li>函数的参数，形式参数，被当作该函数内的局部变量，如果与全局变量同名它们会优先使用.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>变量类型</th>
+<th>声明的位置</th>
+<th>是否存在于堆栈</th>
+<th>作用域</th>
+<th>如果声明为static</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全局</td>
+<td>所有代码块之外</td>
+<td>否</td>
+<td>从声明处到文件尾</td>
+<td>不允许从其他源文件访问</td>
+</tr>
+<tr>
+<td>局部</td>
+<td>代码块起始处</td>
+<td>是</td>
+<td>整个代码块</td>
+<td>变量不存储于堆栈中，它的值在程序整个执行期间一直保存</td>
+</tr>
+<tr>
+<td>形式参数</td>
+<td>函数头部</td>
+<td>是</td>
+<td>整个函数</td>
+<td>不允许</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -595,7 +1045,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -659,12 +1109,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">54k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">45 分钟</span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
