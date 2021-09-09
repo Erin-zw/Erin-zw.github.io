@@ -198,6 +198,418 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/" class="post-title-link" itemprop="url">列表和元组</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 10:32:14 / 修改时间：22:27:12" itemprop="dateCreated datePublished" datetime="2021-09-08T10:32:14+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="列表-list"><a href="#列表-list" class="headerlink" title="列表(list)"></a>列表(list)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>list数据类型是列表，下标从零开始，使用-1下标可以直接找到最后一个元素，依次可以获得所有元素。-4时列表越界报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">0</span>],x[-<span class="number">1</span>],x[-<span class="number">3</span>],x)</span><br><span class="line"><span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test3.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line">IndexError: <span class="built_in">list</span> index out of <span class="built_in">range</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="append，pop，insert，len函数"><a href="#append，pop，insert，len函数" class="headerlink" title="append，pop，insert，len函数"></a>append，pop，insert，len函数</h3><p>Python中可以使用append（）添加末尾列表值，也可以用.insert（）在指定位置添加。此函数返回值为空值，通过print打印出来返回None。</p>
+<p>也可以使用pop（）函数删除列表末尾元素，pop（i）可以删除指定下标i的元素。Pop（）函数为一个值函数，可以print出来，如果删除的是字符串，即使没有单引号也可以打印出来。</p>
+<p>也可以直接赋值改变列表中元素的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">x.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x.insert(<span class="number">1</span>,<span class="string">&#x27;insert&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x.pop(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.pop())</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x[<span class="number">1</span>] = <span class="string">&#x27;change&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="number">4</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;change&#x27;</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>列表里也可以是另一个列表，可以用len函数测试列表长度，要获取y列表中5的值，可以y[1]，也可以x[4][1]。同时列表可以为空，L = [],len(L)=0 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y = [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">x = [<span class="number">1</span>,<span class="string">&#x27;one&#x27;</span>,[<span class="number">2</span>,<span class="string">&#x27;two&#x27;</span>],<span class="number">3</span>,y]</span><br><span class="line"><span class="built_in">print</span>(y[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">4</span>][<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">2</span>],x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(x))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">[<span class="number">2</span>, <span class="string">&#x27;two&#x27;</span>] one</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h3><p>列表可以使用list.sort（）函数对list中的内容进行排序，并且只能是同一类型的数据，如果是字符串类型，就按ASCII码大小进行排序，如果数据类型不一样就会报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">s = [<span class="string">&#x27;cnm&#x27;</span>,<span class="string">&#x27;bshi&#x27;</span>,<span class="string">&#x27;Dwls&#x27;</span>,<span class="string">&#x27; &#x27;</span>]</span><br><span class="line">d.sort()</span><br><span class="line">s.sort()</span><br><span class="line"><span class="built_in">print</span>(d,s)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;Dwls&#x27;</span>, <span class="string">&#x27;bshi&#x27;</span>, <span class="string">&#x27;cnm&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="元组-tuple"><a href="#元组-tuple" class="headerlink" title="元组(tuple)"></a>元组(tuple)</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>Tuple叫元组，一旦列出元素就不可以修改，大小也不行。因为其不可变，所以一旦列出就很安全。其形式如下图所示，并且如果只定义一个元素，则需要加一个逗号，消除他可能是赋值歧义的可能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">y = (<span class="number">1</span>,)</span><br><span class="line">z = (<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y,z)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>) (<span class="number">1</span>,) <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="可变tuple"><a href="#可变tuple" class="headerlink" title="可变tuple"></a>可变tuple</h3><p>这里变的是list，而不是tuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>])</span><br><span class="line">x[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">&#x27;X&#x27;</span></span><br><span class="line">x[<span class="number">2</span>][<span class="number">1</span>] = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, [<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="关于list，tuple实质解释"><a href="#关于list，tuple实质解释" class="headerlink" title="关于list，tuple实质解释"></a>关于list，tuple实质解释</h2><p>list和tuple其实是用链表顺序存储的，也就是前一个元素中存储了下一个元素的位置，这样只要找到第一个元素的位置就可以顺藤摸瓜找到所有元素的位置，所以list的名字其实就是个指针，指向list的第一个元素的位置。list的插入和删除等可以直接用链表的方式进行，比如我要在第1个元素和第2个元素中间插入一个元素，那么直接在链表的最后面（我们假设这个list只有两个元素，那么也就是在第3个元素的位置上）插入这个元素，然后把第一个元素指针指向这个元素（第3个位置），然后再把新插入的元素的指针指向原来的第2个元素，这样插入操作就完成了。读取这个list的时候，先用list的名字（就是个指针，指向第1个元素的位置）找到第一个元素，然后用第1一个元素的指针找到第2个元素（位置3），然后用第2个元素的指针找到第3个元素（位置2），以此类推。所以list的顺序和内存中的实际顺序其实不一定完全对应。这种存储方式不会浪费内存，但查找起来特别费时间，因为要按照链表一个一个找下去，如果你的list特别大的话，那么要等好久才会找到结果。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="post-title-link" itemprop="url">字符串和编码</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-07 20:05:36 / 修改时间：20:42:20" itemprop="dateCreated datePublished" datetime="2021-09-07T20:05:36+08:00">2021-09-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>ASCII编码能表示的整数0-255，一个字节，表示不了中文，Unicode通常用两个字节表示一个字符，汉字中用Unicode编码为01001110 00101101，A用Unicode编码为00000000 01000001，所以占用无用内存。因此又产生了UTF-8编码，可以根据字符大小占用内存，A的编码为1000001。UTF-8一般用一个字节表示字母，三个字节表示汉字。</p>
+<h3 id="ord和chr函数"><a href="#ord和chr函数" class="headerlink" title="ord和chr函数"></a>ord和chr函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>))<span class="comment">#65</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;中&#x27;</span>))<span class="comment">#20013</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">66</span>))<span class="comment">#B</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">25991</span>))<span class="comment">#文</span></span><br></pre></td></tr></table></figure>
+
+<p>如果知道字符的十六进制表示可以直接使用转移字符表示</p>
+<p><code>print(&#39;\u4e2d\u6587&#39;)#中文</code></p>
+<h3 id="编码解码函数和字符串长度函数"><a href="#编码解码函数和字符串长度函数" class="headerlink" title="编码解码函数和字符串长度函数"></a>编码解码函数和字符串长度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;ABC&#x27;</span>.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line">中文</span><br><span class="line">ABC</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>))<span class="comment">#6</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;abc&#x27;</span>))<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;123&#x27;</span>))<span class="comment">#3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串的格式化"><a href="#字符串的格式化" class="headerlink" title="字符串的格式化"></a>字符串的格式化</h2><h3 id="格式化"><a href="#格式化" class="headerlink" title="%格式化"></a>%格式化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello, %s&#x27;</span>   %  <span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"><span class="comment">#hello, world</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%2d %02d %s&#x27;</span> %(<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="comment"># 3 01 abc</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串。%2d如果占不满则用空格填补，%02d用0填补。并且%.2f表示保留两位小数。</p>
+<h3 id="format格式化"><a href="#format格式化" class="headerlink" title="format格式化"></a>format格式化</h3><p>另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……，不过这种方式写起来比%要麻烦得多，1后面的冒号相当于注释。此种方法类似str.函数（输入）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello, &#123;0&#125;, 成绩提升了 &#123;1:.1f&#125;%&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;小明&#x27;</span>, <span class="number">17.125</span>)) </span><br><span class="line"><span class="comment">#Hello, 小明, 成绩提升了 17.1%</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="f-string格式化"><a href="#f-string格式化" class="headerlink" title="f-string格式化"></a>f-string格式化</h3><p>最后一种格式化字符串的方法是使用以f开头的字符串，称之为f-string，它和普通字符串不同之处在于，字符串如果包含{xxx}，就会以对应的变量替换：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="number">2.5</span></span><br><span class="line">s = <span class="number">3.14</span> * r ** <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;The area of a circle with radius <span class="subst">&#123;r&#125;</span> is <span class="subst">&#123;s:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment">#The area of a circle with radius 2.5 is 19.62</span></span><br></pre></td></tr></table></figure>
+
+<p>两个乘号是乘方的意思，优先级高于一个乘号</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/STM32/SysTick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/01/STM32/SysTick/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 23:56:35" itemprop="dateCreated datePublished" datetime="2021-09-01T23:56:35+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-02 09:45:50" itemprop="dateModified" datetime="2021-09-02T09:45:50+08:00">2021-09-02</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/26/C/%E6%A0%88%E5%B8%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/26/C/%E6%A0%88%E5%B8%A7/" class="post-title-link" itemprop="url">栈帧</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-26 00:52:19 / 修改时间：23:29:52" itemprop="dateCreated datePublished" datetime="2021-08-26T00:52:19+08:00">2021-08-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>961</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>每次调用一个函数，都要为该次调用的函数实例分配栈空间。为单个函数分配的那部分栈空间就叫做<strong>栈帧（ Stack Frame ）</strong>。调用栈（ Call Stack ）就是正在使用的栈空间，由多个嵌套调用函数所使用的栈帧组成。具体来说，Call Stack  就是指存放某个程序的正在运行的函数的信息的栈。Call Stack 由 Stack Frames 组成，每个 Stack Frame  对应于一个未完成运行的函数。</p>
+<p>需要注意的是，在内存中，栈是从高地址向低地址延伸的，即栈底对应高地址，栈顶对应低地址。</p>
+<h2 id="栈帧寄存器"><a href="#栈帧寄存器" class="headerlink" title="栈帧寄存器"></a>栈帧寄存器</h2><p>在 Stack Frame 中，涉及到三种重要的特殊寄存器：</p>
+<ul>
+<li>ESP 寄存器为 Stack Pointer ，它始终指向栈顶的位置。</li>
+<li>EIP 寄存器（instruction pointer ）为返回地址，它是调用函数（ Caller ）在执行完 Call 指令后的下一条指令的地址。</li>
+<li>EBP 寄存器为 Frame Pointer（ 亦称 Base Pointer ），它被用作在当前的栈帧中寻址所有的函数参数以及局部变量。指向当前的栈帧的底部</li>
+</ul>
+<h2 id="栈帧组成"><a href="#栈帧组成" class="headerlink" title="栈帧组成"></a>栈帧组成</h2><ul>
+<li><p>the arguments (parameter values) passed to the routine (if any);传递给例程的参数（参数值）（如果有）；</p>
+</li>
+<li><p>the return address back to the routine’s caller返回给例程调用者的返回地址</p>
+</li>
+<li><p>space for the local variables of the routine (if any).例程局部变量的空间（如果有的话）</p>
+</li>
+</ul>
+<img src="/images/C/%E6%A0%88%E5%B8%A7/1.jpg" style="zoom:67%;">
+
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><ul>
+<li>参数入栈: 将参数按照调用约定(C 是从右向左)依次压入系统栈中;</li>
+<li>返回地址入栈: 将当前代码区调用指令的下一条指令地址压入栈中，供函数返回时继续执行;</li>
+<li>代码跳转: 处理器将代码区跳转到被调用函数的入口处;</li>
+<li>把存放在 EBP 寄存器的 Frame Pointer 地址压入栈；<code>push ebp</code></li>
+<li>更新 EBP 寄存器为当前栈顶的地址；<code>mov ebp, esp</code></li>
+<li>给新栈帧分配空间 <code>sub esp, XXX</code></li>
+<li>把局部变量压入栈；</li>
+<li>把保存寄存器里的值压入栈；</li>
+</ul>
+<p>最后两个步骤实际上sp在不断加加</p>
+<h2 id="函数返回"><a href="#函数返回" class="headerlink" title="函数返回"></a>函数返回</h2><ul>
+<li>保存被调用函数的返回值到 eax 寄存器中；<code>mov eax, xxx</code></li>
+<li>恢复 esp 同时回收局部变量空间；<code>mov esp, ebp</code></li>
+<li>将上一个栈帧底部位置恢复到 ebp；<code>pop ebp</code></li>
+<li>弹出当前栈顶元素,从栈中取到返回地址,并跳转到该位置 ；<code>ret</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/C/%E6%8D%A2%E8%A1%8C%E5%9B%9E%E8%BD%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1280,492 +1692,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数指针与回调函数（转换表）</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-16 19:39:40" itemprop="dateCreated datePublished" datetime="2021-08-16T19:39:40+08:00">2021-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-22 00:37:56" itemprop="dateModified" datetime="2021-08-22T00:37:56+08:00">2021-08-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><h3 id="概念区分"><a href="#概念区分" class="headerlink" title="概念区分"></a>概念区分</h3><table>
-<thead>
-<tr>
-<th>声明</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>int f;</code></td>
-<td>一个整型变量</td>
-</tr>
-<tr>
-<td><code>int *f;</code></td>
-<td>一个指向整型的指针</td>
-</tr>
-<tr>
-<td><code>int f();</code></td>
-<td>一个返回值为整型函数</td>
-</tr>
-<tr>
-<td><code>int *f();</code></td>
-<td>一个返回值为指向整型指针的函数，可以把int*连在一起看</td>
-</tr>
-<tr>
-<td><code>int (*f)();</code></td>
-<td>一个指向函数的指即函数指针</td>
-</tr>
-<tr>
-<td><code>int *(*f)();</code></td>
-<td>一个指向 返回值为指向整型的指针的函数 的指针</td>
-</tr>
-<tr>
-<td><code>int f[];</code></td>
-<td>一个整型数组</td>
-</tr>
-<tr>
-<td><code>int *f[];</code></td>
-<td>一个存放指向整形的指针的数组</td>
-</tr>
-<tr>
-<td><code>int f()[];</code></td>
-<td><strong>非法</strong>，是一个返回值为数组的函数，但是函数只能返回标量值而不能返回数组</td>
-</tr>
-<tr>
-<td><code>int f[]();</code></td>
-<td><strong>非法</strong>，像是一个元素类型为返回值为整型的函数的数组，但是数组要求元素长度相同</td>
-</tr>
-<tr>
-<td><code>int (*f[])();</code></td>
-<td>一个元素为指向返回值为整型的函数的指针的数组</td>
-</tr>
-<tr>
-<td><code>int *(*f[])();</code></td>
-<td>一个元素为指向返回值为指向整型指针的函数的指针的数组</td>
-</tr>
-</tbody></table>
-<h3 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法"></a>声明方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*pf)(<span class="keyword">int</span>) = &amp;f;<span class="comment">//符号&amp;可加可不加，因为函数名被使用时总是由编译器把它转换为函数指针</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line">ans = f(<span class="number">25</span>);</span><br><span class="line">ans = (*pf)(<span class="number">25</span>);</span><br><span class="line">ans = pf(<span class="number">25</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p><strong>例子：在单链表中查找一个值</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">int</span> <span class="keyword">const</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;value == value)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了改善兼容性与便利性，能查找不同元素类型的链表如字符串或者数组而不只是整形，即能对任何类型的值进行比较。</p>
-<p><strong>修改一：</strong></p>
-<p>使用函数指针，编写一个比较两数大小的函数，将此函数指针作为参数传递给查找函数。</p>
-<p><strong>修改二：</strong></p>
-<p>向比较函数传递指针而不是值本身。</p>
-<hr>
-<p>使用这种技巧的函数被称为回调函数，因为用户把一个函数的指针作为参数传递给其他函数，后者将回调用户的函数。</p>
-<p>方便了不同时刻执行不同类型的工作。</p>
-<p><strong>修改后的查找函数：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">void</span> <span class="keyword">const</span> *value,<span class="keyword">int</span> (*compare)(<span class="keyword">void</span> <span class="keyword">const</span> *,<span class="keyword">void</span> <span class="keyword">const</span> *))</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(compare(&amp;node-&gt;value ,value) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用例子（整型）：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_int</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> *a,<span class="keyword">void</span> <span class="keyword">const</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*(<span class="keyword">int</span> *)a == *(<span class="keyword">int</span>*)b)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,compare_int);</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">...</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,<span class="built_in">strcmp</span>);<span class="comment">//使用自带的字符串比较函数</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h2><p>假设要实现一个小型计算器，可以使用switch如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(oper)&#123;</span><br><span class="line">    <span class="keyword">case</span> ADD:</span><br><span class="line">        result = add(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SUB:</span><br><span class="line">        result = sub(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MUL:</span><br><span class="line">        result = mul(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DIV:</span><br><span class="line">        result = div(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了使用switch语句，操作符的代码必须是整数。如果他们是从零开始的整数，我们就可以使用<strong>转换表</strong>完成相同的任务。<strong>转换表</strong>就是一个<strong>函数指针数组</strong>。</p>
-<p>转换表声明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sub</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">mul</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">div</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//其他运算函数声明</span></span><br><span class="line"><span class="keyword">double</span> (*oper_func[])(<span class="keyword">double</span>,<span class="keyword">double</span>) = &#123;add,sub,mul,div...&#125;;<span class="comment">//声明函数指针数组</span></span><br><span class="line"></span><br><span class="line">result = oper_func[oper](op1,op2);<span class="comment">//使用转换表</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C/%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/C/%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">枚举</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-16 19:31:20 / 修改时间：19:56:30" itemprop="dateCreated datePublished" datetime="2021-08-16T19:31:20+08:00">2021-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>853</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><code>enum NAME &#123;ele1,ele2,ele3...&#125;var_name;</code></p>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>方式1：<strong>先定义枚举类型，再定义枚举变量</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">      MON=<span class="number">1</span>, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span> <span class="title">day</span>;</span></span><br></pre></td></tr></table></figure>
-
-<p>方式2：<strong>定义枚举类型的同时定义枚举变量</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">      MON=<span class="number">1</span>, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125; day;</span><br></pre></td></tr></table></figure>
-
-<p>方式3：<strong>省略枚举名称，直接定义枚举变量</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">      MON=<span class="number">1</span>, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125; day;</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>例一：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">      MON, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125; day;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 遍历枚举元素</span></span><br><span class="line">    <span class="keyword">for</span> (day = MON; day &lt;= SUN; day++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;枚举元素：%d \n&quot;</span>, day);<span class="comment">//不能以s%输出</span></span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//默认第一个元素为1，可自行赋值</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">枚举元素：<span class="number">0</span></span><br><span class="line">枚举元素：<span class="number">1</span></span><br><span class="line">枚举元素：<span class="number">2</span></span><br><span class="line">枚举元素：<span class="number">3</span></span><br><span class="line">枚举元素：<span class="number">4</span></span><br><span class="line">枚举元素：<span class="number">5</span></span><br><span class="line">枚举元素：<span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<p>例二：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">      MON=<span class="number">0</span>, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125; day;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    day = TUE;</span><br><span class="line">    <span class="comment">// 遍历枚举元素</span></span><br><span class="line">    <span class="keyword">switch</span>(day)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/13/C/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/13/C/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" class="post-title-link" itemprop="url">动态内存分配</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-13 21:18:01" itemprop="dateCreated datePublished" datetime="2021-08-13T21:18:01+08:00">2021-08-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-16 18:50:46" itemprop="dateModified" datetime="2021-08-16T18:50:46+08:00">2021-08-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="malloc和free函数"><a href="#malloc和free函数" class="headerlink" title="malloc和free函数"></a>malloc和free函数</h3><h4 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h4><p>当声明数组时，我们通常定义一个足够大的宏，使其尽量容纳多的元素，但是这样造成内存浪费，使用动态内存分配可以避免这种内存浪费。</p>
-<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>函数原型</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *pointer)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>调用malloc函数时，malloc从内存池提取一块可用内存，向程序返回一个指向这块内存的指针。这块内存并没有初始化。malloc参数就是所需要的字节数，并且分配的内存是连续的。如果内存池是空的或者内存池可用内存无法满足要求那么就会返回NULL指针。</p>
-<p>当一块以前分配的内存不使用时，使用free函数把他归还给内存池。</p>
-<h3 id="calloc和realloc函数"><a href="#calloc和realloc函数" class="headerlink" title="calloc和realloc函数"></a>calloc和realloc函数</h3><p>函数原型</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> num_elements, <span class="keyword">size_t</span> element_size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> new_size)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>calloc函数也用于内存分配，与malloc区别就是返回时指针可以初始化为0。并且参数是所需元素的数量和每个元素的字节数。</p>
-<p>realloc函数用于修改一个已经分配的内存块的大小。若用于扩大内存块，那么这块内存保留，新增加的内存添加到原本的后面。若用于缩小，该内存块尾部一部分被拿掉，剩余保留。若原先的内存块无法修改，realloc将重新分配一块内存，将原先那块内存内容复制到分配的内存块上。</p>
-<h3 id="使用动态内存分配"><a href="#使用动态内存分配" class="headerlink" title="使用动态内存分配"></a>使用动态内存分配</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *pi;</span><br><span class="line">   pi = <span class="built_in">malloc</span>(<span class="number">100</span>);<span class="comment">//更好的是pi = malloc(25 * sizeof(int));方便移植</span></span><br><span class="line">   <span class="keyword">if</span>(pi == <span class="literal">NULL</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Out of memory!\n&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">   &#125;<span class="comment">//检查是否分配成功，避免指向NULL指针</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">25</span>; i++)&#123;</span><br><span class="line">      pi[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,pi[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="动态内存分配常见错误"><a href="#动态内存分配常见错误" class="headerlink" title="动态内存分配常见错误"></a>动态内存分配常见错误</h3><ul>
-<li>对NULL指针间接访问</li>
-<li>对分配的内存越界操作</li>
-<li>释放并非动态分配的内存</li>
-<li>释放一块动态分配内存的一部分（解决方法：realloc函数可以有效缩小一块动态分配的内存，有效释放他尾部的部分内存）</li>
-<li>一块动态内存被释放后继续使用</li>
-</ul>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>分配内存但在使用完后不释放会引起内存泄漏，内存泄漏会一点点榨干内存。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/13/C/%E8%81%94%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/13/C/%E8%81%94%E5%90%88/" class="post-title-link" itemprop="url">联合</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-13 20:38:50 / 修改时间：21:18:50" itemprop="dateCreated datePublished" datetime="2021-08-13T20:38:50+08:00">2021-08-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>694</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>最简单的使用联合例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">   <span class="keyword">float</span> f;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">&#125;fi;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   fi.f = <span class="number">1.5</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,fi.i);</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的联合在一个整形和浮点都是32位的机器上，变量fi只占用一个32位的字，若成员f被使用，这个字作为浮点值访问，成员i若被使用，这个字作为整形被访问。也就说<strong>联合中所有成员引用的是内存中相同的位置</strong>。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VARIBLE</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> &#123;</span>INT,FLOAT,STRING&#125; type;</span><br><span class="line">    <span class="keyword">int</span> int_value;</span><br><span class="line">    <span class="keyword">float</span> float_value;</span><br><span class="line">    <span class="keyword">char</span> *string_value;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//使用union</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VARIBLE</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> &#123;</span>INT,FLOAT,STRING&#125; type;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">float</span> f;</span><br><span class="line">        <span class="keyword">char</span> *s;</span><br><span class="line">    &#125;value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>有一个结构保存变量的类型和值。如果是int型，那么就有两个没有被使用。使用联合可以避免。从而节省了内存空间。</p>
-<p><strong>联合的长度取决于最长成员的长度。</strong>当联合中成员长度相差较为悬殊时，内存就会浪费，这时存储指针可以避免浪费内存。</p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">&#125;x = &#123;<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1837,7 +1763,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1901,12 +1827,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">63k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">57 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
