@@ -198,6 +198,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%A4%E6%96%AD%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/py/%E5%88%A4%E6%96%AD%E5%BE%AA%E7%8E%AF/" class="post-title-link" itemprop="url">判断循环</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 11:05:18 / 修改时间：22:08:14" itemprop="dateCreated datePublished" datetime="2021-09-08T11:05:18+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>关于if的用法格式如下，elif是else if，注意对齐。并且这里注意input返回值为字符串类型，不能直接和整数比较大小，所以用int()函数来转化为整形。但是输入abc报错，int()函数发现一个字符串并不是合法的数字时就会报错，程序就退出了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>(<span class="string">&#x27;x = &#x27;</span>)</span><br><span class="line">x = <span class="built_in">int</span>(s)</span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">18</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;yes&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> x &gt; <span class="number">6</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;no&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hh&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>range函数解释，range（x，y，foot），x-y为范围，foot为步长，上限为y-1，不会超过y。</p>
+<p>下面为range函数使用实例，类似于中for的使用，进行一遍i的循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>)))</span><br><span class="line"><span class="comment">#[2, 4, 6, 8]</span></span><br><span class="line">s = <span class="string">&#x27;sound&#x27;</span></span><br><span class="line">s = <span class="string">&#x27;sound&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="built_in">print</span>(s[i])</span><br><span class="line"><span class="built_in">print</span>(s[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">s</span><br><span class="line">o</span><br><span class="line">u</span><br><span class="line">n</span><br><span class="line">d</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>上图也包括了循环的用法，range(len(s))把值传给i，不断打印。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;Ma&#x27;</span>,<span class="string">&#x27;Me&#x27;</span>,<span class="string">&#x27;My&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">Ma</span><br><span class="line">Me</span><br><span class="line">My</span><br></pre></td></tr></table></figure>
+
+<p>for中else是穷尽列表导致循环被终止时执行的，break即跳出循环。break 语句可以跳出 for 和 while 的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else 块将不执行。 continue 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,num):</span><br><span class="line">        <span class="keyword">if</span> num%i == <span class="number">0</span>:</span><br><span class="line">            j = num/i</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;%d 等于 %d * %d&#x27;</span>%(num,i,j))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(num,<span class="string">&#x27;是一个质数&#x27;</span>)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="number">10</span> 等于 <span class="number">2</span> * <span class="number">5</span></span><br><span class="line"><span class="number">11</span> 是一个质数</span><br><span class="line"><span class="number">12</span> 等于 <span class="number">2</span> * <span class="number">6</span></span><br><span class="line"><span class="number">13</span> 是一个质数</span><br><span class="line"><span class="number">14</span> 等于 <span class="number">2</span> * <span class="number">7</span></span><br><span class="line"><span class="number">15</span> 等于 <span class="number">3</span> * <span class="number">5</span></span><br><span class="line"><span class="number">16</span> 等于 <span class="number">2</span> * <span class="number">8</span></span><br><span class="line"><span class="number">17</span> 是一个质数</span><br><span class="line"><span class="number">18</span> 等于 <span class="number">2</span> * <span class="number">9</span></span><br><span class="line"><span class="number">19</span> 是一个质数</span><br></pre></td></tr></table></figure>
+
+<p>类似的while用法如下：while中加else，当while条件不满足时，执行else后的语句，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">n = <span class="number">99</span></span><br><span class="line"><span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">sum</span> = <span class="built_in">sum</span> + n</span><br><span class="line">    n = n - <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>)</span><br><span class="line"><span class="comment">#2500</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(count,<span class="string">&quot;is less than 5&quot;</span>)</span><br><span class="line">    count = count + <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(count,<span class="string">&quot;is not less than 5&quot;</span>)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="number">0</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">is</span> <span class="keyword">not</span> less than <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/Java/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1515,181 +1615,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/C/%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/C/%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" class="post-title-link" itemprop="url">预处理器</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-22 11:12:37" itemprop="dateCreated datePublished" datetime="2021-08-22T11:12:37+08:00">2021-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 19:37:24" itemprop="dateModified" datetime="2021-08-23T19:37:24+08:00">2021-08-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>编译一个C程序第一个步骤叫做预处理阶段，C预处理器在源代码编译之前对其进行一些文本性质操作。</p>
-<h2 id="预定义符号"><a href="#预定义符号" class="headerlink" title="预定义符号"></a>预定义符号</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>例子</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>__FILE__</td>
-<td>“name.c”</td>
-<td>进行编译的源文件名称</td>
-</tr>
-<tr>
-<td>__LINE__</td>
-<td>25</td>
-<td>文件当前行的行号</td>
-</tr>
-<tr>
-<td>__DATE__</td>
-<td>“Jan 17 2021”</td>
-<td>文件被编译的日期</td>
-</tr>
-<tr>
-<td>__TIME__</td>
-<td>“11:34:01”</td>
-<td>文件被编译的时间</td>
-</tr>
-<tr>
-<td>__STDC__</td>
-<td>1</td>
-<td>如果编译器遵循ANSI C值就为1，否则未定义</td>
-</tr>
-</tbody></table>
-<h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>声明格式：<code>#define name stuff</code></p>
-<p>例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG_PRINT printf(<span class="meta-string">&quot;FILE %s line &quot;</span>\ </span></span><br><span class="line"><span class="string">&quot;%d: x=%d, y=%d,&quot;</span>\    <span class="comment">//相邻的字符串常量自动被连接</span></span><br><span class="line"><span class="string">&quot;z=%d&quot;</span>,__FILE__,__LINE__,x,y,z)<span class="comment">//注意此处没有分号</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p>声明格式：<code>#define name(parameter-list) stuff</code></p>
-<p>例子1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) x*x</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,S(a+<span class="number">1</span>));<span class="comment">//输出11，原因是将a+1替换，会变成a+1*a+1,不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) (x)*(x)</span></span><br></pre></td></tr></table></figure>
-
-<p>例子2：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) (x)+(x)</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="number">10</span>*S(a));<span class="comment">//输出55，原因是将a替换，会变成10*(a)+(a),不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) ((x)*(x))</span></span><br></pre></td></tr></table></figure>
-
-<p>例子3：#结构是把宏参数转换为字符串</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRINT(FORMAT,VALUE) printf(<span class="meta-string">&quot;The value of &quot;</span>#VALUE  <span class="meta-string">&quot; is &quot;</span>FORMAT<span class="meta-string">&quot;\n&quot;</span>,VALUE)<span class="comment">//别吵别吵，这里很关键</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">22</span>;</span><br><span class="line">    PRINT(<span class="string">&quot;%d&quot;</span>,x+<span class="number">3</span>);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">The value of x+<span class="number">3</span> is <span class="number">25</span></span><br></pre></td></tr></table></figure>
-
-<p>例子4：##结构是把两边的符号连接成一个</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(number,value) sum ## number += value</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum5 = <span class="number">0</span>;<span class="comment">//前提是变量已经定义过</span></span><br><span class="line">    ADD(<span class="number">5</span>,<span class="number">25</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum5);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="副作用宏"><a href="#副作用宏" class="headerlink" title="副作用宏"></a>副作用宏</h3><p>例子1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) ((a)&gt;(b)?(a):(b))<span class="comment">//与参数类型无关</span></span></span><br><span class="line">...</span><br><span class="line">x = <span class="number">5</span>;</span><br><span class="line">y = <span class="number">8</span>;</span><br><span class="line">z = MAX(x++,y++);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d,%d,%d&quot;</span>,x,y,z);</span><br><span class="line"><span class="comment">//输出为6，10，9</span></span><br><span class="line"><span class="comment">//带入分析可知 z = ((x++)&gt;(y++)?(x++):(y++));</span></span><br></pre></td></tr></table></figure>
-
-<p>例子2：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVENPARITY(ch) ((cbit(ch)&amp;1)?(ch)|PARITYBIT:(ch))<span class="comment">//奇偶检验，PARITYBIT为1</span></span></span><br><span class="line">ch = EVENPARITY(getchar());<span class="comment">//这条语句实际上是失败的，因为getchar()实际上有两个，还有一个回车</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="undef"><a href="#undef" class="headerlink" title="#undef"></a>#undef</h3><p>作用是移除一个宏定义</p>
-<p>声明格式：<code>#undef name</code></p>
-<h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>一般格式</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> constant-expression<span class="comment">//常量表达式</span></span></span><br><span class="line">		statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> constant-expression</span></span><br><span class="line">        other statements...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">        other statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p><strong>是否被定义</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> symbol<span class="comment">//等价</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> symbol</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>一般来讲#include尖括号是函数库文件，双引号是本地文件。</p>
-<p><strong>多重包含：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;b.h&quot;</span></span></span><br><span class="line"><span class="comment">//如果两个文件都包含了x.h文件，就会造成多重包含</span></span><br></pre></td></tr></table></figure>
-
-<p>解决方法就是条件编译：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HEADERNAME_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HEADERNAME_H 1<span class="comment">//此处1可加可不加，不加1的话，变量就是一个空字符串</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>当头文件第一次被包含时，变量未定义就给它定义，第二次多重包含时，ifndef条件为假内容就被忽略，不会被多次编译</p>
-<h3 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h3><ul>
-<li><p><code>#error text of error mesage</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(A)</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(B)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(C)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">error</span> No selected</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></li>
-<li><p><code>#line number &quot;string&quot;</code>他告诉预处理器number是下一行输入的行号，如果加入了string，预处理器就把它当作文件的名字。这条指令将修改__FILE__和__LINE__</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1757,7 +1686,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1821,12 +1750,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">69k</span>
+    <span title="站点总字数">76k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:03</span>
+    <span title="站点阅读时长">1:09</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
