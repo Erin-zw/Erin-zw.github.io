@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="来者犹可追">
+  <meta name="description" content="广播介绍1234567891011121314151617import numpy as npa &#x3D; np.array([0,1,2])M &#x3D; np.ones((3,3))print(M+a)个一维数组就被扩展或者广播了。它沿着第二个维度扩展，扩展到匹配 M 数组的形状b &#x3D; np.arange(3)[:,np.newaxis]print(b)print(a+b)#输出[[1. 2. 3.] [1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="广播">
 <meta property="og:url" content="http://example.com/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="来者犹可追">
+<meta property="og:description" content="广播介绍1234567891011121314151617import numpy as npa &#x3D; np.array([0,1,2])M &#x3D; np.ones((3,3))print(M+a)个一维数组就被扩展或者广播了。它沿着第二个维度扩展，扩展到匹配 M 数组的形状b &#x3D; np.arange(3)[:,np.newaxis]print(b)print(a+b)#输出[[1. 2. 3.] [1">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/numpy/广播/1.png">
+<meta property="og:image" content="http://example.com/images/numpy/广播/2.png">
 <meta property="article:published_time" content="2021-09-17T03:19:04.398Z">
-<meta property="article:modified_time" content="2021-09-17T15:08:12.311Z">
+<meta property="article:modified_time" content="2021-09-18T11:59:41.054Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/numpy/广播/1.png">
 
 <link rel="canonical" href="http://example.com/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/">
 
@@ -225,10 +228,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-17 11:19:04 / 修改时间：23:08:12" itemprop="dateCreated datePublished" datetime="2021-09-17T11:19:04+08:00">2021-09-17</time>
+              <time title="创建时间：2021-09-17 11:19:04" itemprop="dateCreated datePublished" datetime="2021-09-17T11:19:04+08:00">2021-09-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 19:59:41" itemprop="dateModified" datetime="2021-09-18T19:59:41+08:00">2021-09-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,7 +261,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>889</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -271,7 +280,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="广播介绍"><a href="#广播介绍" class="headerlink" title="广播介绍"></a>广播介绍</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">M = np.ones((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(M+a)个一维数组就被扩展或者广播了。它沿着第二个维度扩展，扩展到匹配 M 数组的形状</span><br><span class="line">b = np.arange(<span class="number">3</span>)[:,np.newaxis]</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(a+b)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]]</span><br><span class="line">[[<span class="number">0</span>]</span><br><span class="line"> [<span class="number">1</span>]</span><br><span class="line"> [<span class="number">2</span>]]</span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<img src="/images/numpy/广播/1.png" style="zoom:67%;">
+
+<p>浅色的盒子表示广播的值。同样需要注意的是，这个额外的内存并没有 在实际操作中进行分配，但是这样的想象方式更方便我们从概念上理解。</p>
+<p>以下属于不兼容的情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">M = np.ones((<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line">a = np.arange(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(M+a)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">    <span class="built_in">print</span>(M+a)</span><br><span class="line">ValueError: operands could <span class="keyword">not</span> be broadcast together <span class="keyword">with</span> shapes (<span class="number">3</span>,<span class="number">2</span>) (<span class="number">3</span>,)</span><br></pre></td></tr></table></figure>
+
+<h2 id="广播实际应用"><a href="#广播实际应用" class="headerlink" title="广播实际应用"></a>广播实际应用</h2><h3 id="数组归一化处理"><a href="#数组归一化处理" class="headerlink" title="数组归一化处理"></a>数组归一化处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.random.random((<span class="number">10</span>, <span class="number">3</span>))<span class="comment">#均匀分布的10*3数组</span></span><br><span class="line">Xmean = X.mean(<span class="number">0</span>)<span class="comment">#将列维度聚合求均值</span></span><br><span class="line"><span class="built_in">print</span>(X,Xmean)</span><br><span class="line">X_centered = X - Xmean<span class="comment">#广播实现归一化</span></span><br><span class="line"><span class="built_in">print</span>(X_centered)</span><br><span class="line"><span class="built_in">print</span>(X_centered.mean(<span class="number">0</span>))<span class="comment">#验证是否归一化</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画一个二维函数"><a href="#画一个二维函数" class="headerlink" title="画一个二维函数"></a>画一个二维函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)</span><br><span class="line">y = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)[:, np.newaxis]</span><br><span class="line">z = np.sin(x) ** <span class="number">10</span> + np.cos(<span class="number">10</span> + y * x) * np.cos(x)</span><br><span class="line">plt.imshow(z, origin=<span class="string">&#x27;lower&#x27;</span>, extent=[<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">5</span>],cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line">plt.colorbar()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="/images/numpy/广播/2.png" style="zoom:67%;">
+
     </div>
 
     
@@ -419,6 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E6%92%AD%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">广播介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E6%92%AD%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">广播实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%BD%92%E4%B8%80%E5%8C%96%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">数组归一化处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E4%B8%80%E4%B8%AA%E4%BA%8C%E7%BB%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">画一个二维函数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -434,14 +457,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -498,12 +521,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:28</span>
+    <span title="站点阅读时长">1:29</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

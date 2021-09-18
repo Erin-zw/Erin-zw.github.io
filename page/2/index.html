@@ -198,6 +198,198 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/10/py/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/10/py/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">高阶函数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-10 22:00:50" itemprop="dateCreated datePublished" datetime="2021-09-10T22:00:50+08:00">2021-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-11 20:05:03" itemprop="dateModified" datetime="2021-09-11T20:05:03+08:00">2021-09-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>函数名称也是变量</p>
+<p>传入函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y,f</span>):</span></span><br><span class="line">    <span class="keyword">return</span> f(x),f(y)</span><br><span class="line"><span class="built_in">print</span>(add(-<span class="number">1</span>,<span class="number">2</span>,<span class="built_in">abs</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="map和reduce"><a href="#map和reduce" class="headerlink" title="map和reduce"></a>map和reduce</h2><p>map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。</p>
+<p>再看reduce的用法。reduce把一个函数作用在一个序列[x1, x2, x3, …]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<p>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</p>
+<p>如下例子，将字符串转化成浮点数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">char2num</span>(<span class="params">s</span>):</span></span><br><span class="line">    digits = &#123;<span class="string">&#x27;0&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;1&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;2&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;3&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;4&#x27;</span>:<span class="number">4</span>,<span class="string">&#x27;5&#x27;</span>:<span class="number">5</span>,<span class="string">&#x27;6&#x27;</span>:<span class="number">6</span>,<span class="string">&#x27;7&#x27;</span>:<span class="number">7</span>,<span class="string">&#x27;8&#x27;</span>:<span class="number">8</span>,<span class="string">&#x27;9&#x27;</span>:<span class="number">9</span>,<span class="string">&#x27;.&#x27;</span>:<span class="number">10</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> digits[s]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params"><span class="built_in">str</span></span>):</span></span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    L = <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line">    <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">enumerate</span>(L):</span><br><span class="line">        <span class="keyword">if</span> j == <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">            k = i</span><br><span class="line">    L.pop(k)</span><br><span class="line">    d = <span class="built_in">len</span>(L) - k</span><br><span class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x,y:x * <span class="number">10</span> + y, <span class="built_in">map</span>(char2num,L))/<span class="built_in">pow</span>(<span class="number">10</span>,d)</span><br><span class="line"><span class="built_in">print</span>(fn(<span class="string">&#x27;2787.114514&#x27;</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">2787.114514</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><p>过滤函数。 判断为False的数据，filter函数返回值类型为Iterator </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_odd</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(<span class="built_in">filter</span>(is_odd,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>])))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">filter</span>(is_odd,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>])))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">15</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="sorted函数"><a href="#sorted函数" class="headerlink" title="sorted函数"></a>sorted函数</h2><p>排序函数用法如下所示，可以加上key关键字对每一个数据使用函数后进行判断排序，并且可以加上reverse关键字进行反向排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>([<span class="string">&#x27;bob&#x27;</span>,<span class="string">&#x27;about&#x27;</span>,<span class="string">&#x27;Zoo&#x27;</span>,<span class="string">&#x27;Credit&#x27;</span>],key = <span class="built_in">str</span>.lower, reverse = <span class="literal">True</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>([-<span class="number">7</span>,<span class="number">3</span>,<span class="number">34</span>,<span class="number">5</span>,<span class="number">3</span>],key = <span class="built_in">abs</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="string">&#x27;Zoo&#x27;</span>, <span class="string">&#x27;Credit&#x27;</span>, <span class="string">&#x27;bob&#x27;</span>, <span class="string">&#x27;about&#x27;</span>]</span><br><span class="line">[<span class="number">3</span>, <span class="number">3</span>, <span class="number">5</span>, -<span class="number">7</span>, <span class="number">34</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/numpy/numpy%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/09/numpy/numpy%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">numpy随机函数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-09 23:27:37 / 修改时间：23:37:02" itemprop="dateCreated datePublished" datetime="2021-09-09T23:27:37+08:00">2021-09-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/numpy/numpy%20random%20seed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1145,216 +1337,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/" class="post-title-link" itemprop="url">列表和元组</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-08 10:32:14 / 修改时间：22:27:12" itemprop="dateCreated datePublished" datetime="2021-09-08T10:32:14+08:00">2021-09-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="列表-list"><a href="#列表-list" class="headerlink" title="列表(list)"></a>列表(list)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>list数据类型是列表，下标从零开始，使用-1下标可以直接找到最后一个元素，依次可以获得所有元素。-4时列表越界报错。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">0</span>],x[-<span class="number">1</span>],x[-<span class="number">3</span>],x)</span><br><span class="line"><span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test3.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line">IndexError: <span class="built_in">list</span> index out of <span class="built_in">range</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="append，pop，insert，len函数"><a href="#append，pop，insert，len函数" class="headerlink" title="append，pop，insert，len函数"></a>append，pop，insert，len函数</h3><p>Python中可以使用append（）添加末尾列表值，也可以用.insert（）在指定位置添加。此函数返回值为空值，通过print打印出来返回None。</p>
-<p>也可以使用pop（）函数删除列表末尾元素，pop（i）可以删除指定下标i的元素。Pop（）函数为一个值函数，可以print出来，如果删除的是字符串，即使没有单引号也可以打印出来。</p>
-<p>也可以直接赋值改变列表中元素的值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">x.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x.insert(<span class="number">1</span>,<span class="string">&#x27;insert&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x.pop(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.pop())</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x[<span class="number">1</span>] = <span class="string">&#x27;change&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="number">4</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;change&#x27;</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-<p>列表里也可以是另一个列表，可以用len函数测试列表长度，要获取y列表中5的值，可以y[1]，也可以x[4][1]。同时列表可以为空，L = [],len(L)=0 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y = [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">x = [<span class="number">1</span>,<span class="string">&#x27;one&#x27;</span>,[<span class="number">2</span>,<span class="string">&#x27;two&#x27;</span>],<span class="number">3</span>,y]</span><br><span class="line"><span class="built_in">print</span>(y[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">4</span>][<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">2</span>],x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(x))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">[<span class="number">2</span>, <span class="string">&#x27;two&#x27;</span>] one</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h3><p>列表可以使用list.sort（）函数对list中的内容进行排序，并且只能是同一类型的数据，如果是字符串类型，就按ASCII码大小进行排序，如果数据类型不一样就会报错。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">s = [<span class="string">&#x27;cnm&#x27;</span>,<span class="string">&#x27;bshi&#x27;</span>,<span class="string">&#x27;Dwls&#x27;</span>,<span class="string">&#x27; &#x27;</span>]</span><br><span class="line">d.sort()</span><br><span class="line">s.sort()</span><br><span class="line"><span class="built_in">print</span>(d,s)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;Dwls&#x27;</span>, <span class="string">&#x27;bshi&#x27;</span>, <span class="string">&#x27;cnm&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="元组-tuple"><a href="#元组-tuple" class="headerlink" title="元组(tuple)"></a>元组(tuple)</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>Tuple叫元组，一旦列出元素就不可以修改，大小也不行。因为其不可变，所以一旦列出就很安全。其形式如下图所示，并且如果只定义一个元素，则需要加一个逗号，消除他可能是赋值歧义的可能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">y = (<span class="number">1</span>,)</span><br><span class="line">z = (<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y,z)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>) (<span class="number">1</span>,) <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="可变tuple"><a href="#可变tuple" class="headerlink" title="可变tuple"></a>可变tuple</h3><p>这里变的是list，而不是tuple</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>])</span><br><span class="line">x[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">&#x27;X&#x27;</span></span><br><span class="line">x[<span class="number">2</span>][<span class="number">1</span>] = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, [<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-<h2 id="关于list，tuple实质解释"><a href="#关于list，tuple实质解释" class="headerlink" title="关于list，tuple实质解释"></a>关于list，tuple实质解释</h2><p>list和tuple其实是用链表顺序存储的，也就是前一个元素中存储了下一个元素的位置，这样只要找到第一个元素的位置就可以顺藤摸瓜找到所有元素的位置，所以list的名字其实就是个指针，指向list的第一个元素的位置。list的插入和删除等可以直接用链表的方式进行，比如我要在第1个元素和第2个元素中间插入一个元素，那么直接在链表的最后面（我们假设这个list只有两个元素，那么也就是在第3个元素的位置上）插入这个元素，然后把第一个元素指针指向这个元素（第3个位置），然后再把新插入的元素的指针指向原来的第2个元素，这样插入操作就完成了。读取这个list的时候，先用list的名字（就是个指针，指向第1个元素的位置）找到第一个元素，然后用第1一个元素的指针找到第2个元素（位置3），然后用第2个元素的指针找到第3个元素（位置2），以此类推。所以list的顺序和内存中的实际顺序其实不一定完全对应。这种存储方式不会浪费内存，但查找起来特别费时间，因为要按照链表一个一个找下去，如果你的list特别大的话，那么要等好久才会找到结果。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="post-title-link" itemprop="url">字符串和编码</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-07 20:05:36 / 修改时间：20:42:20" itemprop="dateCreated datePublished" datetime="2021-09-07T20:05:36+08:00">2021-09-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>ASCII编码能表示的整数0-255，一个字节，表示不了中文，Unicode通常用两个字节表示一个字符，汉字中用Unicode编码为01001110 00101101，A用Unicode编码为00000000 01000001，所以占用无用内存。因此又产生了UTF-8编码，可以根据字符大小占用内存，A的编码为1000001。UTF-8一般用一个字节表示字母，三个字节表示汉字。</p>
-<h3 id="ord和chr函数"><a href="#ord和chr函数" class="headerlink" title="ord和chr函数"></a>ord和chr函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>))<span class="comment">#65</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;中&#x27;</span>))<span class="comment">#20013</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">66</span>))<span class="comment">#B</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">25991</span>))<span class="comment">#文</span></span><br></pre></td></tr></table></figure>
-
-<p>如果知道字符的十六进制表示可以直接使用转移字符表示</p>
-<p><code>print(&#39;\u4e2d\u6587&#39;)#中文</code></p>
-<h3 id="编码解码函数和字符串长度函数"><a href="#编码解码函数和字符串长度函数" class="headerlink" title="编码解码函数和字符串长度函数"></a>编码解码函数和字符串长度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;ABC&#x27;</span>.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line">中文</span><br><span class="line">ABC</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>))<span class="comment">#6</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;abc&#x27;</span>))<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;123&#x27;</span>))<span class="comment">#3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串的格式化"><a href="#字符串的格式化" class="headerlink" title="字符串的格式化"></a>字符串的格式化</h2><h3 id="格式化"><a href="#格式化" class="headerlink" title="%格式化"></a>%格式化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello, %s&#x27;</span>   %  <span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"><span class="comment">#hello, world</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%2d %02d %s&#x27;</span> %(<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="comment"># 3 01 abc</span></span><br></pre></td></tr></table></figure>
-
-<p>如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串。%2d如果占不满则用空格填补，%02d用0填补。并且%.2f表示保留两位小数。</p>
-<h3 id="format格式化"><a href="#format格式化" class="headerlink" title="format格式化"></a>format格式化</h3><p>另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……，不过这种方式写起来比%要麻烦得多，1后面的冒号相当于注释。此种方法类似str.函数（输入）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello, &#123;0&#125;, 成绩提升了 &#123;1:.1f&#125;%&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;小明&#x27;</span>, <span class="number">17.125</span>)) </span><br><span class="line"><span class="comment">#Hello, 小明, 成绩提升了 17.1%</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="f-string格式化"><a href="#f-string格式化" class="headerlink" title="f-string格式化"></a>f-string格式化</h3><p>最后一种格式化字符串的方法是使用以f开头的字符串，称之为f-string，它和普通字符串不同之处在于，字符串如果包含{xxx}，就会以对应的变量替换：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="number">2.5</span></span><br><span class="line">s = <span class="number">3.14</span> * r ** <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;The area of a circle with radius <span class="subst">&#123;r&#125;</span> is <span class="subst">&#123;s:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment">#The area of a circle with radius 2.5 is 19.62</span></span><br></pre></td></tr></table></figure>
-
-<p>两个乘号是乘方的意思，优先级高于一个乘号</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1426,14 +1408,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1490,12 +1472,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:28</span>
+    <span title="站点阅读时长">1:29</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
