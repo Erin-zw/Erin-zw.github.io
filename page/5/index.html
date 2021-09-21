@@ -198,6 +198,144 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/numpy/Ndarray%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/06/numpy/Ndarray%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Ndarray对象</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-06 00:43:09" itemprop="dateCreated datePublished" datetime="2021-08-06T00:43:09+08:00">2021-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-12 21:00:04" itemprop="dateModified" datetime="2021-09-12T21:00:04+08:00">2021-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>530</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>ndarray对象是用于存放同类型元素的多维数组。ndarray 中的每个元素在内存中都有相同存储大小的区域。 </p>
+<h3 id="内部组成"><a href="#内部组成" class="headerlink" title="内部组成"></a>内部组成</h3><ul>
+<li>一个指向数据（内存或内存映射文件中的一块数据）的指针。</li>
+<li>数据类型或 dtype，描述在数组中的固定大小值的格子。</li>
+<li>一个表示数组形状（shape）的元组，表示各维度大小的元组。</li>
+<li>一个跨度元组（stride），其中的整数指的是为了前进到当前维度下一个元素需要”跨过”的字节数。</li>
+</ul>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p><code>numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin = 0)</code></p>
+<p>参数说明：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">object</td>
+<td style="text-align:left">数组或嵌套的数列</td>
+</tr>
+<tr>
+<td style="text-align:left">dtype</td>
+<td style="text-align:left">数组元素的数据类型，可选</td>
+</tr>
+<tr>
+<td style="text-align:left">copy</td>
+<td style="text-align:left">对象是否需要复制，可选</td>
+</tr>
+<tr>
+<td style="text-align:left">order</td>
+<td style="text-align:left">创建数组的样式，C为行方向，F为列方向，A为任意方向（默认）</td>
+</tr>
+<tr>
+<td style="text-align:left">subok</td>
+<td style="text-align:left">默认返回一个与基类类型一致的数组</td>
+</tr>
+<tr>
+<td style="text-align:left">ndmin</td>
+<td style="text-align:left">指定生成数组的最小维度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>例子：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line">a = np.array([[<span class="number">1</span>+<span class="number">1j</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]], dtype=<span class="built_in">complex</span>)  </span><br><span class="line"><span class="built_in">print</span> (a)</span><br><span class="line">//输出</span><br><span class="line">[[<span class="number">1.</span>+<span class="number">1.j</span> <span class="number">2.</span>+<span class="number">0.j</span>]</span><br><span class="line"> [<span class="number">3.</span>+<span class="number">0.j</span> <span class="number">4.</span>+<span class="number">0.j</span>]</span><br><span class="line"> [<span class="number">5.</span>+<span class="number">0.j</span> <span class="number">6.</span>+<span class="number">0.j</span>]]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/matplotlib/matplotlib1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -452,7 +590,6 @@
       
           <h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><h4 id="数组名"><a href="#数组名" class="headerlink" title="数组名"></a>数组名</h4><p>在数组a[10]中，a[1]代表数组中的第二个元素，a代表数组中第一个元素a[0]的地址。a是一个指针常量。</p>
 <h4 id="下标引用"><a href="#下标引用" class="headerlink" title="下标引用"></a>下标引用</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">10</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *ap = <span class="built_in">array</span> + <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*ap的值     ： %d\n&quot;</span>,*ap);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ap[0]的值   ： %d\n&quot;</span>,ap[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*(ap+6)的值 ： %d\n&quot;</span>,*(ap+<span class="number">6</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ap[6]的值   ： %d\n&quot;</span>,ap[<span class="number">6</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ap[-1]的值  ： %d\n&quot;</span>,ap[<span class="number">-1</span>]);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">*ap的值     ： <span class="number">2</span></span><br><span class="line">ap[<span class="number">0</span>]的值   ： <span class="number">2</span></span><br><span class="line">*(ap+<span class="number">6</span>)的值 ： <span class="number">8</span></span><br><span class="line">ap[<span class="number">6</span>]的值   ： <span class="number">8</span></span><br><span class="line">ap[<span class="number">-1</span>]的值  ： <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="函数和数组"><a href="#函数和数组" class="headerlink" title="函数和数组"></a>函数和数组</h4><p>作为函数参数的数组名是将数组指针拷贝传递给函数，函数如果执行了下标引用，实际上是对指针执行<strong>间接访问</strong>，通过这种间接访问，函数可以<strong>修改</strong>调用程序中的数组元素。</p>
 <h4 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h4><p><strong>注意：</strong>当数组的初始化局部于一个函数或代码块时，仔细考虑在程序的执行流每次进入该函数时，每一次都要初始化是否值得，如果不值得，就把数组声明为static，这样数组初始化只用在程序开始前执行一次。</p>
 <h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><h4 id="储存顺序"><a href="#储存顺序" class="headerlink" title="储存顺序"></a>储存顺序</h4><p>行主序，例如int  a[4] [6]下标依次就是最右边下标先变化，习惯上叫做4行6列。</p>
@@ -462,22 +599,18 @@
 <p>a+1的类型也是“指向包含10个整形元素的数组的指针”，只不过是指向了a的下一行</p>
 <p>*(a+1)的类型是“指向整型的指针”，即是指向a[1][0]的指针</p>
 <p>*(a+1)+5的类型也是“指向整型的指针”，即是指向a[1][5]的指针</p>
-<p>*(*(a+1)+5)的类型就是整型，即是a[1][5]元素。*(a+1)等价于a[1]所以前面写成*(a[1]+5)也是可以的。</p>
+<p><em>(\</em>(a+1)+5)的类型就是整型，即是a[1][5]元素。*(a+1)等价于a[1]所以前面写成*(a[1]+5)也是可以的。</p>
 <h4 id="指向数组的指针"><a href="#指向数组的指针" class="headerlink" title="指向数组的指针"></a>指向数组的指针</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">vector</span>[<span class="number">10</span>], *vp = <span class="built_in">vector</span>;</span><br><span class="line"><span class="keyword">int</span> matrix[<span class="number">3</span>][<span class="number">10</span>], *mp = matrix;</span><br></pre></td></tr></table></figure>
-
 <p>上面两个定义，第一条是合法初始化。第二条是非法的。因为mp为指向整型的指针，matrix为指向数组的指针。</p>
 <p>正确声明如下：</p>
 <p><code>int (*p)[10] = matrix;//因为*p本身就是相当于数组名</code></p>
 <p>如果要创建一个指向第一个整形元素的指针有两种方法：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pi = &amp;matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"><span class="keyword">int</span> *pi = matrix[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-
 <p>第二个意思就是<code>pi = matrix[0]</code>,实际上matrix[0]就是指向第一个整形元素的指针。</p>
 <h4 id="函数形参"><a href="#函数形参" class="headerlink" title="函数形参"></a>函数形参</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> matrix[<span class="number">3</span>][<span class="number">10</span>];</span><br><span class="line"><span class="comment">//以下两种都可以</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> (*mat)[<span class="number">10</span>])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> mat[][<span class="number">10</span>])</span></span>;</span><br><span class="line"><span class="comment">//下面这种不行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> **mat)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <h4 id="数组初始化-1"><a href="#数组初始化-1" class="headerlink" title="数组初始化"></a>数组初始化</h4><p>例如a[][][][]…，从左到右维度增加，只有一维才能缺省，后几维都需给出具体数值初始化。</p>
 <h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>两种方案：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> *keyword[] = &#123;</span><br><span class="line">    <span class="string">&quot;do&quot;</span>,</span><br><span class="line">    <span class="string">&quot;for&quot;</span>,</span><br><span class="line">    <span class="string">&quot;if&quot;</span>,</span><br><span class="line">    <span class="string">&quot;register&quot;</span>,</span><br><span class="line">    <span class="string">&quot;return&quot;</span>,</span><br><span class="line">    <span class="string">&quot;switch&quot;</span>,</span><br><span class="line">    <span class="string">&quot;while&quot;</span>,</span><br><span class="line">    <span class="literal">NULL</span></span><br><span class="line">&#125;;<span class="comment">//指针数组形式，一般常用这种，并且在数组最后增加一个NULL指针方便遍历数组</span></span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> keyword[][<span class="number">9</span>] = &#123;</span><br><span class="line">	<span class="string">&quot;do&quot;</span>,</span><br><span class="line">    <span class="string">&quot;for&quot;</span>,</span><br><span class="line">    <span class="string">&quot;if&quot;</span>,</span><br><span class="line">    <span class="string">&quot;register&quot;</span>,</span><br><span class="line">    <span class="string">&quot;return&quot;</span>,</span><br><span class="line">    <span class="string">&quot;switch&quot;</span>,</span><br><span class="line">    <span class="string">&quot;while&quot;</span>,</span><br><span class="line">&#125;;<span class="comment">//二位数组形式</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -573,6 +706,7 @@
 <p>长整型≥整型≥短整型</p>
 <p>short int至少2字节，long int至少4字节，int是4字节还是2字节由编译器设计者决定，本系统为4字节。</p>
 <p>缺省的char可以是有符号也可以是无符号的，这取决于编译器。一般为了保证可移植性不显式定义为有符号或者无符号。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -581,7 +715,8 @@
 <th>值范围</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>char</td>
 <td>1字节</td>
 <td>-128到127或0到255</td>
@@ -626,8 +761,11 @@
 <td>4字节</td>
 <td>0到4294967295</td>
 </tr>
-</tbody></table>
-<h3 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h3><table>
+</tbody>
+</table>
+</div>
+<h3 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -636,7 +774,8 @@
 <th>精度</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>float</td>
 <td>4字节</td>
 <td>1.2E-38到3.4E+38</td>
@@ -654,7 +793,9 @@
 <td>3.4E-4932到1.1E+4932</td>
 <td>20位有效位</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>float精度以及范围分析：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/krocwang/article/details/4444491">第一篇</a></li>
@@ -746,20 +887,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>char* ，int* 都是一种类型，都是扩展类型。int*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。所以指针变量和整型变量是不一样的，不能相互赋值。如下所示是个错误赋值语句：</p>
+          <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>char<em> ，int</em> 都是一种类型，都是扩展类型。int*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。所以指针变量和整型变量是不一样的，不能相互赋值。如下所示是个错误赋值语句：</p>
 <p><code>d = 10- *d</code></p>
 <h3 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*<span class="number">100</span> = <span class="number">25</span>;</span><br><span class="line">*(<span class="keyword">int</span>*)<span class="number">100</span> = <span class="number">25</span>;</span><br></pre></td></tr></table></figure>
-
 <p>间接访问符号只能访问只能作用于指针类型，100是一个整型，所以是非法的。</p>
 <p>但是使用强制类型转换即可达到赋值的目的。</p>
 <h3 id="NULL指针"><a href="#NULL指针" class="headerlink" title="NULL指针"></a>NULL指针</h3><p>NULL指针不指向任何东西，要使一个指针变量为NULL可以给它赋零值，机器内部而言实际地址值可能不同。</p>
 <p><strong>对NULL指针解引用间接访问是非法的！</strong></p>
 <h3 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">...</span><br><span class="line">*a = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
-
 <p>以上代码指针变量a未进行初始化，a的初始值若是非法地址则报错，若为合法地址则修改了合法地址本来的值。</p>
 <p><strong>注意：所以对指针间接访问时，确保它们被初始化了！如果知道指针将被初始化为什么地址，就把它初始化为该值，如果不知道，就初始化为NULL指针。</strong></p>
 <h3 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">int</span>* b = &amp;a;</span><br><span class="line"><span class="keyword">int</span>** c = &amp;b;</span><br></pre></td></tr></table></figure>
-
 <p>int**实际上还是一种扩展类型，叫做指向整型变量的指针变量的指针类型。即指针的指针。int表明了指针的指针指向的类型。</p>
 <h3 id="指针左值和右值和指针表达式"><a href="#指针左值和右值和指针表达式" class="headerlink" title="指针左值和右值和指针表达式"></a>指针左值和右值和指针表达式</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
 <li>左值就是一个可被储存的单元，右值就是一个可被读取的数据。</li>
@@ -767,13 +905,12 @@
 </ol>
 <p>通俗来说，右值指的是式子本身代表的值，左值代表存储式子的地址。左值即是等式左边的，右值即是等式右边的。</p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">112</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *d = &amp;a;</span><br><span class="line">b = *d;</span><br></pre></td></tr></table></figure>
-
-<p>d的值分为两种情况：<br>d左值：表达式 d 表示的是存储d这个指针变量本身的内存地址。<br>d右值：表达式 d 表示的是存储变量a的内存地址。<br>*d的值也分为两种情况：<br>*d左值：表达式 *d 表示的是存储变量a的内存地址。<br>*d右值：表达式 *d 表示的是存储变量a的内存地址中的所存的值。</p>
+<p>d的值分为两种情况：<br>d左值：表达式 d 表示的是存储d这个指针变量本身的内存地址。<br>d右值：表达式 d 表示的是存储变量a的内存地址。<br><em>d的值也分为两种情况： 
+</em>d左值：表达式 <em>d 表示的是存储变量a的内存地址。 
+</em>d右值：表达式 *d 表示的是存储变量a的内存地址中的所存的值。</p>
 <h4 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h4><p>声明：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">char</span> *cp = &amp;ch;</span><br></pre></td></tr></table></figure>
-
-
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -782,7 +919,8 @@
 <th>左值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>&amp;ch</td>
 <td>表示的是ch的地址可作为右值赋值</td>
 <td><strong>非法</strong>，相当于一个常量，没有指定地址，不能作为左值接受赋值</td>
@@ -852,7 +990,9 @@
 <td>表示cp指向地址的值加一，之后cp存储的地址加一</td>
 <td><strong>非法</strong>，没有明确地址存放’b’</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>就是说作为左值要有一个清晰明确的地址，比如&amp;ch这种就没有一个变量存储他的值，表示他的地址。</p>
 <p>作为左值时，实际上是右值对左值的地址进行赋值。</p>
 <h3 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h3><ul>
@@ -926,7 +1066,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>290</span>
+              <span>288</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -947,13 +1087,11 @@
       
           <p>1.指针变量就是地址！</p>
 <p>2.<code>char* p = char *p</code></p>
-<p>3.char* ，int* 都是一种类型，都是扩展类型。int*<strong>叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。</strong></p>
+<p>3.char<em> ，int</em> 都是一种类型，都是扩展类型。int<strong>*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。</strong></p>
 <p>4.第一条语句相当于把app定义为一个指向字符的指针类型的数据类型。第二条语句使用这个新的数据类型app去定义a这个指针变量。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* app；</span><br><span class="line">app a；</span><br></pre></td></tr></table></figure>
-
 <p>5.定义指针类型的数据类型用typedef而不用#define 上面第二句只是将a定义为了指针变量而b是字符变量。所以定义一个新的数据类型最好用typedef</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> app char*；</span></span><br><span class="line">app a，b；</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -1056,7 +1194,6 @@
 <p>函数和代码块之外的标识符链接属性为external,代码块之内的标识符链接属性为none</p>
 <p>如下所示，b，c，f链接属性为external，其他的为none：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">c</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="修改链接属性的关键字："><a href="#修改链接属性的关键字：" class="headerlink" title="修改链接属性的关键字："></a>修改链接属性的关键字：</h3><p><strong>static:</strong></p>
 <ol>
 <li>对于缺省情况下为external链接属性的声明,在声明前加static,会使这个标识符变成这个源文件私有,这样可以防止它被其他源文件调用.</li>
@@ -1079,6 +1216,7 @@
 <li>在某个函数或块的内部声明的变量称为局部变量。它们只能被该函数或该代码块内部的语句使用。局部变量在函数外部是不可知的。</li>
 <li>函数的参数，形式参数，被当作该函数内的局部变量，如果与全局变量同名它们会优先使用.</li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1089,7 +1227,8 @@
 <th>如果声明为static</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>全局</td>
 <td>所有代码块之外</td>
 <td>否</td>
@@ -1110,7 +1249,9 @@
 <td>整个函数</td>
 <td>不允许</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -1206,7 +1347,6 @@
 <h3 id="为什么要字节对齐"><a href="#为什么要字节对齐" class="headerlink" title="为什么要字节对齐"></a>为什么要字节对齐</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
 <p>各个硬件平台对存储空间的处理上有很大的不同，一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐。比如sparc系统，如果取未对齐的数据会发生错误，举个例：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">8</span>];</span><br><span class="line"><span class="keyword">char</span> *p = &amp;ch[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> i = *(<span class="keyword">int</span> *)p;</span><br></pre></td></tr></table></figure>
-
 <p>运行时会报segment error，而在x86上就不会出现错误，只是效率下降。</p>
 <h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
 <li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
@@ -1237,8 +1377,8 @@
 <p><code>#pragma pack()</code></p>
 <h3 id="不同系统的数据模型"><a href="#不同系统的数据模型" class="headerlink" title="不同系统的数据模型"></a>不同系统的数据模型</h3><p>本机模型（LLP64）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
-
 <p>其他模型</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1249,7 +1389,8 @@
 <th>LLP64</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>char</td>
 <td>8</td>
 <td>8</td>
@@ -1291,33 +1432,28 @@
 <td>64</td>
 <td>64</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>绝大部分64位的Unix，linux都是使用的LP64模型；32位Linux系统是ILP32模型；64位的Windows使用的是LLP64(long long and point 64)模型。32单片机使用的是ILP32</p>
 <h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>​        最后看一下D结构体，假如在64位系统中，就占用64个字节</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">long</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
 <p><strong>这种方法不能指定内存对齐小于默认对齐，也就是说它只能调大不能调小。而且比较坑的是调小的时候是没任何提示（包括警告和错误）</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-
 <p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) = 8，刚好占的空间大小是8的整数倍1倍</p>
 <p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
 <p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
 <p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
-<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
+<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将<strong>attribute</strong>((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f1;</span><br><span class="line">	<span class="keyword">char</span> f2;</span><br><span class="line">	<span class="keyword">char</span> f3;</span><br><span class="line">	<span class="keyword">int</span> f4;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
-
 <p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
 <p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
 <p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
@@ -1419,28 +1555,23 @@
           <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
 <h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))<span class="comment">//取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐。</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-
 <p>当aligned作用于变量时，其作用是告诉编译器为变量分配内存的时候，要分配在指定对齐的内存上.作用于变量之上不会改变变量的大小。   例如：int a <strong>attribute</strong>((aligned(16)));该变量a的内存起始地址为16的倍数。</p>
 <h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
 <li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>注意：</strong></p>
 <p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
 <p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
 <h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
 <hr>
-<p>于是本文的大体意思就清晰了，__attribute__((section(&quot;section_name&quot;)))，其作用是将作用的函数或数据放入指定为&quot;section_name&quot;对应的段中。</p>
+<p>于是本文的大体意思就清晰了，__attribute__((section(\”section_name\”)))，其作用是将作用的函数或数据放入指定为\”section_name\”对应的段中。</p>
 
       
     </div>
@@ -1529,7 +1660,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1593,12 +1724,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

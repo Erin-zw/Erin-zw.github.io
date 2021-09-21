@@ -322,7 +322,6 @@
 <h3 id="缓冲区的刷新（清空）"><a href="#缓冲区的刷新（清空）" class="headerlink" title="缓冲区的刷新（清空）"></a>缓冲区的刷新（清空）</h3><p>缓冲区的刷新就是将指针_ptr变为缓冲区的基地址﹐同时_cnt的值变为0，因为缓冲区刷新后里面是没有数据的!</p>
 <p>下列情况会引发缓冲区的刷新：<br> 缓冲区满时 ； 行缓冲区遇到回车时 ； 关闭文件 ； 使用特定函数刷新缓冲区 。</p>
 <h2 id="FILE结构体"><a href="#FILE结构体" class="headerlink" title="FILE结构体"></a>FILE结构体</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDIN_FILENO	0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDOUT_FILENO	1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDERR_FILENO	2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">char</span>	*_ptr;<span class="comment">//指向缓冲区第一个未读的字</span></span><br><span class="line">  <span class="keyword">int</span>	 _cnt;<span class="comment">//剩余多少个字节还没有读/写</span></span><br><span class="line">  <span class="keyword">char</span>	*_base;<span class="comment">//缓冲区基地址</span></span><br><span class="line">  <span class="keyword">int</span>	 _flag;<span class="comment">//标志位，如是读（r）还是写（w），还可以是缓冲模式</span></span><br><span class="line">  <span class="keyword">int</span>	 _file;<span class="comment">//文件句柄</span></span><br><span class="line">  <span class="keyword">int</span>	 _charbuf<span class="comment">//单字节的缓冲，即缓冲大小仅为1个字节，如果为单字节缓冲，_base将无效  </span></span><br><span class="line">  <span class="keyword">int</span>	 _bufsiz;<span class="comment">//缓冲区大小，一般都是4096</span></span><br><span class="line">  <span class="keyword">char</span>	*_tmpfname;<span class="comment">//</span></span><br><span class="line">&#125; FILE;</span><br><span class="line"></span><br><span class="line">__MINGW_IMPORT FILE _iob[];	<span class="comment">/* An array of FILE imported from DLL. */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdin	(&amp;_iob[STDIN_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdout	(&amp;_iob[STDOUT_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stderr	(&amp;_iob[STDERR_FILENO])</span></span><br></pre></td></tr></table></figure>
-
 <p>上面代码摘取了stdio.h文件中关于FILE结构体的定义。FILE是一个数据结构，用于访问一个流，可以认为是辅助字节流动的一个结构。如果同时激活几个流，每个流都有一个FILE与他关联。可以看出标准输入流，标准输出流，标准错误流名称分别为stdin,stdout,stderr，都是指向FILE结构体的指针。标准输入是缺省情况下输入的来源，标准输出是缺省情况下输出的来源。通常标准输入为键盘设备，标准输出为屏幕或者终端。缺省的标准输入输出设备可以被修改。</p>
 <p><strong>自己的理解：FILE结构体实际上就是一个文件缓冲区结构体，包含了缓冲区的信息，而所谓的流就是一个指向这种类型结构体的一个指针。实际上键盘输入什么的都是到了缓冲区。那文件输入呢，实际上打开一个文件fopen就是创建了一个内存区域作为缓冲区，函数返回了一个指向这个缓冲区的指针。</strong></p>
 <h2 id="流I-O总览"><a href="#流I-O总览" class="headerlink" title="流I/O总览"></a>流I/O总览</h2><h3 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h3><ol>
@@ -332,6 +331,7 @@
 <li>调用fclose函数关闭流</li>
 </ol>
 <h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><p>不需要打开或者关闭</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -341,7 +341,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符</td>
 <td>getchar</td>
 <td>putchar</td>
@@ -359,7 +360,10 @@
 <td>fwrite</td>
 <td>读取（写入）二进制数据</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -370,7 +374,8 @@
 <th>内存中的字符串</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>getchar</td>
 <td>字符输入</td>
 <td>fgetc，getc</td>
@@ -412,12 +417,15 @@
 <td>print</td>
 <td>sprint</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="打开流"><a href="#打开流" class="headerlink" title="打开流"></a>打开流</h2><h3 id="fopen函数"><a href="#fopen函数" class="headerlink" title="fopen函数"></a>fopen函数</h3><p>fopen函数用于打开一个文件，并把一个流和这个文件关联，把所谓的流和文件绑定在一起。文件实际上可以看作一个物理设备，流就是文件这个物理设备和编程者之间的逻辑桥梁。</p>
 <p>函数原型：</p>
 <p><code>FILE *fopen(char const *name, char const *mode)</code></p>
 <p>第一个参数是文件或者设备的名字，第二个参数值打开模式</p>
 <p>模式如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -427,7 +435,8 @@
 <th>添加</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>文本</td>
 <td>“r”</td>
 <td>“w”</td>
@@ -439,25 +448,24 @@
 <td>“wb”</td>
 <td>“ab”</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>如果一个文件打开用于读取那么文件原先必须存在。如果被用来写入，文件如果存在，写入时原内容删除，如果文件不存在就新建一个。如果文件被用来添加，文件如果存在，写入时原内容不被删除，如果文件不存在就新建一个。无论哪一种情况，只能从<strong>文件尾部</strong>写入。</p>
 <p>在添加模式下，流既可以读也可以写。如果已经读入了一些数据，那么你现在想写入数据，就必须调用文件定位函数。如果你先向文件写入数据之后又想读入数据，就要调用fflush函数或者文件定位函数。</p>
 <p>如果fopen函数失败返回NULL指针。所以必须要检查函数的返回值。</p>
 <p>fopen函数用法：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FILE *input;</span><br><span class="line">input = fopen(<span class="string">&quot;data3&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(input == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;data3&quot;</span>);<span class="comment">//在屏幕打印：data3: No such file or directory</span></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="freopen函数"><a href="#freopen函数" class="headerlink" title="freopen函数"></a>freopen函数</h3><p>函数原型</p>
 <p><code>FILE *freopen(char const *filename,char const *mode,FILE *name);</code></p>
 <p>这个函数用途就是将一个流重定向到其他文件或者物理设备。</p>
 <p>举个例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* args[])</span></span>&#123;</span><br><span class="line">   freopen (<span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="built_in">stdout</span>);<span class="comment">//此处mode可以选择w或者a，选择r无效</span></span><br><span class="line">   <span class="built_in">puts</span>(<span class="string">&quot;nmsl&quot;</span>);</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>标准输出流stdout默认的关联输出设备是屏幕即终端，使用freopen函数后stdout就会重定向到b.txt文件，之后输出的字符都会到这个文件中。</p>
 <h2 id="关闭流"><a href="#关闭流" class="headerlink" title="关闭流"></a>关闭流</h2><p>流是用fclose函数关闭的，函数原型如下:<code>int flcose(FILE *f);</code></p>
 <p>对于输出流，fclose函数在文件关闭之前刷新缓冲区，如果执行成功返回零值，否则返回EOF</p>
 <p>关闭时要进行错误检查：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fclose(xx)!=<span class="number">0</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;fclose&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="字符I-O"><a href="#字符I-O" class="headerlink" title="字符I/O"></a>字符I/O</h2><h3 id="字符I-O宏和函数"><a href="#字符I-O宏和函数" class="headerlink" title="字符I/O宏和函数"></a>字符I/O宏和函数</h3><p>当一个流被打开，可以用于输入也可以用于输出，最简单的形式就是字符I/O。</p>
 <p>字符输入函数原型：</p>
 <p><code>int fgetc(FILE *stream)</code></p>
@@ -481,7 +489,6 @@
 <p>ungetc函数把一个字符重新返回到流中，这样他就可以被重新读入。</p>
 <p>例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read_int</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">int</span> ch;</span><br><span class="line">    value = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((ch = getchar()) != EOF &amp;&amp; <span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        value *= <span class="number">10</span>;</span><br><span class="line">        value += ch - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ungetc(ch,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* args[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    a = read_int();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="未格式化的行I-O"><a href="#未格式化的行I-O" class="headerlink" title="未格式化的行I/O"></a>未格式化的行I/O</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>行I/O可用两种方式执行：格式化的和未格式化的。这两种都用于操纵字符串。</p>
 <p>读取函数原型：</p>
 <p><code>char *fgets(char *buffer, int buffer_size, FILE *stream);</code></p>
@@ -494,7 +501,6 @@
 <p>传送给fputs的数组必须包含一个字符串，他的字符被写入流中，这个字符串预期以NUL结尾，所以没有数组（字符串）长度参数。fgets每次只能最多读取一行，fputs可以输出一行的一部分，也可以一次写入一行，也可以一次写入多行，根据字符串中换行符的个数决定。如果写入出现错误返回EOF，否则返回一个非负值。</p>
 <p>来看一个从一个文件向另一个文件复制文本行的例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_LINE_LENGTH 1024<span class="comment">//我可以复制的最长行</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copylines</span><span class="params">( FILE *input, FILE *output )</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[MAX_LINE_LENGTH];</span><br><span class="line">    <span class="keyword">while</span>( fgets( buffer, MAX_LINE_LENGTH, input) != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">fputs</span>( buffer, putput);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>MAX_LINE_LENGTH决定了数组最大长度，也就是一行的最大长度.这个长度不是很重要,因为不管行被一次性读取还是分段读取,产生的文件都是相同的.但是如果函数要统计被复制的行数,就不能简单地在循环里变量加加,而是要加上判断每段是否以换行符结尾.</p>
 <h3 id="关于fgets和gets-fputs和puts的区别"><a href="#关于fgets和gets-fputs和puts的区别" class="headerlink" title="关于fgets和gets,fputs和puts的区别:"></a>关于fgets和gets,fputs和puts的区别:</h3><ul>
 <li>gets读取一行输入时,读取到\n时结束,系统自动将\n转换成NUL，所以实际上是可以无限读入的</li>
@@ -503,7 +509,6 @@
 </ul>
 <p><strong>例子：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s1[N];</span><br><span class="line">    <span class="keyword">char</span> s2[N];</span><br><span class="line">    fgets(s1, N, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="comment">//    gets(s1);</span></span><br><span class="line">    <span class="keyword">if</span>(s1[<span class="built_in">strlen</span>(s1) - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)&#123;        <span class="comment">// 去掉换行符</span></span><br><span class="line">        s1[<span class="built_in">strlen</span>(s1) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//   fflush(stdin);                               //清空缓冲区</span></span><br><span class="line">    fgets(s2, N, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="comment">//    gets(s2);</span></span><br><span class="line">    <span class="keyword">if</span>(s2[<span class="built_in">strlen</span>(s2) - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)&#123;        <span class="comment">// 去掉换行符</span></span><br><span class="line">        s2[<span class="built_in">strlen</span>(s2) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s %s\n&quot;</span>, s1, s2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>当使用fgets函数输入时，如果输入12345，则输出1234 5.s1就是”1234\0“，s2就是”5\0“。为什么会这样就是说fgets函数因为数组长度原因而造成读取完毕时，下一个fgets会继续读取缓冲区的字符。</p>
 </li>
@@ -524,38 +529,12 @@
 <h4 id="格式代码-1"><a href="#格式代码-1" class="headerlink" title="格式代码"></a>格式代码</h4><p>他们指定函数如何解释接下来的输入字符。一般以一个百分号开头，后面可以是</p>
 <ul>
 <li><p>一个可选星号，星号将转换后的值丢弃而不是存储</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c,d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%*d %d&quot;</span>,&amp;c,&amp;d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输入1 2 输出 2 0</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c,d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%*d %d&quot;</span>,&amp;c,&amp;d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输入1 2 输出 2 0</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>一个可选的宽度，限制被读取用于转换的输入字符个数。如果没有给出宽度，函数就连续读入字符直到遇到空白字符。</p>
 </li>
 <li><p>一个可选限定符</p>
-<table>
-<thead>
-<tr>
-<th>格式码</th>
-<th>h</th>
-<th>l</th>
-<th>L</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d,i,n</td>
-<td>short</td>
-<td>long</td>
-<td></td>
-</tr>
-<tr>
-<td>o,u,x</td>
-<td>unsigned</td>
-<td>unsigned long</td>
-<td></td>
-</tr>
-<tr>
-<td>e,f,g</td>
-<td></td>
-<td>double</td>
-<td>long double</td>
-</tr>
-</tbody></table>
+<p>| 格式码 | h        | l             | L           |<br>| ——— | ———— | ——————- | —————- |<br>| d,i,n  | short    | long          |             |<br>| o,u,x  | unsigned | unsigned long |             |<br>| e,f,g  |          | double        | long double |</p>
 </li>
 <li><p>格式代码（自己查阅）</p>
 </li>
@@ -563,23 +542,23 @@
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>在使用fscanf时，在输入中保持边界的同步是困难的，因为他把换行符也当作空白字符跳过。</p>
 <p>比如一组数据想要四个一输入，但是如果第二行是出错了，第三次输入数据就会变成2 3 3 3，就会无法边界同步。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">2 2 2 2 2</span><br><span class="line">3 3 3 3</span><br><span class="line">4 4 4 4</span><br><span class="line">5 5 5 5</span><br></pre></td></tr></table></figure>
-
 <p>办法就是使用sscanf处理行定向的输入：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 100<span class="comment">//要处理的最长行</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">( FILE *input )</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b, c, d, e;</span><br><span class="line">    <span class="keyword">char</span> str[SIZE];</span><br><span class="line">    <span class="keyword">while</span>( fgets( str, SIZE, input ) != <span class="literal">NULL</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">sscanf</span>( str, <span class="string">&quot;%d %d %d %d %d&quot;</span>, &amp;a， &amp;b, &amp;c, &amp;d, &amp;e) != <span class="number">4</span>)&#123;</span><br><span class="line">            fprint( <span class="built_in">stderr</span>, <span class="string">&quot;Bad input skipped: %s&quot;</span>, str);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//处理这组输入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="格式化的行I-O（printf家族）"><a href="#格式化的行I-O（printf家族）" class="headerlink" title="格式化的行I/O（printf家族）"></a>格式化的行I/O（printf家族）</h2><h3 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>int fprintf( FILE *stream, char const *format, ... );</code></p>
 <p><code>int printf( char const *format, ... );</code></p>
-<p>``int sprintf( char *buffer, char const *format, … );`</p>
+<p><code>`int sprintf( char *buffer, char const *format, ... );</code></p>
 <p>3个函数返回值是实际打印或存储的字符数。避免sprintf数组内存溢出。</p>
 <h3 id="格式代码-2"><a href="#格式代码-2" class="headerlink" title="格式代码"></a>格式代码</h3><p>除了格式代码，其他字符原样打印，格式代码一般百分号开头，后面可以跟：</p>
-<h4 id="零个或多个标志字符"><a href="#零个或多个标志字符" class="headerlink" title="零个或多个标志字符"></a>零个或多个标志字符</h4><table>
+<h4 id="零个或多个标志字符"><a href="#零个或多个标志字符" class="headerlink" title="零个或多个标志字符"></a>零个或多个标志字符</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>标志</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>-</td>
 <td>值在字段中左对齐，缺省情况是右对齐</td>
 </tr>
@@ -599,10 +578,13 @@
 <td>#</td>
 <td>选择某些代码的另一种转换形式</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="一个可选的最小字段宽度"><a href="#一个可选的最小字段宽度" class="headerlink" title="一个可选的最小字段宽度"></a>一个可选的最小字段宽度</h4><p>指定结果最小字符数，值的字符数大于指定值正常显示，小于的话根据标志显示。</p>
 <h4 id="一个可选的精度"><a href="#一个可选的精度" class="headerlink" title="一个可选的精度"></a>一个可选的精度</h4><p>看书</p>
-<h4 id="一个可选的修改符"><a href="#一个可选的修改符" class="headerlink" title="一个可选的修改符"></a>一个可选的修改符</h4><table>
+<h4 id="一个可选的修改符"><a href="#一个可选的修改符" class="headerlink" title="一个可选的修改符"></a>一个可选的修改符</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>修改符</th>
@@ -610,7 +592,8 @@
 <th>表示参数是···</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>h</td>
 <td>d,i,o,u,x,X</td>
 <td>一个（可能是无符号）short型整数</td>
@@ -635,14 +618,15 @@
 <td>e,E,g,f,G</td>
 <td>一个long double型值</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h4><p>和scanf差不多</p>
 <h2 id="二进制I-O"><a href="#二进制I-O" class="headerlink" title="二进制I/O"></a>二进制I/O</h2><p>数据写到文件效率最高的就是二进制写入，二进制避免了字符转换的开销和精度。但是可读性太差，需要特定程序读取。</p>
 <h3 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>size_t fread( void *buffer, size_t size, size_t count, FILE *stream );</code></p>
 <p><code>size_t fwrite( void *buffer, size_t size, size_t count, FILE *stream );</code></p>
 <p>buffer是一个指向保存数据位置的指针，size是一个元素所占用的字节，count是元素个数，stream就是流。</p>
 <h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VALUE</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">    <span class="keyword">char</span> c[SIZE];</span><br><span class="line">&#125; vlaue[ARRAY_SIZE];</span><br><span class="line">n_values = fread( values, <span class="keyword">sizeof</span>( struct VALUE ), ARRAY_SIZE, input_stream );</span><br><span class="line"><span class="comment">/*处理数据...*/</span></span><br><span class="line">fwrite( values, <span class="keyword">sizeof</span>( struct VALUE ), ARRAY_SIZE, output_stream );</span><br></pre></td></tr></table></figure>
-
 <h2 id="刷新和定位函数"><a href="#刷新和定位函数" class="headerlink" title="刷新和定位函数"></a>刷新和定位函数</h2><h3 id="刷新函数"><a href="#刷新函数" class="headerlink" title="刷新函数"></a>刷新函数</h3><h4 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h4><p><code>int fflush( FILE *strream );</code></p>
 <p>立即把输出缓冲区信息打印，或者把输入缓冲区信息丢弃。</p>
 <h3 id="定位函数"><a href="#定位函数" class="headerlink" title="定位函数"></a>定位函数</h3><h4 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h4><p><code>long ftell( FILE *stream );</code></p>
@@ -651,6 +635,7 @@
 <p>在二进制流中，这个值就是当前位置距离文件起止位置的字节数。</p>
 <p>在文本流中，这个值表示一个位置，他不一定表示当前位置与文件起始位置之间的字符数，因为有转义字符，但是ftell函数返回值总能用于fseek函数中，作为距离文件起始位置的偏移量。</p>
 <h4 id="fseek函数"><a href="#fseek函数" class="headerlink" title="fseek函数"></a>fseek函数</h4><p>函数允许你在一个流中定位，这个操作将改变下一个读取或写入的位置。第二个参数是偏移量，第三个参数是属性见下表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -658,7 +643,8 @@
 <th>你将定位到</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>SEEK_SET</td>
 <td>从流的起始位置起offset个字节，offset必须是一个非负值</td>
 </tr>
@@ -670,7 +656,9 @@
 <td>SEEK_END</td>
 <td>从流的尾部位置起offset个字节，offset可正可负，如果为正将定位到文件尾后</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>试图定位到一个文件开始位置之前是错误的，定位到文件尾是扩展这个文件。</p>
 <p>在二进制流中，从SEEK_END进行定位可能不被支持。在文本流中，如果是SEEK_CUR或者SEEK_END，offset必须是0.如果是SEEK_SET，offset必须是一个从同一个流ftell返回的值。</p>
 <h2 id="改变缓冲方式"><a href="#改变缓冲方式" class="headerlink" title="改变缓冲方式"></a>改变缓冲方式</h2><h3 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>void setbuf( FIEL *stream, char *buf );</code></p>
@@ -851,7 +839,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -915,12 +903,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

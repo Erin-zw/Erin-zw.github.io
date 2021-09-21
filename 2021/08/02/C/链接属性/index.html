@@ -288,7 +288,6 @@
 <p>函数和代码块之外的标识符链接属性为external,代码块之内的标识符链接属性为none</p>
 <p>如下所示，b，c，f链接属性为external，其他的为none：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">c</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="修改链接属性的关键字："><a href="#修改链接属性的关键字：" class="headerlink" title="修改链接属性的关键字："></a>修改链接属性的关键字：</h3><p><strong>static:</strong></p>
 <ol>
 <li>对于缺省情况下为external链接属性的声明,在声明前加static,会使这个标识符变成这个源文件私有,这样可以防止它被其他源文件调用.</li>
@@ -311,6 +310,7 @@
 <li>在某个函数或块的内部声明的变量称为局部变量。它们只能被该函数或该代码块内部的语句使用。局部变量在函数外部是不可知的。</li>
 <li>函数的参数，形式参数，被当作该函数内的局部变量，如果与全局变量同名它们会优先使用.</li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -321,7 +321,8 @@
 <th>如果声明为static</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>全局</td>
 <td>所有代码块之外</td>
 <td>否</td>
@@ -342,7 +343,9 @@
 <td>整个函数</td>
 <td>不允许</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
     </div>
 
@@ -507,7 +510,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -571,12 +574,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

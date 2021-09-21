@@ -198,6 +198,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/Java/%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/Java/%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Java基础</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 10:42:53 / 修改时间：10:58:13" itemprop="dateCreated datePublished" datetime="2021-09-08T10:42:53+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -264,24 +349,18 @@
       
           <h2 id="列表-list"><a href="#列表-list" class="headerlink" title="列表(list)"></a>列表(list)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>list数据类型是列表，下标从零开始，使用-1下标可以直接找到最后一个元素，依次可以获得所有元素。-4时列表越界报错。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">0</span>],x[-<span class="number">1</span>],x[-<span class="number">3</span>],x)</span><br><span class="line"><span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test3.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line">IndexError: <span class="built_in">list</span> index out of <span class="built_in">range</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="append，pop，insert，len函数"><a href="#append，pop，insert，len函数" class="headerlink" title="append，pop，insert，len函数"></a>append，pop，insert，len函数</h3><p>Python中可以使用append（）添加末尾列表值，也可以用.insert（）在指定位置添加。此函数返回值为空值，通过print打印出来返回None。</p>
 <p>也可以使用pop（）函数删除列表末尾元素，pop（i）可以删除指定下标i的元素。Pop（）函数为一个值函数，可以print出来，如果删除的是字符串，即使没有单引号也可以打印出来。</p>
 <p>也可以直接赋值改变列表中元素的值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">x.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x.insert(<span class="number">1</span>,<span class="string">&#x27;insert&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x.pop(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.pop())</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x[<span class="number">1</span>] = <span class="string">&#x27;change&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="number">4</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;change&#x27;</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
 <p>列表里也可以是另一个列表，可以用len函数测试列表长度，要获取y列表中5的值，可以y[1]，也可以x[4][1]。同时列表可以为空，L = [],len(L)=0 。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y = [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">x = [<span class="number">1</span>,<span class="string">&#x27;one&#x27;</span>,[<span class="number">2</span>,<span class="string">&#x27;two&#x27;</span>],<span class="number">3</span>,y]</span><br><span class="line"><span class="built_in">print</span>(y[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">4</span>][<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">2</span>],x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(x))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">[<span class="number">2</span>, <span class="string">&#x27;two&#x27;</span>] one</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h3><p>列表可以使用list.sort（）函数对list中的内容进行排序，并且只能是同一类型的数据，如果是字符串类型，就按ASCII码大小进行排序，如果数据类型不一样就会报错。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">s = [<span class="string">&#x27;cnm&#x27;</span>,<span class="string">&#x27;bshi&#x27;</span>,<span class="string">&#x27;Dwls&#x27;</span>,<span class="string">&#x27; &#x27;</span>]</span><br><span class="line">d.sort()</span><br><span class="line">s.sort()</span><br><span class="line"><span class="built_in">print</span>(d,s)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;Dwls&#x27;</span>, <span class="string">&#x27;bshi&#x27;</span>, <span class="string">&#x27;cnm&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <h2 id="元组-tuple"><a href="#元组-tuple" class="headerlink" title="元组(tuple)"></a>元组(tuple)</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>Tuple叫元组，一旦列出元素就不可以修改，大小也不行。因为其不可变，所以一旦列出就很安全。其形式如下图所示，并且如果只定义一个元素，则需要加一个逗号，消除他可能是赋值歧义的可能。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">y = (<span class="number">1</span>,)</span><br><span class="line">z = (<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y,z)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>) (<span class="number">1</span>,) <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="可变tuple"><a href="#可变tuple" class="headerlink" title="可变tuple"></a>可变tuple</h3><p>这里变的是list，而不是tuple</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>])</span><br><span class="line">x[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">&#x27;X&#x27;</span></span><br><span class="line">x[<span class="number">2</span>][<span class="number">1</span>] = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, [<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
 <h2 id="关于list，tuple实质解释"><a href="#关于list，tuple实质解释" class="headerlink" title="关于list，tuple实质解释"></a>关于list，tuple实质解释</h2><p>list和tuple其实是用链表顺序存储的，也就是前一个元素中存储了下一个元素的位置，这样只要找到第一个元素的位置就可以顺藤摸瓜找到所有元素的位置，所以list的名字其实就是个指针，指向list的第一个元素的位置。list的插入和删除等可以直接用链表的方式进行，比如我要在第1个元素和第2个元素中间插入一个元素，那么直接在链表的最后面（我们假设这个list只有两个元素，那么也就是在第3个元素的位置上）插入这个元素，然后把第一个元素指针指向这个元素（第3个位置），然后再把新插入的元素的指针指向原来的第2个元素，这样插入操作就完成了。读取这个list的时候，先用list的名字（就是个指针，指向第1个元素的位置）找到第一个元素，然后用第1一个元素的指针找到第2个元素（位置3），然后用第2个元素的指针找到第3个元素（位置2），以此类推。所以list的顺序和内存中的实际顺序其实不一定完全对应。这种存储方式不会浪费内存，但查找起来特别费时间，因为要按照链表一个一个找下去，如果你的list特别大的话，那么要等好久才会找到结果。</p>
 
       
@@ -370,22 +449,16 @@
       
           <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>ASCII编码能表示的整数0-255，一个字节，表示不了中文，Unicode通常用两个字节表示一个字符，汉字中用Unicode编码为01001110 00101101，A用Unicode编码为00000000 01000001，所以占用无用内存。因此又产生了UTF-8编码，可以根据字符大小占用内存，A的编码为1000001。UTF-8一般用一个字节表示字母，三个字节表示汉字。</p>
 <h3 id="ord和chr函数"><a href="#ord和chr函数" class="headerlink" title="ord和chr函数"></a>ord和chr函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>))<span class="comment">#65</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;中&#x27;</span>))<span class="comment">#20013</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">66</span>))<span class="comment">#B</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">25991</span>))<span class="comment">#文</span></span><br></pre></td></tr></table></figure>
-
 <p>如果知道字符的十六进制表示可以直接使用转移字符表示</p>
 <p><code>print(&#39;\u4e2d\u6587&#39;)#中文</code></p>
 <h3 id="编码解码函数和字符串长度函数"><a href="#编码解码函数和字符串长度函数" class="headerlink" title="编码解码函数和字符串长度函数"></a>编码解码函数和字符串长度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;ABC&#x27;</span>.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line">中文</span><br><span class="line">ABC</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>))<span class="comment">#6</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;abc&#x27;</span>))<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;123&#x27;</span>))<span class="comment">#3</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="字符串的格式化"><a href="#字符串的格式化" class="headerlink" title="字符串的格式化"></a>字符串的格式化</h2><h3 id="格式化"><a href="#格式化" class="headerlink" title="%格式化"></a>%格式化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello, %s&#x27;</span>   %  <span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"><span class="comment">#hello, world</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%2d %02d %s&#x27;</span> %(<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="comment"># 3 01 abc</span></span><br></pre></td></tr></table></figure>
-
 <p>如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串。%2d如果占不满则用空格填补，%02d用0填补。并且%.2f表示保留两位小数。</p>
 <h3 id="format格式化"><a href="#format格式化" class="headerlink" title="format格式化"></a>format格式化</h3><p>另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……，不过这种方式写起来比%要麻烦得多，1后面的冒号相当于注释。此种方法类似str.函数（输入）。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello, &#123;0&#125;, 成绩提升了 &#123;1:.1f&#125;%&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;小明&#x27;</span>, <span class="number">17.125</span>)) </span><br><span class="line"><span class="comment">#Hello, 小明, 成绩提升了 17.1%</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="f-string格式化"><a href="#f-string格式化" class="headerlink" title="f-string格式化"></a>f-string格式化</h3><p>最后一种格式化字符串的方法是使用以f开头的字符串，称之为f-string，它和普通字符串不同之处在于，字符串如果包含{xxx}，就会以对应的变量替换：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="number">2.5</span></span><br><span class="line">s = <span class="number">3.14</span> * r ** <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;The area of a circle with radius <span class="subst">&#123;r&#125;</span> is <span class="subst">&#123;s:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment">#The area of a circle with radius 2.5 is 19.62</span></span><br></pre></td></tr></table></figure>
-
 <p>两个乘号是乘方的意思，优先级高于一个乘号</p>
 
       
@@ -563,15 +636,13 @@
 <li>EBP 寄存器为 Frame Pointer（ 亦称 Base Pointer ），它被用作在当前的栈帧中寻址所有的函数参数以及局部变量。指向当前的栈帧的底部</li>
 </ul>
 <h2 id="栈帧组成"><a href="#栈帧组成" class="headerlink" title="栈帧组成"></a>栈帧组成</h2><ul>
-<li><p>the arguments (parameter values) passed to the routine (if any);传递给例程的参数（参数值）（如果有）；</p>
-</li>
+<li>the arguments (parameter values) passed to the routine (if any);传递给例程的参数（参数值）（如果有）；</li>
 <li><p>the return address back to the routine’s caller返回给例程调用者的返回地址</p>
 </li>
 <li><p>space for the local variables of the routine (if any).例程局部变量的空间（如果有的话）</p>
 </li>
 </ul>
-<img src="/images/C/%E6%A0%88%E5%B8%A7/1.jpg" style="zoom:67%;">
-
+<p><img src="/images/C/%E6%A0%88%E5%B8%A7/1.jpg" style="zoom:67%;"></p>
 <h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><ul>
 <li>参数入栈: 将参数按照调用约定(C 是从右向左)依次压入系统栈中;</li>
 <li>返回地址入栈: 将当前代码区调用指令的下一条指令地址压入栈中，供函数返回时继续执行;</li>
@@ -881,7 +952,6 @@
 
       
           <h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((c=getchar())!=<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%c,%d&quot;</span>,c, n);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ol>
 <li>输入:<br> ssss回车<br> 得到:<br> s,0s,0s,0s,0<br> ,0 光标处(等待输入)<br> 其实循环执行了五次，前四次输出s，第五次输出的是回车，所以才会出现：输出ssss后下一行的光标出（等待输入）</li>
 <li>如果我们输入：<br> ksssa<br> 输出：<br> k,0s,0s,0s,0</li>
@@ -901,19 +971,16 @@
 </li>
 </ol>
 <h3 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>1.输入:<br>1234回车<br>得到：<br>Fine.Fine.Fine.Fine.Fine.光标处(等待输入)</p>
 <p>说明：ch依次被赋值1234回车，注意回车刷新缓冲区的同时也被赋值给ch，这个五个字符均不是‘#’故运行了五次，仍为跳出循环。</p>
 <p>2.输入：<br>1234#回车<br>得到：<br>Fine.Fine.Fine.Fine.光标处（程序结束）</p>
 <p>说明：ch依次被赋值1234#回车，循环执行到#时候跳出，故循环只执行4次。</p>
 <h3 id="例子4"><a href="#例子4" class="headerlink" title="例子4"></a>例子4</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        getchar();<span class="comment">//吃掉回车</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>此方法只适合单个输入：</p>
 <p>1.输入：1回车<br>得到： Fine.光标处(等待输入)</p>
 <p>2.输入： 123回车<br>得到： Fine.Fine.光标处(等待输入)</p>
 <p>说明：实际上ch只接收了1和3 的值，2和回车都被getchar()这个语句吃掉了</p>
 <h3 id="例子5"><a href="#例子5" class="headerlink" title="例子5"></a>例子5</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>完美解决问题</p>
 
       
@@ -1048,7 +1115,6 @@
 <h3 id="缓冲区的刷新（清空）"><a href="#缓冲区的刷新（清空）" class="headerlink" title="缓冲区的刷新（清空）"></a>缓冲区的刷新（清空）</h3><p>缓冲区的刷新就是将指针_ptr变为缓冲区的基地址﹐同时_cnt的值变为0，因为缓冲区刷新后里面是没有数据的!</p>
 <p>下列情况会引发缓冲区的刷新：<br> 缓冲区满时 ； 行缓冲区遇到回车时 ； 关闭文件 ； 使用特定函数刷新缓冲区 。</p>
 <h2 id="FILE结构体"><a href="#FILE结构体" class="headerlink" title="FILE结构体"></a>FILE结构体</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDIN_FILENO	0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDOUT_FILENO	1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STDERR_FILENO	2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">char</span>	*_ptr;<span class="comment">//指向缓冲区第一个未读的字</span></span><br><span class="line">  <span class="keyword">int</span>	 _cnt;<span class="comment">//剩余多少个字节还没有读/写</span></span><br><span class="line">  <span class="keyword">char</span>	*_base;<span class="comment">//缓冲区基地址</span></span><br><span class="line">  <span class="keyword">int</span>	 _flag;<span class="comment">//标志位，如是读（r）还是写（w），还可以是缓冲模式</span></span><br><span class="line">  <span class="keyword">int</span>	 _file;<span class="comment">//文件句柄</span></span><br><span class="line">  <span class="keyword">int</span>	 _charbuf<span class="comment">//单字节的缓冲，即缓冲大小仅为1个字节，如果为单字节缓冲，_base将无效  </span></span><br><span class="line">  <span class="keyword">int</span>	 _bufsiz;<span class="comment">//缓冲区大小，一般都是4096</span></span><br><span class="line">  <span class="keyword">char</span>	*_tmpfname;<span class="comment">//</span></span><br><span class="line">&#125; FILE;</span><br><span class="line"></span><br><span class="line">__MINGW_IMPORT FILE _iob[];	<span class="comment">/* An array of FILE imported from DLL. */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdin	(&amp;_iob[STDIN_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdout	(&amp;_iob[STDOUT_FILENO])</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stderr	(&amp;_iob[STDERR_FILENO])</span></span><br></pre></td></tr></table></figure>
-
 <p>上面代码摘取了stdio.h文件中关于FILE结构体的定义。FILE是一个数据结构，用于访问一个流，可以认为是辅助字节流动的一个结构。如果同时激活几个流，每个流都有一个FILE与他关联。可以看出标准输入流，标准输出流，标准错误流名称分别为stdin,stdout,stderr，都是指向FILE结构体的指针。标准输入是缺省情况下输入的来源，标准输出是缺省情况下输出的来源。通常标准输入为键盘设备，标准输出为屏幕或者终端。缺省的标准输入输出设备可以被修改。</p>
 <p><strong>自己的理解：FILE结构体实际上就是一个文件缓冲区结构体，包含了缓冲区的信息，而所谓的流就是一个指向这种类型结构体的一个指针。实际上键盘输入什么的都是到了缓冲区。那文件输入呢，实际上打开一个文件fopen就是创建了一个内存区域作为缓冲区，函数返回了一个指向这个缓冲区的指针。</strong></p>
 <h2 id="流I-O总览"><a href="#流I-O总览" class="headerlink" title="流I/O总览"></a>流I/O总览</h2><h3 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h3><ol>
@@ -1058,6 +1124,7 @@
 <li>调用fclose函数关闭流</li>
 </ol>
 <h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><p>不需要打开或者关闭</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1067,7 +1134,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符</td>
 <td>getchar</td>
 <td>putchar</td>
@@ -1085,7 +1153,10 @@
 <td>fwrite</td>
 <td>读取（写入）二进制数据</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1096,7 +1167,8 @@
 <th>内存中的字符串</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>getchar</td>
 <td>字符输入</td>
 <td>fgetc，getc</td>
@@ -1138,12 +1210,15 @@
 <td>print</td>
 <td>sprint</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="打开流"><a href="#打开流" class="headerlink" title="打开流"></a>打开流</h2><h3 id="fopen函数"><a href="#fopen函数" class="headerlink" title="fopen函数"></a>fopen函数</h3><p>fopen函数用于打开一个文件，并把一个流和这个文件关联，把所谓的流和文件绑定在一起。文件实际上可以看作一个物理设备，流就是文件这个物理设备和编程者之间的逻辑桥梁。</p>
 <p>函数原型：</p>
 <p><code>FILE *fopen(char const *name, char const *mode)</code></p>
 <p>第一个参数是文件或者设备的名字，第二个参数值打开模式</p>
 <p>模式如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1153,7 +1228,8 @@
 <th>添加</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>文本</td>
 <td>“r”</td>
 <td>“w”</td>
@@ -1165,25 +1241,24 @@
 <td>“wb”</td>
 <td>“ab”</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>如果一个文件打开用于读取那么文件原先必须存在。如果被用来写入，文件如果存在，写入时原内容删除，如果文件不存在就新建一个。如果文件被用来添加，文件如果存在，写入时原内容不被删除，如果文件不存在就新建一个。无论哪一种情况，只能从<strong>文件尾部</strong>写入。</p>
 <p>在添加模式下，流既可以读也可以写。如果已经读入了一些数据，那么你现在想写入数据，就必须调用文件定位函数。如果你先向文件写入数据之后又想读入数据，就要调用fflush函数或者文件定位函数。</p>
 <p>如果fopen函数失败返回NULL指针。所以必须要检查函数的返回值。</p>
 <p>fopen函数用法：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FILE *input;</span><br><span class="line">input = fopen(<span class="string">&quot;data3&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(input == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;data3&quot;</span>);<span class="comment">//在屏幕打印：data3: No such file or directory</span></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="freopen函数"><a href="#freopen函数" class="headerlink" title="freopen函数"></a>freopen函数</h3><p>函数原型</p>
 <p><code>FILE *freopen(char const *filename,char const *mode,FILE *name);</code></p>
 <p>这个函数用途就是将一个流重定向到其他文件或者物理设备。</p>
 <p>举个例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* args[])</span></span>&#123;</span><br><span class="line">   freopen (<span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="built_in">stdout</span>);<span class="comment">//此处mode可以选择w或者a，选择r无效</span></span><br><span class="line">   <span class="built_in">puts</span>(<span class="string">&quot;nmsl&quot;</span>);</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>标准输出流stdout默认的关联输出设备是屏幕即终端，使用freopen函数后stdout就会重定向到b.txt文件，之后输出的字符都会到这个文件中。</p>
 <h2 id="关闭流"><a href="#关闭流" class="headerlink" title="关闭流"></a>关闭流</h2><p>流是用fclose函数关闭的，函数原型如下:<code>int flcose(FILE *f);</code></p>
 <p>对于输出流，fclose函数在文件关闭之前刷新缓冲区，如果执行成功返回零值，否则返回EOF</p>
 <p>关闭时要进行错误检查：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fclose(xx)!=<span class="number">0</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;fclose&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="字符I-O"><a href="#字符I-O" class="headerlink" title="字符I/O"></a>字符I/O</h2><h3 id="字符I-O宏和函数"><a href="#字符I-O宏和函数" class="headerlink" title="字符I/O宏和函数"></a>字符I/O宏和函数</h3><p>当一个流被打开，可以用于输入也可以用于输出，最简单的形式就是字符I/O。</p>
 <p>字符输入函数原型：</p>
 <p><code>int fgetc(FILE *stream)</code></p>
@@ -1207,7 +1282,6 @@
 <p>ungetc函数把一个字符重新返回到流中，这样他就可以被重新读入。</p>
 <p>例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read_int</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">int</span> ch;</span><br><span class="line">    value = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((ch = getchar()) != EOF &amp;&amp; <span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        value *= <span class="number">10</span>;</span><br><span class="line">        value += ch - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ungetc(ch,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* args[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    a = read_int();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="未格式化的行I-O"><a href="#未格式化的行I-O" class="headerlink" title="未格式化的行I/O"></a>未格式化的行I/O</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>行I/O可用两种方式执行：格式化的和未格式化的。这两种都用于操纵字符串。</p>
 <p>读取函数原型：</p>
 <p><code>char *fgets(char *buffer, int buffer_size, FILE *stream);</code></p>
@@ -1220,7 +1294,6 @@
 <p>传送给fputs的数组必须包含一个字符串，他的字符被写入流中，这个字符串预期以NUL结尾，所以没有数组（字符串）长度参数。fgets每次只能最多读取一行，fputs可以输出一行的一部分，也可以一次写入一行，也可以一次写入多行，根据字符串中换行符的个数决定。如果写入出现错误返回EOF，否则返回一个非负值。</p>
 <p>来看一个从一个文件向另一个文件复制文本行的例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_LINE_LENGTH 1024<span class="comment">//我可以复制的最长行</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copylines</span><span class="params">( FILE *input, FILE *output )</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[MAX_LINE_LENGTH];</span><br><span class="line">    <span class="keyword">while</span>( fgets( buffer, MAX_LINE_LENGTH, input) != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">fputs</span>( buffer, putput);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>MAX_LINE_LENGTH决定了数组最大长度，也就是一行的最大长度.这个长度不是很重要,因为不管行被一次性读取还是分段读取,产生的文件都是相同的.但是如果函数要统计被复制的行数,就不能简单地在循环里变量加加,而是要加上判断每段是否以换行符结尾.</p>
 <h3 id="关于fgets和gets-fputs和puts的区别"><a href="#关于fgets和gets-fputs和puts的区别" class="headerlink" title="关于fgets和gets,fputs和puts的区别:"></a>关于fgets和gets,fputs和puts的区别:</h3><ul>
 <li>gets读取一行输入时,读取到\n时结束,系统自动将\n转换成NUL，所以实际上是可以无限读入的</li>
@@ -1229,7 +1302,6 @@
 </ul>
 <p><strong>例子：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s1[N];</span><br><span class="line">    <span class="keyword">char</span> s2[N];</span><br><span class="line">    fgets(s1, N, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="comment">//    gets(s1);</span></span><br><span class="line">    <span class="keyword">if</span>(s1[<span class="built_in">strlen</span>(s1) - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)&#123;        <span class="comment">// 去掉换行符</span></span><br><span class="line">        s1[<span class="built_in">strlen</span>(s1) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//   fflush(stdin);                               //清空缓冲区</span></span><br><span class="line">    fgets(s2, N, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="comment">//    gets(s2);</span></span><br><span class="line">    <span class="keyword">if</span>(s2[<span class="built_in">strlen</span>(s2) - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)&#123;        <span class="comment">// 去掉换行符</span></span><br><span class="line">        s2[<span class="built_in">strlen</span>(s2) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s %s\n&quot;</span>, s1, s2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>当使用fgets函数输入时，如果输入12345，则输出1234 5.s1就是”1234\0“，s2就是”5\0“。为什么会这样就是说fgets函数因为数组长度原因而造成读取完毕时，下一个fgets会继续读取缓冲区的字符。</p>
 </li>
@@ -1250,38 +1322,12 @@
 <h4 id="格式代码-1"><a href="#格式代码-1" class="headerlink" title="格式代码"></a>格式代码</h4><p>他们指定函数如何解释接下来的输入字符。一般以一个百分号开头，后面可以是</p>
 <ul>
 <li><p>一个可选星号，星号将转换后的值丢弃而不是存储</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c,d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%*d %d&quot;</span>,&amp;c,&amp;d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输入1 2 输出 2 0</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c,d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%*d %d&quot;</span>,&amp;c,&amp;d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输入1 2 输出 2 0</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>一个可选的宽度，限制被读取用于转换的输入字符个数。如果没有给出宽度，函数就连续读入字符直到遇到空白字符。</p>
 </li>
 <li><p>一个可选限定符</p>
-<table>
-<thead>
-<tr>
-<th>格式码</th>
-<th>h</th>
-<th>l</th>
-<th>L</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d,i,n</td>
-<td>short</td>
-<td>long</td>
-<td></td>
-</tr>
-<tr>
-<td>o,u,x</td>
-<td>unsigned</td>
-<td>unsigned long</td>
-<td></td>
-</tr>
-<tr>
-<td>e,f,g</td>
-<td></td>
-<td>double</td>
-<td>long double</td>
-</tr>
-</tbody></table>
+<p>| 格式码 | h        | l             | L           |<br>| ——— | ———— | ——————- | —————- |<br>| d,i,n  | short    | long          |             |<br>| o,u,x  | unsigned | unsigned long |             |<br>| e,f,g  |          | double        | long double |</p>
 </li>
 <li><p>格式代码（自己查阅）</p>
 </li>
@@ -1289,23 +1335,23 @@
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>在使用fscanf时，在输入中保持边界的同步是困难的，因为他把换行符也当作空白字符跳过。</p>
 <p>比如一组数据想要四个一输入，但是如果第二行是出错了，第三次输入数据就会变成2 3 3 3，就会无法边界同步。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">2 2 2 2 2</span><br><span class="line">3 3 3 3</span><br><span class="line">4 4 4 4</span><br><span class="line">5 5 5 5</span><br></pre></td></tr></table></figure>
-
 <p>办法就是使用sscanf处理行定向的输入：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 100<span class="comment">//要处理的最长行</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">( FILE *input )</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b, c, d, e;</span><br><span class="line">    <span class="keyword">char</span> str[SIZE];</span><br><span class="line">    <span class="keyword">while</span>( fgets( str, SIZE, input ) != <span class="literal">NULL</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">sscanf</span>( str, <span class="string">&quot;%d %d %d %d %d&quot;</span>, &amp;a， &amp;b, &amp;c, &amp;d, &amp;e) != <span class="number">4</span>)&#123;</span><br><span class="line">            fprint( <span class="built_in">stderr</span>, <span class="string">&quot;Bad input skipped: %s&quot;</span>, str);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//处理这组输入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="格式化的行I-O（printf家族）"><a href="#格式化的行I-O（printf家族）" class="headerlink" title="格式化的行I/O（printf家族）"></a>格式化的行I/O（printf家族）</h2><h3 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>int fprintf( FILE *stream, char const *format, ... );</code></p>
 <p><code>int printf( char const *format, ... );</code></p>
-<p>``int sprintf( char *buffer, char const *format, … );`</p>
+<p><code>`int sprintf( char *buffer, char const *format, ... );</code></p>
 <p>3个函数返回值是实际打印或存储的字符数。避免sprintf数组内存溢出。</p>
 <h3 id="格式代码-2"><a href="#格式代码-2" class="headerlink" title="格式代码"></a>格式代码</h3><p>除了格式代码，其他字符原样打印，格式代码一般百分号开头，后面可以跟：</p>
-<h4 id="零个或多个标志字符"><a href="#零个或多个标志字符" class="headerlink" title="零个或多个标志字符"></a>零个或多个标志字符</h4><table>
+<h4 id="零个或多个标志字符"><a href="#零个或多个标志字符" class="headerlink" title="零个或多个标志字符"></a>零个或多个标志字符</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>标志</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>-</td>
 <td>值在字段中左对齐，缺省情况是右对齐</td>
 </tr>
@@ -1325,10 +1371,13 @@
 <td>#</td>
 <td>选择某些代码的另一种转换形式</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="一个可选的最小字段宽度"><a href="#一个可选的最小字段宽度" class="headerlink" title="一个可选的最小字段宽度"></a>一个可选的最小字段宽度</h4><p>指定结果最小字符数，值的字符数大于指定值正常显示，小于的话根据标志显示。</p>
 <h4 id="一个可选的精度"><a href="#一个可选的精度" class="headerlink" title="一个可选的精度"></a>一个可选的精度</h4><p>看书</p>
-<h4 id="一个可选的修改符"><a href="#一个可选的修改符" class="headerlink" title="一个可选的修改符"></a>一个可选的修改符</h4><table>
+<h4 id="一个可选的修改符"><a href="#一个可选的修改符" class="headerlink" title="一个可选的修改符"></a>一个可选的修改符</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>修改符</th>
@@ -1336,7 +1385,8 @@
 <th>表示参数是···</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>h</td>
 <td>d,i,o,u,x,X</td>
 <td>一个（可能是无符号）short型整数</td>
@@ -1361,14 +1411,15 @@
 <td>e,E,g,f,G</td>
 <td>一个long double型值</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h4><p>和scanf差不多</p>
 <h2 id="二进制I-O"><a href="#二进制I-O" class="headerlink" title="二进制I/O"></a>二进制I/O</h2><p>数据写到文件效率最高的就是二进制写入，二进制避免了字符转换的开销和精度。但是可读性太差，需要特定程序读取。</p>
 <h3 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>size_t fread( void *buffer, size_t size, size_t count, FILE *stream );</code></p>
 <p><code>size_t fwrite( void *buffer, size_t size, size_t count, FILE *stream );</code></p>
 <p>buffer是一个指向保存数据位置的指针，size是一个元素所占用的字节，count是元素个数，stream就是流。</p>
 <h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VALUE</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">    <span class="keyword">char</span> c[SIZE];</span><br><span class="line">&#125; vlaue[ARRAY_SIZE];</span><br><span class="line">n_values = fread( values, <span class="keyword">sizeof</span>( struct VALUE ), ARRAY_SIZE, input_stream );</span><br><span class="line"><span class="comment">/*处理数据...*/</span></span><br><span class="line">fwrite( values, <span class="keyword">sizeof</span>( struct VALUE ), ARRAY_SIZE, output_stream );</span><br></pre></td></tr></table></figure>
-
 <h2 id="刷新和定位函数"><a href="#刷新和定位函数" class="headerlink" title="刷新和定位函数"></a>刷新和定位函数</h2><h3 id="刷新函数"><a href="#刷新函数" class="headerlink" title="刷新函数"></a>刷新函数</h3><h4 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h4><p><code>int fflush( FILE *strream );</code></p>
 <p>立即把输出缓冲区信息打印，或者把输入缓冲区信息丢弃。</p>
 <h3 id="定位函数"><a href="#定位函数" class="headerlink" title="定位函数"></a>定位函数</h3><h4 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h4><p><code>long ftell( FILE *stream );</code></p>
@@ -1377,6 +1428,7 @@
 <p>在二进制流中，这个值就是当前位置距离文件起止位置的字节数。</p>
 <p>在文本流中，这个值表示一个位置，他不一定表示当前位置与文件起始位置之间的字符数，因为有转义字符，但是ftell函数返回值总能用于fseek函数中，作为距离文件起始位置的偏移量。</p>
 <h4 id="fseek函数"><a href="#fseek函数" class="headerlink" title="fseek函数"></a>fseek函数</h4><p>函数允许你在一个流中定位，这个操作将改变下一个读取或写入的位置。第二个参数是偏移量，第三个参数是属性见下表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1384,7 +1436,8 @@
 <th>你将定位到</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>SEEK_SET</td>
 <td>从流的起始位置起offset个字节，offset必须是一个非负值</td>
 </tr>
@@ -1396,7 +1449,9 @@
 <td>SEEK_END</td>
 <td>从流的尾部位置起offset个字节，offset可正可负，如果为正将定位到文件尾后</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>试图定位到一个文件开始位置之前是错误的，定位到文件尾是扩展这个文件。</p>
 <p>在二进制流中，从SEEK_END进行定位可能不被支持。在文本流中，如果是SEEK_CUR或者SEEK_END，offset必须是0.如果是SEEK_SET，offset必须是一个从同一个流ftell返回的值。</p>
 <h2 id="改变缓冲方式"><a href="#改变缓冲方式" class="headerlink" title="改变缓冲方式"></a>改变缓冲方式</h2><h3 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h3><p><code>void setbuf( FIEL *stream, char *buf );</code></p>
@@ -1505,7 +1560,8 @@
 
       
           <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>编译一个C程序第一个步骤叫做预处理阶段，C预处理器在源代码编译之前对其进行一些文本性质操作。</p>
-<h2 id="预定义符号"><a href="#预定义符号" class="headerlink" title="预定义符号"></a>预定义符号</h2><table>
+<h2 id="预定义符号"><a href="#预定义符号" class="headerlink" title="预定义符号"></a>预定义符号</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>符号</th>
@@ -1513,7 +1569,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>__FILE__</td>
 <td>“name.c”</td>
 <td>进行编译的源文件名称</td>
@@ -1538,143 +1595,44 @@
 <td>1</td>
 <td>如果编译器遵循ANSI C值就为1，否则未定义</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>声明格式：<code>#define name stuff</code></p>
 <p>例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG_PRINT printf(<span class="meta-string">&quot;FILE %s line &quot;</span>\ </span></span><br><span class="line"><span class="string">&quot;%d: x=%d, y=%d,&quot;</span>\    <span class="comment">//相邻的字符串常量自动被连接</span></span><br><span class="line"><span class="string">&quot;z=%d&quot;</span>,__FILE__,__LINE__,x,y,z)<span class="comment">//注意此处没有分号</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p>声明格式：<code>#define name(parameter-list) stuff</code></p>
 <p>例子1：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) x*x</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,S(a+<span class="number">1</span>));<span class="comment">//输出11，原因是将a+1替换，会变成a+1*a+1,不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) (x)*(x)</span></span><br></pre></td></tr></table></figure>
-
 <p>例子2：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) (x)+(x)</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="number">10</span>*S(a));<span class="comment">//输出55，原因是将a替换，会变成10*(a)+(a),不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) ((x)*(x))</span></span><br></pre></td></tr></table></figure>
-
 <p>例子3：#结构是把宏参数转换为字符串</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRINT(FORMAT,VALUE) printf(<span class="meta-string">&quot;The value of &quot;</span>#VALUE  <span class="meta-string">&quot; is &quot;</span>FORMAT<span class="meta-string">&quot;\n&quot;</span>,VALUE)<span class="comment">//别吵别吵，这里很关键</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">22</span>;</span><br><span class="line">    PRINT(<span class="string">&quot;%d&quot;</span>,x+<span class="number">3</span>);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">The value of x+<span class="number">3</span> is <span class="number">25</span></span><br></pre></td></tr></table></figure>
-
 <p>例子4：##结构是把两边的符号连接成一个</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(number,value) sum ## number += value</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum5 = <span class="number">0</span>;<span class="comment">//前提是变量已经定义过</span></span><br><span class="line">    ADD(<span class="number">5</span>,<span class="number">25</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum5);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="副作用宏"><a href="#副作用宏" class="headerlink" title="副作用宏"></a>副作用宏</h3><p>例子1：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) ((a)&gt;(b)?(a):(b))<span class="comment">//与参数类型无关</span></span></span><br><span class="line">...</span><br><span class="line">x = <span class="number">5</span>;</span><br><span class="line">y = <span class="number">8</span>;</span><br><span class="line">z = MAX(x++,y++);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d,%d,%d&quot;</span>,x,y,z);</span><br><span class="line"><span class="comment">//输出为6，10，9</span></span><br><span class="line"><span class="comment">//带入分析可知 z = ((x++)&gt;(y++)?(x++):(y++));</span></span><br></pre></td></tr></table></figure>
-
 <p>例子2：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVENPARITY(ch) ((cbit(ch)&amp;1)?(ch)|PARITYBIT:(ch))<span class="comment">//奇偶检验，PARITYBIT为1</span></span></span><br><span class="line">ch = EVENPARITY(getchar());<span class="comment">//这条语句实际上是失败的，因为getchar()实际上有两个，还有一个回车</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="undef"><a href="#undef" class="headerlink" title="#undef"></a>#undef</h3><p>作用是移除一个宏定义</p>
 <p>声明格式：<code>#undef name</code></p>
 <h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>一般格式</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> constant-expression<span class="comment">//常量表达式</span></span></span><br><span class="line">		statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> constant-expression</span></span><br><span class="line">        other statements...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">        other statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <p><strong>是否被定义</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> symbol<span class="comment">//等价</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> symbol</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>一般来讲#include尖括号是函数库文件，双引号是本地文件。</p>
 <p><strong>多重包含：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;b.h&quot;</span></span></span><br><span class="line"><span class="comment">//如果两个文件都包含了x.h文件，就会造成多重包含</span></span><br></pre></td></tr></table></figure>
-
 <p>解决方法就是条件编译：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HEADERNAME_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HEADERNAME_H 1<span class="comment">//此处1可加可不加，不加1的话，变量就是一个空字符串</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <p>当头文件第一次被包含时，变量未定义就给它定义，第二次多重包含时，ifndef条件为假内容就被忽略，不会被多次编译</p>
 <h3 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h3><ul>
 <li><p><code>#error text of error mesage</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(A)</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(B)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(C)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">error</span> No selected</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(A)</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(B)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(C)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">error</span> No selected</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p><code>#line number &quot;string&quot;</code>他告诉预处理器number是下一行输入的行号，如果加入了string，预处理器就把它当作文件的名字。这条指令将修改__FILE__和__LINE__</p>
 </li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/C/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/C/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">命令行参数</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-22 00:38:06 / 修改时间：11:12:20" itemprop="dateCreated datePublished" datetime="2021-08-22T00:38:06+08:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>582</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>每个C语言程序都必须有一个称为main()的函数，作为程序启动的起点。当执行程序时，命令行参数（command-line  argument）（由shell逐一解析）通过两个入参提供给main()函数。第一个参数int  argc，表示命令行参数的个数。第二个参数char *argv[]，是一个指向命令行参数的指针数组，每一参数又都是以空字符（null）  结尾的字符串。第一个字符串，亦即argv[0]指向的，（通常）是该程序的名称。argv中的指针列表以NULL指针结尾（即argv[argc]为NULL）。</p>
-<p>例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,argc);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">3</span>]);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">D:\Vsc\test&gt;apple.exe a b c d<span class="comment">//在命令行中输入</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">apple.exe<span class="comment">//一般指向的第一个参数为程序名称</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
-
-<h3 id="处理命令行参数"><a href="#处理命令行参数" class="headerlink" title="处理命令行参数"></a>处理命令行参数</h3><p>实际上就是对字符串的处理</p>
-<p>见书：p267</p>
 
       
     </div>
@@ -1763,7 +1721,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1827,12 +1785,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

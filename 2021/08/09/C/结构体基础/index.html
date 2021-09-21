@@ -282,7 +282,6 @@
 <p><code>struct tag&#123;member-list&#125;  variable-list;</code></p>
 <p><strong>例子1：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">float</span> c;</span><br><span class="line">&#125;x;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">float</span> c;</span><br><span class="line">&#125;y[<span class="number">20</span>],*z;</span><br></pre></td></tr></table></figure>
-
 <p>声明了一个叫x的变量，有三个成员变量，整数a，字符b，浮点数c。</p>
 <p>声明了y数组，包含了20个结构。</p>
 <p>声明了z指针，指向结构体的指针。</p>
@@ -292,34 +291,25 @@
 <p>如何处理上述问题，看看例子2：</p>
 <p><strong>例子2：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">float</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span> <span class="title">x</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span> <span class="title">y</span>[20],*<span class="title">z</span>;</span></span><br></pre></td></tr></table></figure>
-
 <p>标签tag为成员列表提供一个名字，以便后续声明。标签允许多个声明使用同一个成员列表。并且此时x，y，z三者属于同一种类型。</p>
 <p><strong>例子3：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">float</span> c;</span><br><span class="line">&#125;Simple;</span><br><span class="line">Simple x;</span><br><span class="line">Simple y[<span class="number">20</span>],*z;</span><br></pre></td></tr></table></figure>
-
 <p>使用typedef重新定义一种新类型是一种声明结构体的好方法。这个技巧和声明一个结构标签的效果几乎相同，区别在于Simple现在是个类型名，而SIMPLE是个结构标签。</p>
 <h3 id="间接访问与直接访问"><a href="#间接访问与直接访问" class="headerlink" title="间接访问与直接访问"></a>间接访问与直接访问</h3><p><strong>例子：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">COMPLEX</span>&#123;</span></span><br><span class="line">    <span class="keyword">float</span> f;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">long</span> *lp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span> <span class="title">s</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span> <span class="title">sa</span>[10];</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SIMPLE</span> *<span class="title">sp</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">COMPLEX</span> <span class="title">comp</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">COMPLEX</span> *<span class="title">cp</span>;</span></span><br><span class="line"><span class="comment">//直接访问</span></span><br><span class="line">comp.f</span><br><span class="line">comp.sa[<span class="number">4</span>].c</span><br><span class="line"><span class="comment">//间接访问</span></span><br><span class="line">cp-&gt;f</span><br><span class="line">cp-&gt;a</span><br></pre></td></tr></table></figure>
-
 <h3 id="结构体的自引用与互引用"><a href="#结构体的自引用与互引用" class="headerlink" title="结构体的自引用与互引用"></a>结构体的自引用与互引用</h3><h4 id="自引用"><a href="#自引用" class="headerlink" title="自引用"></a>自引用</h4><p>结构体内部包含结构体本身是非法的，可以包含只想结构体本身的指针。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tag</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tag</span> *<span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注意：</strong>下面是错误定义，因为在struct内部时name尚未被定义</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    name *b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;name;</span><br></pre></td></tr></table></figure>
-
 <p>解决方法就是定义一个结构标签声明b。</p>
 <p>正确定义：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">name_tag</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">name_tag</span> *<span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;name;</span><br></pre></td></tr></table></figure>
-
 <p><strong>实例：</strong></p>
 <p>二叉树结点：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">binary_tree</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> data    ;   <span class="comment">// Data area</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">binary_tree</span> * <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">binary_tree</span> * <span class="title">right</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h4 id="互引用和不完整声明"><a href="#互引用和不完整声明" class="headerlink" title="互引用和不完整声明"></a>互引用和不完整声明</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>;</span><span class="comment">//不完整声明</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">B</span> *<span class="title">partner</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">A</span> *<span class="title">partner</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>使用不完整声明，声明一个作为结构标签的标识符，然后就可以用在不需要知道这个结构长度的声明中，比如声明指向这个结构的指针。</p>
 <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">INIT_EX</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">10</span>];</span><br><span class="line">    Simple c;</span><br><span class="line">&#125;x = &#123;</span><br><span class="line">    <span class="number">10</span>,</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">    &#123;<span class="number">25</span>,<span class="string">&#x27;x&#x27;</span>,<span class="number">1.9</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -484,7 +474,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -548,12 +538,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

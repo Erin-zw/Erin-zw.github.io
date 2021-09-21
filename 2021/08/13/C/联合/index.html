@@ -273,14 +273,11 @@
       
         <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>最简单的使用联合例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">   <span class="keyword">float</span> f;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">&#125;fi;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   fi.f = <span class="number">1.5</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,fi.i);</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>上面的联合在一个整形和浮点都是32位的机器上，变量fi只占用一个32位的字，若成员f被使用，这个字作为浮点值访问，成员i若被使用，这个字作为整形被访问。也就说<strong>联合中所有成员引用的是内存中相同的位置</strong>。</p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VARIBLE</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> &#123;</span>INT,FLOAT,STRING&#125; type;</span><br><span class="line">    <span class="keyword">int</span> int_value;</span><br><span class="line">    <span class="keyword">float</span> float_value;</span><br><span class="line">    <span class="keyword">char</span> *string_value;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//使用union</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VARIBLE</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> &#123;</span>INT,FLOAT,STRING&#125; type;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">float</span> f;</span><br><span class="line">        <span class="keyword">char</span> *s;</span><br><span class="line">    &#125;value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>有一个结构保存变量的类型和值。如果是int型，那么就有两个没有被使用。使用联合可以避免。从而节省了内存空间。</p>
 <p><strong>联合的长度取决于最长成员的长度。</strong>当联合中成员长度相差较为悬殊时，内存就会浪费，这时存储指针可以避免浪费内存。</p>
 <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">&#125;x = &#123;<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -445,7 +442,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -509,12 +506,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
