@@ -296,6 +296,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/10/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/" class="post-title-link" itemprop="url">接口</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-10 22:45:25" itemprop="dateCreated datePublished" datetime="2021-11-10T22:45:25+08:00">2021-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-11 00:14:05" itemprop="dateModified" datetime="2021-11-11T00:14:05+08:00">2021-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>接口中常量定义时，可以不写public static final，缺省有。接口中方法定义 时，可以不写public abstract，缺省有。接口只定义不变的内容（常量和抽象方法）</p>
+<p>一个类可以实现多个接口（implements），接口不能new一个对象，但是是引用数据类型，并且可用于声明引用变量类型。接口可以继承另一个接口（extends），而且支持多继承。一个类实现一个接口，必须实现之中所有方法，并且方法只能是 public的</p>
+<p><strong>定义方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">public</span>] <span class="class"><span class="keyword">interface</span> 接口 [<span class="keyword">extends</span> 父接口列表 ]</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">static</span>] [<span class="keyword">final</span>] 数据类型 成员变量=常量值;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">abstract</span>] 返回值类型 成员方法[(参数列表)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>接口声明的引用类型变量只能调用接口中定义过的方法。</strong>比如下面的ar和vol，只能调用相应的area方法和volume方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClosedFigure fig = <span class="keyword">new</span> Ellipse(point,<span class="number">10</span>,<span class="number">20</span>);</span><br><span class="line"><span class="comment">//父类对象fig引用椭圆子类实例</span></span><br><span class="line">Area ar = fig; <span class="comment">//Area接口对象ar引用实现Area接口的</span></span><br><span class="line">ClosedFigure类的Ellipse子类实例</span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">Cylinder cylinder = <span class="keyword">new</span> Cylinder(fig,<span class="number">10</span>); <span class="comment">//椭圆柱</span></span><br><span class="line">ar = cylinder; <span class="comment">//ar引用实现Area接口的Cylinder类的实例</span></span><br><span class="line">Volume vol = cylinder; <span class="comment">//Volume接口对象vol引用实现Volume接口的Cylinder类的实例</span></span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">vol.volume()</span><br></pre></td></tr></table></figure>
+<p><img src="\imazges\Java\第四章\1.jpg" style="zoom:67%;"></p>
+<h1 id="内部类和内部接口"><a href="#内部类和内部接口" class="headerlink" title="内部类和内部接口"></a>内部类和内部接口</h1><ul>
+<li>内嵌类型不能与外层类型同名。</li>
+<li>内部类中可以声明成员变量和成员方法。</li>
+<li>内部类可以继承父类或实现接口。</li>
+<li>可以声明内部类为抽象类，该抽象类必 须被其他内部类继承；内部接口必须被 其他内部类实现。</li>
+<li>使用点运算符“ . ”引用内嵌类型： 外层类型.内嵌类型</li>
+<li>内嵌类型具有类中成员的4种访问控制权限。当内 部类可被访问时，才能考虑内部类中成员的访问控 制权限</li>
+<li>内嵌类型与其外层类型彼此信任，能访问对方的所 有成员。</li>
+<li>在实例内部类中，使用以下格式引用或调用外部类当前实例的成员变量或实例 成员方法</li>
+<li>内部接口总是静态的。内部类可声明是静态的或实 例的，静态内部类能够声明静态成员，但不能引用 外部类的实例成员；实例内部类不能声明静态成员</li>
+</ul>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h2 id="泛型声明"><a href="#泛型声明" class="headerlink" title="泛型声明"></a>泛型声明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] <span class="class"><span class="keyword">class</span> 类&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br><span class="line"><span class="class">[修饰符] <span class="title">class</span> 类&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/08/Java/%E7%AC%AC%E4%B8%89%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -321,10 +431,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-11-08 19:41:16 / 修改时间：23:25:14" itemprop="dateCreated datePublished" datetime="2021-11-08T19:41:16+08:00">2021-11-08</time>
+              <time title="创建时间：2021-11-08 19:41:16" itemprop="dateCreated datePublished" datetime="2021-11-08T19:41:16+08:00">2021-11-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-10 22:51:20" itemprop="dateModified" datetime="2021-11-10T22:51:20+08:00">2021-11-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -341,7 +457,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.1k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -469,7 +585,14 @@
 </table>
 </div>
 <p><strong>静态成员变量：</strong>在类中，用static声明的成员变量为静态成员变量，或叫做类属 性、类变量。它为该类的公用变量，属于类，被该类的所有实例共享（只此一 份），在类被载入时被显式初始化。可以使用“对象.类属性”来调用，不过一般 都使用“类名.类属性”。static变量置于方法区</p>
-<p><strong>静态方法：</strong>在类中，用static声明的成员变量为静态成员变量，或叫做类属 性、类变量。它为该类的公用变量，属于类，被该类的所有实例共享（只此一 份），在类被载入时被显式初始化。可以使用“对象.类属性”来调用，不过一般 都使用“类名.类属性”。static变量置于方法区</p>
+<p><strong>静态方法：</strong></p>
+<ul>
+<li><p>静态方法不需要通过它所属的类的任何实例就可以被调用，因此在静态方法中不能使用 this 关键字，也不能直接访问所属类的实例变量和实例方法，但是可以直接访问所属类的静态变量和静态方法。另外，和 this  关键字一样，super 关键字也与类的特定实例相关，所以在静态方法中也不能使用 super 关键字。父类中是静态方法，</p>
+</li>
+<li><p>子类中不能覆盖为非静态方法；在符合覆盖规则的前提下， 在父子类中，父类中的静态方法可以被子类中的静态方法覆盖，但无多态</p>
+</li>
+<li>父子类中，静态方法只能被静态方法覆盖，父子类中，非静态方法只能被非静态方法覆盖</li>
+</ul>
 <p><strong>静态初始化块 static {}：</strong>如果希望加载后，对整个类进行某些初始化操作，可 以使用static初始化，</p>
 <ul>
 <li>是在类初始化时执行，不是在创建对象时执行。</li>
@@ -508,7 +631,7 @@
 <li>抽象方法只有方法的声明，没有方法体（即{}和里面的代码），其必须被子类实现 （这也是抽象方法的设计初衷，提供规范，要求各子类实现规范）</li>
 <li>抽象类用于设计和实现的分离，但是这种分离不够彻底。</li>
 <li>一个抽象类可以继承另一个抽象类</li>
-<li>有抽象方法的类一定是抽象类，但是抽象类中不一定都是抽象方法，也可以全部都是具 体方法</li>
+<li>有抽象方法的类一定是抽象类，但是抽象类中不一定都是抽象方法，也可以全部都是具体方法</li>
 </ul>
 <p><strong>特点：</strong></p>
 <ul>
@@ -1265,126 +1388,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/19/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/19/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-19 01:03:55" itemprop="dateCreated datePublished" datetime="2021-09-19T01:03:55+08:00">2021-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-21 00:32:48" itemprop="dateModified" datetime="2021-09-21T00:32:48+08:00">2021-09-21</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>220</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>傅里叶变换 FT Fourier transform</p>
-<p>傅里叶级数 FS Fourier series</p>
-<p>离散傅里叶变换 DFT discrete fourier transform</p>
-<p>离散时间傅立叶变换 DTFT Discrete time Fourier Transform</p>
-<p>加上I（inverse）就是逆变换</p>
-<p>时域连续周期对应频域离散非周期</p>
-<p>时域连续非周期对应频域连续非周期</p>
-<p>时域离散周期对应频域离散周期</p>
-<p>时域离散非周期对应频域连续周期</p>
-<p>综上：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>时域</th>
-<th>频域</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>连续</td>
-<td>非周期</td>
-</tr>
-<tr>
-<td>周期</td>
-<td>离散</td>
-</tr>
-<tr>
-<td>离散</td>
-<td>周期</td>
-</tr>
-<tr>
-<td>非周期</td>
-<td>连续</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1456,7 +1459,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1520,12 +1523,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">111k</span>
+    <span title="站点总字数">113k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:41</span>
+    <span title="站点阅读时长">1:43</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
