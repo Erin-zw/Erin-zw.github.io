@@ -198,6 +198,261 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/C/%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/22/C/%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" class="post-title-link" itemprop="url">预处理器</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-22 11:12:37" itemprop="dateCreated datePublished" datetime="2021-08-22T11:12:37+08:00">2021-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-23 19:37:24" itemprop="dateModified" datetime="2021-08-23T19:37:24+08:00">2021-08-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>编译一个C程序第一个步骤叫做预处理阶段，C预处理器在源代码编译之前对其进行一些文本性质操作。</p>
+<h2 id="预定义符号"><a href="#预定义符号" class="headerlink" title="预定义符号"></a>预定义符号</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>例子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__FILE__</td>
+<td>“name.c”</td>
+<td>进行编译的源文件名称</td>
+</tr>
+<tr>
+<td>__LINE__</td>
+<td>25</td>
+<td>文件当前行的行号</td>
+</tr>
+<tr>
+<td>__DATE__</td>
+<td>“Jan 17 2021”</td>
+<td>文件被编译的日期</td>
+</tr>
+<tr>
+<td>__TIME__</td>
+<td>“11:34:01”</td>
+<td>文件被编译的时间</td>
+</tr>
+<tr>
+<td>__STDC__</td>
+<td>1</td>
+<td>如果编译器遵循ANSI C值就为1，否则未定义</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p>声明格式：<code>#define name stuff</code></p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG_PRINT printf(<span class="meta-string">&quot;FILE %s line &quot;</span>\ </span></span><br><span class="line"><span class="string">&quot;%d: x=%d, y=%d,&quot;</span>\    <span class="comment">//相邻的字符串常量自动被连接</span></span><br><span class="line"><span class="string">&quot;z=%d&quot;</span>,__FILE__,__LINE__,x,y,z)<span class="comment">//注意此处没有分号</span></span><br></pre></td></tr></table></figure>
+<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p>声明格式：<code>#define name(parameter-list) stuff</code></p>
+<p>例子1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) x*x</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,S(a+<span class="number">1</span>));<span class="comment">//输出11，原因是将a+1替换，会变成a+1*a+1,不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) (x)*(x)</span></span><br></pre></td></tr></table></figure>
+<p>例子2：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(x) (x)+(x)</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="number">10</span>*S(a));<span class="comment">//输出55，原因是将a替换，会变成10*(a)+(a),不是我们想要的结果</span></span><br><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S(s) ((x)*(x))</span></span><br></pre></td></tr></table></figure>
+<p>例子3：#结构是把宏参数转换为字符串</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRINT(FORMAT,VALUE) printf(<span class="meta-string">&quot;The value of &quot;</span>#VALUE  <span class="meta-string">&quot; is &quot;</span>FORMAT<span class="meta-string">&quot;\n&quot;</span>,VALUE)<span class="comment">//别吵别吵，这里很关键</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">22</span>;</span><br><span class="line">    PRINT(<span class="string">&quot;%d&quot;</span>,x+<span class="number">3</span>);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">The value of x+<span class="number">3</span> is <span class="number">25</span></span><br></pre></td></tr></table></figure>
+<p>例子4：##结构是把两边的符号连接成一个</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD(number,value) sum ## number += value</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum5 = <span class="number">0</span>;<span class="comment">//前提是变量已经定义过</span></span><br><span class="line">    ADD(<span class="number">5</span>,<span class="number">25</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum5);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="副作用宏"><a href="#副作用宏" class="headerlink" title="副作用宏"></a>副作用宏</h3><p>例子1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) ((a)&gt;(b)?(a):(b))<span class="comment">//与参数类型无关</span></span></span><br><span class="line">...</span><br><span class="line">x = <span class="number">5</span>;</span><br><span class="line">y = <span class="number">8</span>;</span><br><span class="line">z = MAX(x++,y++);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d,%d,%d&quot;</span>,x,y,z);</span><br><span class="line"><span class="comment">//输出为6，10，9</span></span><br><span class="line"><span class="comment">//带入分析可知 z = ((x++)&gt;(y++)?(x++):(y++));</span></span><br></pre></td></tr></table></figure>
+<p>例子2：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EVENPARITY(ch) ((cbit(ch)&amp;1)?(ch)|PARITYBIT:(ch))<span class="comment">//奇偶检验，PARITYBIT为1</span></span></span><br><span class="line">ch = EVENPARITY(getchar());<span class="comment">//这条语句实际上是失败的，因为getchar()实际上有两个，还有一个回车</span></span><br></pre></td></tr></table></figure>
+<h3 id="undef"><a href="#undef" class="headerlink" title="#undef"></a>#undef</h3><p>作用是移除一个宏定义</p>
+<p>声明格式：<code>#undef name</code></p>
+<h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>一般格式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> constant-expression<span class="comment">//常量表达式</span></span></span><br><span class="line">		statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> constant-expression</span></span><br><span class="line">        other statements...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">        other statements</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>是否被定义</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> symbol<span class="comment">//等价</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(symbol)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> symbol</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>一般来讲#include尖括号是函数库文件，双引号是本地文件。</p>
+<p><strong>多重包含：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;b.h&quot;</span></span></span><br><span class="line"><span class="comment">//如果两个文件都包含了x.h文件，就会造成多重包含</span></span><br></pre></td></tr></table></figure>
+<p>解决方法就是条件编译：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HEADERNAME_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HEADERNAME_H 1<span class="comment">//此处1可加可不加，不加1的话，变量就是一个空字符串</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>当头文件第一次被包含时，变量未定义就给它定义，第二次多重包含时，ifndef条件为假内容就被忽略，不会被多次编译</p>
+<h3 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h3><ul>
+<li><p><code>#error text of error mesage</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(A)</span></span><br><span class="line">	...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(B)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(C)</span></span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">error</span> No selected</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>#line number &quot;string&quot;</code>他告诉预处理器number是下一行输入的行号，如果加入了string，预处理器就把它当作文件的名字。这条指令将修改__FILE__和__LINE__</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/C/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/22/C/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">命令行参数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-22 00:38:06 / 修改时间：11:12:20" itemprop="dateCreated datePublished" datetime="2021-08-22T00:38:06+08:00">2021-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>582</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>每个C语言程序都必须有一个称为main()的函数，作为程序启动的起点。当执行程序时，命令行参数（command-line  argument）（由shell逐一解析）通过两个入参提供给main()函数。第一个参数int  argc，表示命令行参数的个数。第二个参数char *argv[]，是一个指向命令行参数的指针数组，每一参数又都是以空字符（null）  结尾的字符串。第一个字符串，亦即argv[0]指向的，（通常）是该程序的名称。argv中的指针列表以NULL指针结尾（即argv[argc]为NULL）。</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,argc);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">3</span>]);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">D:\Vsc\test&gt;apple.exe a b c d<span class="comment">//在命令行中输入</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">apple.exe<span class="comment">//一般指向的第一个参数为程序名称</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+<h3 id="处理命令行参数"><a href="#处理命令行参数" class="headerlink" title="处理命令行参数"></a>处理命令行参数</h3><p>实际上就是对字符串的处理</p>
+<p>见书：p267</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1130,256 +1385,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/py/py%E5%9F%BA%E6%9C%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/py/py%E5%9F%BA%E6%9C%AC/" class="post-title-link" itemprop="url">python基础</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-06 00:50:03" itemprop="dateCreated datePublished" datetime="2021-08-06T00:50:03+08:00">2021-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-11 20:53:15" itemprop="dateModified" datetime="2021-09-11T20:53:15+08:00">2021-09-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>712</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h2><p>print函数接受多个字符串 ，字符串间逗号以空格代替</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;,&#x27;</span>,<span class="string">&#x27;ok?&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="number">100</span>+<span class="number">200</span>)</span><br><span class="line">//输出</span><br><span class="line">hello , ok?</span><br><span class="line"><span class="number">300</span></span><br></pre></td></tr></table></figure>
-<p>行连接，使用反斜杠</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x = 1+    \</span></span><br><span class="line"><span class="string">2+\</span></span><br><span class="line"><span class="string">    3&#x27;</span>)</span><br><span class="line"><span class="comment">#输出x = 1+    2+    3</span></span><br></pre></td></tr></table></figure>
-<p>在看一个</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span>;<span class="built_in">print</span>(<span class="string">&#x27;x is&#x27;</span>,    x)</span><br><span class="line"><span class="comment">#输出x is 5</span></span><br></pre></td></tr></table></figure>
-<h2 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = (<span class="string">&#x27;input your name:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello,&#x27;</span>,name)</span><br></pre></td></tr></table></figure>
-<p>当然了括号内也可以不加字符串</p>
-<h2 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>字符串是以’ ‘或” “括起来的任意文本。</p>
-<p>若括号内既有’ ’又有” ”可以使用转义字符\,\n（换行）,\t（TAB)等都是转义字符，甚至\\也是，代表\。如下面一条语句若I’m的’不加转义字符\，则会导致报错。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;I\&#x27;m &quot;ok&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>这两条语句等价，’’’ ‘’’是允许多行字符串的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;f\n3\n4&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;&#x27;f</span></span><br><span class="line"><span class="string">3</span></span><br><span class="line"><span class="string">4&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>Py中可以在字符串前加入r默认字符串内不转义</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">r&#x27;f\n3\n4\n&#x27;</span>)<span class="comment">#输出f\n3\n4\n</span></span><br></pre></td></tr></table></figure>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Py中字符串，数字都可以赋值给变量</p>
-<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">9</span>/<span class="number">3</span>)<span class="comment">#3.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span>/<span class="number">3</span>)<span class="comment">#0.3333333333333333</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>//<span class="number">3</span>)<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>%<span class="number">3</span>)<span class="comment">#0</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/numpy/Ndarray%E5%AF%B9%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/numpy/Ndarray%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Ndarray对象</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-06 00:43:09" itemprop="dateCreated datePublished" datetime="2021-08-06T00:43:09+08:00">2021-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-12 21:00:04" itemprop="dateModified" datetime="2021-09-12T21:00:04+08:00">2021-09-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>530</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>ndarray对象是用于存放同类型元素的多维数组。ndarray 中的每个元素在内存中都有相同存储大小的区域。 </p>
-<h3 id="内部组成"><a href="#内部组成" class="headerlink" title="内部组成"></a>内部组成</h3><ul>
-<li>一个指向数据（内存或内存映射文件中的一块数据）的指针。</li>
-<li>数据类型或 dtype，描述在数组中的固定大小值的格子。</li>
-<li>一个表示数组形状（shape）的元组，表示各维度大小的元组。</li>
-<li>一个跨度元组（stride），其中的整数指的是为了前进到当前维度下一个元素需要”跨过”的字节数。</li>
-</ul>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p><code>numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin = 0)</code></p>
-<p>参数说明：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">object</td>
-<td style="text-align:left">数组或嵌套的数列</td>
-</tr>
-<tr>
-<td style="text-align:left">dtype</td>
-<td style="text-align:left">数组元素的数据类型，可选</td>
-</tr>
-<tr>
-<td style="text-align:left">copy</td>
-<td style="text-align:left">对象是否需要复制，可选</td>
-</tr>
-<tr>
-<td style="text-align:left">order</td>
-<td style="text-align:left">创建数组的样式，C为行方向，F为列方向，A为任意方向（默认）</td>
-</tr>
-<tr>
-<td style="text-align:left">subok</td>
-<td style="text-align:left">默认返回一个与基类类型一致的数组</td>
-</tr>
-<tr>
-<td style="text-align:left">ndmin</td>
-<td style="text-align:left">指定生成数组的最小维度</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>例子：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line">a = np.array([[<span class="number">1</span>+<span class="number">1j</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]], dtype=<span class="built_in">complex</span>)  </span><br><span class="line"><span class="built_in">print</span> (a)</span><br><span class="line">//输出</span><br><span class="line">[[<span class="number">1.</span>+<span class="number">1.j</span> <span class="number">2.</span>+<span class="number">0.j</span>]</span><br><span class="line"> [<span class="number">3.</span>+<span class="number">0.j</span> <span class="number">4.</span>+<span class="number">0.j</span>]</span><br><span class="line"> [<span class="number">5.</span>+<span class="number">0.j</span> <span class="number">6.</span>+<span class="number">0.j</span>]]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1447,14 +1456,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1511,12 +1520,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">113k</span>
+    <span title="站点总字数">114k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:44</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
