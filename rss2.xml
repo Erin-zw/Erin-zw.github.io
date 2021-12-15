@@ -9,8 +9,32 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Wed, 01 Dec 2021 15:08:41 GMT</pubDate>
+    <pubDate>Wed, 15 Dec 2021 15:09:25 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>DDS信号发生器</title>
+      <link>http://example.com/2021/12/13/FPGA/DDS/</link>
+      <guid>http://example.com/2021/12/13/FPGA/DDS/</guid>
+      <pubDate>Mon, 13 Dec 2021 15:03:04 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;DDS信号发生器采用&lt;strong&gt;直接数字频率合成&lt;/strong&gt;(Direct Digital Synthesis，简称DDS)技术，</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p><p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p><p>在DDS模块中，输出频率的公式为：</p><p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p><script type="math/tex; mode=display">f_{out} = \frac {f_c*M} {2^N} \\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)\\ \Delta f = \frac {f_c} {2^N}\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p><script type="math/tex; mode=display">P_{off} = \frac {phase*(2^{N}-1)} {360°}\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1))</script>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/FPGA/">FPGA</category>
+      
+      
+      
+      <comments>http://example.com/2021/12/13/FPGA/DDS/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>测试</title>
@@ -26,7 +50,7 @@
       
       
       
-      <content:encoded><![CDATA[<h4 id="复数矩阵的转置、共轭、共轭转置"><a href="#复数矩阵的转置、共轭、共轭转置" class="headerlink" title="复数矩阵的转置、共轭、共轭转置"></a>复数矩阵的转置、共轭、共轭转置</h4><p>conj是共轭运算</p><script type="math/tex; mode=display">A = \begin{bmatrix}2+3i & 3-4i \\ 5+i & 7-2i \end{bmatrix}\\conj(A) = \begin{bmatrix}2-3i & 3+4i \\ 5-i & 7+2i\end{bmatrix}\\A.' = \begin{bmatrix}2+3i & 5+i \\ 3-4i & 7-2i \end{bmatrix}\\conj(A.') = A' = \begin{bmatrix}2-3i & 5-i \\ 3+4i & 7+2i \end{bmatrix}</script>]]></content:encoded>
+      <content:encoded><![CDATA[<h4 id="复数矩阵的转置、共轭、共轭转置"><a href="#复数矩阵的转置、共轭、共轭转置" class="headerlink" title="复数矩阵的转置、共轭、共轭转置"></a>复数矩阵的转置、共轭、共轭转置</h4><p>conj是共轭运算</p><script type="math/tex; mode=display">A = \begin{bmatrix}2+3i & 3-4i \\ 5+i & 7-2i \end{bmatrix}\ \\conj(A) = \begin{bmatrix}2-3i & 3+4i \\ 5-i & 7+2i\end{bmatrix}\ \\A.' = \begin{bmatrix}2+3i & 5+i \\ 3-4i & 7-2i \end{bmatrix}\ \\conj(A.') = A' = \begin{bmatrix}2-3i & 5-i \\ 3+4i & 7+2i \end{bmatrix}</script>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/Matlab/">Matlab</category>
@@ -113,8 +137,8 @@
     
     <item>
       <title>parameter,defparame,`define,localparam四者区别</title>
-      <link>http://example.com/2021/11/07/Verilog/parameter/</link>
-      <guid>http://example.com/2021/11/07/Verilog/parameter/</guid>
+      <link>http://example.com/2021/11/07/FPGA/parameter/</link>
+      <guid>http://example.com/2021/11/07/FPGA/parameter/</guid>
       <pubDate>Sun, 07 Nov 2021 09:02:40 GMT</pubDate>
       
         
@@ -127,11 +151,11 @@
       <content:encoded><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">define</span>:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;</span></span><br><span class="line">            范围 -&gt; 整个工程;</span><br><span class="line"></span><br><span class="line"><span class="keyword">parameter</span>:  作用 -&gt; 常用于模块间参数传递;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义;</span><br><span class="line"></span><br><span class="line"><span class="keyword">localparam</span>: 作用 -&gt; 常用于状态机的参数定义;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义，不可用于参数传递;</span><br><span class="line"><span class="keyword">localparam</span> cannot be used <span class="keyword">within</span> the <span class="keyword">module</span> port <span class="keyword">parameter</span> list.</span><br></pre></td></tr></table></figure><h2 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter"></a>Parameter</h2><p>可以放在模块头上也可以放在模块的内部，他可以通过defparameter的方式或者模块实例化的时候进行重写。</p><p><strong>Example：</strong></p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line">#(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"> item;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> (port_list );</span><br><span class="line"> <span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span><span class="comment">//可以被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><p>一旦有模块参数被写在模块头部，则出现在模块内部的模块参数被视为本地参数，不能被重写。</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> #(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"><span class="keyword">parameter</span> DEPTH=<span class="number">4</span>; <span class="comment">//不能被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><p>在上层模块对参数重写的方式如下:</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>)F1<span class="variable">.MSB</span>=<span class="number">4</span>;F1<span class="variable">.LSB</span>=<span class="number">2</span>;fifo F1;</span><br><span class="line"><span class="number">2</span>) fifo <span class="variable">#(4,2) F1(port_list)</span>;</span><br><span class="line"><span class="number">3</span>) fifo <span class="variable">#(.LSB(2), .MSB(4)) fifo(port_list)</span>;</span><br></pre></td></tr></table></figure><h2 id="defparam修改参数"><a href="#defparam修改参数" class="headerlink" title="defparam修改参数"></a>defparam修改参数</h2><p>当一个模块引用另外一个模块时，高层模块可以改变低层模块用parameter定义的参数值。例子代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Width</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Polarity</span> = <span class="number">0</span>;<span class="comment">//使得U_D1的Width = 4， Polarity = 0；</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">defparam</span>    U_D2<span class="variable">.Width</span> = <span class="number">5</span>;<span class="comment">//使得U_D2的Width = 5，Polarity 不变，即为1；</span></span><br><span class="line">    Decode U_D1();</span><br><span class="line">    Decode U_D2(); </span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><p>也可以模块实例化的时候进行修改，代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    Decode <span class="variable">#(4,0) U_D1()</span>; <span class="comment">//使得Width = 4， Polarity = 0；</span></span><br><span class="line">    Decode <span class="variable">#(5) U_D2()</span>; <span class="comment">//使得 Width = 5，Polarity 不变，即为1；</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><h2 id="define"><a href="#define" class="headerlink" title="`define"></a>`define</h2><p><strong>概念：</strong>可以跨模块的定义，写在模块名称上面，在整个设计工程都有效。一旦define指令被编译，其在整个编译过程中都有效。例如，通<br>过另一个文件中的define指令，定义的常量可以被其他文件调用,直到遇到undef；</p><p><strong>举例：</strong>定义 define UART_CNT 10’d1024.使用UART_CNT</p><h2 id="localparam："><a href="#localparam：" class="headerlink" title="localparam："></a>localparam：</h2><p><strong>概念：</strong>本module内有效的定义，不可用于参数传递；localparamcannot be used within the module port parameter list.一般情况下，状态机的参数都是用localparam的。</p>]]></content:encoded>
       
       
-      <category domain="http://example.com/categories/Verilog/">Verilog</category>
+      <category domain="http://example.com/categories/FPGA/">FPGA</category>
       
       
       
-      <comments>http://example.com/2021/11/07/Verilog/parameter/#disqus_thread</comments>
+      <comments>http://example.com/2021/11/07/FPGA/parameter/#disqus_thread</comments>
       
     </item>
     
@@ -161,8 +185,8 @@
     
     <item>
       <title>Testbench文件编写方法</title>
-      <link>http://example.com/2021/11/07/Verilog/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/</link>
-      <guid>http://example.com/2021/11/07/Verilog/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/</guid>
+      <link>http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/</link>
+      <guid>http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/</guid>
       <pubDate>Sun, 07 Nov 2021 07:22:45 GMT</pubDate>
       
         
@@ -175,11 +199,11 @@
       <content:encoded><![CDATA[<p>转载：<a href="https://blog.csdn.net/weixin_46423500/article/details/113264878">https://blog.csdn.net/weixin_46423500/article/details/113264878</a></p><h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>testbench文件基本结构：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 仿真单位/仿真精度</span></span><br><span class="line"><span class="keyword">module</span> test_bench();</span><br><span class="line"><span class="comment">//通常 testbench没有输入与输出端口</span></span><br><span class="line">信号或变量定义声明</span><br><span class="line">使用<span class="keyword">initial</span>或<span class="keyword">always</span>语句产生激励波形</span><br><span class="line">例化设计模块</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure><h3 id="声明仿真精度和仿真单位"><a href="#声明仿真精度和仿真单位" class="headerlink" title="声明仿真精度和仿真单位"></a>声明仿真精度和仿真单位</h3><p>/#(延时时间)，#(10ns)代表延时10ns</p><p>仿真精度就是说最低的延时精度，比如说<code>`timescale 1ns/1ns</code>，延时精度只能达到1ns</p><p>如果想要延时10.001ns，就要把仿真精度改成1ps(1ns = 1000ps)。</p><h3 id="定义模块名"><a href="#定义模块名" class="headerlink" title="定义模块名"></a>定义模块名</h3><p><code>module flow_led_tb();</code></p><p>模块名的命名方式一般在被测模块名后面加上“ _ tb”，或者在被测模块名前面加上“tb_”，表示为哪个模块提供激励测试文件，通常激励文件不需要定义输入和输出端口。</p><h3 id="信号或常量定义"><a href="#信号或常量定义" class="headerlink" title="信号或常量定义"></a>信号或常量定义</h3><p><strong>常量：</strong></p><p> 代码中定义的常量有时需要频繁的修改，为了方便修改，可以把常量定义成参数的形式，定义参数的关键字为parameter，代码如下：</p><p><code>parameter T = 20;</code></p><p><strong>变量：</strong></p><p>Verilog代码中，常用声明信号或变量的关键字为reg和wire，在initial语句或者always语句中使用的变量定义成reg类型，在assign语句或者用于连接被例化模块名的信号定义成wire类型，声明方法如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"><span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br></pre></td></tr></table></figure><p><strong>使用initial或always语句产生激励波形：</strong><br> 产生时钟激励。代码表示每10ns（假设仿真单位是1ns），sys_clk的电平状态翻转一次，由于一个完整的时钟周期包括一个高电平和一个低电平，因此sys_clk的时钟周期为20ns，占空比为50%。代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> #<span class="number">10</span> sys_clk = ~sys_clk;</span><br></pre></td></tr></table></figure><p>如果要生成其它占空比时钟的话，代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">#<span class="number">6</span> sys_clk = <span class="number">0</span>; #<span class="number">4</span> sys_clk = <span class="number">1</span>; <span class="keyword">end</span></span><br></pre></td></tr></table></figure><p>需要注意的是，在always语句中设置了sys_clk的时钟周期，并没有设置初始值，因此sys_clk需要在initial语句中进行初始化。代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"> sys_clk = <span class="number">1&#x27;b0</span>; <span class="comment">// 时钟初始值</span></span><br><span class="line">sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位初始值</span></span><br><span class="line"> #<span class="number">20</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><h3 id="例化设计模块"><a href="#例化设计模块" class="headerlink" title="例化设计模块"></a>例化设计模块</h3><p>例化的设计模块是指被测模块，例化被测模块的目的是把被测模块和激励模块实例化起来，并且把被测模块的端口与激励模块的端口进行相应的连接，使得激励可以输入到被测模块。如果被测模块是由多个模块组成的，激励模块中只需要例化多个模块的顶层模块，代码如下：</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flow_led u0_flow_led (</span><br><span class="line"> <span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line"> <span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line"> <span class="variable">.led</span> (led )</span><br><span class="line">);</span><br></pre></td></tr></table></figure><h3 id="完整文件"><a href="#完整文件" class="headerlink" title="完整文件"></a>完整文件</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns // 定义仿真时间单位1ns和仿真时间精度为1ns</span></span><br><span class="line"> <span class="keyword">module</span> flow_led_tb(); <span class="comment">// 测试模块</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//parameter define</span></span><br><span class="line"><span class="keyword">parameter</span> T = <span class="number">20</span>; <span class="comment">// 时钟周期为20ns</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"> <span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br><span class="line"><span class="comment">//给输入信号初始值</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">sys_clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位</span></span><br><span class="line"><span class="variable">#(T+1)</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//50Mhz的时钟，周期则为1/50Mhz=20ns,所以每10ns，电平取反一次</span></span><br><span class="line"><span class="keyword">always</span> <span class="variable">#(T/2)</span> sys_clk = ~sys_clk;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化flow_led模块</span></span><br><span class="line">flow_led u0_flow_led (</span><br><span class="line"><span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line"><span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line"><span class="variable">.led</span> (led )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>]]></content:encoded>
       
       
-      <category domain="http://example.com/categories/Verilog/">Verilog</category>
+      <category domain="http://example.com/categories/FPGA/">FPGA</category>
       
       
       
-      <comments>http://example.com/2021/11/07/Verilog/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/#disqus_thread</comments>
+      <comments>http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/#disqus_thread</comments>
       
     </item>
     
@@ -232,30 +256,6 @@
       
       
       <comments>http://example.com/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Basic</title>
-      <link>http://example.com/2021/09/25/Verilog/Basics/</link>
-      <guid>http://example.com/2021/09/25/Verilog/Basics/</guid>
-      <pubDate>Sat, 25 Sep 2021 09:57:52 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;Wire&quot;&gt;&lt;a href=&quot;#Wire&quot; class=&quot;headerlink&quot; title=&quot;Wire&quot;&gt;&lt;/a&gt;Wire&lt;/h2&gt;&lt;p&gt;wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assi</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="Wire"><a href="#Wire" class="headerlink" title="Wire"></a>Wire</h2><p>wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left = right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Verilog/">Verilog</category>
-      
-      
-      
-      <comments>http://example.com/2021/09/25/Verilog/Basics/#disqus_thread</comments>
       
     </item>
     

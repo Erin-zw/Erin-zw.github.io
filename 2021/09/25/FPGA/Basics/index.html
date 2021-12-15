@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="概述123456789&#96;define:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;            范围 -&gt; 整个工程;parameter:  作用 -&gt; 常用于模块间参数传递;            范围 -&gt; 本module内有效的定义;localparam: 作用 -&gt; 常用于状态机的参数定义;            范围 -&gt; 本mod">
+  <meta name="description" content="Wirewire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left &#x3D; right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="parameter,defparame,&#96;define,localparam四者区别">
-<meta property="og:url" content="http://example.com/2021/11/07/Verilog/parameter/index.html">
+<meta property="og:title" content="Basic">
+<meta property="og:url" content="http://example.com/2021/09/25/FPGA/Basics/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="概述123456789&#96;define:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;            范围 -&gt; 整个工程;parameter:  作用 -&gt; 常用于模块间参数传递;            范围 -&gt; 本module内有效的定义;localparam: 作用 -&gt; 常用于状态机的参数定义;            范围 -&gt; 本mod">
+<meta property="og:description" content="Wirewire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left &#x3D; right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-07T09:02:40.478Z">
-<meta property="article:modified_time" content="2021-11-07T12:47:06.952Z">
+<meta property="article:published_time" content="2021-09-25T09:57:52.178Z">
+<meta property="article:modified_time" content="2021-12-15T13:40:42.876Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/11/07/Verilog/parameter/">
+<link rel="canonical" href="http://example.com/2021/09/25/FPGA/Basics/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>parameter,defparame,`define,localparam四者区别 | Erin枫</title>
+  <title>Basic | Erin枫</title>
   
 
 
@@ -201,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/Verilog/parameter/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/FPGA/Basics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          parameter,defparame,`define,localparam四者区别
+          Basic
         </h1>
 
         <div class="post-meta">
@@ -225,17 +225,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-11-07 17:02:40 / 修改时间：20:47:06" itemprop="dateCreated datePublished" datetime="2021-11-07T17:02:40+08:00">2021-11-07</time>
+              <time title="创建时间：2021-09-25 17:57:52" itemprop="dateCreated datePublished" datetime="2021-09-25T17:57:52+08:00">2021-09-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-15 21:40:42" itemprop="dateModified" datetime="2021-12-15T21:40:42+08:00">2021-12-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Verilog/" itemprop="url" rel="index"><span itemprop="name">Verilog</span></a>
+                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
                 </span>
             </span>
 
@@ -252,7 +258,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>136</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -271,22 +277,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">define</span>:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;</span></span><br><span class="line">            范围 -&gt; 整个工程;</span><br><span class="line"></span><br><span class="line"><span class="keyword">parameter</span>:  作用 -&gt; 常用于模块间参数传递;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义;</span><br><span class="line"></span><br><span class="line"><span class="keyword">localparam</span>: 作用 -&gt; 常用于状态机的参数定义;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义，不可用于参数传递;</span><br><span class="line">			<span class="keyword">localparam</span> cannot be used <span class="keyword">within</span> the <span class="keyword">module</span> port <span class="keyword">parameter</span> list.</span><br></pre></td></tr></table></figure>
-<h2 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter"></a>Parameter</h2><p>可以放在模块头上也可以放在模块的内部，他可以通过defparameter的方式或者模块实例化的时候进行重写。</p>
-<p><strong>Example：</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line">#(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"> item;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> (port_list );</span><br><span class="line"> <span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span><span class="comment">//可以被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>一旦有模块参数被写在模块头部，则出现在模块内部的模块参数被视为本地参数，不能被重写。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> #(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"><span class="keyword">parameter</span> DEPTH=<span class="number">4</span>; <span class="comment">//不能被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>在上层模块对参数重写的方式如下:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>)F1<span class="variable">.MSB</span>=<span class="number">4</span>;F1<span class="variable">.LSB</span>=<span class="number">2</span>;fifo F1;</span><br><span class="line"><span class="number">2</span>) fifo <span class="variable">#(4,2) F1(port_list)</span>;</span><br><span class="line"><span class="number">3</span>) fifo <span class="variable">#(.LSB(2), .MSB(4)) fifo(port_list)</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="defparam修改参数"><a href="#defparam修改参数" class="headerlink" title="defparam修改参数"></a>defparam修改参数</h2><p>当一个模块引用另外一个模块时，高层模块可以改变低层模块用parameter定义的参数值。例子代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Width</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Polarity</span> = <span class="number">0</span>;<span class="comment">//使得U_D1的Width = 4， Polarity = 0；</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">defparam</span>    U_D2<span class="variable">.Width</span> = <span class="number">5</span>;<span class="comment">//使得U_D2的Width = 5，Polarity 不变，即为1；</span></span><br><span class="line">    Decode U_D1();</span><br><span class="line">    Decode U_D2(); </span><br><span class="line"><span class="keyword">endmodule</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>也可以模块实例化的时候进行修改，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    Decode <span class="variable">#(4,0) U_D1()</span>; <span class="comment">//使得Width = 4， Polarity = 0；</span></span><br><span class="line">    Decode <span class="variable">#(5) U_D2()</span>; <span class="comment">//使得 Width = 5，Polarity 不变，即为1；</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="define"><a href="#define" class="headerlink" title="`define"></a>`define</h2><p><strong>概念：</strong>可以跨模块的定义，写在模块名称上面，在整个设计工程都有效。一旦define指令被编译，其在整个编译过程中都有效。例如，通<br>过另一个文件中的define指令，定义的常量可以被其他文件调用,直到遇到undef；</p>
-<p><strong>举例：</strong>定义 define UART_CNT 10’d1024.使用UART_CNT</p>
-<h2 id="localparam："><a href="#localparam：" class="headerlink" title="localparam："></a>localparam：</h2><p><strong>概念：</strong>本module内有效的定义，不可用于参数传递；localparamcannot be used within the module port parameter list.一般情况下，状态机的参数都是用localparam的。</p>
+        <h2 id="Wire"><a href="#Wire" class="headerlink" title="Wire"></a>Wire</h2><p>wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left = right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。</p>
 
     </div>
 
@@ -324,7 +315,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/11/07/Verilog/parameter/" title="parameter,defparame,&#96;define,localparam四者区别">http://example.com/2021/11/07/Verilog/parameter/</a>
+    <a href="http://example.com/2021/09/25/FPGA/Basics/" title="Basic">http://example.com/2021/09/25/FPGA/Basics/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -370,12 +361,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/07/%E4%BF%A1%E5%8F%B7/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E9%A2%91%E5%9F%9F%E7%9B%B8%E4%B9%98/" rel="prev" title="时域卷积频域相乘">
-      <i class="fa fa-chevron-left"></i> 时域卷积频域相乘
+    <a href="/2021/09/24/numpy/%E7%B4%A2%E5%BC%95/" rel="prev" title="索引">
+      <i class="fa fa-chevron-left"></i> 索引
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/11/08/Java/%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="类">
-      类 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="next" title="第一章">
+      第一章 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -435,7 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parameter"><span class="nav-number">2.</span> <span class="nav-text">Parameter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defparam%E4%BF%AE%E6%94%B9%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">defparam修改参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#define"><span class="nav-number">4.</span> <span class="nav-text">&#96;define</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#localparam%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">localparam：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wire"><span class="nav-number">1.</span> <span class="nav-text">Wire</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -451,7 +442,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -515,7 +506,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">115k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
