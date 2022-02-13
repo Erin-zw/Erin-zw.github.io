@@ -9,30 +9,31 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Wed, 15 Dec 2021 15:09:25 GMT</pubDate>
+    <pubDate>Sun, 26 Dec 2021 15:58:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>DDS信号发生器</title>
-      <link>http://example.com/2021/12/13/FPGA/DDS/</link>
-      <guid>http://example.com/2021/12/13/FPGA/DDS/</guid>
+      <title>10M信号发生器</title>
+      <link>http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/</link>
+      <guid>http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/</guid>
       <pubDate>Mon, 13 Dec 2021 15:03:04 GMT</pubDate>
       
         
         
-      <description>&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;DDS信号发生器采用&lt;strong&gt;直接数字频率合成&lt;/strong&gt;(Direct Digital Synthesis，简称DDS)技术，</description>
+      <description>&lt;p&gt;DDS简介&lt;/p&gt;
+&lt;p&gt;DDS信号发生器采用&lt;strong&gt;直接数字频率合成&lt;/strong&gt;(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采</description>
         
       
       
       
-      <content:encoded><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p><p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p><p>在DDS模块中，输出频率的公式为：</p><p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p><script type="math/tex; mode=display">f_{out} = \frac {f_c*M} {2^N} \\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)\\ \Delta f = \frac {f_c} {2^N}\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p><script type="math/tex; mode=display">P_{off} = \frac {phase*(2^{N}-1)} {360°}\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1))</script>]]></content:encoded>
+      <content:encoded><![CDATA[<p>DDS简介</p><p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p><p>DDS原理</p><p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p><p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p><p>在DDS模块中，输出频率的公式为：</p><p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p><script type="math/tex; mode=display">f_{out} = \frac {f_c*M} {2^N} \\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)\\ \Delta f = \frac {f_c} {2^N}\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p><script type="math/tex; mode=display">P_{off} = \frac {phase*(2^{N}-1)} {360°}\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1)，也可以不减。只需要看P_{off}是不是直接输出值)</script><p><strong>注意点：</strong>为了使</p><p>10M信号发生器相关计算</p><p>已知系统时钟为50M，</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/FPGA/">FPGA</category>
       
       
       
-      <comments>http://example.com/2021/12/13/FPGA/DDS/#disqus_thread</comments>
+      <comments>http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/#disqus_thread</comments>
       
     </item>
     
