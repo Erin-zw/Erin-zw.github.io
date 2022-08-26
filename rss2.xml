@@ -210,12 +210,15 @@
       
         
         
-      <description>&lt;h2 id=&quot;为什么时域卷积频域就是相乘&quot;&gt;&lt;a href=&quot;#为什么时域卷积频域就是相乘&quot; class=&quot;headerlink&quot; title=&quot;为什么时域卷积频域就是相乘&quot;&gt;&lt;/a&gt;为什么时域卷积频域就是相乘&lt;/h2&gt;&lt;p&gt;​    一般教科书都是选择理论证明，但是如何直观去</description>
+      <description>&lt;p&gt;傅里叶级数（时域卷积频域相乘）&lt;/p&gt;
+&lt;p&gt;​    一般教科书都是选择理论证明，但是如何直观去理解呢。我们知道一个信号可以傅里叶变换分解后然后变成很多个不同频率正弦信号。&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+f(t)=\</description>
         
       
       
       
-      <content:encoded><![CDATA[<h2 id="为什么时域卷积频域就是相乘"><a href="#为什么时域卷积频域就是相乘" class="headerlink" title="为什么时域卷积频域就是相乘"></a>为什么时域卷积频域就是相乘</h2><p>​    一般教科书都是选择理论证明，但是如何直观去理解呢。我们知道一个信号可以傅里叶变换分解后然后变成很多个不同频率正弦信号。那个我们将两个信号去卷积，正弦信号卷积分配，不同频率的正弦信号卷积后为0（“正交”），那么就是相同频率的正弦信号相卷积，频率不变，辐值相乘。这在频域上就表现为相乘。</p><p>​    从知乎上看到的，写的很好，分享一下</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>傅里叶级数（时域卷积频域相乘）</p><p>​    一般教科书都是选择理论证明，但是如何直观去理解呢。我们知道一个信号可以傅里叶变换分解后然后变成很多个不同频率正弦信号。</p><script type="math/tex; mode=display">f(t)=\frac {a_0} {2} +\sum_{n=1}^{+\infty}a_ncos(n\omega_0 t)+b_nsin(n\omega_0 t)\\a_0 =\frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)dt \ \ \ \ \ a_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)cos(n\omega_0t)dt\ \ \ \ \b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script><p>我们将两个信号去卷积，正弦信号卷积分配，不同频率的正弦信号卷积后为0（“正交”）.</p><p>那么就是相同频率的正弦信号相卷积，频率不变，辐值相乘。</p><p>而频域就是不同频率分量的相对大小，因此这在频域上就表现为相乘。</p><p>​    从知乎上看到的，写的很好，分享一下</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/%E4%BF%A1%E5%8F%B7/">信号</category>
