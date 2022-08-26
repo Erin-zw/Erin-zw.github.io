@@ -198,105 +198,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/" class="post-title-link" itemprop="url">广播</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-17 11:19:04" itemprop="dateCreated datePublished" datetime="2021-09-17T11:19:04+08:00">2021-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-18 19:59:41" itemprop="dateModified" datetime="2021-09-18T19:59:41+08:00">2021-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>889</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="广播介绍"><a href="#广播介绍" class="headerlink" title="广播介绍"></a>广播介绍</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">M = np.ones((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(M+a)个一维数组就被扩展或者广播了。它沿着第二个维度扩展，扩展到匹配 M 数组的形状</span><br><span class="line">b = np.arange(<span class="number">3</span>)[:,np.newaxis]</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(a+b)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]]</span><br><span class="line">[[<span class="number">0</span>]</span><br><span class="line"> [<span class="number">1</span>]</span><br><span class="line"> [<span class="number">2</span>]]</span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
-<p><img src="/images/numpy/广播/1.png" style="zoom:67%;"></p>
-<p>浅色的盒子表示广播的值。同样需要注意的是，这个额外的内存并没有 在实际操作中进行分配，但是这样的想象方式更方便我们从概念上理解。</p>
-<p>以下属于不兼容的情况：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">M = np.ones((<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line">a = np.arange(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(M+a)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">    <span class="built_in">print</span>(M+a)</span><br><span class="line">ValueError: operands could <span class="keyword">not</span> be broadcast together <span class="keyword">with</span> shapes (<span class="number">3</span>,<span class="number">2</span>) (<span class="number">3</span>,)</span><br></pre></td></tr></table></figure>
-<h2 id="广播实际应用"><a href="#广播实际应用" class="headerlink" title="广播实际应用"></a>广播实际应用</h2><h3 id="数组归一化处理"><a href="#数组归一化处理" class="headerlink" title="数组归一化处理"></a>数组归一化处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.random.random((<span class="number">10</span>, <span class="number">3</span>))<span class="comment">#均匀分布的10*3数组</span></span><br><span class="line">Xmean = X.mean(<span class="number">0</span>)<span class="comment">#将列维度聚合求均值</span></span><br><span class="line"><span class="built_in">print</span>(X,Xmean)</span><br><span class="line">X_centered = X - Xmean<span class="comment">#广播实现归一化</span></span><br><span class="line"><span class="built_in">print</span>(X_centered)</span><br><span class="line"><span class="built_in">print</span>(X_centered.mean(<span class="number">0</span>))<span class="comment">#验证是否归一化</span></span><br></pre></td></tr></table></figure>
-<h3 id="画一个二维函数"><a href="#画一个二维函数" class="headerlink" title="画一个二维函数"></a>画一个二维函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)</span><br><span class="line">y = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)[:, np.newaxis]</span><br><span class="line">z = np.sin(x) ** <span class="number">10</span> + np.cos(<span class="number">10</span> + y * x) * np.cos(x)</span><br><span class="line">plt.imshow(z, origin=<span class="string">&#x27;lower&#x27;</span>, extent=[<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">5</span>],cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line">plt.colorbar()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/images/numpy/广播/2.png" style="zoom:67%;"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/numpy/%E8%81%9A%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1325,6 +1226,191 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/numpy/%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/numpy/%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">创建数组</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-08 23:20:38" itemprop="dateCreated datePublished" datetime="2021-09-08T23:20:38+08:00">2021-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-12 21:00:21" itemprop="dateModified" datetime="2021-09-12T21:00:21+08:00">2021-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h2><h3 id="列表创建数组"><a href="#列表创建数组" class="headerlink" title="列表创建数组"></a>列表创建数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">4.3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>])</span><br><span class="line">b = np.array(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="comment">#[1.  4.3 2.  5.  3. ]</span></span><br><span class="line"><span class="comment">#[1 2 3 4 5]</span></span><br></pre></td></tr></table></figure>
+<p>np.array用于从列表创建数组，Numpy要求数组数据类型一致，如果类型不匹配，向上转换。</p>
+<p>如果希望设置数组数据类型，可以使用dtype关键字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">4.3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>],dtype = <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[1.  4.3 2.  5.  3. ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="列表二维数组"><a href="#列表二维数组" class="headerlink" title="列表二维数组"></a>列表二维数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="built_in">range</span>(i,i+<span class="number">3</span>) <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[[2 3 4]</span></span><br><span class="line"><span class="comment"># [4 5 6]</span></span><br><span class="line"><span class="comment"># [6 7 8]]</span></span><br></pre></td></tr></table></figure>
+<h2 id="从头创建数组"><a href="#从头创建数组" class="headerlink" title="从头创建数组"></a>从头创建数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">//创建长度为<span class="number">10</span>的数组，数值都为零</span><br><span class="line">a = np.zeros(<span class="number">10</span>,dtype = <span class="string">&#x27;int&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[0 0 0 0 0 0 0 0 0 0]</span></span><br><span class="line"></span><br><span class="line">//创建数组为<span class="number">3</span>*<span class="number">5</span>的浮点型数组，数组的值都是<span class="number">1</span></span><br><span class="line">b = np.ones((<span class="number">3</span>,<span class="number">5</span>),dtype = <span class="string">&#x27;float&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="comment">#[[1. 1. 1. 1. 1.]</span></span><br><span class="line"><span class="comment"># [1. 1. 1. 1. 1.]</span></span><br><span class="line"><span class="comment"># [1. 1. 1. 1. 1.]]</span></span><br><span class="line"></span><br><span class="line">//创建数组为<span class="number">3</span>*<span class="number">5</span>的浮点型数组，数组的值都是<span class="number">1</span></span><br><span class="line">c = np.full((<span class="number">3</span>,<span class="number">5</span>),<span class="number">3.14</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="comment">#[[3.14 3.14 3.14 3.14 3.14]</span></span><br><span class="line"><span class="comment"># [3.14 3.14 3.14 3.14 3.14]</span></span><br><span class="line"><span class="comment"># [3.14 3.14 3.14 3.14 3.14]]</span></span><br><span class="line"></span><br><span class="line">//创建步进为<span class="number">2</span>的线性序列，与<span class="built_in">range</span>类似</span><br><span class="line">d = np.arange(<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"><span class="comment">#[ 0  2  4  6  8 10 12 14 16 18]</span></span><br><span class="line"></span><br><span class="line">//创建一个五元素数组，这五个书均匀分配到<span class="number">0</span>-<span class="number">1</span></span><br><span class="line">e = np.linspace(<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"><span class="comment">#[0.   0.25 0.5  0.75 1.  ]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、在<span class="number">0</span>~<span class="number">1</span>均匀分布的随机数组成的数组</span><br><span class="line">f = np.random.random((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(f)</span><br><span class="line"><span class="comment">#[[0.75927059 0.26065617 0.7533685 ]</span></span><br><span class="line"><span class="comment"># [0.89489277 0.1897646  0.0139238 ]</span></span><br><span class="line"><span class="comment"># [0.92145445 0.00646267 0.29805975]]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、均值为<span class="number">0</span>、方差为<span class="number">1</span>的正态分布的随机数数组</span><br><span class="line">g = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(g)</span><br><span class="line"><span class="comment">#[[ 1.25772902  0.00477293  1.32098154]</span></span><br><span class="line"><span class="comment"># [-0.53031544 -0.70725436  0.85319681]</span></span><br><span class="line"><span class="comment"># [ 0.33023376 -1.35357557 -0.96342333]]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、[<span class="number">0</span>, <span class="number">10</span>)区间的随机整型数组</span><br><span class="line">h = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(h)</span><br><span class="line"><span class="comment">#[[4 3 7]</span></span><br><span class="line"><span class="comment"># [1 2 6]</span></span><br><span class="line"><span class="comment"># [2 7 0]]</span></span><br><span class="line">            </span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的单位矩阵</span><br><span class="line">i = np.eye(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line"><span class="comment">#[[1. 0. 0.]</span></span><br><span class="line"><span class="comment"># [0. 1. 0.]</span></span><br><span class="line"><span class="comment"># [0. 0. 1.]]</span></span><br><span class="line">            </span><br><span class="line">//创建一个由<span class="number">3</span>个整型数组成的未初始化的数组，数组的值是内存空间中的任意值</span><br><span class="line">j = np.empty(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(j)</span><br><span class="line"><span class="comment">#[1. 1. 1.]</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool_</td>
+<td>布尔值（真、True 或假、False），用一个字节存储</td>
+</tr>
+<tr>
+<td>int_</td>
+<td>默认整型（类似于 C 语言中的 long，通常情况下是 int64 或 int32）</td>
+</tr>
+<tr>
+<td>inc</td>
+<td>同 C 语言的 int 相同（通常是 int32 或 int64）</td>
+</tr>
+<tr>
+<td>intp</td>
+<td>用作索引的整型（和 C 语言的 ssize_t 相同，通常情况下是 int32 或 int64）</td>
+</tr>
+<tr>
+<td>int8</td>
+<td>字节（byte，范围从–128 到 127）</td>
+</tr>
+<tr>
+<td>int16</td>
+<td>整型（范围从–32768 到 32767）</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>整型（范围从–2147483648 到 2147483647）</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>整型（范围从–9223372036854775808 到 9223372036854775807）</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>无符号整型（范围从 0 到 255)</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>无符号整型（范围从 0 到 65535）</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>无符号整型（范围从 0 到 4294967295）</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>无符号整型（范围从 0 到 18446744073709551615）</td>
+</tr>
+<tr>
+<td>float_</td>
+<td>float64 的简化形式</td>
+</tr>
+<tr>
+<td>float16</td>
+<td>半精度浮点型：符号比特位，5 比特位指数（exponent），10 比特位尾数 （mantissa）</td>
+</tr>
+<tr>
+<td>float32</td>
+<td>单精度浮点型：符号比特位，8 比特位指数，23 比特位尾数</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>双精度浮点型：符号比特位，11 比特位指数，52 比特位尾数</td>
+</tr>
+<tr>
+<td>complex_</td>
+<td>complex128 的简化形式</td>
+</tr>
+<tr>
+<td>complex64</td>
+<td>复数，由两个 32 位浮点数表示</td>
+</tr>
+<tr>
+<td>complex128</td>
+<td>复数，由两个 64 位浮点数表示</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1396,14 +1482,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1460,12 +1546,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">119k</span>
+    <span title="站点总字数">115k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">1:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

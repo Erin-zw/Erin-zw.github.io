@@ -198,108 +198,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E4%BD%8D%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/24/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E4%BD%8D%E6%95%B0/" class="post-title-link" itemprop="url">单片机位数</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-24 00:52:36 / 修改时间：00:55:57" itemprop="dateCreated datePublished" datetime="2021-08-24T00:52:36+08:00">2021-08-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>569</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="位数定义"><a href="#位数定义" class="headerlink" title="位数定义"></a>位数定义</h3><p>32位单片机的32位是指单片机的“字长”，也就是一次运算中参与运算的数据长度，这个位是指二进制位。</p>
-<ul>
-<li><p>如果总线宽度与CPU一次处理的数据宽度相同，则这个宽度就是所说的单片机位数。</p>
-</li>
-<li><p>如果总线宽度与CPU一次处理的数据宽度不同，总线宽度小于CPU一次处理的数据宽度，则以CPU的数据宽度定义单片机的位数，但称为准多少位。比如某CPU是16位但总线是8位，所以它是准16位。</p>
-</li>
-</ul>
-<h3 id="位数影响"><a href="#位数影响" class="headerlink" title="位数影响"></a>位数影响</h3><p>单片机位数与单片机的性能密切相关，通常32位机的性能要高于16位机，而16位机的性能又要高于8位机。为什么会这样呢？</p>
-<ul>
-<li><p>位数不同，运算效率不同。对于8位机而言，当某个运算的结果或者中间值大于255时，如100+200=300这样的运算，它不能一次完成。因此，要对这样的一个式子进行运算，就要编写一段程序，将运算分步完成，最后合成起来得到一个正确的结果。而如果采用16位单片机来运算的话，那么一次运算就够了，显然分步完成所需要的时间要远远大于单步完成所需要的时间。</p>
-</li>
-<li><p>商业因素。通常运算能力越高，表示这个单片机性能越强，当然，价格高一些人们也可以接受，有了价格空间，生产商通常都会在这些芯片中提供更多的其他的功能，使得芯片的整体性能得到更大的提升。</p>
-</li>
-</ul>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>8位单片机： 80C51系列，PIC系列，AVR系列</p>
-<p>16位单片机：80C196、MSP430系列</p>
-<p>32位单片机：ARM系列</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/23/C/%E5%86%8D%E8%B0%88getchar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1730,6 +1628,128 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/09/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/09/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/" class="post-title-link" itemprop="url">RTT线程建立</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-09 22:44:53" itemprop="dateCreated datePublished" datetime="2021-08-09T22:44:53+08:00">2021-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-02 10:45:04" itemprop="dateModified" datetime="2021-09-02T10:45:04+08:00">2021-09-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">嵌入式操作系统</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
+<p>而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。</p>
+<h2 id="线程栈"><a href="#线程栈" class="headerlink" title="线程栈"></a>线程栈</h2><p>在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里面一段连续的存储空间。栈的大小一般在启动文件或者链接脚本指定，最后由C库函数_main进行初始化。</p>
+<p>而在多线程系统中，每个线程都是独立的，互不干扰，所以要为每个线程分配独立的栈空间。有多少个线程就需要定义多少个栈。    </p>
+<p>定义<strong>线程栈</strong>一般格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALIGN(RT_ALIGN_SIZE)<span class="comment">//ALIGN是一个带参数宏在rtdef.h文件中定义，RT_ALIGN_SIZE在rtconfig.h文件中定义，表示多少字节对齐，默认为4</span></span><br><span class="line"><span class="comment">/*定义线程栈*/</span></span><br><span class="line"><span class="keyword">rt_uint8_t</span> rt_flag1_thread_stack[<span class="number">512</span>];<span class="comment">//RTT数据类型重定义，在rtdef.h文件中</span></span><br><span class="line"><span class="keyword">rt_uint8_t</span> rt_flag2_thread_stack[<span class="number">512</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="线程入口函数"><a href="#线程入口函数" class="headerlink" title="线程入口函数"></a>线程入口函数</h2><p>线程是一个独立的函数，函数主体无限循环且不能返回。</p>
+<p><strong>线程函数</strong>声明一般格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">thread_entry</span><span class="params">(<span class="keyword">void</span> *parg)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* 线程主体，无限循环且不能返回 */</span></span><br><span class="line">	<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">	<span class="comment">/* 线程主体代码 */</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="线程控制块"><a href="#线程控制块" class="headerlink" title="线程控制块"></a>线程控制块</h2><p>在裸机系统中，程序的主体是 CPU 按照顺序执行的。而在多线程系统中，线程的执行 是由系统调度的。为了顺利调度，为每个线程定义了一个线程控制块，相当于线程的身份证。线程控制块里面包含了线程的所有信息，包括线程的栈指针，线程名称，线程的形参等等。定义一个线程控制块需要一个新的数据类型，这个数据类型定义在rtdef.h文件中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">void</span>        *sp;	          <span class="comment">/* 线程栈指针 */</span></span><br><span class="line">	<span class="keyword">void</span>        *entry;	          <span class="comment">/* 线程入口地址 */</span></span><br><span class="line">	<span class="keyword">void</span>        *parameter;	      <span class="comment">/* 线程形参 */</span>	</span><br><span class="line">	<span class="keyword">void</span>        *stack_addr;      <span class="comment">/* 线程栈起始地址 */</span></span><br><span class="line">	<span class="keyword">rt_uint32_t</span> stack_size;       <span class="comment">/* 线程栈大小，单位为字节 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">rt_list_t</span>   tlist;            <span class="comment">/* 线程链表节点 */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">rt_thread_t</span>;</span></span><br></pre></td></tr></table></figure>
+<h2 id="线程初始化函数"><a href="#线程初始化函数" class="headerlink" title="线程初始化函数"></a>线程初始化函数</h2><p>线程的栈，线程的函数实体，线程的控制块最终需要联系起来才能由系统进行统一调度。那么这个联系的工作就由线程初始化函数 rt_thread_init()来实现。该函数在thread.c文件中定义，在 rtthread.h 中声明，所有跟线程相关的函数都在这个文件定义。</p>
+<p>函数遵循以小写rt开头命名表明这是一个外部函数可供调用，以_rt开头表明是一个内部函数只能由RTT内部使用。</p>
+<p>函数定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">rt_err_t</span> <span class="title">rt_thread_init</span><span class="params">(struct rt_thread *thread,<span class="comment">//线程控制块指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span> (*entry)(<span class="keyword">void</span> *parameter),<span class="comment">//entry是线程函数名，形参是一个函数指针，可以看C语言回调函数，此处就是一个回调函数的使用，可以加&amp;也可以不加</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span>             *parameter,<span class="comment">//线程形参，传递线程参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span>             *stack_start,<span class="comment">//线程栈起始地址</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">rt_uint32_t</span>       stack_size)</span><span class="comment">//线程栈大小，单位为字节</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	rt_list_init(&amp;(thread-&gt;tlist));<span class="comment">//初始化链表节点</span></span><br><span class="line">	</span><br><span class="line">	thread-&gt;entry = (<span class="keyword">void</span> *)entry;<span class="comment">//将线程入口（函数起始地址）保存到线程控制块的entry成员</span></span><br><span class="line">	thread-&gt;parameter = parameter;<span class="comment">//将线程入口形参保存到线程控制块的 parameter 成员中</span></span><br><span class="line"></span><br><span class="line">	thread-&gt;stack_addr = stack_start;<span class="comment">//将线程栈起始地址保存到线程控制块的 stack_start 成员中</span></span><br><span class="line">	thread-&gt;stack_size = stack_size;<span class="comment">//将线程栈起大小保存到线程控制块的 stack_size 成员中</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 初始化线程栈，并返回线程栈指针 */</span></span><br><span class="line">	thread-&gt;sp = (<span class="keyword">void</span> *)rt_hw_stack_init( thread-&gt;entry, </span><br><span class="line">		                                   thread-&gt;parameter,</span><br><span class="line">							               (<span class="keyword">void</span> *)((<span class="keyword">char</span> *)thread-&gt;stack_addr + thread-&gt;stack_size - <span class="number">4</span>) );</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> RT_EOK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链表相关操作"><a href="#链表相关操作" class="headerlink" title="链表相关操作"></a>链表相关操作</h3><h4 id="定义链表节点数据类型"><a href="#定义链表节点数据类型" class="headerlink" title="定义链表节点数据类型"></a>定义链表节点数据类型</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">next</span>;</span>              <span class="comment">/* 指向后一个节点 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">prev</span>;</span>              <span class="comment">/* 指向前一个节点 */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> <span class="title">rt_list_t</span>;</span></span><br></pre></td></tr></table></figure>
+<p>双向链表相关操作函数均在rtservice.h函数中。</p>
+<h4 id="初始化链表节点"><a href="#初始化链表节点" class="headerlink" title="初始化链表节点"></a>初始化链表节点</h4><p>初始化节点就是节点的next和pre指向节点本身。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_init</span><span class="params">(<span class="keyword">rt_list_t</span> *l)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    l-&gt;next = l-&gt;prev = l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="在双向链表表头后面插入一个节点"><a href="#在双向链表表头后面插入一个节点" class="headerlink" title="在双向链表表头后面插入一个节点"></a>在双向链表表头后面插入一个节点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_insert_after</span><span class="params">(<span class="keyword">rt_list_t</span> *l, <span class="keyword">rt_list_t</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    l-&gt;next-&gt;prev = n;</span><br><span class="line">    n-&gt;next = l-&gt;next;</span><br><span class="line"></span><br><span class="line">    l-&gt;next = n;</span><br><span class="line">    n-&gt;prev = l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9.jpg" style="zoom: 80%;"></p>
+<h4 id="从双向链表删除一个节点"><a href="#从双向链表删除一个节点" class="headerlink" title="从双向链表删除一个节点"></a>从双向链表删除一个节点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_remove</span><span class="params">(<span class="keyword">rt_list_t</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n-&gt;next-&gt;prev = n-&gt;prev;</span><br><span class="line">    n-&gt;prev-&gt;next = n-&gt;next;</span><br><span class="line"></span><br><span class="line">    n-&gt;next = n-&gt;prev = n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg" style="zoom:80%;"></p>
+<h3 id="rt-hw-stack-init-函数"><a href="#rt-hw-stack-init-函数" class="headerlink" title="rt_hw_stack_init()函数"></a>rt_hw_stack_init()函数</h3><p>详情见书35页，大致就是返回剩余栈的栈顶指针并且初始化已经使用过的栈。一句话说就是栈的初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">rt_uint8_t</span> *<span class="title">rt_hw_stack_init</span><span class="params">(<span class="keyword">void</span>       *tentry,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="keyword">void</span>       *parameter,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="keyword">rt_uint8_t</span> *stack_addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stack_frame</span> *<span class="title">stack_frame</span>;</span></span><br><span class="line">	<span class="keyword">rt_uint8_t</span>         *stk;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span>       i;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 获取栈顶指针</span></span><br><span class="line"><span class="comment">	 实际上我们看下面的一个图，栈是想低地址生长的，栈一开始是空的，所以栈顶地址就是下面这个*/</span></span><br><span class="line">	stk  = stack_addr + <span class="keyword">sizeof</span>(<span class="keyword">rt_uint32_t</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 让stk指针向下8字节对齐 </span></span><br><span class="line"><span class="comment">	总线宽度32位，一般4字节对齐足够了，但是由于要处理8位浮点数，所以进行8字节对齐，这里的所谓对齐实际上就是对地址进行倍数处理，让它为8的倍数，地址为8的倍数，也即是8字节对齐。*/</span></span><br><span class="line">	stk  = (<span class="keyword">rt_uint8_t</span> *)RT_ALIGN_DOWN((<span class="keyword">rt_uint32_t</span>)stk, <span class="number">8</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* stk指针继续向下移动sizeof(struct stack_frame)个偏移，即16个字，64个字节 */</span></span><br><span class="line">	stk -= <span class="keyword">sizeof</span>(struct stack_frame);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 将stk指针强制转化为stack_frame类型后存到stack_frame */</span></span><br><span class="line">    <span class="comment">//强制转换以后，stk指针就指向一个结构体，这个结构体是向上生长的</span></span><br><span class="line">	stack_frame = (struct stack_frame *)stk;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 以stack_frame为起始地址，将栈空间里面的sizeof(struct stack_frame)</span></span><br><span class="line"><span class="comment">	个内存初始化为0xdeadbeef */</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(struct stack_frame) / <span class="keyword">sizeof</span>(<span class="keyword">rt_uint32_t</span>); i ++)</span><br><span class="line">	&#123;</span><br><span class="line">			((<span class="keyword">rt_uint32_t</span> *)stack_frame)[i] = <span class="number">0xdeadbeef</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 初始化异常发生时自动保存的寄存器 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r0  = (<span class="keyword">unsigned</span> <span class="keyword">long</span>)parameter; <span class="comment">/* r0 : argument */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r1  = <span class="number">0</span>;                        <span class="comment">/* r1 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r2  = <span class="number">0</span>;                        <span class="comment">/* r2 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r3  = <span class="number">0</span>;                        <span class="comment">/* r3 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r12 = <span class="number">0</span>;                        <span class="comment">/* r12 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.lr  = <span class="number">0</span>;                        <span class="comment">/* lr */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.pc  = (<span class="keyword">unsigned</span> <span class="keyword">long</span>)tentry;    <span class="comment">/* entry point, pc */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.psr = <span class="number">0x01000000</span>L;              <span class="comment">/* PSR */</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 返回线程栈指针 ，也就是赋值初始化完以后的栈顶指针*/</span></span><br><span class="line">	<span class="keyword">return</span> stk;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/1.jpg" style="zoom: 67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/2.jpg" style="zoom:67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/3.jpg" style="zoom:67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/4.jpg" style="zoom:67%;"></p>
+<h4 id="RT-ALIGN-DOWN宏定义讲解"><a href="#RT-ALIGN-DOWN宏定义讲解" class="headerlink" title="RT_ALIGN_DOWN宏定义讲解"></a>RT_ALIGN_DOWN宏定义讲解</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">int</span>      <span class="keyword">uint32_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">short</span>    <span class="keyword">uint16_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">char</span>     <span class="keyword">uint8_t</span>  ;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_DOWN(size, align)      ((size) &amp; ~((align) - 1))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_SIZE                    (4)</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">uint32_t</span> a;</span><br><span class="line">   a = <span class="number">5</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,RT_ALIGN_DOWN(a,RT_ALIGN_SIZE));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述程序可以得到4 4 4 ，这表明这个宏定义作用是将不是RT_ALIGN_SIZE倍数的数，向下变成RT_ALIGN_SIZE倍数的数。至于原因就是说一个为4的倍数的RT_ALIGN_SIZE，它的二进制最后两位减去一以后一定是11.然后进行&amp;操作时就是一个向下取倍数的效果。</p>
+<h2 id="实现就绪列表"><a href="#实现就绪列表" class="headerlink" title="实现就绪列表"></a>实现就绪列表</h2>
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1801,14 +1821,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1865,12 +1885,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">119k</span>
+    <span title="站点总字数">115k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">1:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

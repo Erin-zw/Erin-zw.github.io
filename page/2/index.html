@@ -198,120 +198,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">Testbench文件编写方法</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-07 15:22:45" itemprop="dateCreated datePublished" datetime="2021-11-07T15:22:45+08:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:55" itemprop="dateModified" datetime="2021-12-15T21:40:55+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>转载：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46423500/article/details/113264878">https://blog.csdn.net/weixin_46423500/article/details/113264878</a></p>
-<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>testbench文件基本结构：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 仿真单位/仿真精度</span></span><br><span class="line"><span class="keyword">module</span> test_bench();</span><br><span class="line"><span class="comment">//通常 testbench没有输入与输出端口</span></span><br><span class="line">信号或变量定义声明</span><br><span class="line">使用<span class="keyword">initial</span>或<span class="keyword">always</span>语句产生激励波形</span><br><span class="line">例化设计模块</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="声明仿真精度和仿真单位"><a href="#声明仿真精度和仿真单位" class="headerlink" title="声明仿真精度和仿真单位"></a>声明仿真精度和仿真单位</h3><p>/#(延时时间)，#(10ns)代表延时10ns</p>
-<p>仿真精度就是说最低的延时精度，比如说<code>`timescale 1ns/1ns</code>，延时精度只能达到1ns</p>
-<p>如果想要延时10.001ns，就要把仿真精度改成1ps(1ns = 1000ps)。</p>
-<h3 id="定义模块名"><a href="#定义模块名" class="headerlink" title="定义模块名"></a>定义模块名</h3><p><code>module flow_led_tb();</code></p>
-<p>模块名的命名方式一般在被测模块名后面加上“ _ tb”，或者在被测模块名前面加上“tb_”，表示为哪个模块提供激励测试文件，通常激励文件不需要定义输入和输出端口。</p>
-<h3 id="信号或常量定义"><a href="#信号或常量定义" class="headerlink" title="信号或常量定义"></a>信号或常量定义</h3><p><strong>常量：</strong></p>
-<p> 代码中定义的常量有时需要频繁的修改，为了方便修改，可以把常量定义成参数的形式，定义参数的关键字为parameter，代码如下：</p>
-<p><code>parameter T = 20;</code></p>
-<p><strong>变量：</strong></p>
-<p>Verilog代码中，常用声明信号或变量的关键字为reg和wire，在initial语句或者always语句中使用的变量定义成reg类型，在assign语句或者用于连接被例化模块名的信号定义成wire类型，声明方法如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"><span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br></pre></td></tr></table></figure>
-<p><strong>使用initial或always语句产生激励波形：</strong><br> 产生时钟激励。代码表示每10ns（假设仿真单位是1ns），sys_clk的电平状态翻转一次，由于一个完整的时钟周期包括一个高电平和一个低电平，因此sys_clk的时钟周期为20ns，占空比为50%。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> #<span class="number">10</span> sys_clk = ~sys_clk;</span><br></pre></td></tr></table></figure>
-<p>如果要生成其它占空比时钟的话，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">#<span class="number">6</span> sys_clk = <span class="number">0</span>; #<span class="number">4</span> sys_clk = <span class="number">1</span>; <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>需要注意的是，在always语句中设置了sys_clk的时钟周期，并没有设置初始值，因此sys_clk需要在initial语句中进行初始化。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"> sys_clk = <span class="number">1&#x27;b0</span>; <span class="comment">// 时钟初始值</span></span><br><span class="line">sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位初始值</span></span><br><span class="line"> #<span class="number">20</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="例化设计模块"><a href="#例化设计模块" class="headerlink" title="例化设计模块"></a>例化设计模块</h3><p>例化的设计模块是指被测模块，例化被测模块的目的是把被测模块和激励模块实例化起来，并且把被测模块的端口与激励模块的端口进行相应的连接，使得激励可以输入到被测模块。如果被测模块是由多个模块组成的，激励模块中只需要例化多个模块的顶层模块，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flow_led u0_flow_led (</span><br><span class="line"> <span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line"> <span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line"> <span class="variable">.led</span> (led )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="完整文件"><a href="#完整文件" class="headerlink" title="完整文件"></a>完整文件</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns // 定义仿真时间单位1ns和仿真时间精度为1ns</span></span><br><span class="line"> <span class="keyword">module</span> flow_led_tb(); <span class="comment">// 测试模块</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//parameter define</span></span><br><span class="line"><span class="keyword">parameter</span> T = <span class="number">20</span>; <span class="comment">// 时钟周期为20ns</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"> <span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br><span class="line"><span class="comment">//给输入信号初始值</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">	sys_clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位</span></span><br><span class="line">	<span class="variable">#(T+1)</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//50Mhz的时钟，周期则为1/50Mhz=20ns,所以每10ns，电平取反一次</span></span><br><span class="line"><span class="keyword">always</span> <span class="variable">#(T/2)</span> sys_clk = ~sys_clk;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化flow_led模块</span></span><br><span class="line">flow_led u0_flow_led (</span><br><span class="line">	<span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line">	<span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line">	<span class="variable">.led</span> (led )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1281,6 +1167,105 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/17/numpy/%E5%B9%BF%E6%92%AD/" class="post-title-link" itemprop="url">广播</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-17 11:19:04" itemprop="dateCreated datePublished" datetime="2021-09-17T11:19:04+08:00">2021-09-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-18 19:59:41" itemprop="dateModified" datetime="2021-09-18T19:59:41+08:00">2021-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>889</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="广播介绍"><a href="#广播介绍" class="headerlink" title="广播介绍"></a>广播介绍</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">M = np.ones((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(M+a)个一维数组就被扩展或者广播了。它沿着第二个维度扩展，扩展到匹配 M 数组的形状</span><br><span class="line">b = np.arange(<span class="number">3</span>)[:,np.newaxis]</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(a+b)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span>]]</span><br><span class="line">[[<span class="number">0</span>]</span><br><span class="line"> [<span class="number">1</span>]</span><br><span class="line"> [<span class="number">2</span>]]</span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+<p><img src="/images/numpy/广播/1.png" style="zoom:67%;"></p>
+<p>浅色的盒子表示广播的值。同样需要注意的是，这个额外的内存并没有 在实际操作中进行分配，但是这样的想象方式更方便我们从概念上理解。</p>
+<p>以下属于不兼容的情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">M = np.ones((<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line">a = np.arange(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(M+a)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">    <span class="built_in">print</span>(M+a)</span><br><span class="line">ValueError: operands could <span class="keyword">not</span> be broadcast together <span class="keyword">with</span> shapes (<span class="number">3</span>,<span class="number">2</span>) (<span class="number">3</span>,)</span><br></pre></td></tr></table></figure>
+<h2 id="广播实际应用"><a href="#广播实际应用" class="headerlink" title="广播实际应用"></a>广播实际应用</h2><h3 id="数组归一化处理"><a href="#数组归一化处理" class="headerlink" title="数组归一化处理"></a>数组归一化处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.random.random((<span class="number">10</span>, <span class="number">3</span>))<span class="comment">#均匀分布的10*3数组</span></span><br><span class="line">Xmean = X.mean(<span class="number">0</span>)<span class="comment">#将列维度聚合求均值</span></span><br><span class="line"><span class="built_in">print</span>(X,Xmean)</span><br><span class="line">X_centered = X - Xmean<span class="comment">#广播实现归一化</span></span><br><span class="line"><span class="built_in">print</span>(X_centered)</span><br><span class="line"><span class="built_in">print</span>(X_centered.mean(<span class="number">0</span>))<span class="comment">#验证是否归一化</span></span><br></pre></td></tr></table></figure>
+<h3 id="画一个二维函数"><a href="#画一个二维函数" class="headerlink" title="画一个二维函数"></a>画一个二维函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)</span><br><span class="line">y = np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>)[:, np.newaxis]</span><br><span class="line">z = np.sin(x) ** <span class="number">10</span> + np.cos(<span class="number">10</span> + y * x) * np.cos(x)</span><br><span class="line">plt.imshow(z, origin=<span class="string">&#x27;lower&#x27;</span>, extent=[<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">5</span>],cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line">plt.colorbar()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/numpy/广播/2.png" style="zoom:67%;"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1352,14 +1337,14 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1416,12 +1401,12 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">119k</span>
+    <span title="站点总字数">115k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">1:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
