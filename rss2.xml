@@ -9,23 +9,44 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Sat, 20 Aug 2022 11:36:12 GMT</pubDate>
+    <pubDate>Fri, 09 Sep 2022 01:20:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>强化专题一（信号计算）</title>
-      <link>http://example.com/2022/08/20/%E4%BF%A1%E5%8F%B7/%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/</link>
-      <guid>http://example.com/2022/08/20/%E4%BF%A1%E5%8F%B7/%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/</guid>
-      <pubDate>Sat, 20 Aug 2022 11:35:05 GMT</pubDate>
+      <title></title>
+      <link>http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/</link>
+      <guid>http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/</guid>
+      <pubDate>Fri, 09 Sep 2022 01:03:31 GMT</pubDate>
       
       
       
       
-      <category domain="http://example.com/categories/%E4%BF%A1%E5%8F%B7/">信号</category>
+      
+      
+      <comments>http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/</link>
+      <guid>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/</guid>
+      <pubDate>Fri, 26 Aug 2022 02:17:43 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。&lt;/p&gt;
+</description>
+        
       
       
       
-      <comments>http://example.com/2022/08/20/%E4%BF%A1%E5%8F%B7/%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/#disqus_thread</comments>
+      <content:encoded><![CDATA[<p>首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。</p>]]></content:encoded>
+      
+      
+      
+      
+      <comments>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/#disqus_thread</comments>
       
     </item>
     
@@ -225,30 +246,6 @@ f(t)=\</description>
       
       
       <comments>http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第二章</title>
-      <link>http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/</link>
-      <guid>http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/</guid>
-      <pubDate>Fri, 05 Nov 2021 13:35:49 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;语言成分&quot;&gt;&lt;a href=&quot;#语言成分&quot; class=&quot;headerlink&quot; title=&quot;语言成分&quot;&gt;&lt;/a&gt;语言成分&lt;/h1&gt;&lt;h2 id=&quot;关键字和标识符&quot;&gt;&lt;a href=&quot;#关键字和标识符&quot; class=&quot;headerlink&quot; title=&quot;关键字</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="语言成分"><a href="#语言成分" class="headerlink" title="语言成分"></a>语言成分</h1><h2 id="关键字和标识符"><a href="#关键字和标识符" class="headerlink" title="关键字和标识符"></a>关键字和标识符</h2><p><strong>关键字</strong>略。</p><p><strong>标识符命名规则</strong>：</p><ol><li>标识符必须以字母、下划线_ 、美元符$开头。</li><li>标识符其它部分可以是字母、下划线“_”、美元符“$”和数字的任意组合。</li><li>Java 标识符大小写敏感，且长度无限制。</li><li>不可以是Java的关键字。</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">合法的标识符：</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> _123 = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> $12aa = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> 变量<span class="number">1</span> = <span class="number">55</span>;</span><br><span class="line">不合法的标识符：</span><br><span class="line"><span class="keyword">int</span> 1a = <span class="number">3</span>; <span class="comment">//不能用数字开头</span></span><br><span class="line"><span class="keyword">int</span> a# = <span class="number">3</span>; <span class="comment">//不能包含#这样的特殊字符</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">int</span> = <span class="number">3</span>; <span class="comment">//不能使用关键字</span></span><br></pre></td></tr></table></figure><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><img src="\images\Java\第二章\1.jpg" style="zoom:67%;"></p><p><strong>注意：</strong><code>float f = 1.1;</code>是错误的，因为float类型要加上f或F后缀，不加默认就是double型。</p><h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><p><strong>数组(Array),类(class),接口(interface)。</strong></p><h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>,<span class="keyword">short</span>,<span class="keyword">char</span>—&gt; <span class="keyword">int</span> —&gt; <span class="keyword">long</span>—&gt; <span class="keyword">float</span> —&gt; <span class="keyword">double</span> </span><br><span class="line"><span class="comment">//容量从高到低。</span></span><br></pre></td></tr></table></figure><p><strong>转换规则：</strong></p><ul><li>不能对boolean类型进行类型转换。</li><li>不能把对象类型转换成不相关类的对象。</li><li>在把容量大的类型转换为容量小的类型时必须使用强制类型转换。</li><li>转换过程中可能导致溢出或损失精度，如<code>int i =128;   byte b = (byte)i;</code>，byte类型最大127，此时b为-128.</li><li>浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入</li></ul><h2 id="变量和常量"><a href="#变量和常量" class="headerlink" title="变量和常量"></a>变量和常量</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Java是一种强类型语言，每个变量都必须声明其类型。</p><p><strong>变量类型划分：</strong></p><ol><li><strong>局部</strong>变量：方法或语句块内部定义的变量。生命周期是 从声明位置开始到”}”为止。在使用前必须先声明和初始化（赋初值）</li><li><strong>实例</strong>变量：<strong>方法外部</strong>、<strong>类的内部</strong>定义的变 量。从属于对象，生命周期伴随对象始终。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初 始化值是16位的0，布尔型默认是false）</li><li><strong>静态</strong>变量：使用static定义。 从属于类，生命周期伴随类始终，从类加载到卸载。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初始化值是16位的0，布尔型默认是false）</li></ol><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>定义：<code>public static final double PI = 3.14;</code></p><p>其值无法改变，只能被初始化一次。常量的命名通常使用全大写，如果单词较多则使用下划线进行分隔。</p><h2 id="一些运算符"><a href="#一些运算符" class="headerlink" title="一些运算符"></a>一些运算符</h2><p><strong>&lt;&lt;：</strong>左移运算符（丢弃最高位，0补最低位）</p><p><strong>>&gt;：</strong>右移运算符（符号位不变，左边补上符号位）</p><p><strong>>&gt;&gt;：</strong>无符号移位运算符（无符号右移、忽略符号位扩展、0补最高位。无符号右移中的符号位也跟着变，<strong>无符号的意思是将符号位当作数字位看待</strong>。）</p><p>右移一位相当于除2取商。左移 一位相当于乘2。</p><h1 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h1><p>略</p><h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组为引用数据类型。相当于有一个指针值着吧。</p><h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p><strong>定义方法</strong>:<code>int x[] = new int[5];</code>或者<code>int x[]; x = new int[5];</code>或者<code>int x[] = &#123;1, 2, 3, 4, 5&#125;;</code></p><p><img src="\images\Java\第二章\2.jpg" style="zoom:67%;"></p><p><strong>for语句遍历：</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (类型 变量 : 数组)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> value : fib)<span class="comment">//类似py迭代器</span></span><br><span class="line"><span class="comment">//vaue获得fib数组每个元素，</span></span><br><span class="line"><span class="comment">//相当于fib[i]</span></span><br><span class="line">System.out.print(<span class="string">&quot; &quot;</span>+value);</span><br></pre></td></tr></table></figure><p>关于<strong>引用数据类型</strong>这一说：</p><p><img src="\images\Java\第二章\3.jpg" style="zoom:50%;"></p><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p><strong>定义方法：</strong><code>int mat[][] = new int[3][4];或者int mat[][] = &#123; &#123;1,2,3&#125;,&#123;4,5,6&#125; &#125;</code></p><p><img src="\images\Java\第二章\4.jpg" style="zoom:50%;"></p><p><img src="\images\Java\第二章\5.jpg" style="zoom:50%;"></p><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基本定义方法</span></span><br><span class="line">[修饰符…] 返回值类型 方法名([参数列表])</span><br><span class="line">&#123;</span><br><span class="line">语句序列;</span><br><span class="line">[<span class="keyword">return</span> [返回值]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p><img src="\images\Java\第二章\6.jpg" style="zoom:50%;"></p><p><strong>引用模型：</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String s1 = <span class="string">&quot;abcdef&quot;</span>;</span><br><span class="line">        String s2 = s1;</span><br><span class="line">        String s3 = <span class="keyword">new</span> String(s1);</span><br><span class="line">        System.out.println(s1 == s2);</span><br><span class="line">        System.out.println(s2.equals(s1));</span><br><span class="line">        System.out.println(s1 == s3);</span><br><span class="line">        System.out.println(s3.equals(s1));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#输出</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Java/">Java</category>
-      
-      
-      
-      <comments>http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/#disqus_thread</comments>
       
     </item>
     
