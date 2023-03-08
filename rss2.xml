@@ -9,8 +9,32 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Sun, 05 Mar 2023 13:52:00 GMT</pubDate>
+    <pubDate>Mon, 06 Mar 2023 14:55:55 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>dicom影像显示</title>
+      <link>http://example.com/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/</link>
+      <guid>http://example.com/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/</guid>
+      <pubDate>Mon, 06 Mar 2023 10:08:44 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;位图显示方法&quot;&gt;&lt;a href=&quot;#位图显示方法&quot; class=&quot;headerlink&quot; title=&quot;位图显示方法&quot;&gt;&lt;/a&gt;位图显示方法&lt;/h2&gt;&lt;p&gt;Windows位图有两种：&lt;strong&gt;DDB&lt;/strong&gt;以及&lt;strong&gt;DIB&lt;/strong</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="位图显示方法"><a href="#位图显示方法" class="headerlink" title="位图显示方法"></a>位图显示方法</h2><p>Windows位图有两种：<strong>DDB</strong>以及<strong>DIB</strong>。</p><p><strong>DDB</strong>中不包含调色板，通过硬件设备来显示图像，位图在内存中的位置和结构由硬件的驱动程序来管理,类似于MFC205中的Cbitmap类。由于不包含有调色板，图像的显示由硬件设备直接来实现，所以这种显示方式的速度非常快，与此同时，因为它的显示是依赖于设备的，所以在不同设备之间是不能够实现文件的兼容应用，从而决定了DDB的应用范围非常有限。</p><p><strong>DIB</strong>设备无关位图却克服了DDB的确定，它不再依赖于硬件设备，是一种外部图像格式，从而完全能够实现不同设备之间的文件兼容应用。由于DIB位图中包含了一个调色板，而图像中的像素值表示了对应于该调色板的查找值，虽然相对于DDB位图多了一项查找过程，但是，DIB位图实现了不同设备之间的兼容显示，当需要显示图像的时候，只需要通过像素值找到调色板中对应的颜色进行显示，而不在关心硬件设备是否支持图像显示，从而实现了独立于硬件设备，所以目前大多数应用的图像基本都属于DIB类型。Windows中所有的图像生成都是由图形设备接口GDI来管理的，GDI是通过应用高层的绘图函数来实现生成的图像的，正由于这种生成方式，所以无论何种硬件设备都能够生成同样的图形，因此GDI构成了Windows系统的核心部件。</p><h2 id="DICOM显示流程"><a href="#DICOM显示流程" class="headerlink" title="DICOM显示流程"></a>DICOM显示流程</h2><p>不同的操作系统中字节数据的排列顺序是不同的，一般主要有两种排列方式，即Big Endian和Little Endian。前者表示系统中的字节数据采用正常的顺序进行排列，而后者恰恰相反，采用高低字节调换的方式进行数据排列。通常情况下，在UNIX系统中采用正常顺序的Big Endian排列方式，而Windows中则采用髙低字节调换的Little Endian排列方式。</p><p>数据解析流程：</p><div id="flowchart-0" class="flow-chart"></div><p>DICOM-BMP显示流程：</p><div id="flowchart-1" class="flow-chart"></div><h2 id="图像标注"><a href="#图像标注" class="headerlink" title="图像标注"></a>图像标注</h2><p>做为医学图像显示系统，对图像中重点关注区域的加以标注是不可或缺的，可以辅助医生对其感兴趣区域进行锁定和定性分析。同时标记对医学教学也是非常有帮助的。本文中设计的对DICOM文件中图像的热点关注区域进行标注，并对所标注的轨迹坐标等信息进行读取和保存。对影像图像进行标记，针对影像图像可能涉及到很多部位，及不同的病状，本设计采用画线、圆形、矩形三种标记方式对其进行标记定位。</p><p>主要实现方法是通过调用Windows系统下的CClientDC类，以鼠标左键按下为坐标起点，以鼠标左键弹起为坐标终点，这样就能够画出标记线。</p><h2 id="图像的旋转和放大"><a href="#图像的旋转和放大" class="headerlink" title="图像的旋转和放大"></a>图像的旋转和放大</h2><p><strong>图像旋转</strong>就是以空间的某一点为原点，然后改变旋转角度，但是每一点的相对位置关系是不变的。从数学方法上来描述，图像的旋转就是建立一幅图像与其变换后的图像中所有像素点之间映射关系的函数:(x,y)=(X(u,v),Y(u,v)),(x,y)表示输入的图像素点的坐标，(u,v)表示输出的图像素点的坐标。x,y,u,v表示了输入图像与输出图像所有点的几何对应关系。图像的旋转计算方法为:假设在X-Y坐标体系中，将点(x,y)旋转角度θ，得到点(u,v)。</p><p>计算公式为：</p><script type="math/tex; mode=display">[u,v] = [x,y]\begin{bmatrix}cos\theta & -sin\theta \\ sin\theta & sin\theta\end{bmatrix}</script><p><strong>图像放大</strong>可以更好的帮助医生诊断，其最简单的方法就是将像素放大，变换的公式为：</p><script type="math/tex; mode=display">u = r_x * x\\v = r_y * y</script><p>其中<code>r_x</code>为X方向的放大比例，7；为y方向的放大比例，然后将变换后的像素排列在的阵列中，但是这样的放大只是像素坐标的间隔变大。所以这样的放大以后会产生马赛克，为了解决这一问题，通常采用插值法来实现像素的平稳过度。</p><p><img src="\images\毕设\dicom标准\6.jpg" style="zoom:50%;"></p><p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始op=>operation: 读取数据cond=>condition: Big Endian?op2=>operation: 数据处理op3=>operation: 字节交换e=>end: 结束st->op->cond->op2->econd(yes)->op2cond(no)->op3op3->op2</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 开始e=>end: 结束op1=>operation: 打开文件op2=>operation: 提取传输输入法op3=>operation: 数据解析op4=>operation: 获取图像数据信息op5=>operation: 数据解析op6=>operation: 调用相应解压模块op7=>operation: 获取图像数据op8=>operation: 图像数据转换为8位数据op9=>operation: DIB显示cond1=>condition: DICOM？cond2=>condition: 图像是否为压缩数据？st->op1->cond1(yes)->op2->op3->op4->op5->cond2(no)->op7->op8->op9->econd1(no)->econd2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script></p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/">毕业设计</category>
+      
+      
+      
+      <comments>http://example.com/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>dicom图像灰度理解</title>
@@ -49,7 +73,7 @@
       
       
       
-      <content:encoded><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p><h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p><ul><li><strong>窗宽：</strong>window witdh (ww) 图像数据的显示范围</li><li><strong>窗位：</strong>window level (wl) 图像数据显示的中心值</li></ul><p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p><p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p><p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p><script type="math/tex; mode=display">f(x) =\left \{ \begin{array}{c}0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ \frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}\end{array}\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p><h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p><p>注意这里的单位是Hu, 是CT的单位，使用发明者豪斯费尔德（Hounsfield Unit）的首字母简称，范围是-1024-3071，用于衡量人体组织对X射线的吸收率，设定水的吸收率为0，骨的CT值为1000，空气的CT值为-1000。</p><p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>]]></content:encoded>
+      <content:encoded><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p><h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p><p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p><p>人体常见组织CT值：</p><p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p><h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p><ul><li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p><p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p></li><li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p><p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p></li></ul><p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p><p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p><p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p><script type="math/tex; mode=display">f(x) =\left \{ \begin{array}{c}0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ \frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}\end{array}\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p><h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p><p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/">毕业设计</category>
@@ -201,31 +225,6 @@
       
       
       <comments>http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>测试</title>
-      <link>http://example.com/2021/11/24/Matlab/Test/</link>
-      <guid>http://example.com/2021/11/24/Matlab/Test/</guid>
-      <pubDate>Wed, 24 Nov 2021 14:58:06 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h4 id=&quot;复数矩阵的转置、共轭、共轭转置&quot;&gt;&lt;a href=&quot;#复数矩阵的转置、共轭、共轭转置&quot; class=&quot;headerlink&quot; title=&quot;复数矩阵的转置、共轭、共轭转置&quot;&gt;&lt;/a&gt;复数矩阵的转置、共轭、共轭转置&lt;/h4&gt;&lt;p&gt;conj是共轭运算&lt;/p&gt;
-&lt;scr</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h4 id="复数矩阵的转置、共轭、共轭转置"><a href="#复数矩阵的转置、共轭、共轭转置" class="headerlink" title="复数矩阵的转置、共轭、共轭转置"></a>复数矩阵的转置、共轭、共轭转置</h4><p>conj是共轭运算</p><script type="math/tex; mode=display">A = \begin{bmatrix}2+3i & 3-4i \\ 5+i & 7-2i \end{bmatrix}\ \\conj(A) = \begin{bmatrix}2-3i & 3+4i \\ 5-i & 7+2i\end{bmatrix}\ \\A.' = \begin{bmatrix}2+3i & 5+i \\ 3-4i & 7-2i \end{bmatrix}\ \\conj(A.') = A' = \begin{bmatrix}2-3i & 5-i \\ 3+4i & 7+2i \end{bmatrix}</script>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/Matlab/">Matlab</category>
-      
-      
-      
-      <comments>http://example.com/2021/11/24/Matlab/Test/#disqus_thread</comments>
       
     </item>
     

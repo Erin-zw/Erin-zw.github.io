@@ -198,6 +198,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/" class="post-title-link" itemprop="url">10M信号发生器</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-13 23:03:04" itemprop="dateCreated datePublished" datetime="2021-12-13T23:03:04+08:00">2021-12-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-26 23:58:27" itemprop="dateModified" datetime="2021-12-26T23:58:27+08:00">2021-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>755</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>DDS简介</p>
+<p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p>
+<p>DDS原理</p>
+<p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p>
+<p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p>
+<p>在DDS模块中，输出频率的公式为：</p>
+<p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p>
+<script type="math/tex; mode=display">
+f_{out} = \frac {f_c*M} {2^N} 
+\\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)
+\\ \Delta f = \frac {f_c} {2^N}
+\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p>
+<script type="math/tex; mode=display">
+P_{off} = \frac {phase*(2^{N}-1)} {360°}
+\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1)，也可以不减。只需要看P_{off}是不是直接输出值)</script><p><strong>注意点：</strong>为了使</p>
+<p>10M信号发生器相关计算</p>
+<p>已知系统时钟为50M，</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/24/Matlab/Test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1361,102 +1469,10 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/FPGA/Basics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/25/FPGA/Basics/" class="post-title-link" itemprop="url">Basic</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-25 17:57:52" itemprop="dateCreated datePublished" datetime="2021-09-25T17:57:52+08:00">2021-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:42" itemprop="dateModified" datetime="2021-12-15T21:40:42+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>136</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Wire"><a href="#Wire" class="headerlink" title="Wire"></a>Wire</h2><p>wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left = right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1524,7 +1540,7 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1588,12 +1604,12 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">126k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

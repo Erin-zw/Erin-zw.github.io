@@ -22,19 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="问题普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。 窗位窗宽调节定义： 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值逐段映射为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。">
+  <meta name="description" content="问题普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。 CT值定义是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。 CT 值是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dicom窗位和窗宽">
 <meta property="og:url" content="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="问题普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。 窗位窗宽调节定义： 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值逐段映射为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。">
+<meta property="og:description" content="问题普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。 CT值定义是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。 CT 值是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/毕设/dicom标准/5.jpg">
 <meta property="og:image" content="http://example.com/images/毕设/dicom标准/4.jpg">
 <meta property="article:published_time" content="2023-03-05T12:27:05.004Z">
-<meta property="article:modified_time" content="2023-03-05T15:40:32.570Z">
+<meta property="article:modified_time" content="2023-03-06T08:37:20.118Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/毕设/dicom标准/4.jpg">
+<meta name="twitter:image" content="http://example.com/images/毕设/dicom标准/5.jpg">
 
 <link rel="canonical" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/">
 
@@ -227,10 +228,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-05 20:27:05 / 修改时间：23:40:32" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
+              <time title="创建时间：2023-03-05 20:27:05" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-06 16:37:20" itemprop="dateModified" datetime="2023-03-06T16:37:20+08:00">2023-03-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -254,14 +261,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -274,10 +281,18 @@
 
       
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p>
+<h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p>
+<p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p>
+<p>人体常见组织CT值：</p>
+<p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p>
 <h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p>
 <ul>
-<li><strong>窗宽：</strong>window witdh (ww) 图像数据的显示范围</li>
-<li><strong>窗位：</strong>window level (wl) 图像数据显示的中心值</li>
+<li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p>
+<p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p>
+</li>
+<li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p>
+<p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p>
+</li>
 </ul>
 <p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p>
 <p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p>
@@ -292,7 +307,6 @@ f(x) =
 \end{array}
 \right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p>
 <h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p>
-<p>注意这里的单位是Hu, 是CT的单位，使用发明者豪斯费尔德（Hounsfield Unit）的首字母简称，范围是-1024-3071，用于衡量人体组织对X射线的吸收率，设定水的吸收率为0，骨的CT值为1000，空气的CT值为-1000。</p>
 <p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>
 
     </div>
@@ -442,7 +456,7 @@ f(x) =
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD%E8%B0%83%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">窗位窗宽调节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%AE%BD%E7%AA%97%E4%BD%8D%E9%80%89%E6%8B%A9"><span class="nav-number">3.</span> <span class="nav-text">窗宽窗位选择</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CT%E5%80%BC%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">CT值定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD%E8%B0%83%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">窗位窗宽调节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%AE%BD%E7%AA%97%E4%BD%8D%E9%80%89%E6%8B%A9"><span class="nav-number">4.</span> <span class="nav-text">窗宽窗位选择</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -458,7 +472,7 @@ f(x) =
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -522,12 +536,12 @@ f(x) =
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">126k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

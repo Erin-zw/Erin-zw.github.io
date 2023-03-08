@@ -198,6 +198,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/py/py%E5%9F%BA%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/06/py/py%E5%9F%BA%E6%9C%AC/" class="post-title-link" itemprop="url">python基础</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-06 00:50:03" itemprop="dateCreated datePublished" datetime="2021-08-06T00:50:03+08:00">2021-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-11 20:53:15" itemprop="dateModified" datetime="2021-09-11T20:53:15+08:00">2021-09-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>712</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h2><p>print函数接受多个字符串 ，字符串间逗号以空格代替</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;,&#x27;</span>,<span class="string">&#x27;ok?&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="number">100</span>+<span class="number">200</span>)</span><br><span class="line">//输出</span><br><span class="line">hello , ok?</span><br><span class="line"><span class="number">300</span></span><br></pre></td></tr></table></figure>
+<p>行连接，使用反斜杠</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x = 1+    \</span></span><br><span class="line"><span class="string">2+\</span></span><br><span class="line"><span class="string">    3&#x27;</span>)</span><br><span class="line"><span class="comment">#输出x = 1+    2+    3</span></span><br></pre></td></tr></table></figure>
+<p>在看一个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span>;<span class="built_in">print</span>(<span class="string">&#x27;x is&#x27;</span>,    x)</span><br><span class="line"><span class="comment">#输出x is 5</span></span><br></pre></td></tr></table></figure>
+<h2 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = (<span class="string">&#x27;input your name:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello,&#x27;</span>,name)</span><br></pre></td></tr></table></figure>
+<p>当然了括号内也可以不加字符串</p>
+<h2 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>字符串是以’ ‘或” “括起来的任意文本。</p>
+<p>若括号内既有’ ’又有” ”可以使用转义字符\,\n（换行）,\t（TAB)等都是转义字符，甚至\\也是，代表\。如下面一条语句若I’m的’不加转义字符\，则会导致报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;I\&#x27;m &quot;ok&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>这两条语句等价，’’’ ‘’’是允许多行字符串的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;f\n3\n4&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;&#x27;f</span></span><br><span class="line"><span class="string">3</span></span><br><span class="line"><span class="string">4&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>Py中可以在字符串前加入r默认字符串内不转义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">r&#x27;f\n3\n4\n&#x27;</span>)<span class="comment">#输出f\n3\n4\n</span></span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Py中字符串，数字都可以赋值给变量</p>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">9</span>/<span class="number">3</span>)<span class="comment">#3.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span>/<span class="number">3</span>)<span class="comment">#0.3333333333333333</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>//<span class="number">3</span>)<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">9</span>%<span class="number">3</span>)<span class="comment">#0</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/numpy/Ndarray%E5%AF%B9%E8%B1%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1478,121 +1586,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">attribute关键字</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-01 19:10:03" itemprop="dateCreated datePublished" datetime="2021-08-01T19:10:03+08:00">2021-08-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-24 02:24:39" itemprop="dateModified" datetime="2021-08-24T02:24:39+08:00">2021-08-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
-<h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))<span class="comment">//取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐。</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-<p>当aligned作用于变量时，其作用是告诉编译器为变量分配内存的时候，要分配在指定对齐的内存上.作用于变量之上不会改变变量的大小。   例如：int a <strong>attribute</strong>((aligned(16)));该变量a的内存起始地址为16的倍数。</p>
-<h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
-<li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong></p>
-<p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
-<p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
-<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
-<hr>
-<p>于是本文的大体意思就清晰了，__attribute__((section(\”section_name\”)))，其作用是将作用的函数或数据放入指定为\”section_name\”对应的段中。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1660,7 +1657,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1724,12 +1721,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">126k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
