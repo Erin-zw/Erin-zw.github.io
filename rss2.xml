@@ -9,11 +9,11 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Wed, 15 Mar 2023 14:51:03 GMT</pubDate>
+    <pubDate>Wed, 15 Mar 2023 14:52:51 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>基础学习二</title>
+      <title>三三三</title>
       <link>http://example.com/2023/03/15/C#%E5%AD%A6%E4%B9%A0/bucuo/</link>
       <guid>http://example.com/2023/03/15/C#%E5%AD%A6%E4%B9%A0/bucuo/</guid>
       <pubDate>Wed, 15 Mar 2023 14:50:43 GMT</pubDate>
@@ -21,12 +21,14 @@
         
         
       <description>&lt;p&gt;ttest&lt;/p&gt;
+&lt;p&gt;ttest&lt;/p&gt;
+&lt;p&gt;ttest&lt;/p&gt;
 </description>
         
       
       
       
-      <content:encoded><![CDATA[<p>ttest</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>ttest</p><p>ttest</p><p>ttest</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/C/">C#</category>
