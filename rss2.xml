@@ -9,8 +9,33 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Wed, 15 Mar 2023 14:36:09 GMT</pubDate>
+    <pubDate>Wed, 15 Mar 2023 14:51:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>基础学习二</title>
+      <link>http://example.com/2023/03/15/C#%E5%AD%A6%E4%B9%A0/bucuo/</link>
+      <guid>http://example.com/2023/03/15/C#%E5%AD%A6%E4%B9%A0/bucuo/</guid>
+      <pubDate>Wed, 15 Mar 2023 14:50:43 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;ttest&lt;/p&gt;
+</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>ttest</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/C/">C#</category>
+      
+      
+      
+      <comments>http://example.com/2023/03/15/C#%E5%AD%A6%E4%B9%A0/bucuo/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>基础学习二</title>
@@ -212,29 +237,6 @@
       
       
       <comments>http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/</link>
-      <guid>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/</guid>
-      <pubDate>Fri, 26 Aug 2022 02:17:43 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。&lt;/p&gt;
-</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。</p>]]></content:encoded>
-      
-      
-      
-      
-      <comments>http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/#disqus_thread</comments>
       
     </item>
     

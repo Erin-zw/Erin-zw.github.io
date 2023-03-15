@@ -198,6 +198,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/numpy/%E8%81%9A%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/17/numpy/%E8%81%9A%E5%90%88/" class="post-title-link" itemprop="url">聚合</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-17 10:49:40 / 修改时间：11:15:47" itemprop="dateCreated datePublished" datetime="2021-09-17T10:49:40+08:00">2021-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>711</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">L = np.random.random(<span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(np.<span class="built_in">sum</span>(L))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">45.0698150033394</span></span><br></pre></td></tr></table></figure>
+<h2 id="最大最小值"><a href="#最大最小值" class="headerlink" title="最大最小值"></a>最大最小值</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">big_array = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line"><span class="built_in">print</span>(np.<span class="built_in">min</span>(big_array), np.<span class="built_in">max</span>(big_array))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">2.0632153620026017e-06</span> <span class="number">0.9999991348477495</span></span><br></pre></td></tr></table></figure>
+<p>对于 min、max、sum 和其他 NumPy 聚合，一种更简洁的语法形式是数 组对象直接调用这些方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">big_array = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line"><span class="built_in">print</span>(big_array.<span class="built_in">min</span>(), big_array.<span class="built_in">max</span>(), big_array.<span class="built_in">sum</span>())</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">4.051526761639224e-06</span> <span class="number">0.9999997959904566</span> <span class="number">500274.7846662359</span></span><br></pre></td></tr></table></figure>
+<h2 id="多维度聚合"><a href="#多维度聚合" class="headerlink" title="多维度聚合"></a>多维度聚合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> numpy.core.arrayprint <span class="keyword">import</span> printoptions</span><br><span class="line">M = np.random.random((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="comment">#print(M)</span></span><br><span class="line"><span class="built_in">print</span>(M.<span class="built_in">sum</span>())</span><br><span class="line"><span class="built_in">print</span>(M.<span class="built_in">min</span>(axis=<span class="number">0</span>))<span class="comment">#每一列的最小值</span></span><br><span class="line"><span class="built_in">print</span>(M.<span class="built_in">max</span>(axis=<span class="number">1</span>))<span class="comment">#每一行的最小值</span></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">7.863562459365775</span></span><br><span class="line">[<span class="number">0.58394473</span> <span class="number">0.41008368</span> <span class="number">0.65217043</span> <span class="number">0.28077708</span>]</span><br><span class="line">[<span class="number">0.71819992</span> <span class="number">0.91296865</span> <span class="number">0.93953933</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/numpy/%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1321,122 +1411,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/08/py/%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-08 22:48:56" itemprop="dateCreated datePublished" datetime="2021-09-08T22:48:56+08:00">2021-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-09 22:17:21" itemprop="dateModified" datetime="2021-09-09T22:17:21+08:00">2021-09-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>函数用法如下，函数名就是一个指向函数对象的一个引用，可以把函数名称赋值给一个变量，相当于给这个函数起了一个别名。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n1 = <span class="number">255</span></span><br><span class="line">a = <span class="built_in">hex</span></span><br><span class="line"><span class="built_in">print</span>(a(n1))<span class="comment">#0xff</span></span><br></pre></td></tr></table></figure>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>定义一个函数，使用def关键字。如果想定义一个空函数，可以使用pass语句，如图中所示。pass语句也可以作为占位符，如图中所示。同样，可以使用isinstance函数检查输入参数进行参数检查，此函数返回值为布尔值。同时函数返回值用return。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(x,(<span class="built_in">int</span> ,<span class="built_in">float</span>)):</span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">&#x27;type error&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">60</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">18</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;teen&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;baby&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nop</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">nop()</span><br><span class="line">age(<span class="number">19</span>)</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">19</span>))</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">70</span>))</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">8</span>))</span><br><span class="line">age(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">teen</span><br><span class="line">teen</span><br><span class="line"><span class="literal">None</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">baby</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test2.py&quot;</span>, line <span class="number">17</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    age(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test2.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> age</span><br><span class="line">    <span class="keyword">raise</span> TypeError(<span class="string">&#x27;type error&#x27;</span>)</span><br><span class="line">TypeError: <span class="built_in">type</span> error</span><br></pre></td></tr></table></figure>
-<h2 id="返回多值"><a href="#返回多值" class="headerlink" title="返回多值"></a>返回多值</h2><p>返回多值实际上是还是一个值，只不过这个值的类型是元组tuple，并且按位赋值给了变量。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span>(<span class="params">x,y,step,angle = <span class="number">0</span></span>):</span></span><br><span class="line">    nx = x + step * math.cos(angle)</span><br><span class="line">    ny = y - step * math.sin(angle)</span><br><span class="line">    <span class="keyword">return</span> nx,ny</span><br><span class="line">x,y = move(<span class="number">100</span>,<span class="number">100</span>,<span class="number">60</span>,math.pi/<span class="number">6</span>)</span><br><span class="line">r = move(<span class="number">100</span>,<span class="number">100</span>,<span class="number">60</span>,math.pi/<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">151.96152422706632</span> <span class="number">70.0</span></span><br><span class="line">(<span class="number">151.96152422706632</span>, <span class="number">70.0</span>)</span><br><span class="line"><span class="number">151.96152422706632</span></span><br></pre></td></tr></table></figure>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>函数的参数可以使用默认参数，这样可以方便输入，当有参数一直是固定或者变化的场合很少时，就可以使用默认参数，默认参数是指在定义函数时就给参数赋一个值，这样调用时不需要在写出来，当然了如果输入参数不想是默认参数是可以改变输入。<strong>但是一般默认参数在必选参数后面，因为为了避免报错。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pow</span>(<span class="params">x,n = <span class="number">2</span></span>):</span></span><br><span class="line">    s = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        s *= x</span><br><span class="line">        n = n-<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(<span class="number">5</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<p>默认参数使用中的陷阱。实际上默认参数L也是一个变量它指向[ ]这个对象，每次调用函数时，如果改变了L的内容，下一次调用时，L的默认参数也会发生变化。所以记住默认参数必须是<strong>不可变对象</strong>，如图中所示使用None这个关键字。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_append</span>(<span class="params">L = []</span>):</span></span><br><span class="line">    L.append(<span class="string">&#x27;END&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br><span class="line"><span class="built_in">print</span>(m_append(),m_append(),m_append())</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">y_append</span>(<span class="params">L = <span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(<span class="string">&#x27;END&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br><span class="line"><span class="built_in">print</span>(y_append(),y_append(),y_append())</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>可变参数用处在于传入参数个数是可变的，比如一个函数参数个数不确定，会用list，tuple传入，但是可以在参数前加上符号，变量会自动变成tuple传给函数内部numbers，如果如下面tuple已被定义，则也可以用符号将其变成可变参数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span>(<span class="params">numbers</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + n * n</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"><span class="built_in">print</span>(calc([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_calc</span>(<span class="params">*numbers</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + n * n</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"><span class="built_in">print</span>(m_calc(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">num = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(m_calc(*num))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure>
-<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。</p>
-<p>关键字参数有什么用？它可以扩展函数的功能。比如，在person函数里，我们保证能接收到name和age这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。用法如下面所示：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span>(<span class="params">name,age,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;name:&#x27;</span>,name,<span class="string">&#x27;age:&#x27;</span>,age,<span class="string">&#x27;other:&#x27;</span>,kw)</span><br><span class="line">person(<span class="string">&#x27;Michael&#x27;</span>,<span class="number">30</span>)</span><br><span class="line">person(<span class="string">&#x27;Bob&#x27;</span>,<span class="number">35</span>,city = <span class="string">&#x27;Beijing&#x27;</span>)</span><br><span class="line">person(<span class="string">&#x27;Adam&#x27;</span>,<span class="number">45</span>,gender = <span class="string">&#x27;M&#x27;</span>,job = <span class="string">&#x27;Engineer&#x27;</span>)</span><br><span class="line">extra = &#123;<span class="string">&#x27;city&#x27;</span> : <span class="string">&#x27;Beijing&#x27;</span>,<span class="string">&#x27;job&#x27;</span> : <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br><span class="line">person(<span class="string">&#x27;Jack&#x27;</span>,<span class="number">24</span>,**extra)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">name: Michael age: <span class="number">30</span> other: &#123;&#125;</span><br><span class="line">name: Bob age: <span class="number">35</span> other: &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;Beijing&#x27;</span>&#125;</span><br><span class="line">name: Adam age: <span class="number">45</span> other: &#123;<span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;job&#x27;</span>: <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br><span class="line">name: Jack age: <span class="number">24</span> other: &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;Beijing&#x27;</span>, <span class="string">&#x27;job&#x27;</span>: <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="命名关键字参数"><a href="#命名关键字参数" class="headerlink" title="命名关键字参数"></a>命名关键字参数</h3><p>如果要限制关键字参数名字就用命名关键字参数。要使用*分隔符。命名关键字参数必须传入关键字名，这和位置参数不同，命名关键字参数可以有缺省值，若函数中已经有可变参数则不需要额外加分隔符。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span>(<span class="params">name,age,*,city = <span class="string">&#x27;Beijing&#x27;</span>,job</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name,age,city,job)</span><br><span class="line">person(<span class="string">&#x27;m&#x27;</span>,<span class="number">18</span>,job = <span class="string">&#x27;teacher&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_person</span>(<span class="params">name,age,*args,city,job</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name,age,args,city,job)</span><br><span class="line">m_person(<span class="string">&#x27;y&#x27;</span>,<span class="number">18</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,city = <span class="string">&#x27;Beijing&#x27;</span>,job = <span class="string">&#x27;teacher&#x27;</span>)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">m <span class="number">18</span> Beijing teacher</span><br><span class="line">y <span class="number">18</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) Beijing teacher</span><br></pre></td></tr></table></figure>
-<h3 id="参数组合"><a href="#参数组合" class="headerlink" title="参数组合"></a>参数组合</h3><p>在Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
-<p>在函数调用的时候，Python解释器自动按照参数位置和参数名把对应的参数传进去。</p>
-<p>最神奇的是通过一个tuple和dict，你也可以调用上述函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">a,b,c = <span class="number">0</span>,*args,d,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;a = &#x27;</span>,a,<span class="string">&#x27;b = &#x27;</span>,b,<span class="string">&#x27;c = &#x27;</span>,c,<span class="string">&#x27;args = &#x27;</span>,args,<span class="string">&#x27;d = &#x27;</span>,d,<span class="string">&#x27;kw = &#x27;</span>,kw)</span><br><span class="line">f1(<span class="number">1</span>,<span class="number">2</span>,<span class="number">233</span>,<span class="number">3</span>,<span class="number">3</span>,d = <span class="string">&#x27;bejing&#x27;</span>,x = <span class="string">&#x27;shanghai&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span>(<span class="params">a,b,c = <span class="number">0</span>,*args,d,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;a = &#x27;</span>,a,<span class="string">&#x27;b = &#x27;</span>,b,<span class="string">&#x27;c = &#x27;</span>,c,<span class="string">&#x27;args = &#x27;</span>,args,<span class="string">&#x27;d = &#x27;</span>,d,<span class="string">&#x27;kw = &#x27;</span>,kw)</span><br><span class="line">args = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">kw = &#123;<span class="string">&#x27;d&#x27;</span> : <span class="number">88</span>,<span class="string">&#x27;x&#x27;</span> : <span class="string">&#x27;#&#x27;</span>&#125;</span><br><span class="line">f2(*args,**kw)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">a =  <span class="number">1</span> b =  <span class="number">2</span> c =  <span class="number">233</span> args =  (<span class="number">3</span>, <span class="number">3</span>) d =  bejing kw =  &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;shanghai&#x27;</span>&#125;</span><br><span class="line">a =  <span class="number">1</span> b =  <span class="number">2</span> c =  <span class="number">3</span> args =  (<span class="number">4</span>,) d =  <span class="number">88</span> kw =  &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;#&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h3><p>使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递归调用的次数过多，会导致栈溢出。</p>
-<p>解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
-<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n * fact(n - <span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_fact</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> fact_iter(n,<span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact_iter</span>(<span class="params">num,product</span>):</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> product</span><br><span class="line">    <span class="keyword">return</span> fact_iter(num - <span class="number">1</span>,num * product)</span><br><span class="line"><span class="built_in">print</span>(fact(<span class="number">4</span>),m_fact(<span class="number">4</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">24</span> <span class="number">24</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1508,7 +1482,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
