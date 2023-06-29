@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="由于先前并未学习使用过C#，本文采用Chatgpt进行辅助分析。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dicom图像显示代码分析">
+<meta property="og:url" content="http://example.com/2023/06/18/Csharp/%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="由于先前并未学习使用过C#，本文采用Chatgpt进行辅助分析。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-18T12:54:36.455Z">
+<meta property="article:modified_time" content="2023-04-20T05:36:58.000Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/18/Csharp/%E4%BA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>dicom图像显示代码分析 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/Csharp/%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dicom图像显示代码分析
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-20 13:36:58" itemprop="dateModified" datetime="2023-04-20T13:36:58+08:00">2023-04-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C#学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于先前并未学习使用过C#，本文采用<strong>Chatgpt</strong>进行辅助分析。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.ComponentModel;</span><br><span class="line">using System.Data;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Linq;</span><br><span class="line">using System.Text;</span><br><span class="line">using System.Windows.Forms;</span><br><span class="line">//using System.Drawing;</span><br><span class="line">using System.Drawing.Imaging;</span><br><span class="line">using System.IO;</span><br><span class="line">using System.Runtime;</span><br><span class="line">using System.Runtime.Serialization;</span><br><span class="line">using System.Runtime.Serialization.Formatters;</span><br><span class="line">using System.Runtime.Serialization.Formatters.Binary;</span><br><span class="line">using Dicom;</span><br><span class="line">using Dicom.IO;</span><br><span class="line">using Dicom.IO.Buffer;</span><br><span class="line">using Dicom.Imaging;</span><br><span class="line">using Dicom.Imaging.Codec;</span><br><span class="line">using Dicom.Imaging.Codec.Jpeg;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">namespace DrawingDCMExample //定义总命名空间</span><br><span class="line">&#123;</span><br><span class="line">    public partial class DICOMProcessDemo : Form //这段代码定义了一个名为DICOMProcessDemo的类，该类继承自Form类，并被定义为public和partial。由于它被定义为partial，可以在其他文件中定义该类的其他部分。</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// The Image member that inserted in PictureBox</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        </span><br><span class="line">        private string defaultImageBG;//用于存放默认背景的路径</span><br><span class="line">        </span><br><span class="line">        public DICOMProcessDemo()//DICOMProcessDemo类的初始化</span><br><span class="line">        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">            //这个方法的作用是初始化窗体中的控件，包括将控件添加到窗体中、设置控件的位置和大小、以及绑定事件处理程序等。</span><br><span class="line">            string appPath = Application.StartupPath;//定义appPath为程序启动路径</span><br><span class="line">            string imagePath = appPath + @&quot;\..\..\..\..\&quot; + @&quot;Resource\defaultbackgroundImage.bmp&quot;;</span><br><span class="line">            //具体地说，这个路径是通过将appPath（应用程序的路径）与一个相对路径拼接而成的。其中，@&quot;........&quot;表示向上跳四级目录，即到应用程序所在的根目录，然后再跳到Resource文件夹下，最后再拼接上文件名&quot;defaultbackgroundImage.bmp&quot;。</span><br><span class="line">            //换句话说，这个路径指向了应用程序根目录下的Resource文件夹中的一个名为&quot;defaultbackgroundImage.bmp&quot;的位图文件。</span><br><span class="line">            defaultImageBG = imagePath;</span><br><span class="line">            pictureBox1.Image = Image.FromFile(imagePath);</span><br><span class="line">            //PictureBox是一个Windows Forms控件，用于在用户界面中显示图像。Image属性是PictureBox控件中用于存储和显示图像的属性。通过将其设置为从文件加载的图像，可以更改PictureBox控件中显示的图像。</span><br><span class="line">			//Image.FromFile方法是一个静态方法，它可以从文件加载图像并返回一个Image对象。将返回的Image对象赋给PictureBox控件的Image属性，从而更改控件中显示的图像。</span><br><span class="line">            DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);</span><br><span class="line">            //这段代码DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);是用于加载DICOM图像编解码器的代码。</span><br><span class="line">			//在这里，DicomTranscoder是一个用于DICOM图像编解码的类。LoadCodecs是该类的一个静态方法，用于从指定目录中加载编解码器。Application.StartupPath是指当前应用程序的启动路径，而&quot;Dicom.Native*.dll&quot;则是指定要加载的编解码器的文件名模式。*通配符表示任何字符。通过加载编解码器，我们可以在应用程序中使用DICOM图像，并将其转换为其他格式，例如BMP或JPEG，以在屏幕上显示或进行分析。</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void openToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">            	//是一个事件处理方法，它是在用户单击菜单项 &quot;openToolStripMenuItem&quot; 时触发的。该方法的主要功能是打开一个文件对话框，允许用户选择一个文件，并将选择的文件加载到应用程序中。</span><br><span class="line">        &#123;</span><br><span class="line">            using(openFileDialog1 = new OpenFileDialog())</span><br><span class="line">                //这是 C# 中的一个 using 语句块，用于在代码块执行结束时自动释放资源。在这个例子中，using 语句块用于打开一个文件对话框，并在选择文件后自动关闭对话框并释放资源。</span><br><span class="line">            &#123;</span><br><span class="line">                openFileDialog1.Filter=&quot;DCM files(*.DCM)|*.DCM| dcm files(*.dcm)|*.dcm&quot;;</span><br><span class="line">                //这行代码是为 OpenFileDialog 对象设置一个过滤器，限制用户在打开文件对话框时只能选择特定类型的文件。</span><br><span class="line">				//在这个例子中，Filter 属性的值为 &quot;DCM files(*.DCM)|*.DCM| dcm files(*.dcm)|*.dcm&quot;，表示可以选择后缀名为 .dcm 或 .DCM 的文件。该属性值的格式为 &quot;文件类型描述|文件扩展名&quot;，多个文件类型描述和文件扩展名之间用竖线 | 分隔，每个文件类型描述和文件扩展名之间用逗号 , 分隔。</span><br><span class="line">				//因此，在这个例子中，文件类型描述分别为 &quot;DCM files&quot; 和 &quot;dcm files&quot;，文件扩展名分别为 &quot;*.DCM&quot; 和 &quot;*.dcm&quot;。用户在打开文件对话框时，只能选择这两种类型的文件，其他类型的文件会被过滤掉，不会显示在对话框中。在这里括号是进一步说明文件类型。</span><br><span class="line">                openFileDialog1.RestoreDirectory=true;</span><br><span class="line">				//作用是在关闭文件对话框后，恢复到打开文件对话框前的目录。这样做的好处是避免了在用户打开文件对话框时意外地改变了当前目录，从而导致后续操作出现问题的情况。</span><br><span class="line">                if (openFileDialog1.ShowDialog() == DialogResult.OK)//检查用户是否在文件打开对话框中单击了确认按钮</span><br><span class="line">                &#123;</span><br><span class="line">                    string dcmPath = openFileDialog1.FileName.ToString();//dcm文件路径存储在 OpenFileDialog 类的 FileName 属性中。转换为字符串并存储在 dcmPath 变量中。</span><br><span class="line">                    //string dcmFileName = Path.Substring(Path.LastIndexOf(&quot;\\&quot;) + 1);</span><br><span class="line">                    listView1.Items.Clear();//清空 ListView 控件，以便准备向其中添加新项</span><br><span class="line">                    ShowAndDrawingDCMImage(dcmPath);//加载和显示 DICOM 文件中的图像。</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Show the metaInfo of the DCM file and Drawing the image on the Screen</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcmFileName&quot;&gt;The path of your DCM file&lt;/param&gt;</span><br><span class="line">        private void ShowAndDrawingDCMImage(string dcmFileName)//加载显示DICOM图像</span><br><span class="line">        &#123;</span><br><span class="line">            try</span><br><span class="line">            &#123;</span><br><span class="line">                DicomFile dcmFile = DicomFile.Open(dcmFileName);//执行此行代码后，将拥有一个DicomFile对象，该对象表示由dcmFileName参数指定的DICOM文件</span><br><span class="line">                LoadAndShowDCMMetaInfo(dcmFile);//加载和显示dicom文件的元数据信息</span><br><span class="line">                listView1.Update();//ListView控件刷新其显示并根据其基础数据源更新其内容	</span><br><span class="line">                DrawingDCMData2Screen(dcmFile);//使用DICOM文件中的数据进行图像处理，并将其绘制到屏幕上，以便用户可以查看医学影像</span><br><span class="line">            &#125;</span><br><span class="line">            catch (System.Exception ex)</span><br><span class="line">            &#123;</span><br><span class="line">                MessageBox.Show(ex.Message);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Load all of the Elements in the DCM Meta </span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcm&quot;&gt;the DICOM file&lt;/param&gt;</span><br><span class="line">        private void LoadAndShowDCMMetaInfo(DicomFile dcm)</span><br><span class="line">        &#123;</span><br><span class="line">            //Show the message of DCM file to the listview in the dialog.</span><br><span class="line">            DicomDataset dcmDataset = dcm.Dataset;//dcm对象数据集存储到变量</span><br><span class="line">            DicomFileMetaInformation dcmMetaInfo = dcm.FileMetaInfo;//dcm对象文件元信息存储到变量</span><br><span class="line">            listView1.BeginUpdate();</span><br><span class="line">            //控件的显示将暂时被挂起。在调用BeginUpdate()方法之后，通常会对控件中的项和子项进行更改，然后再调用EndUpdate()方法。这样可以确保控件的显示更新只会在所有更改完成后才执行，从而避免出现不必要的重绘操作。</span><br><span class="line">            //DICOM MetaInfo</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.MediaStorageSOPClassUID==null?&quot;&quot;:dcmMetaInfo.MediaStorageSOPClassUID.ToString()))//利用String.IsNullOrWhiteSpace方法，判断dcm文件中的SOP类的UID信息是否为空</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID，</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                //用group号“0002”创建ListViewItem对象赋值给newItem变量。也就是说，ListViewItem的构造函数被调用，传入了一个表示Tag Group Number为&quot;0002&quot;的字符串。这个字符串将被作为该ListViewItem的主显示文本（即第一列）</span><br><span class="line">                newItem.SubItems.Add(&quot;0002&quot;);</span><br><span class="line">                //在ListView控件中，每一行都可以有多个列（即子项），用来显示多个数据。因此，在创建ListViewItem对象之后，可以通过调用ListViewItem的SubItems属性，来获取该项的子项集合。通过调用Add方法，可以向该集合中添加新的子项。这里添加的子项是Tag Element number</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.MediaStorageSOPClassUID.ToString());</span><br><span class="line">                //第三列添加SOP类UID信息</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">                //将包含DICOM文件Tag Group Number、Tag Element Number和SOP类UID信息的newItem对象添加到了listView1控件的行集合中，使其显示在控件中。</span><br><span class="line">            &#125;</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.MediaStorageSOPInstanceUID==null?&quot;&quot;:dcmMetaInfo.MediaStorageSOPInstanceUID.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0003&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.MediaStorageSOPInstanceUID.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加SOP实例UID信息</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.TransferSyntax==null?&quot;&quot;:dcmMetaInfo.TransferSyntax.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.TransferSyntax.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加传输语法UID信息</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.ImplementationClassUID==null?&quot;&quot;:dcmMetaInfo.ImplementationClassUID.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0012&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.ImplementationClassUID.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加实现类UID信息，实现类 UID（Implementation Class UID）是DICOM中的一个标识符，用于表示医学图像设备或软件的厂商和型号信息。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.ImplementationVersionName==null?&quot;&quot;:dcmMetaInfo.ImplementationVersionName.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0013&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.ImplementationVersionName.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加版本号信息。DICOM 设备或软件的制造商会将 ImplementationVersionName 的值设置为特定的版本号或修订号。</span><br><span class="line"></span><br><span class="line">            //Patient Info</span><br><span class="line">            string patientName = dcmDataset.Get&lt;string&gt;(DicomTag.PatientName, &quot;&quot;);</span><br><span class="line">            //Get&lt;T&gt; 方法是 Dicom 数据集中的一个通用方法，用于获取指定标签号（Tag）对应的值，并将其转换为指定类型 T。在这里DicomTag.PatientName是一个表示患者姓名的标签号，并且使用空字符作为默认值。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientName))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientName);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者姓名信息</span><br><span class="line">            string patientID = dcmDataset.Get&lt;string&gt;(DicomTag.PatientID, &quot;&quot;);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者ID信息</span><br><span class="line">            string patientBirth = dcmDataset.Get&lt;string&gt;(DicomTag.PatientBirthDate);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientBirth))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0030&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientBirth);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者生日信息</span><br><span class="line">            string patientSex = dcmDataset.Get&lt;string&gt;(DicomTag.PatientSex);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientSex))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0040&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientSex);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者性别信息</span><br><span class="line">            string patientAge = dcmDataset.Get&lt;string&gt;(DicomTag.PatientAge);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientAge))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;1010&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientAge);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者年龄信息</span><br><span class="line">            //Study &amp; Series Info</span><br><span class="line">            string studyDate = dcmDataset.Get&lt;string&gt;(DicomTag.StudyDate);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyDate))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0008&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyDate);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加检查日期信息</span><br><span class="line">            string studyTime = dcmDataset.Get&lt;string&gt;(DicomTag.StudyTime);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyTime))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0008&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0030&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyTime);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加检查的具体时间，包括时分秒和毫秒</span><br><span class="line">            string studyInstanceID = dcmDataset.Get&lt;string&gt;(DicomTag.StudyInstanceUID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyInstanceID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;000D&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyInstanceID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加病人检查唯一标志符信息，用于唯一标识病人的一次检查（即一个 study），它是一个由数字和句点组成的字符串，全球唯一，可用于跨医院或跨系统的病人信息交换。</span><br><span class="line">            string seriesInstanceID = dcmDataset.Get&lt;string&gt;(DicomTag.SeriesInstanceUID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(seriesInstanceID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;000E&quot;);</span><br><span class="line">                newItem.SubItems.Add(seriesInstanceID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加了一次检查中某个影像序列的唯一标识符，SeriesInstanceUID 标签用于唯一标识一组相关的影像（即一个 series），它也是一个由数字和句点组成的字符串，全球唯一。</span><br><span class="line">            string studyID = dcmDataset.Get&lt;string&gt;(DicomTag.StudyID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加了病人的检查编号信息。StudyID 标签用于识别一个病人的检查，通常由医院或机构自己定义。</span><br><span class="line">            //Image Info</span><br><span class="line">            string imageHeight = dcmDataset.Get&lt;string&gt;(DicomTag.Rows);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(imageHeight))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(imageHeight);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像高度信息，图像高度就是像素行数，也即Rows</span><br><span class="line">            string imageWidth = dcmDataset.Get&lt;string&gt;(DicomTag.Columns);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(imageWidth))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0011&quot;);</span><br><span class="line">                newItem.SubItems.Add(imageWidth);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像宽度信息，图像宽度就是像素列数，也即Columns</span><br><span class="line">            string bitsAlloctaed = dcmDataset.Get&lt;string&gt;(DicomTag.BitsAllocated);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(bitsAlloctaed))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0100&quot;);</span><br><span class="line">                newItem.SubItems.Add(bitsAlloctaed);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像像素深度信息，图像像素深度就是像素所占用的位数，常见位数为8，16，32.</span><br><span class="line">            string bitsStored = dcmDataset.Get&lt;string&gt;(DicomTag.BitsStored);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(bitsStored))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0101&quot;);</span><br><span class="line">                newItem.SubItems.Add(bitsStored);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像实际像素深度信息。在DICOM中，像素深度可以分配比实际位深度更多的位，但实际位深度表示图像实际存储的精度。通常情况下，实际位深度等于或小于像素深度。</span><br><span class="line">            string highBits = dcmDataset.Get&lt;string&gt;(DicomTag.HighBit);</span><br><span class="line">            //这行代码是用于从DICOM数据集中获取像素值中最高位的位位置。在DICOM中，像素值是一个整数，其位数由像素深度决定，每个像素值可以被解释为灰度值或颜色分量等。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(highBits))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0102&quot;);</span><br><span class="line">                newItem.SubItems.Add(highBits);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加二进制像素值最高位位置信息</span><br><span class="line">            listView1.EndUpdate();//结束控件显示更新</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Drawing the image in your DCM to the Dialog</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcm&quot;&gt;&lt;/param&gt;</span><br><span class="line">        private void DrawingDCMData2Screen(DicomFile dcm)//在窗口上显示dicom影像的bmp格式图象</span><br><span class="line">        &#123;</span><br><span class="line">            pictureBox1.Image = ConvertDCMData2BitImage(dcm);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Convert the byte data retrieved from DCM file to Image</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;imagedata&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">        private Bitmap ConvertDCMData2BitImage(DicomFile dcm)//将dcm格式转换为bmp格式</span><br><span class="line">        &#123;</span><br><span class="line">            DicomFile newDcmFile = null;//定义一个空dicom文件用于存放压缩dicom文件实例</span><br><span class="line">            if (dcm.FileMetaInfo.TransferSyntax.IsEncapsulated)//判断传输语法是否被压缩</span><br><span class="line">            &#123;</span><br><span class="line">               // System.Reflection.Assembly.LoadFrom(Path.Combine(Application.StartupPath,&quot;Dicom.Native64.dll&quot;));</span><br><span class="line">                DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);</span><br><span class="line">                newDcmFile=dcm.ChangeTransferSyntax(DicomTransferSyntax.ExplicitVRLittleEndian,new DicomJpegLsParams());//使用ExplicitVRLittleEndian传输语法，指定图像压缩算法以便后续处理            </span><br><span class="line">            &#125;</span><br><span class="line">            DicomImage imageDcm=null;//定义空的dicom图像类用于存放压缩dicom文件的图像信息</span><br><span class="line">            if (newDcmFile != null)//如果是被压缩的dicom文件，那么newDcmFile非空</span><br><span class="line">                imageDcm = new DicomImage(newDcmFile.Dataset);//将newDcmFile的数据集作为参数创建dicom图像类对象</span><br><span class="line">            else</span><br><span class="line">                imageDcm = new DicomImage(dcm.Dataset);//不是压缩文件就直接使用函数传入的dcm文件</span><br><span class="line">            DicomDataset dataset = dcm.Dataset;//使用变量方便传输</span><br><span class="line">            byte[] fs = imageDcm.PixelData.NumberOfFrames &lt; 2 ? imageDcm.PixelData.GetFrame(0).Data : imageDcm.PixelData.GetFrame(1).Data;//使用条件运算符判断是否是多帧图像，如果图象只有一帧，那么就是使用第0帧的图像数据，如果是多帧图像，那么就选用第1帧的图像数据。将图像数据存放在字节类型的数组fs中。</span><br><span class="line">            uint size = (uint)Marshal.SizeOf(typeof(short));//获取short类型的大小用于后续处理</span><br><span class="line">            uint padding = (uint)fs.Length % size;//字节数组长度与 short 类型大小的余数</span><br><span class="line">            uint count = (uint)fs.Length / size;//字节数组长度与 short 类型大小的商</span><br><span class="line">            short[] values = new short[count];//创建short类型数组存放基本的16位像素单元</span><br><span class="line">            System.Buffer.BlockCopy(fs, 0, values, 0, (int)(fs.Length - padding));//将字节数组复制到short类型数组中</span><br><span class="line"></span><br><span class="line">            int height = dataset.Get&lt;int&gt;(DicomTag.Rows);//获取图像高度，也即行数</span><br><span class="line">            int width = dataset.Get&lt;int&gt;(DicomTag.Columns);//获取图像宽度，也即列数</span><br><span class="line">            int windowsWidth = (int)dataset.Get&lt;double&gt;(DicomTag.WindowWidth);//窗宽定义</span><br><span class="line">            int windowsCenter = (int)dataset.Get&lt;double&gt;(DicomTag.WindowCenter);//窗位定义</span><br><span class="line">            //if the windowsWidth = 0, the DCM file is not standard type.</span><br><span class="line">            if (windowsWidth == 0 || windowsCenter==0)//对非标准dicom文件进行处理，并进行相应窗位窗宽计算</span><br><span class="line">            &#123;</span><br><span class="line">                windowsWidth = values.Max&lt;short&gt;()-values.Min&lt;short&gt;();</span><br><span class="line">                windowsCenter = windowsWidth / 2;</span><br><span class="line">            &#125;</span><br><span class="line">            int low = windowsCenter - windowsWidth / 2;//计算窗的范围</span><br><span class="line">            int high = windowsCenter + windowsWidth / 2;</span><br><span class="line">            Bitmap bitmap = new Bitmap(width, height);</span><br><span class="line">            for (int i = 0; i &lt; height; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j = 0; j &lt; width; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    int r, g, b;</span><br><span class="line">                    int temp = (int)values[(width - j - 1) * height + i];</span><br><span class="line">                    int val = temp &gt; high ? 255 : (temp &lt; low ? 0 : ((temp - low) * 255 / windowsWidth));</span><br><span class="line">                    r = g = b = val;</span><br><span class="line">                    bitmap.SetPixel(i, width-j-1, Color.FromArgb(r, g, b));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;//相当于从第一行末端到第一行第一个元素使用数组元素进行像素值赋值，接着第二行末端到第二行第一个元素，以此类推。</span><br><span class="line">            return bitmap;//返回Bitmap类型对象</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            MessageBox.Show(&quot;The program is just a demo written by C# using fo-dicom!****zssure****&quot;);</span><br><span class="line">        &#125;//帮助里的help提示</span><br><span class="line"></span><br><span class="line">        private void closeToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            listView1.Items.Clear();//清空ListView控件</span><br><span class="line">            pictureBox1.Image = Image.FromFile(defaultImageBG);//将图像替换成默认背景</span><br><span class="line">            MessageBox.Show(&quot;The close is just back to original state.Please click &#x27;X&#x27; to exit! &quot;);</span><br><span class="line">        &#125;//close选项提示</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/06/18/Csharp/%E4%BA%8C/" title="dicom图像显示代码分析">http://example.com/2023/06/18/Csharp/二/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/16/Csharp/%E4%B8%80/" rel="prev" title="基础学习一">
+      <i class="fa fa-chevron-left"></i> 基础学习一
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/18/Csharp/%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="dicom图像操作代码分析">
+      dicom图像操作代码分析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">148k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

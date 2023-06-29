@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="传输语法在DICOM（数字成像和通信医学）中，传输语法描述了DICOM文件中像素数据和其他元数据的编码方式和格式。传输语法还定义了DICOM文件的字节顺序、VR（值表示）类型和其他元数据的编码方式。 传输语法可以是封装的或未封装的。封装的传输语法通常用于压缩像素数据，以减小DICOM文件的大小。因此，当检查DICOM文件的传输语法时，可以确定它是否包含压缩的像素数据。如果传输语法是封装的，那么解码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dicom基础知识补充">
+<meta property="og:url" content="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="传输语法在DICOM（数字成像和通信医学）中，传输语法描述了DICOM文件中像素数据和其他元数据的编码方式和格式。传输语法还定义了DICOM文件的字节顺序、VR（值表示）类型和其他元数据的编码方式。 传输语法可以是封装的或未封装的。封装的传输语法通常用于压缩像素数据，以减小DICOM文件的大小。因此，当检查DICOM文件的传输语法时，可以确定它是否包含压缩的像素数据。如果传输语法是封装的，那么解码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-18T12:54:36.706Z">
+<meta property="article:modified_time" content="2023-05-11T10:00:44.000Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>dicom基础知识补充 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dicom基础知识补充
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 18:00:44" itemprop="dateModified" datetime="2023-05-11T18:00:44+08:00">2023-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="传输语法"><a href="#传输语法" class="headerlink" title="传输语法"></a>传输语法</h2><p>在DICOM（数字成像和通信医学）中，传输语法描述了DICOM文件中像素数据和其他元数据的编码方式和格式。传输语法还定义了DICOM文件的字节顺序、VR（值表示）类型和其他元数据的编码方式。</p>
+<p>传输语法可以是封装的或未封装的。封装的传输语法通常用于压缩像素数据，以减小DICOM文件的大小。因此，当检查DICOM文件的传输语法时，可以确定它是否包含压缩的像素数据。如果传输语法是封装的，那么解码图像数据时需要先进行解封装（解压缩），然后再将其转换为图像。</p>
+<h2 id="ExplicitVRLittleEndian"><a href="#ExplicitVRLittleEndian" class="headerlink" title="ExplicitVRLittleEndian"></a>ExplicitVRLittleEndian</h2><p>ExplicitVRLittleEndian是DICOM文件的一种传输语法，也称为明示VR（值表示）小端字节序。这种传输语法被广泛用于DICOM文件中，它指定了数据元素的VR类型和字节序。在ExplicitVRLittleEndian传输语法中，每个数据元素都由一个16位的标签和一个16位的VR值组成。如果数据元素的VR类型是数字、日期或时间等固定长度的值，则接下来的字节是该值的字节表示。如果数据元素的VR类型是可变长度的字符串或字节数组，则VR值指示了该值的长度，并在之后的字节中存储该值的内容。ExplicitVRLittleEndian传输语法使用小端字节序，即最低有效字节在最前面的方式来存储数据。因此，在读取DICOM文件时，需要按照这种顺序来解析数据元素的值。</p>
+<h2 id="DicomJpegLsParams"><a href="#DicomJpegLsParams" class="headerlink" title="DicomJpegLsParams"></a>DicomJpegLsParams</h2><p>DicomJpegLsParams是一个用于指定JPEG-LS压缩算法参数的类。在DICOM中，JPEG-LS是一种无损压缩算法，通常用于减小DICOM文件中像素数据的大小。DicomJpegLsParams类中包含了一些属性，用于指定JPEG-LS压缩算法的参数，例如压缩比例、预测算法、重构算法等。当使用DICOM库进行图像解码时，可以将DicomJpegLsParams参数传递给相关方法，以指定要使用的JPEG-LS压缩算法参数，从而更好地控制图像解码的过程。</p>
+<h2 id="DicomImage和DicomFile类区别"><a href="#DicomImage和DicomFile类区别" class="headerlink" title="DicomImage和DicomFile类区别"></a>DicomImage和DicomFile类区别</h2><p>在DICOM（数字成像和通信医学）中，DicomImage和DicomFile都是用于表示DICOM图像和文件的类，它们之间的区别如下：</p>
+<ol>
+<li>DicomImage表示DICOM图像数据，而DicomFile表示DICOM文件的数据和元数据。</li>
+<li>DicomImage是一个特定的图像类，它提供了一些用于访问和处理DICOM图像数据的方法和属性，例如获取像素数据、获取像素点的值、调整图像亮度和对比度等。而DicomFile是一个通用的文件类，它提供了一些用于访问和处理DICOM文件的方法和属性，例如获取文件元数据、获取文件中的数据元素、读取和写入DICOM文件等。</li>
+<li>DicomImage对象通常是从DicomFile对象中读取DICOM文件的像素数据得到的，可以通过将DicomFile对象传递给相关方法来创建DicomImage对象。因此，DicomFile对象是创建DicomImage对象的重要输入之一。</li>
+<li><strong>DicomFile对象可以包含一个或多个DICOM图像数据，每个图像数据可以使用不同的传输语法和编码方式。而DicomImage对象仅表示单个DICOM图像数据，通常使用一种特定的传输语法和编码方式。</strong></li>
+<li>在处理DICOM文件时，通常需要首先创建一个DicomFile对象，然后从中提取需要的图像数据，然后使用DicomImage对象对图像数据进行处理和显示。</li>
+</ol>
+<h2 id="Dicom图像帧数以及选取"><a href="#Dicom图像帧数以及选取" class="headerlink" title="Dicom图像帧数以及选取"></a>Dicom图像帧数以及选取</h2><p>在DICOM图像中，图像帧数指的是该图像中包含的图像帧（Image Frame）的数量。一个图像帧表示了图像在某个时间点的状态，可以理解为一个静止的图像。举个例子，一个磁共振成像（MRI）的DICOM图像可能包含多个图像帧，每个图像帧表示了扫描仪在不同的时间点捕获的MRI图像。</p>
+<p>在处理DICOM图像时，需要根据图像帧数的数量来确定需要处理的图像帧，以及如何将多个图像帧组合成完整的图像。例如，对于一张包含多个图像帧的DICOM图像，我们可以选择只处理其中的某一个图像帧，或者将所有图像帧合并成一个三维的立体图像。因此，在处理DICOM图像时，图像帧数是一个非常重要的参数。</p>
+<p>在DICOM图像中，像素数据是存储图像信息的最重要的数据元素之一。每个像素的值代表了图像中一个点的亮度或灰度。在多帧DICOM图像中，每一帧都包含了一组像素数据，用来表示该帧对应的图像。因此，一个多帧DICOM图像中的所有帧的像素数据总和就是整个图像的像素数据。并且帧数是从0开始计数的，即第一帧的帧数为0，第二帧的帧数为1，以此类推。这与一些其他编程语言或者图像处理库中可能采用的从1开始计数的方式略有不同，需要注意。在使用DICOM相关的编程库或者工具时，应该遵循DICOM标准，以保证正确解析和处理DICOM图像数据。</p>
+<p>在代码中，如果一个DICOM图像只有一帧，那么只需要获取这一帧的像素数据即可，因为它就是整个图像的像素数据。而如果一个DICOM图像有多帧，为了简化处理过程，代码中选择只获取第1帧的像素数据，而不是获取所有帧的像素数据并将它们组合起来。这是因为第1帧通常包含了完整的图像信息，而<strong>其他帧则可能只包含了该图像的某些局部信息或补充信息</strong>。同时，获取第1帧的像素数据可以让代码更加简洁和高效，因为不需要处理多个像素数据数组。当然，如果需要获取其他帧的像素数据，也可以在代码中进行相应的修改。</p>
+<h2 id="按列存储"><a href="#按列存储" class="headerlink" title="按列存储"></a>按列存储</h2><p>dicom图像的像素信息是按照列主序存储的。在此次设计例子中，<code>values</code>数组中前<code>height</code>个元素存储的是第一列像素的值，接下来的<code>height</code>个元素存储的是第二列像素的值，以此类推，直到最后一列。因此，在将<code>values</code>数组转换为<code>Bitmap</code>对象时，需要按照列进行遍历并设置像素的值。</p>
+<h2 id="SOP和服务类的区别"><a href="#SOP和服务类的区别" class="headerlink" title="SOP和服务类的区别"></a>SOP和服务类的区别</h2><p>SOP和服务类是DICOM中的两个概念，它们有相似之处，但又有一些区别。</p>
+<p>SOP（Service-Object Pair）是指DICOM中的服务和对象对，即一个服务与一个对象之间的关系。SOP包含两个方面：服务（Service）和对象（Object），表示在DICOM中，一个服务可以针对一个特定的对象进行操作。每个SOP的实例都有一个唯一的UID标识符。</p>
+<p>服务类（Service Class）是针对某种功能而定义的服务的集合，它是一组相关的SOP类的总称。服务类包括一组操作，这些操作的目的是在不同设备之间传输图像和相关信息。每个服务类都有一个唯一的UID标识符。</p>
+<p>两者的区别在于，SOP是服务和对象之间的关系，是具体的实例，而服务类是一组相关的SOP类的总称，是具有相同功能的一组服务的集合。SOP相当于一个文件的名称，服务类则相当于一组文件的集合。    </p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/" title="dicom基础知识补充">http://example.com/2023/06/18/毕业设计/dicom问题/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/18/Csharp/%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="dicom图像操作代码分析">
+      <i class="fa fa-chevron-left"></i> dicom图像操作代码分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">传输语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ExplicitVRLittleEndian"><span class="nav-number">2.</span> <span class="nav-text">ExplicitVRLittleEndian</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DicomJpegLsParams"><span class="nav-number">3.</span> <span class="nav-text">DicomJpegLsParams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DicomImage%E5%92%8CDicomFile%E7%B1%BB%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">DicomImage和DicomFile类区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dicom%E5%9B%BE%E5%83%8F%E5%B8%A7%E6%95%B0%E4%BB%A5%E5%8F%8A%E9%80%89%E5%8F%96"><span class="nav-number">5.</span> <span class="nav-text">Dicom图像帧数以及选取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E5%88%97%E5%AD%98%E5%82%A8"><span class="nav-number">6.</span> <span class="nav-text">按列存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOP%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.</span> <span class="nav-text">SOP和服务类的区别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">148k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
