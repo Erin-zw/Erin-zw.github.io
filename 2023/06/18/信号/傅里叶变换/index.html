@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。">
+  <meta name="description" content="傅里叶变换 FT Fourier transform 傅里叶级数 FS Fourier series 离散傅里叶变换 DFT discrete fourier transform 离散时间傅立叶变换 DTFT Discrete time Fourier Transform 加上I（inverse）就是逆变换 时域连续周期对应频域离散非周期 时域连续非周期对应频域连续非周期 时域离散周期对应频域离散">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Erin枫">
-<meta property="og:url" content="http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/index.html">
+<meta property="og:title" content="傅里叶变换">
+<meta property="og:url" content="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。">
+<meta property="og:description" content="傅里叶变换 FT Fourier transform 傅里叶级数 FS Fourier series 离散傅里叶变换 DFT discrete fourier transform 离散时间傅立叶变换 DTFT Discrete time Fourier Transform 加上I（inverse）就是逆变换 时域连续周期对应频域离散非周期 时域连续非周期对应频域连续非周期 时域离散周期对应频域离散">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-26T02:17:43.984Z">
-<meta property="article:modified_time" content="2022-08-26T02:20:08.719Z">
+<meta property="article:published_time" content="2023-06-18T12:54:36.577Z">
+<meta property="article:modified_time" content="2023-08-11T09:08:32.155Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/">
+<link rel="canonical" href="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title> | Erin枫</title>
+  <title>傅里叶变换 | Erin枫</title>
   
 
 
@@ -201,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          傅里叶变换
         </h1>
 
         <div class="post-meta">
@@ -225,9 +225,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-26 10:17:43 / 修改时间：10:20:08" itemprop="dateCreated datePublished" datetime="2022-08-26T10:17:43+08:00">2022-08-26</time>
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-11 17:08:32" itemprop="dateModified" datetime="2023-08-11T17:08:32+08:00">2023-08-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
+                </span>
             </span>
 
           
@@ -243,7 +258,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>75</span>
+              <span>220</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -262,7 +277,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>首先高等数学还有一章没做，预计10月中旬结束线代强化，概率强化，高数。政治预计11月底结束选择，英语开学开始小三门和作文。专业课预计10月底结束强化。</p>
+        <p>傅里叶变换 FT Fourier transform</p>
+<p>傅里叶级数 FS Fourier series</p>
+<p>离散傅里叶变换 DFT discrete fourier transform</p>
+<p>离散时间傅立叶变换 DTFT Discrete time Fourier Transform</p>
+<p>加上I（inverse）就是逆变换</p>
+<p>时域连续周期对应频域离散非周期</p>
+<p>时域连续非周期对应频域连续非周期</p>
+<p>时域离散周期对应频域离散周期</p>
+<p>时域离散非周期对应频域连续周期</p>
+<p>综上：</p>
+<table>
+<thead>
+<tr>
+<th>时域</th>
+<th>频域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连续</td>
+<td>非周期</td>
+</tr>
+<tr>
+<td>周期</td>
+<td>离散</td>
+</tr>
+<tr>
+<td>离散</td>
+<td>周期</td>
+</tr>
+<tr>
+<td>非周期</td>
+<td>连续</td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -300,7 +348,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2022/08/26/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/kk/" title="">http://example.com/2022/08/26/所思所想/kk/</a>
+    <a href="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" title="傅里叶变换">http://example.com/2023/06/18/信号/傅里叶变换/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -346,12 +394,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/" rel="prev" title="10M信号发生器">
-      <i class="fa fa-chevron-left"></i> 10M信号发生器
+    <a href="/2023/06/18/Csharp/%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="dicom图像操作代码分析">
+      <i class="fa fa-chevron-left"></i> dicom图像操作代码分析
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/" rel="next" title="">
-       <i class="fa fa-chevron-right"></i>
+    <a href="/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/" rel="next" title="dicom基础知识补充">
+      dicom基础知识补充 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -426,14 +474,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -490,12 +538,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">148k</span>
+    <span title="站点总字数">149k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:15</span>
+    <span title="站点阅读时长">2:16</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -608,6 +656,59 @@ $(document).ready(function() {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

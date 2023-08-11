@@ -313,6 +313,206 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">py知识</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-11 17:05:21 / 修改时间：17:10:55" itemprop="dateCreated datePublished" datetime="2023-08-11T17:05:21+08:00">2023-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>597</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="with关键字"><a href="#with关键字" class="headerlink" title="with关键字"></a>with关键字</h2><p>在 Python 中，<code>with</code> 语句用于创建一个上下文管理器（Context Manager），用于管理一些资源的获取和释放，以确保资源得到正确的使用和清理。这种管理在处理文件、网络连接、数据库连接等需要显式打开和关闭资源的情况下非常有用，因为它可以帮助避免资源泄漏和错误处理。</p>
+<p><code>with</code> 语句的一般语法结构如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> context_expression <span class="keyword">as</span> target:</span><br><span class="line">    <span class="comment"># 代码块</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>context_expression</code>：通常是一个上下文管理器对象，它负责定义资源的获取和释放规则。</li>
+<li><code>target</code>：通常是一个变量，用于接收上下文管理器生成的资源。</li>
+<li>代码块：在代码块中，你可以使用 <code>target</code> 获取资源并进行操作，当代码块结束时，资源会自动被释放，无论是否发生异常。</li>
+</ul>
+<p>一个常见的使用案例是文件的读写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    content = file.read()</span><br><span class="line"><span class="comment"># 在代码块结束后，文件会自动关闭，不需要显式调用 file.close()</span></span><br></pre></td></tr></table></figure>
+
+<p>在你提供的代码中，<code>with torch.no_grad():</code> 语句的目的是在该上下文中执行一些操作，而在这个上下文中，PyTorch 不会跟踪梯度信息，从而避免不必要的内存占用和计算。这在进行一些不需要梯度信息的操作，如参数更新，时非常有用。当 <code>with</code> 代码块结束后，梯度追踪会自动恢复。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">虚拟环境</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-06 16:35:06" itemprop="dateCreated datePublished" datetime="2023-08-06T16:35:06+08:00">2023-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-11 17:10:32" itemprop="dateModified" datetime="2023-08-11T17:10:32+08:00">2023-08-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>433</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-关于anaconda的一些理解"><a href="#1-关于anaconda的一些理解" class="headerlink" title="1.关于anaconda的一些理解:"></a>1.关于anaconda的一些理解:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env list//用来查看虚拟环境清单</span><br></pre></td></tr></table></figure>
+
+<img src="\images\深度学习\基础知识\1.png" style="zoom:120%;">
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kyxdjy/article/details/126272002">https://blog.csdn.net/kyxdjy/article/details/126272002</a></p>
+<h2 id="2-ERROR"><a href="#2-ERROR" class="headerlink" title="2.ERROR"></a>2.ERROR</h2><h3 id="2-1ERROR-Ignored-the-following-versions-that-require-a-different-python-version-1-21-2-Requires-Python"><a href="#2-1ERROR-Ignored-the-following-versions-that-require-a-different-python-version-1-21-2-Requires-Python" class="headerlink" title="2.1ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python"></a>2.1ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=版本号//降级py版本</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2解决-Could-not-build-wheels-for-pandas-which-is-required-to-install-pyproject-toml-based-projects"><a href="#2-2解决-Could-not-build-wheels-for-pandas-which-is-required-to-install-pyproject-toml-based-projects" class="headerlink" title="2.2解决 Could not build wheels for pandas, which is required to install pyproject.toml-based projects"></a>2.2解决 Could not build wheels for pandas, which is required to install pyproject.toml-based projects</h3><p>将py降级为3.9版本即可</p>
+<h2 id="3-创建conda虚拟环境"><a href="#3-创建conda虚拟环境" class="headerlink" title="3.创建conda虚拟环境"></a>3.创建conda虚拟环境</h2><h2 id="3-1查看安装了哪些包"><a href="#3-1查看安装了哪些包" class="headerlink" title="3.1查看安装了哪些包"></a>3.1查看安装了哪些包</h2><p><code>conda list</code></p>
+<h3 id="3-2查看存在哪些虚拟环境"><a href="#3-2查看存在哪些虚拟环境" class="headerlink" title="3.2查看存在哪些虚拟环境"></a>3.2查看存在哪些虚拟环境</h3><p><code>conda env list</code></p>
+<h3 id="3-3python创建虚拟环境"><a href="#3-3python创建虚拟环境" class="headerlink" title="3.3python创建虚拟环境"></a>3.3python创建虚拟环境</h3><p><code>conda create -n your env name python=x.x</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -404,6 +604,131 @@
 <p>SOP（Service-Object Pair）是指DICOM中的服务和对象对，即一个服务与一个对象之间的关系。SOP包含两个方面：服务（Service）和对象（Object），表示在DICOM中，一个服务可以针对一个特定的对象进行操作。每个SOP的实例都有一个唯一的UID标识符。</p>
 <p>服务类（Service Class）是针对某种功能而定义的服务的集合，它是一组相关的SOP类的总称。服务类包括一组操作，这些操作的目的是在不同设备之间传输图像和相关信息。每个服务类都有一个唯一的UID标识符。</p>
 <p>两者的区别在于，SOP是服务和对象之间的关系，是具体的实例，而服务类是一组相关的SOP类的总称，是具有相同功能的一组服务的集合。SOP相当于一个文件的名称，服务类则相当于一组文件的集合。    </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-title-link" itemprop="url">傅里叶变换</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-11 17:08:32" itemprop="dateModified" datetime="2023-08-11T17:08:32+08:00">2023-08-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>220</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>傅里叶变换 FT Fourier transform</p>
+<p>傅里叶级数 FS Fourier series</p>
+<p>离散傅里叶变换 DFT discrete fourier transform</p>
+<p>离散时间傅立叶变换 DTFT Discrete time Fourier Transform</p>
+<p>加上I（inverse）就是逆变换</p>
+<p>时域连续周期对应频域离散非周期</p>
+<p>时域连续非周期对应频域连续非周期</p>
+<p>时域离散周期对应频域离散周期</p>
+<p>时域离散非周期对应频域连续周期</p>
+<p>综上：</p>
+<table>
+<thead>
+<tr>
+<th>时域</th>
+<th>频域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连续</td>
+<td>非周期</td>
+</tr>
+<tr>
+<td>周期</td>
+<td>离散</td>
+</tr>
+<tr>
+<td>离散</td>
+<td>周期</td>
+</tr>
+<tr>
+<td>非周期</td>
+<td>连续</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -964,391 +1289,6 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/" class="post-title-link" itemprop="url">dicom窗位和窗宽</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-05 20:27:05" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-06 16:37:20" itemprop="dateModified" datetime="2023-03-06T16:37:20+08:00">2023-03-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p>
-<h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p>
-<p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p>
-<p>人体常见组织CT值：</p>
-<p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p>
-<h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p>
-<ul>
-<li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p>
-<p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p>
-</li>
-<li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p>
-<p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p>
-</li>
-</ul>
-<p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p>
-<p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p>
-<p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p>
-<script type="math/tex; mode=display">
-f(x) =
-\left \{ 
-\begin{array}{c}
-0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ 
-\frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 
-255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}
-\end{array}
-\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p>
-<h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p>
-<p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">dicom简介</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-04 19:47:57" itemprop="dateCreated datePublished" datetime="2023-03-04T19:47:57+08:00">2023-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-08 21:19:09" itemprop="dateModified" datetime="2023-03-08T21:19:09+08:00">2023-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="dicom基本概念和定义"><a href="#dicom基本概念和定义" class="headerlink" title="dicom基本概念和定义"></a>dicom基本概念和定义</h2><ul>
-<li><p><strong>实体(Entity):</strong>表示一个或者一类具有相同特性的应用对象。 </p>
-</li>
-<li><p><strong>关系(Relation):**</strong>表示各个实体之间的相互关系。比如医疗影像设备和患者之间，存在的就是检查的关系。</p>
-</li>
-<li><p><strong>实体-关系（E-R)模型：</strong>描述实际中具体的物体或者概念的一种信息模型。通过定义实体和实体间的关系，从而表达出系统所实现的功能。</p>
-</li>
-<li><p><strong>对象(Object):</strong>即现实中的实际事物在计算机内部的抽象表达，它包含了事物的属性以及对事物的处理方法，并且具有封装与继承的特征。</p>
-</li>
-<li><p><strong>唯一标识符UID:</strong>此标志无论在世界上的任何地点都是独一无二的，为了保证其唯一性，它的产生机制如下：&lt;根&gt;.&lt;后缀&gt;，即由根和后缀两部分组成，其中根部分是由权威部门来制定的，通过权威部门来确保它的唯一性，之后再通过其他的机构部门分配到医院，同时也必须要保证其在内部网络的唯一性。</p>
-</li>
-<li><p><strong>信息对象定义(Information Object Definition,==lOD==)：**</strong>指的是信息实体的集合。每一个信息实体都是一个单独的对象属性，例如人的名字就是人这一对象的信息实体，当这些信息实体组合到特定的模块中就会形成数据集。在DICOM中一个IOD可以包含单个的信息实体也可以包含多个信息实体。通常情况下，管理功能的服务类使用的是包含单个信息实体的IOD，而处理图像的服务类使用的则是包含有多个信息实体的IOD。</p>
-</li>
-<li><p><strong>服务(Service):**</strong>服务指的是为其他应用程序所提供的功能，通过下层服务原语和信息对象来实现服务的功能。服务类指的是将一项用于对象的指令抽象出来进行描述，比如用于对象的命令和结果。服务类中包含了应用实体的概念，指的是一个实际的应用程序。服务中包括有服务类提供者和服务类使用者，服务类提供者是提供DICOM服务的应用实体，服务类使用者则是通过网络要求DICOM服务的应用实体。</p>
-</li>
-</ul>
-<ul>
-<li><strong>服务对象对(Service Object Pair,==SOP==)：</strong>它是传递DICOM信息的基本单位。每一个DICOM都包含一个SOP类，而这个SOP类表示的是实际对象，SOP根据UID来进行唯一表示，并且其类型可根据UID来识别，DICOM应用实体可以支持一个或多个SOP类。</li>
-</ul>
-<h2 id="dicom标准信息模型"><a href="#dicom标准信息模型" class="headerlink" title="dicom标准信息模型"></a>dicom标准信息模型</h2><p>DICOM的信息模型中主要包含有四个层次：病人层次(Patient)、研究层次(Study)、序列层次(Series)以及图像层次(Image)。</p>
-<ul>
-<li><p><strong>病人层次（Patient):</strong>病人IOD封装了该病人的基本信息。如病人姓名、性别、年龄、身高以及体重等基本信息。</p>
-</li>
-<li><p><strong>研究层次（Study):</strong>研究层次表示对特定类型请求的一个结果，它是DICOM信息模型中最为关键的一部分，因为整个DICOM影像都以研究层次的正确引导而进行。研究层次也包含了一些标识信息，通过该标识信息可以连接医院的影像管理系统(HIS)。</p>
-</li>
-<li><p><strong>序列层次（Series):</strong>序列层次中包含的是图像的序列，同时也标识了图像相关的一些属性，如图像属于何种类型，图像生成的日期以及生成该图像所使用的设备等等。序列层次中规定了图像序列的排列类型，而图像序列的排列类型可根据具体的临床应用来决定。</p>
-</li>
-<li><p><strong>图像层次（Image):</strong>图像层次包含的就是DICOM中的图像数据，它也是整个信息模型的最底层。由于不同设备产生的图像不同，可以是单层的图像，也可以是双层的图像，甚至还会有一些器官的运动图像。</p>
-</li>
-</ul>
-<h2 id="dicom文件结构"><a href="#dicom文件结构" class="headerlink" title="dicom文件结构"></a>dicom文件结构</h2><p>DICOM文件的组成包括两部分：即文件头和数据集，同时每个DICOM文件中还包含一个服务对象的SOP实例，其中包含了一个图像实例。</p>
-<h3 id="dicom文件头"><a href="#dicom文件头" class="headerlink" title="dicom文件头"></a>dicom文件头</h3><p>文件头是为了保持与通用文件结构的兼容性。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>组成</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>文件导读</td>
-<td>由128个字节16进制数组成，主要是为了进行一些特定的操作和应用协议，方便访问其内部的图像数据以及其他的信息，通常情况下这部分无内容，即用128个字节的00H来表示</td>
-</tr>
-<tr>
-<td>DICOM前缀</td>
-<td>由4个字节组成，对应的ASCII码为“DICM”，是用来判定该文件的格式是否为DICOM</td>
-</tr>
-<tr>
-<td>文件元信息元素</td>
-<td>一些其他的信息，如文件的元信息版本、传输语法、媒介存储SOP类、文件应用类、源AE标题、私有信息以及程序生成器等等。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="dicom数据集"><a href="#dicom数据集" class="headerlink" title="dicom数据集"></a>dicom数据集</h3><p>​        数据集是由大量的按照一定顺序排列的数据元所组成，而数据元又由四部分组成：TAG(标签)、VR(值表示)、值长度和值域。DICOM数据集描述的就是现实中一个具体事物抽象成的实例，而数据元表示的则是实例的各个属性，数据元包含的信息可以是简单的字符信息，也可以是数字信息，每个数据元按照其标签的递增方式进行排列。比如，如果将一个患者抽象成为一个实例，那么数据元表示的可以是患者的名字、年龄、性别以及患者所做的检查中包含的图像生成的日期、图像的类型和图像数据本身等等。</p>
-<p><img src="\images\毕设\dicom标准\2.jpg" style="zoom:50%;"></p>
-<p>（1）<strong>TAG(标签)</strong>：在DICOM数据元中，标签是用来对数据元做唯一的标识，即同一个标签在数据元中只能出现一次，但是有一种情况例外，就是当数据元使用嵌套模式的时候。标签是一个4字节的无符号整数，它由两部分组成，即组号和元素号。标签分为标准标签（Standard Data Elements Tag)和留给用户自定义的标签，一般来说，组号为偶数的标签就是标准标签，但是在制定DICOM标准的时候为了以后对DICOM的发展进行更新应用，一些特殊的标签暂时没做任何定义，也不允许自定义，包括组号为：0000、0002、0004和0006的标签，每一个标准标签的详细定义和说明都可以通过数据字典来进行查阅。组号为奇数的标签通常是留给用户自定义的标签，同样有一些特殊的例外，其中包括组号为：0001、0003、0005和0007的标签。</p>
-<p>（2）<strong>VR(值表示）：</strong>VR表示数据元素的数据类型，由2个字节的整数组成。例如，当VR为<strong>“PN”</strong>时，表示的是病人的姓名，当VR为<strong>“UI”</strong>时，表示的是统一标识符，当VR为<strong>“AT”</strong>时，表示的是属性标签，当VR为<strong>“FL”</strong>时，表示的是数据域采用的是单精度浮点型的类型。根据传输语法的可选性，VR可分为两类：即显式和隐式，如图2-3和图2-4所示。当为显式的时候，VR不可以被省略，但是当为隐式的时候VR必须被置零省略。随着DICOM版本的发展，以前版本的一些数据类型可能在新版本不再在被支持，当VR为“RET”时，就表示该类型在DICOM3.0中不被支持，如果为了兼容使用，必须包含以前版本标准的全部有效数据，但是如果仅仅是为了兼容，而不使用这些数据，也可以不包含。当VR为“SQ”时，表示数据域里还有嵌套的子数据元，而当子数据元里的数据类型依然为“SQ”时，就形成了递归的嵌套模式，在嵌套的递归模式下，要求对DICOM进行数据解析的时候必须能够遍及所有的嵌套数据。</p>
-<p><img src="\images\毕设\dicom标准\3.jpg" style="zoom:50%;"></p>
-<p>（3）<strong>值长度：</strong>值长度分为两种。首先，是根据VR值是显式还是隐式的类型决定值长度用十六位或者三十二位无符号整数来表示，它说明了是值域中数据的长度的字节数，这个字节数必须是偶数。值长度仅仅表示数据元中值域数据的长度，而不包含标签、值表示和它本身的字节长度。其次，是一个固定的三十二位的字段，表示SQ嵌套模式下或者未知的数据长度，对于0B和OW的数据类型，根据协商的语法未定义的部分也可使用。</p>
-<p>（4）<strong>值域：</strong>长度为偶数个字节，表示数据元的具体数据，VR决定了值域中数据的类型。当表示值的多重性的VM大于1的时候，说明了元素可以是多重取值。</p>
-<h2 id="dicom图像编码"><a href="#dicom图像编码" class="headerlink" title="dicom图像编码"></a>dicom图像编码</h2><p>在图像显示方式上，DICOM采用的是位图的编码的方式，即以像素点为单位，按照从左向右，从上向下的排列方式显示出每个点的颜色和光度。不同的光度变现出DICOM图像的不同特征，DICOM标准中用Tag(0028，0004)来表示光度，通常有以下5种：</p>
-<ul>
-<li>MONOCHROMEI：用白色显示灰阶图像的最小值，黑色显示图像的最大值</li>
-<li>MONOCHROMEZ：用黑色显示灰阶图像的最小值，白色显示图像的最大值</li>
-<li>RGB：用红色、绿色和蓝色的组合显示彩色图像</li>
-<li>HUE：用色调、饱和度和亮度的组合显示彩色图像</li>
-<li>PALLETEC0L0R：利用调色板进行显示的彩色图像</li>
-</ul>
-<p>DICOM图像分为两类，即灰度图像和彩色图像。DICOM图像的像素数据分为按字节编码（VR显示为OB)和按字编码（VR显示为OW)两种。灰度图像的色彩范围就是从黑色到白色，因此每一个像素只用亮度值就可以表示。彩色图像如上所述有三种实现的方式，通常24位的RGB图像称为真彩图像，包含了计算机领域所有的颜色，显示效果最好。每一个像素的数据有以下3个因素来表示：</p>
-<p>(1)<strong>分配位数(Bits Allocate):</strong>定义了分配给该采样值的二进制位数，数据元的标签为(0028，0100)。</p>
-<p>(2)<strong>存储位数(Bits Stored):</strong>定义了实际使用中该采样值所占用的位数，数据元的标签为(0028，0101)表示。</p>
-<p>(3)<strong>最高位位置(High Bit):</strong>定义了采样值最高位的位置，数据元的标签为(0028，0102)。</p>
-<p>一个像素单元由上述的三个元素来决定，分配位数、存储位数和最高位位置分别规定了像素数据的大小、存储位数和最高位的位置。分配位数必须大于等于存储位数。当该像素点由多个采样值组合而成的时候，多个采样值将会按照一定语法规则进行排列，而当采样值小于8位时，就会按照字节的方式进行编码，当采样值大于8的时候则会以字的方式进行编码。根据语法的不同，字节的高地位顺序也会有所不同。由于原始的DICOM图像所占用的空间极其庞大，既浪费空间，输出效率也十分低下，所以在不丢失图像数据信息的条件下，去除图像的冗余部分，释放存储空间，提高传输效率是十分必要的，通常会采用压缩的方式对DICOM图像进行处理，而压缩方法包括有损压缩和无损压缩。</p>
-<p>(1)<strong>无损压缩：</strong>顾名思义，就是在不丢失原始数据的条件下，对图像进行压缩，降低图像占用空间的一种方法。其优点就是完全不破坏原始的DICOM数据，但是缺点是压缩比较低，通常只能压缩到原始图像的二分之一到十分之一的范围内。根据其不破坏原始图像的特点，一般我们将此种压缩方法应用到对文本信息的压缩，例如患者的名字、年龄等等，这些信息必须要完整，否则无法识别。无损压缩使用的方法游程编码(Run Length Encode,RLE)以及霍夫曼(Huffman)编码等等。</p>
-<p>(2)<strong>有损压缩：</strong>与无损压缩正好互补，它的优点就是有非常高的压缩比，可以压缩到原始图像的十分之一到二百分之一，极其有效的释放占用的存储空间，提高传输效率，可是缺点就是会丢失一些原始数据，不过对于图像声音等用人体的感觉器官感受的信息其实在一般情况下是有着很大的冗余度的，适当的丢失部分休息并不会对患者的诊断带来影响，所以这种方式通常用到DICOM图像以及动态的画面中。有损压缩通常使用的方法是变换数据的表示域，比如将数据进行傅里叶变换到频域里，然后将频域中的低频部分去掉，然后再进行傅里叶反变换，就能实现压缩。类似的方法还有很多，但是考虑到医学是一门极其严谨的学科，所以国外很多地方不提倡有损压缩，因此DICOM通常会使用RLE游程编码的无损压缩和JPEG-LS的无损压缩方式。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/" class="post-title-link" itemprop="url">大纲</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-07 14:35:35" itemprop="dateCreated datePublished" datetime="2023-02-07T14:35:35+08:00">2023-02-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-04 19:48:44" itemprop="dateModified" datetime="2023-03-04T19:48:44+08:00">2023-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>199</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="选题"><a href="#选题" class="headerlink" title="选题"></a>选题</h2><p>基于fo-dicom的医学影像客户端系统设计与开发</p>
-<h2 id="内容要求"><a href="#内容要求" class="headerlink" title="内容要求"></a>内容要求</h2><p>1.选用一种编程语言实现DICOM协议中的C-FIND和C-MOVE功能</p>
-<p>2.设计并实现影像数据传输的客户端系统，完成向服务器查询、申请并接收下载影像数据。完成对下载医学影像的展示、移动、缩放、旋转、调窗、加标注等操作</p>
-<h2 id="参考论文"><a href="#参考论文" class="headerlink" title="参考论文"></a>参考论文</h2><p>1<a target="_blank" rel="noopener" href="https://webvpn.whut.edu.cn/https/77726476706e69737468656265737421fbf952d2243e635930068cb8/KCMS/detail/detail.aspx?filename=1014269763.nh&dbname=CMFD201402&dbcode=cdmd&uid=WEEvREcwSlJHSldSdmVpa3VEMHZFclhEcXpKSTNqc3ZFVE5nSnJqTk8rMD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MTU1MzZWNzNNVkYyNkdyRytGOWJLckpFYlBJUitmbnM0eVJZYW16MTFQSGJrcVdBMEZyQ1VSN21mWk9ackZ5RG4=">医学影像DICOM的显示和处理</a></p>
-<p>2 高效完善DICOM图像显示软件的开发研究</p>
-<p>3 DICOM医学图像查看器的设计与实现</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1420,14 +1360,14 @@ f(x) =
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1484,12 +1424,12 @@ f(x) =
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">148k</span>
+    <span title="站点总字数">149k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:15</span>
+    <span title="站点阅读时长">2:16</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
