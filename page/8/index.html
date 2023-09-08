@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E6%8C%87%E9%92%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/numpy/%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -212,297 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/02/C/%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">指针</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-02 19:00:39 / 修改时间：23:28:58" itemprop="dateCreated datePublished" datetime="2021-08-02T19:00:39+08:00">2021-08-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>char<em> ，int</em> 都是一种类型，都是扩展类型。int*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。所以指针变量和整型变量是不一样的，不能相互赋值。如下所示是个错误赋值语句：</p>
-<p><code>d = 10- *d</code></p>
-<h3 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*<span class="number">100</span> = <span class="number">25</span>;</span><br><span class="line">*(<span class="keyword">int</span>*)<span class="number">100</span> = <span class="number">25</span>;</span><br></pre></td></tr></table></figure>
-<p>间接访问符号只能访问只能作用于指针类型，100是一个整型，所以是非法的。</p>
-<p>但是使用强制类型转换即可达到赋值的目的。</p>
-<h3 id="NULL指针"><a href="#NULL指针" class="headerlink" title="NULL指针"></a>NULL指针</h3><p>NULL指针不指向任何东西，要使一个指针变量为NULL可以给它赋零值，机器内部而言实际地址值可能不同。</p>
-<p><strong>对NULL指针解引用间接访问是非法的！</strong></p>
-<h3 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">...</span><br><span class="line">*a = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
-<p>以上代码指针变量a未进行初始化，a的初始值若是非法地址则报错，若为合法地址则修改了合法地址本来的值。</p>
-<p><strong>注意：所以对指针间接访问时，确保它们被初始化了！如果知道指针将被初始化为什么地址，就把它初始化为该值，如果不知道，就初始化为NULL指针。</strong></p>
-<h3 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">int</span>* b = &amp;a;</span><br><span class="line"><span class="keyword">int</span>** c = &amp;b;</span><br></pre></td></tr></table></figure>
-<p>int**实际上还是一种扩展类型，叫做指向整型变量的指针变量的指针类型。即指针的指针。int表明了指针的指针指向的类型。</p>
-<h3 id="指针左值和右值和指针表达式"><a href="#指针左值和右值和指针表达式" class="headerlink" title="指针左值和右值和指针表达式"></a>指针左值和右值和指针表达式</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
-<li>左值就是一个可被储存的单元，右值就是一个可被读取的数据。</li>
-<li>左值必须是<strong>一个被明确了地址的内存存储单元</strong>，可以用来被赋值；右值必须是一个能被读出来的确确实实的值，这个值可以是数据，可以是指针，可以是结构，反正只要能被读出来的，都可以定义为右值。</li>
-</ol>
-<p>通俗来说，右值指的是式子本身代表的值，左值代表存储式子的地址。左值即是等式左边的，右值即是等式右边的。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">112</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *d = &amp;a;</span><br><span class="line">b = *d;</span><br></pre></td></tr></table></figure>
-<p>d的值分为两种情况：<br>d左值：表达式 d 表示的是存储d这个指针变量本身的内存地址。<br>d右值：表达式 d 表示的是存储变量a的内存地址。<br><em>d的值也分为两种情况： 
-</em>d左值：表达式 <em>d 表示的是存储变量a的内存地址。 
-</em>d右值：表达式 *d 表示的是存储变量a的内存地址中的所存的值。</p>
-<h4 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h4><p>声明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">char</span> *cp = &amp;ch;</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>右值</th>
-<th>左值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&amp;ch</td>
-<td>表示的是ch的地址可作为右值赋值</td>
-<td><strong>非法</strong>，相当于一个常量，没有指定地址，不能作为左值接受赋值</td>
-</tr>
-<tr>
-<td>cp</td>
-<td>表示的是ch的地址可作为右值赋值</td>
-<td>表示cp指针变量所在的地址可以作为左值接受赋值</td>
-</tr>
-<tr>
-<td>&amp;cp</td>
-<td>表示cp的地址可以作为右值赋值</td>
-<td><strong>非法</strong>，相当于一个常量，没有清晰定义地址，不能作为左值</td>
-</tr>
-<tr>
-<td>*cp</td>
-<td>表示cp指向的值可以作为右值赋值</td>
-<td>表示cp存储的地址，可以作为左值</td>
-</tr>
-<tr>
-<td>*cp+1</td>
-<td>表示cp指向的值加一即’b’</td>
-<td><strong>非法</strong>，没有一个明确地址存放’b’这个值，就像b+25=a这种赋值</td>
-</tr>
-<tr>
-<td>*(cp+1)</td>
-<td>表示cp指向的地址加一指向的值</td>
-<td>表示cp指向的地址加一</td>
-</tr>
-<tr>
-<td>++cp</td>
-<td>表示cp指向的地址加一</td>
-<td><strong>非法</strong>，没有明确地址存放加一以后的地址</td>
-</tr>
-<tr>
-<td>cp++</td>
-<td>表示cp指向的地址，但是之后地址加一</td>
-<td><strong>非法</strong>，没有明确地址存放加一以后的cp的地址</td>
-</tr>
-<tr>
-<td>*++cp</td>
-<td>表示cp加一后指向地址的值</td>
-<td>表示cp加一后的地址</td>
-</tr>
-<tr>
-<td>*cp++</td>
-<td>表示cp指向地址的值，之后cp地址加一</td>
-<td>表示cp存放的地址</td>
-</tr>
-<tr>
-<td>++*cp</td>
-<td>表示cp指向的值加一</td>
-<td><strong>非法</strong>，没有明确地址存放’b’</td>
-</tr>
-<tr>
-<td>(*cp)++</td>
-<td>表示cp指向的值，之后这个值加一</td>
-<td><strong>非法</strong>，没有明确地址存放’b’</td>
-</tr>
-<tr>
-<td>++*++cp</td>
-<td>表示cp指向地址加一后的值加一</td>
-<td><strong>非法</strong>，没有明确地址存放</td>
-</tr>
-<tr>
-<td>++*cp++</td>
-<td>表示cp指向地址的值加一，之后cp存储的地址加一</td>
-<td><strong>非法</strong>，没有明确地址存放’b’</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>就是说作为左值要有一个清晰明确的地址，比如&amp;ch这种就没有一个变量存储他的值，表示他的地址。</p>
-<p>作为左值时，实际上是右值对左值的地址进行赋值。</p>
-<h3 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h3><ul>
-<li>指针 ± 整数，目的地址 = 源地址 ± 整数*数据类型占据大小</li>
-<li>指针-指针，同一数组内可进行操作，得出的数据类型为ptrdiff_t，可以为负数。比如p1指向a[i],p2指向a[j],p1-p2得到i-j。</li>
-<li>&lt; &gt; ≥ ≤ 这些关系符最有可能用到。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E6%8C%87%E9%92%88%E8%A1%A5%E5%85%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/02/C/%E6%8C%87%E9%92%88%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">指针补充</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-02 16:12:36 / 修改时间：19:00:19" itemprop="dateCreated datePublished" datetime="2021-08-02T16:12:36+08:00">2021-08-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>288</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1.指针变量就是地址！</p>
-<p>2.<code>char* p = char *p</code></p>
-<p>3.char<em> ，int</em> 都是一种类型，都是扩展类型。int<strong>*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。</strong></p>
-<p>4.第一条语句相当于把app定义为一个指向字符的指针类型的数据类型。第二条语句使用这个新的数据类型app去定义a这个指针变量。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* app；</span><br><span class="line">app a；</span><br></pre></td></tr></table></figure>
-<p>5.定义指针类型的数据类型用typedef而不用#define 上面第二句只是将a定义为了指针变量而b是字符变量。所以定义一个新的数据类型最好用typedef</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> app char*；</span></span><br><span class="line">app a，b；</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/C/%E9%93%BE%E6%8E%A5%E5%B1%9E%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/02/C/%E9%93%BE%E6%8E%A5%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">链接属性和存储类型</a>
+            <a href="/2021/09/08/numpy/%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">创建数组</a>
         </h2>
 
         <div class="post-meta">
@@ -514,14 +224,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-02 12:49:56" itemprop="dateCreated datePublished" datetime="2021-08-02T12:49:56+08:00">2021-08-02</time>
+              <time title="创建时间：2021-09-08 23:20:38" itemprop="dateCreated datePublished" datetime="2021-09-08T23:20:38+08:00">2021-09-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-22 00:28:21" itemprop="dateModified" datetime="2021-08-22T00:28:21+08:00">2021-08-22</time>
+                <time title="修改时间：2021-09-12 21:00:21" itemprop="dateModified" datetime="2021-09-12T21:00:21+08:00">2021-09-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -529,7 +239,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
                 </span>
             </span>
 
@@ -539,7 +249,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -558,71 +268,96 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="链接属性"><a href="#链接属性" class="headerlink" title="链接属性"></a>链接属性</h2><h3 id="什么是链接属性？"><a href="#什么是链接属性？" class="headerlink" title="什么是链接属性？"></a>什么是链接属性？</h3><p>当组成一个程序的各个源文件分别被编译后,所有的目标文件以及那些从一个或多个函数库中引用的函数链接在一起,形成可执行程序.</p>
-<p>标识符的链接属性决定如何处理在不同文件中出现的标识符.标识符作用域与它的链接属性有关,但这两个属性并不相同.</p>
-<h3 id="链接属性分为三种"><a href="#链接属性分为三种" class="headerlink" title="链接属性分为三种:"></a>链接属性分为三种:</h3><ol>
-<li>external(外部):external链接属性的标识符不管声明几次,存在于多少个源文件,都是属于一个个体.</li>
-<li>internal(内部):internal链接属性的标识符在同一个源文件内所有声明都是同一个个体,但在其他源文件中多个声明分属不同个体.</li>
-<li>none(无):没有链接属性的标识符(none)总是当成单独个体,也就是多次声明被当做多个不同的实体.</li>
-</ol>
-<p><strong>缺省情况下：</strong></p>
-<p>函数和代码块之外的标识符链接属性为external,代码块之内的标识符链接属性为none</p>
-<p>如下所示，b，c，f链接属性为external，其他的为none：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span>* a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">c</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="修改链接属性的关键字："><a href="#修改链接属性的关键字：" class="headerlink" title="修改链接属性的关键字："></a>修改链接属性的关键字：</h3><p><strong>static:</strong></p>
-<ol>
-<li>对于缺省情况下为external链接属性的声明,在声明前加static,会使这个标识符变成这个源文件私有,这样可以防止它被其他源文件调用.</li>
-<li>对于缺省情况下为none链接属性的声明,在声明前加static,不会改变这个标识符的链接属性,也不会改变它的作用域,但会改变它的存储类型(生命周期),让它在程序执行的整个过程中一直存在.</li>
-</ol>
-<p><strong>extern:</strong></p>
-<ol>
-<li>在声明前加extern,会为这个标识符指定external链接属性.这样就可以在其他源文件声明的外部定义这个实体.</li>
-<li>如果标识符在第一次声明中已经指定了链接属性,那么extern在后面的第二次或以后的声明中,不会更改第一次声明所指定的链接属性.</li>
-</ol>
-<h2 id="存储类型"><a href="#存储类型" class="headerlink" title="存储类型"></a><strong>存储类型</strong></h2><p>变量的存储类型是指存储变量值的内存类型。有三个地方可以用于存储变量：普通内存、运行时堆栈、硬件寄存器。变量的缺省存储类型取决于它的声明位置。</p>
-<ol>
-<li>凡是在<strong>任何代码块之外声明的变量</strong>总是存储于静态内存中，也就是<strong>不属于堆栈</strong>的内存，这类变量称为<strong>静态(static)变量</strong>。静态变量在程序运行之前创建，更确切的说，是在将可执行文件加载到内存的时候创建，其在程序的整个执行期间始终存在。</li>
-<li>在<strong>代码块内部</strong>声明的变量的缺省存储类型是<strong>自动的(automatic)</strong>, 也就是说它存储于<strong>堆栈中</strong>，称为自动变量。有一个关键字auto就是用于修饰这种存储类型的，但它极少使用，因为代码块中的变量缺省情况下就是自动变量。在程序执行到声明自动变量的代码块时，自动变量才被创建，当程序的执行流离开代码块时，这些自动变量便自行销毁。在代码块内部声明的变量，如果给它加上static，可以使它的存储类型从自动变为静态。注意，修改变量的存储类型并不表示修改改变量的作用域。它任然只能在该代码块内部按名字访问。函数的形式参数不能声明为静态，因为实参总是在堆栈中传递给函数。</li>
-<li>关键字register(寄存器)可以用于自动变量的声明，提示它们应该存储于机器的硬件寄存器而不是内存中。</li>
-</ol>
-<p><strong>注意：</strong>静态变量未初始化会自动初始化为0，自动的不会并且初始化过程由链接器完成。</p>
-<h2 id="全局变量和局部变量"><a href="#全局变量和局部变量" class="headerlink" title="全局变量和局部变量"></a><strong>全局变量和局部变量</strong></h2><ol>
-<li>全局变量是定义在<strong>函数外部</strong>，通常是在程序的顶部。全局变量在整个程序生命周期内都是有效的，在任意的函数内部能访问全局变量。全局变量可以被任何函数访问。在程序中，局部变量和全局变量的名称可以相同，但是在函数内，如果两个名字相同，会使用局部变量值，全局变量不会被使用。</li>
-<li>在某个函数或块的内部声明的变量称为局部变量。它们只能被该函数或该代码块内部的语句使用。局部变量在函数外部是不可知的。</li>
-<li>函数的参数，形式参数，被当作该函数内的局部变量，如果与全局变量同名它们会优先使用.</li>
-</ol>
-<div class="table-container">
+          <h2 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h2><h3 id="列表创建数组"><a href="#列表创建数组" class="headerlink" title="列表创建数组"></a>列表创建数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">4.3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>])</span><br><span class="line">b = np.array(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="comment">#[1.  4.3 2.  5.  3. ]</span></span><br><span class="line"><span class="comment">#[1 2 3 4 5]</span></span><br></pre></td></tr></table></figure>
+<p>np.array用于从列表创建数组，Numpy要求数组数据类型一致，如果类型不匹配，向上转换。</p>
+<p>如果希望设置数组数据类型，可以使用dtype关键字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">4.3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>],dtype = <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[1.  4.3 2.  5.  3. ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="列表二维数组"><a href="#列表二维数组" class="headerlink" title="列表二维数组"></a>列表二维数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="built_in">range</span>(i,i+<span class="number">3</span>) <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[[2 3 4]</span></span><br><span class="line"><span class="comment"># [4 5 6]</span></span><br><span class="line"><span class="comment"># [6 7 8]]</span></span><br></pre></td></tr></table></figure>
+<h2 id="从头创建数组"><a href="#从头创建数组" class="headerlink" title="从头创建数组"></a>从头创建数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">//创建长度为<span class="number">10</span>的数组，数值都为零</span><br><span class="line">a = np.zeros(<span class="number">10</span>,dtype = <span class="string">&#x27;int&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">#[0 0 0 0 0 0 0 0 0 0]</span></span><br><span class="line"></span><br><span class="line">//创建数组为<span class="number">3</span>*<span class="number">5</span>的浮点型数组，数组的值都是<span class="number">1</span></span><br><span class="line">b = np.ones((<span class="number">3</span>,<span class="number">5</span>),dtype = <span class="string">&#x27;float&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="comment">#[[1. 1. 1. 1. 1.]</span></span><br><span class="line"><span class="comment"># [1. 1. 1. 1. 1.]</span></span><br><span class="line"><span class="comment"># [1. 1. 1. 1. 1.]]</span></span><br><span class="line"></span><br><span class="line">//创建数组为<span class="number">3</span>*<span class="number">5</span>的浮点型数组，数组的值都是<span class="number">1</span></span><br><span class="line">c = np.full((<span class="number">3</span>,<span class="number">5</span>),<span class="number">3.14</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="comment">#[[3.14 3.14 3.14 3.14 3.14]</span></span><br><span class="line"><span class="comment"># [3.14 3.14 3.14 3.14 3.14]</span></span><br><span class="line"><span class="comment"># [3.14 3.14 3.14 3.14 3.14]]</span></span><br><span class="line"></span><br><span class="line">//创建步进为<span class="number">2</span>的线性序列，与<span class="built_in">range</span>类似</span><br><span class="line">d = np.arange(<span class="number">0</span>,<span class="number">20</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"><span class="comment">#[ 0  2  4  6  8 10 12 14 16 18]</span></span><br><span class="line"></span><br><span class="line">//创建一个五元素数组，这五个书均匀分配到<span class="number">0</span>-<span class="number">1</span></span><br><span class="line">e = np.linspace(<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"><span class="comment">#[0.   0.25 0.5  0.75 1.  ]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、在<span class="number">0</span>~<span class="number">1</span>均匀分布的随机数组成的数组</span><br><span class="line">f = np.random.random((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(f)</span><br><span class="line"><span class="comment">#[[0.75927059 0.26065617 0.7533685 ]</span></span><br><span class="line"><span class="comment"># [0.89489277 0.1897646  0.0139238 ]</span></span><br><span class="line"><span class="comment"># [0.92145445 0.00646267 0.29805975]]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、均值为<span class="number">0</span>、方差为<span class="number">1</span>的正态分布的随机数数组</span><br><span class="line">g = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(g)</span><br><span class="line"><span class="comment">#[[ 1.25772902  0.00477293  1.32098154]</span></span><br><span class="line"><span class="comment"># [-0.53031544 -0.70725436  0.85319681]</span></span><br><span class="line"><span class="comment"># [ 0.33023376 -1.35357557 -0.96342333]]</span></span><br><span class="line"></span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的、[<span class="number">0</span>, <span class="number">10</span>)区间的随机整型数组</span><br><span class="line">h = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(h)</span><br><span class="line"><span class="comment">#[[4 3 7]</span></span><br><span class="line"><span class="comment"># [1 2 6]</span></span><br><span class="line"><span class="comment"># [2 7 0]]</span></span><br><span class="line">            </span><br><span class="line">//创建一个<span class="number">3</span>×<span class="number">3</span>的单位矩阵</span><br><span class="line">i = np.eye(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line"><span class="comment">#[[1. 0. 0.]</span></span><br><span class="line"><span class="comment"># [0. 1. 0.]</span></span><br><span class="line"><span class="comment"># [0. 0. 1.]]</span></span><br><span class="line">            </span><br><span class="line">//创建一个由<span class="number">3</span>个整型数组成的未初始化的数组，数组的值是内存空间中的任意值</span><br><span class="line">j = np.empty(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(j)</span><br><span class="line"><span class="comment">#[1. 1. 1.]</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><div class="table-container">
 <table>
 <thead>
 <tr>
-<th>变量类型</th>
-<th>声明的位置</th>
-<th>是否存在于堆栈</th>
-<th>作用域</th>
-<th>如果声明为static</th>
+<th>数据类型</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>全局</td>
-<td>所有代码块之外</td>
-<td>否</td>
-<td>从声明处到文件尾</td>
-<td>不允许从其他源文件访问</td>
+<td>bool_</td>
+<td>布尔值（真、True 或假、False），用一个字节存储</td>
 </tr>
 <tr>
-<td>局部</td>
-<td>代码块起始处</td>
-<td>是</td>
-<td>整个代码块</td>
-<td>变量不存储于堆栈中，它的值在程序整个执行期间一直保存</td>
+<td>int_</td>
+<td>默认整型（类似于 C 语言中的 long，通常情况下是 int64 或 int32）</td>
 </tr>
 <tr>
-<td>形式参数</td>
-<td>函数头部</td>
-<td>是</td>
-<td>整个函数</td>
-<td>不允许</td>
+<td>inc</td>
+<td>同 C 语言的 int 相同（通常是 int32 或 int64）</td>
+</tr>
+<tr>
+<td>intp</td>
+<td>用作索引的整型（和 C 语言的 ssize_t 相同，通常情况下是 int32 或 int64）</td>
+</tr>
+<tr>
+<td>int8</td>
+<td>字节（byte，范围从–128 到 127）</td>
+</tr>
+<tr>
+<td>int16</td>
+<td>整型（范围从–32768 到 32767）</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>整型（范围从–2147483648 到 2147483647）</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>整型（范围从–9223372036854775808 到 9223372036854775807）</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>无符号整型（范围从 0 到 255)</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>无符号整型（范围从 0 到 65535）</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>无符号整型（范围从 0 到 4294967295）</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>无符号整型（范围从 0 到 18446744073709551615）</td>
+</tr>
+<tr>
+<td>float_</td>
+<td>float64 的简化形式</td>
+</tr>
+<tr>
+<td>float16</td>
+<td>半精度浮点型：符号比特位，5 比特位指数（exponent），10 比特位尾数 （mantissa）</td>
+</tr>
+<tr>
+<td>float32</td>
+<td>单精度浮点型：符号比特位，8 比特位指数，23 比特位尾数</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>双精度浮点型：符号比特位，11 比特位指数，52 比特位尾数</td>
+</tr>
+<tr>
+<td>complex_</td>
+<td>complex128 的简化形式</td>
+</tr>
+<tr>
+<td>complex64</td>
+<td>复数，由两个 32 位浮点数表示</td>
+</tr>
+<tr>
+<td>complex128</td>
+<td>复数，由两个 64 位浮点数表示</td>
 </tr>
 </tbody>
 </table>
@@ -648,7 +383,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -662,7 +397,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/01/C/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" class="post-title-link" itemprop="url">字节对齐</a>
+            <a href="/2021/09/08/py/%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数</a>
         </h2>
 
         <div class="post-meta">
@@ -674,14 +409,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-01 19:51:49" itemprop="dateCreated datePublished" datetime="2021-08-01T19:51:49+08:00">2021-08-01</time>
+              <time title="创建时间：2021-09-08 22:48:56" itemprop="dateCreated datePublished" datetime="2021-09-08T22:48:56+08:00">2021-09-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-25 00:40:02" itemprop="dateModified" datetime="2021-08-25T00:40:02+08:00">2021-08-25</time>
+                <time title="修改时间：2021-09-09 22:17:21" itemprop="dateModified" datetime="2021-09-09T22:17:21+08:00">2021-09-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -689,7 +424,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
                 </span>
             </span>
 
@@ -699,7 +434,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
+              <span>4.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -718,124 +453,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="字节对齐概念"><a href="#字节对齐概念" class="headerlink" title="字节对齐概念"></a>字节对齐概念</h3><p>许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。</p>
-<h3 id="为什么要字节对齐"><a href="#为什么要字节对齐" class="headerlink" title="为什么要字节对齐"></a>为什么要字节对齐</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
-<p>各个硬件平台对存储空间的处理上有很大的不同，一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐。比如sparc系统，如果取未对齐的数据会发生错误，举个例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">8</span>];</span><br><span class="line"><span class="keyword">char</span> *p = &amp;ch[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> i = *(<span class="keyword">int</span> *)p;</span><br></pre></td></tr></table></figure>
-<p>运行时会报segment error，而在x86上就不会出现错误，只是效率下降。</p>
-<h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
-<li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
-<li><strong>结构体或者类的自身对齐值</strong>是其成员中自身对齐值最大的那个值。</li>
-<li><strong>指定对齐值</strong>：是指使用#pragma pack (value)时的指定对齐值value。</li>
-<li>数据成员、结构体和类的<strong>有效对齐值</strong>：自身对齐值和指定对齐值中小的那个值。</li>
-</ol>
-<h3 id="不同数据类型对齐原则"><a href="#不同数据类型对齐原则" class="headerlink" title="不同数据类型对齐原则"></a>不同数据类型对齐原则</h3><p>内存对齐主要遵循下面两个原则:</p>
-<ol>
-<li><ul>
-<li>结构体成员变量的起始地址能够被其成员变量<strong>有效对齐值</strong>整除。</li>
-<li>结构体总体大小能够被<strong>结构体有效对齐值</strong>整除，如不能则在后面补充字节。</li>
-</ul>
-<p>即结构体每一个数据类型都要对齐</p>
-</li>
-<li><p>标准数据类型，它的地址只要是它的长度的整数倍就行</p>
-</li>
-<li><p>数组 ：按照基本数据类型对齐，第一个对齐了后面的自然也就对齐了。</p>
-</li>
-<li><p>联合 ：按其包含的长度最大的数据类型对齐。</p>
-</li>
-<li><p>在一个struct中包含另一个struct，内部struct应该以它的最大数据成员大小的整数倍开始存储。如 struct A 中包含 struct B, struct B 中包含数据成员 char, int, double，则 struct B 应该以sizeof(double)=8的整数倍为起始地址。</p>
-</li>
-</ol>
-<p>其实这里有点不严谨，编译器在编译的时候是可以指定对齐大小的，实际使用的有效对齐其实是取指定大小和自身大小的最小值，一般默认的对齐大小是4，这个模数是可以改变的，可以用预编译命令：</p>
-<p><code>#pragma pack(n)</code></p>
-<p>取消自定义字节对齐方式</p>
-<p><code>#pragma pack()</code></p>
-<h3 id="不同系统的数据模型"><a href="#不同系统的数据模型" class="headerlink" title="不同系统的数据模型"></a>不同系统的数据模型</h3><p>本机模型（LLP64）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
-<p>其他模型</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Data Type</th>
-<th>ILP32</th>
-<th>ILP64</th>
-<th>LP64</th>
-<th>LLP64</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>char</td>
-<td>8</td>
-<td>8</td>
-<td>8</td>
-<td>8</td>
-</tr>
-<tr>
-<td>short</td>
-<td>16</td>
-<td>16</td>
-<td>16</td>
-<td>16</td>
-</tr>
-<tr>
-<td>int</td>
-<td>32</td>
-<td>64</td>
-<td>32</td>
-<td>32</td>
-</tr>
-<tr>
-<td>long</td>
-<td>32</td>
-<td>64</td>
-<td>64</td>
-<td>32</td>
-</tr>
-<tr>
-<td>long long</td>
-<td>64</td>
-<td>64</td>
-<td>64</td>
-<td>64</td>
-</tr>
-<tr>
-<td>pointer</td>
-<td>32</td>
-<td>64</td>
-<td>64</td>
-<td>64</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>绝大部分64位的Unix，linux都是使用的LP64模型；32位Linux系统是ILP32模型；64位的Windows使用的是LLP64(long long and point 64)模型。32单片机使用的是ILP32</p>
-<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>​        最后看一下D结构体，假如在64位系统中，就占用64个字节</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">long</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
-<p><strong>这种方法不能指定内存对齐小于默认对齐，也就是说它只能调大不能调小。而且比较坑的是调小的时候是没任何提示（包括警告和错误）</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-<p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) = 8，刚好占的空间大小是8的整数倍1倍</p>
-<p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
-<p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
-<p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
-<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将<strong>attribute</strong>((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f1;</span><br><span class="line">	<span class="keyword">char</span> f2;</span><br><span class="line">	<span class="keyword">char</span> f3;</span><br><span class="line">	<span class="keyword">int</span> f4;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
-<p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
-<p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
-<p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
-<p>当align作用于结构体定义时会改变结构体的大小。结构体最终大小为aligned指定大小的整数倍</p>
-<p>总结：</p>
-<p><code>#pragma pack(n)</code>：针对的是结构体内每一个成员相对第一个成员的偏移地址对齐。</p>
-<p><code>__attribute__((aligned (n)))</code>：针对的是整个结构体在整个内存地址空间分配时的对齐。</p>
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>函数用法如下，函数名就是一个指向函数对象的一个引用，可以把函数名称赋值给一个变量，相当于给这个函数起了一个别名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n1 = <span class="number">255</span></span><br><span class="line">a = <span class="built_in">hex</span></span><br><span class="line"><span class="built_in">print</span>(a(n1))<span class="comment">#0xff</span></span><br></pre></td></tr></table></figure>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>定义一个函数，使用def关键字。如果想定义一个空函数，可以使用pass语句，如图中所示。pass语句也可以作为占位符，如图中所示。同样，可以使用isinstance函数检查输入参数进行参数检查，此函数返回值为布尔值。同时函数返回值用return。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(x,(<span class="built_in">int</span> ,<span class="built_in">float</span>)):</span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">&#x27;type error&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">60</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">elif</span> x &gt;= <span class="number">18</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;teen&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;baby&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nop</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">nop()</span><br><span class="line">age(<span class="number">19</span>)</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">19</span>))</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">70</span>))</span><br><span class="line"><span class="built_in">print</span>(age(<span class="number">8</span>))</span><br><span class="line">age(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">teen</span><br><span class="line">teen</span><br><span class="line"><span class="literal">None</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">baby</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test2.py&quot;</span>, line <span class="number">17</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    age(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test2.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> age</span><br><span class="line">    <span class="keyword">raise</span> TypeError(<span class="string">&#x27;type error&#x27;</span>)</span><br><span class="line">TypeError: <span class="built_in">type</span> error</span><br></pre></td></tr></table></figure>
+<h2 id="返回多值"><a href="#返回多值" class="headerlink" title="返回多值"></a>返回多值</h2><p>返回多值实际上是还是一个值，只不过这个值的类型是元组tuple，并且按位赋值给了变量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span>(<span class="params">x,y,step,angle = <span class="number">0</span></span>):</span></span><br><span class="line">    nx = x + step * math.cos(angle)</span><br><span class="line">    ny = y - step * math.sin(angle)</span><br><span class="line">    <span class="keyword">return</span> nx,ny</span><br><span class="line">x,y = move(<span class="number">100</span>,<span class="number">100</span>,<span class="number">60</span>,math.pi/<span class="number">6</span>)</span><br><span class="line">r = move(<span class="number">100</span>,<span class="number">100</span>,<span class="number">60</span>,math.pi/<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">151.96152422706632</span> <span class="number">70.0</span></span><br><span class="line">(<span class="number">151.96152422706632</span>, <span class="number">70.0</span>)</span><br><span class="line"><span class="number">151.96152422706632</span></span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>函数的参数可以使用默认参数，这样可以方便输入，当有参数一直是固定或者变化的场合很少时，就可以使用默认参数，默认参数是指在定义函数时就给参数赋一个值，这样调用时不需要在写出来，当然了如果输入参数不想是默认参数是可以改变输入。<strong>但是一般默认参数在必选参数后面，因为为了避免报错。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pow</span>(<span class="params">x,n = <span class="number">2</span></span>):</span></span><br><span class="line">    s = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        s *= x</span><br><span class="line">        n = n-<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(<span class="number">5</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<p>默认参数使用中的陷阱。实际上默认参数L也是一个变量它指向[ ]这个对象，每次调用函数时，如果改变了L的内容，下一次调用时，L的默认参数也会发生变化。所以记住默认参数必须是<strong>不可变对象</strong>，如图中所示使用None这个关键字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_append</span>(<span class="params">L = []</span>):</span></span><br><span class="line">    L.append(<span class="string">&#x27;END&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br><span class="line"><span class="built_in">print</span>(m_append(),m_append(),m_append())</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">y_append</span>(<span class="params">L = <span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(<span class="string">&#x27;END&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> L</span><br><span class="line"><span class="built_in">print</span>(y_append(),y_append(),y_append())</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>, <span class="string">&#x27;END&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>] [<span class="string">&#x27;END&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>可变参数用处在于传入参数个数是可变的，比如一个函数参数个数不确定，会用list，tuple传入，但是可以在参数前加上符号，变量会自动变成tuple传给函数内部numbers，如果如下面tuple已被定义，则也可以用符号将其变成可变参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span>(<span class="params">numbers</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + n * n</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"><span class="built_in">print</span>(calc([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_calc</span>(<span class="params">*numbers</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + n * n</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"><span class="built_in">print</span>(m_calc(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">num = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(m_calc(*num))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。</p>
+<p>关键字参数有什么用？它可以扩展函数的功能。比如，在person函数里，我们保证能接收到name和age这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。用法如下面所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span>(<span class="params">name,age,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;name:&#x27;</span>,name,<span class="string">&#x27;age:&#x27;</span>,age,<span class="string">&#x27;other:&#x27;</span>,kw)</span><br><span class="line">person(<span class="string">&#x27;Michael&#x27;</span>,<span class="number">30</span>)</span><br><span class="line">person(<span class="string">&#x27;Bob&#x27;</span>,<span class="number">35</span>,city = <span class="string">&#x27;Beijing&#x27;</span>)</span><br><span class="line">person(<span class="string">&#x27;Adam&#x27;</span>,<span class="number">45</span>,gender = <span class="string">&#x27;M&#x27;</span>,job = <span class="string">&#x27;Engineer&#x27;</span>)</span><br><span class="line">extra = &#123;<span class="string">&#x27;city&#x27;</span> : <span class="string">&#x27;Beijing&#x27;</span>,<span class="string">&#x27;job&#x27;</span> : <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br><span class="line">person(<span class="string">&#x27;Jack&#x27;</span>,<span class="number">24</span>,**extra)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">name: Michael age: <span class="number">30</span> other: &#123;&#125;</span><br><span class="line">name: Bob age: <span class="number">35</span> other: &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;Beijing&#x27;</span>&#125;</span><br><span class="line">name: Adam age: <span class="number">45</span> other: &#123;<span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;job&#x27;</span>: <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br><span class="line">name: Jack age: <span class="number">24</span> other: &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;Beijing&#x27;</span>, <span class="string">&#x27;job&#x27;</span>: <span class="string">&#x27;Engineer&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="命名关键字参数"><a href="#命名关键字参数" class="headerlink" title="命名关键字参数"></a>命名关键字参数</h3><p>如果要限制关键字参数名字就用命名关键字参数。要使用*分隔符。命名关键字参数必须传入关键字名，这和位置参数不同，命名关键字参数可以有缺省值，若函数中已经有可变参数则不需要额外加分隔符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span>(<span class="params">name,age,*,city = <span class="string">&#x27;Beijing&#x27;</span>,job</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name,age,city,job)</span><br><span class="line">person(<span class="string">&#x27;m&#x27;</span>,<span class="number">18</span>,job = <span class="string">&#x27;teacher&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_person</span>(<span class="params">name,age,*args,city,job</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name,age,args,city,job)</span><br><span class="line">m_person(<span class="string">&#x27;y&#x27;</span>,<span class="number">18</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,city = <span class="string">&#x27;Beijing&#x27;</span>,job = <span class="string">&#x27;teacher&#x27;</span>)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">m <span class="number">18</span> Beijing teacher</span><br><span class="line">y <span class="number">18</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) Beijing teacher</span><br></pre></td></tr></table></figure>
+<h3 id="参数组合"><a href="#参数组合" class="headerlink" title="参数组合"></a>参数组合</h3><p>在Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
+<p>在函数调用的时候，Python解释器自动按照参数位置和参数名把对应的参数传进去。</p>
+<p>最神奇的是通过一个tuple和dict，你也可以调用上述函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">a,b,c = <span class="number">0</span>,*args,d,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;a = &#x27;</span>,a,<span class="string">&#x27;b = &#x27;</span>,b,<span class="string">&#x27;c = &#x27;</span>,c,<span class="string">&#x27;args = &#x27;</span>,args,<span class="string">&#x27;d = &#x27;</span>,d,<span class="string">&#x27;kw = &#x27;</span>,kw)</span><br><span class="line">f1(<span class="number">1</span>,<span class="number">2</span>,<span class="number">233</span>,<span class="number">3</span>,<span class="number">3</span>,d = <span class="string">&#x27;bejing&#x27;</span>,x = <span class="string">&#x27;shanghai&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span>(<span class="params">a,b,c = <span class="number">0</span>,*args,d,**kw</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;a = &#x27;</span>,a,<span class="string">&#x27;b = &#x27;</span>,b,<span class="string">&#x27;c = &#x27;</span>,c,<span class="string">&#x27;args = &#x27;</span>,args,<span class="string">&#x27;d = &#x27;</span>,d,<span class="string">&#x27;kw = &#x27;</span>,kw)</span><br><span class="line">args = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">kw = &#123;<span class="string">&#x27;d&#x27;</span> : <span class="number">88</span>,<span class="string">&#x27;x&#x27;</span> : <span class="string">&#x27;#&#x27;</span>&#125;</span><br><span class="line">f2(*args,**kw)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">a =  <span class="number">1</span> b =  <span class="number">2</span> c =  <span class="number">233</span> args =  (<span class="number">3</span>, <span class="number">3</span>) d =  bejing kw =  &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;shanghai&#x27;</span>&#125;</span><br><span class="line">a =  <span class="number">1</span> b =  <span class="number">2</span> c =  <span class="number">3</span> args =  (<span class="number">4</span>,) d =  <span class="number">88</span> kw =  &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;#&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h3><p>使用递归函数需要注意防止栈溢出。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递归调用的次数过多，会导致栈溢出。</p>
+<p>解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n * fact(n - <span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m_fact</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> fact_iter(n,<span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact_iter</span>(<span class="params">num,product</span>):</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> product</span><br><span class="line">    <span class="keyword">return</span> fact_iter(num - <span class="number">1</span>,num * product)</span><br><span class="line"><span class="built_in">print</span>(fact(<span class="number">4</span>),m_fact(<span class="number">4</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">24</span> <span class="number">24</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -857,7 +499,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -871,7 +513,197 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/01/C/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">attribute关键字</a>
+            <a href="/2021/09/08/py/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">字典和集合</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 22:11:50 / 修改时间：22:48:53" itemprop="dateCreated datePublished" datetime="2021-09-08T22:11:50+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="字典-dict"><a href="#字典-dict" class="headerlink" title="字典(dict)"></a>字典(dict)</h2><p>字典是key-value储存，key为元素名称，value为元素值。可以直接赋值字符串或者整数。</p>
+<p>通过in操作可以判断字典中有无此元素，有则返回true，无则返回False。也可以通过get（）函数判断，有则返回元素值，无返回None，也可以自己决定没有的时候返回什么值。通过pop（）函数可以删除字典中的元素。List不能作为key，因为key是不可变的。</p>
+<p>Tuple虽然可以作为key</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">3</span>&#125;</span><br><span class="line">d[<span class="string">&#x27;a&#x27;</span>] = <span class="string">&#x27;a&#x27;</span></span><br><span class="line">d[<span class="string">&#x27;d&#x27;</span>] = <span class="number">4</span></span><br><span class="line"><span class="built_in">print</span>(d[<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;d&#x27;</span> <span class="keyword">in</span> d)</span><br><span class="line"><span class="built_in">print</span>(d.get(<span class="string">&#x27;e&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(d.get(<span class="string">&#x27;e&#x27;</span>,-<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(d.pop(<span class="string">&#x27;d&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">-<span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集合-set"><a href="#集合-set" class="headerlink" title="集合(set)"></a>集合(set)</h2><p>Set和dict类似，只是不储存value。在set中，用list加入元素，set会自动过滤重复元素，add()函数可以添加元素，重复添加没有用，remove（）元素可以去除元素，集合输出是无序的，所以两个集合可以进行并，或等操作。也可以通过in判断是否元素存在，但是get函数不行。    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">set</span>([<span class="number">3</span>,<span class="number">2</span>,<span class="string">&#x27;d&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="string">&#x27;a&#x27;</span>,<span class="number">4</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">s.add(<span class="number">6</span>)</span><br><span class="line">s.add(<span class="number">6</span>)</span><br><span class="line">s.add(<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">s.remove(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">d = <span class="built_in">set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(s&amp;d)</span><br><span class="line"><span class="built_in">print</span>(s|d)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;a&#x27;</span>&#125;</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;a&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="再议不可变对象"><a href="#再议不可变对象" class="headerlink" title="再议不可变对象"></a>再议不可变对象</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;abc&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(a.replace(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;A&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">c = <span class="string">&#x27;abc&#x27;</span></span><br><span class="line">d = c.replace(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(c,d)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">Abc</span><br><span class="line">abc</span><br><span class="line">abc Abc</span><br></pre></td></tr></table></figure>
+<p>首先看一个例子，replace函数可以替换字符串中的元素，但是实际上replace函数作用的是’abc’这个字符串而不是对于a这个变量，所以以c，d来看，replace函数对字符串替换以后生成一个新的字符串赋值给d变量，而c这个变量并没有受到replace函数的影响。</p>
+<h2 id="dict哈希表原理"><a href="#dict哈希表原理" class="headerlink" title="dict哈希表原理"></a>dict哈希表原理</h2><p>dict则为了快速查找使用了一种特别的方法，哈希表。哈希表采用哈希函数从key计算得到一个数字（哈希函数有个特点：对于不同的key，有很大的概率得到的哈希值也不同），然后直接把value存储到这个数字所对应的地址上，比如key=’ABC’，value=10，经过哈希函数得到key对应的哈希值为123，那么就申请一个有1000个地址（从0到999）的内存，然后把10存放在地址为123的地方。类似的，对于key=’BCD’，value=20，得到key的哈希值为234，那么就把20存放在地址为234的地方。对于这样的表查找起来是非常方便的。只要给出key，计算得到哈希值，然后直接到对应的地址去找value就可以了。无论有几个元素，都可以直接找到value，无需遍历整个表。不过虽然dict查找速度快，但内存浪费严重，你看我们只存储了两个元素，都要申请一个长度为1000的内存。现在你知道为啥key要用不可变对象了吧？因为不可变对象是常量，每次的哈希值算出来都是固定的，这样就不会出错。比如key=’ABC’，value=10，存储地址为123，假设我突发奇想，把key改成’BCD’，那么当查找’BCD’的value的时候就会去234的地址找，但那里啥也没有，这就乱套了。你看我们上面有一句话：对于不同的key，有很大的概率得到的哈希值也不同。那么有很小的概率不同的key可以得到相同的哈希值了？没错，比如对于我们的例子来说，哈希值只有3位，那么只要元素个数超过1000，就一定会有至少两个key的哈希值相同（鸽笼原理），这种情况叫“冲突”，设计哈希表的时候要采取办法减少冲突，实在冲突了也要想办法补救。不过这是编译器的事情，况且对于初学者的我们来说碰到的冲突的概率基本等于零，就不用操心了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%A4%E6%96%AD%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/py/%E5%88%A4%E6%96%AD%E5%BE%AA%E7%8E%AF/" class="post-title-link" itemprop="url">判断循环</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 11:05:18 / 修改时间：22:08:14" itemprop="dateCreated datePublished" datetime="2021-09-08T11:05:18+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>关于if的用法格式如下，elif是else if，注意对齐。并且这里注意input返回值为字符串类型，不能直接和整数比较大小，所以用int()函数来转化为整形。但是输入abc报错，int()函数发现一个字符串并不是合法的数字时就会报错，程序就退出了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>(<span class="string">&#x27;x = &#x27;</span>)</span><br><span class="line">x = <span class="built_in">int</span>(s)</span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">18</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;yes&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> x &gt; <span class="number">6</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;no&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hh&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>range函数解释，range（x，y，foot），x-y为范围，foot为步长，上限为y-1，不会超过y。</p>
+<p>下面为range函数使用实例，类似于中for的使用，进行一遍i的循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>,<span class="number">2</span>)))</span><br><span class="line"><span class="comment">#[2, 4, 6, 8]</span></span><br><span class="line">s = <span class="string">&#x27;sound&#x27;</span></span><br><span class="line">s = <span class="string">&#x27;sound&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="built_in">print</span>(s[i])</span><br><span class="line"><span class="built_in">print</span>(s[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">s</span><br><span class="line">o</span><br><span class="line">u</span><br><span class="line">n</span><br><span class="line">d</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<p>上图也包括了循环的用法，range(len(s))把值传给i，不断打印。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;Ma&#x27;</span>,<span class="string">&#x27;Me&#x27;</span>,<span class="string">&#x27;My&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">Ma</span><br><span class="line">Me</span><br><span class="line">My</span><br></pre></td></tr></table></figure>
+<p>for中else是穷尽列表导致循环被终止时执行的，break即跳出循环。break 语句可以跳出 for 和 while 的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else 块将不执行。 continue 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,num):</span><br><span class="line">        <span class="keyword">if</span> num%i == <span class="number">0</span>:</span><br><span class="line">            j = num/i</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;%d 等于 %d * %d&#x27;</span>%(num,i,j))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(num,<span class="string">&#x27;是一个质数&#x27;</span>)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="number">10</span> 等于 <span class="number">2</span> * <span class="number">5</span></span><br><span class="line"><span class="number">11</span> 是一个质数</span><br><span class="line"><span class="number">12</span> 等于 <span class="number">2</span> * <span class="number">6</span></span><br><span class="line"><span class="number">13</span> 是一个质数</span><br><span class="line"><span class="number">14</span> 等于 <span class="number">2</span> * <span class="number">7</span></span><br><span class="line"><span class="number">15</span> 等于 <span class="number">3</span> * <span class="number">5</span></span><br><span class="line"><span class="number">16</span> 等于 <span class="number">2</span> * <span class="number">8</span></span><br><span class="line"><span class="number">17</span> 是一个质数</span><br><span class="line"><span class="number">18</span> 等于 <span class="number">2</span> * <span class="number">9</span></span><br><span class="line"><span class="number">19</span> 是一个质数</span><br></pre></td></tr></table></figure>
+<p>类似的while用法如下：while中加else，当while条件不满足时，执行else后的语句，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">n = <span class="number">99</span></span><br><span class="line"><span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">sum</span> = <span class="built_in">sum</span> + n</span><br><span class="line">    n = n - <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>)</span><br><span class="line"><span class="comment">#2500</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(count,<span class="string">&quot;is less than 5&quot;</span>)</span><br><span class="line">    count = count + <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(count,<span class="string">&quot;is not less than 5&quot;</span>)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="number">0</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">is</span> less than <span class="number">5</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">is</span> <span class="keyword">not</span> less than <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/Java/%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/Java/%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Java基础</a>
         </h2>
 
         <div class="post-meta">
@@ -883,14 +715,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-01 19:10:03" itemprop="dateCreated datePublished" datetime="2021-08-01T19:10:03+08:00">2021-08-01</time>
+              <time title="创建时间：2021-09-08 10:42:53" itemprop="dateCreated datePublished" datetime="2021-09-08T10:42:53+08:00">2021-09-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-24 02:24:39" itemprop="dateModified" datetime="2021-08-24T02:24:39+08:00">2021-08-24</time>
+                <time title="修改时间：2021-11-01 14:53:39" itemprop="dateModified" datetime="2021-11-01T14:53:39+08:00">2021-11-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -898,7 +730,197 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>64</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>选择题：标识符</p>
+<p>简答题：类，对象，继承的定义</p>
+<p>代码阅读题：阅读代码，写出结果（书上源码）</p>
+<p>代码填空题：各种基本类</p>
+<p>程序设计题（18分）：</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/py/%E5%88%97%E8%A1%A8%E5%85%83%E7%BB%84/" class="post-title-link" itemprop="url">列表和元组</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-08 10:32:14 / 修改时间：22:27:12" itemprop="dateCreated datePublished" datetime="2021-09-08T10:32:14+08:00">2021-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="列表-list"><a href="#列表-list" class="headerlink" title="列表(list)"></a>列表(list)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>list数据类型是列表，下标从零开始，使用-1下标可以直接找到最后一个元素，依次可以获得所有元素。-4时列表越界报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">0</span>],x[-<span class="number">1</span>],x[-<span class="number">3</span>],x)</span><br><span class="line"><span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;d:/VsPython/test3.py&quot;</span>, line <span class="number">3</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(x[-<span class="number">4</span>])</span><br><span class="line">IndexError: <span class="built_in">list</span> index out of <span class="built_in">range</span></span><br></pre></td></tr></table></figure>
+<h3 id="append，pop，insert，len函数"><a href="#append，pop，insert，len函数" class="headerlink" title="append，pop，insert，len函数"></a>append，pop，insert，len函数</h3><p>Python中可以使用append（）添加末尾列表值，也可以用.insert（）在指定位置添加。此函数返回值为空值，通过print打印出来返回None。</p>
+<p>也可以使用pop（）函数删除列表末尾元素，pop（i）可以删除指定下标i的元素。Pop（）函数为一个值函数，可以print出来，如果删除的是字符串，即使没有单引号也可以打印出来。</p>
+<p>也可以直接赋值改变列表中元素的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">x.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x.insert(<span class="number">1</span>,<span class="string">&#x27;insert&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x.pop(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.pop())</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x[<span class="number">1</span>] = <span class="string">&#x27;change&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="number">4</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="string">&#x27;change&#x27;</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>列表里也可以是另一个列表，可以用len函数测试列表长度，要获取y列表中5的值，可以y[1]，也可以x[4][1]。同时列表可以为空，L = [],len(L)=0 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">y = [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">x = [<span class="number">1</span>,<span class="string">&#x27;one&#x27;</span>,[<span class="number">2</span>,<span class="string">&#x27;two&#x27;</span>],<span class="number">3</span>,y]</span><br><span class="line"><span class="built_in">print</span>(y[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">4</span>][<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(x[<span class="number">2</span>],x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(x))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">[<span class="number">2</span>, <span class="string">&#x27;two&#x27;</span>] one</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+<h3 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h3><p>列表可以使用list.sort（）函数对list中的内容进行排序，并且只能是同一类型的数据，如果是字符串类型，就按ASCII码大小进行排序，如果数据类型不一样就会报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">s = [<span class="string">&#x27;cnm&#x27;</span>,<span class="string">&#x27;bshi&#x27;</span>,<span class="string">&#x27;Dwls&#x27;</span>,<span class="string">&#x27; &#x27;</span>]</span><br><span class="line">d.sort()</span><br><span class="line">s.sort()</span><br><span class="line"><span class="built_in">print</span>(d,s)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;Dwls&#x27;</span>, <span class="string">&#x27;bshi&#x27;</span>, <span class="string">&#x27;cnm&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="元组-tuple"><a href="#元组-tuple" class="headerlink" title="元组(tuple)"></a>元组(tuple)</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>Tuple叫元组，一旦列出元素就不可以修改，大小也不行。因为其不可变，所以一旦列出就很安全。其形式如下图所示，并且如果只定义一个元素，则需要加一个逗号，消除他可能是赋值歧义的可能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">y = (<span class="number">1</span>,)</span><br><span class="line">z = (<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y,z)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>) (<span class="number">1</span>,) <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="可变tuple"><a href="#可变tuple" class="headerlink" title="可变tuple"></a>可变tuple</h3><p>这里变的是list，而不是tuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>])</span><br><span class="line">x[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">&#x27;X&#x27;</span></span><br><span class="line">x[<span class="number">2</span>][<span class="number">1</span>] = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, [<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="关于list，tuple实质解释"><a href="#关于list，tuple实质解释" class="headerlink" title="关于list，tuple实质解释"></a>关于list，tuple实质解释</h2><p>list和tuple其实是用链表顺序存储的，也就是前一个元素中存储了下一个元素的位置，这样只要找到第一个元素的位置就可以顺藤摸瓜找到所有元素的位置，所以list的名字其实就是个指针，指向list的第一个元素的位置。list的插入和删除等可以直接用链表的方式进行，比如我要在第1个元素和第2个元素中间插入一个元素，那么直接在链表的最后面（我们假设这个list只有两个元素，那么也就是在第3个元素的位置上）插入这个元素，然后把第一个元素指针指向这个元素（第3个位置），然后再把新插入的元素的指针指向原来的第2个元素，这样插入操作就完成了。读取这个list的时候，先用list的名字（就是个指针，指向第1个元素的位置）找到第一个元素，然后用第1一个元素的指针找到第2个元素（位置3），然后用第2个元素的指针找到第3个元素（位置2），以此类推。所以list的顺序和内存中的实际顺序其实不一定完全对应。这种存储方式不会浪费内存，但查找起来特别费时间，因为要按照链表一个一个找下去，如果你的list特别大的话，那么要等好久才会找到结果。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/py/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="post-title-link" itemprop="url">字符串和编码</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-07 20:05:36 / 修改时间：20:42:20" itemprop="dateCreated datePublished" datetime="2021-09-07T20:05:36+08:00">2021-09-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
                 </span>
             </span>
 
@@ -927,27 +949,326 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
-<h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))<span class="comment">//取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐。</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-<p>当aligned作用于变量时，其作用是告诉编译器为变量分配内存的时候，要分配在指定对齐的内存上.作用于变量之上不会改变变量的大小。   例如：int a <strong>attribute</strong>((aligned(16)));该变量a的内存起始地址为16的倍数。</p>
-<h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
-<li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong></p>
-<p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
-<p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
-<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
-<hr>
-<p>于是本文的大体意思就清晰了，__attribute__((section(\”section_name\”)))，其作用是将作用的函数或数据放入指定为\”section_name\”对应的段中。</p>
+          <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>ASCII编码能表示的整数0-255，一个字节，表示不了中文，Unicode通常用两个字节表示一个字符，汉字中用Unicode编码为01001110 00101101，A用Unicode编码为00000000 01000001，所以占用无用内存。因此又产生了UTF-8编码，可以根据字符大小占用内存，A的编码为1000001。UTF-8一般用一个字节表示字母，三个字节表示汉字。</p>
+<h3 id="ord和chr函数"><a href="#ord和chr函数" class="headerlink" title="ord和chr函数"></a>ord和chr函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>))<span class="comment">#65</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="string">&#x27;中&#x27;</span>))<span class="comment">#20013</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">66</span>))<span class="comment">#B</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="number">25991</span>))<span class="comment">#文</span></span><br></pre></td></tr></table></figure>
+<p>如果知道字符的十六进制表示可以直接使用转移字符表示</p>
+<p><code>print(&#39;\u4e2d\u6587&#39;)#中文</code></p>
+<h3 id="编码解码函数和字符串长度函数"><a href="#编码解码函数和字符串长度函数" class="headerlink" title="编码解码函数和字符串长度函数"></a>编码解码函数和字符串长度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ABC&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;ABC&#x27;</span>.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line"><span class="string">b&#x27;ABC&#x27;</span></span><br><span class="line">中文</span><br><span class="line">ABC</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>))<span class="comment">#6</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;abc&#x27;</span>))<span class="comment">#3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(<span class="string">&#x27;123&#x27;</span>))<span class="comment">#3</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符串的格式化"><a href="#字符串的格式化" class="headerlink" title="字符串的格式化"></a>字符串的格式化</h2><h3 id="格式化"><a href="#格式化" class="headerlink" title="%格式化"></a>%格式化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello, %s&#x27;</span>   %  <span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"><span class="comment">#hello, world</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%2d %02d %s&#x27;</span> %(<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="comment"># 3 01 abc</span></span><br></pre></td></tr></table></figure>
+<p>如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串。%2d如果占不满则用空格填补，%02d用0填补。并且%.2f表示保留两位小数。</p>
+<h3 id="format格式化"><a href="#format格式化" class="headerlink" title="format格式化"></a>format格式化</h3><p>另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……，不过这种方式写起来比%要麻烦得多，1后面的冒号相当于注释。此种方法类似str.函数（输入）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello, &#123;0&#125;, 成绩提升了 &#123;1:.1f&#125;%&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;小明&#x27;</span>, <span class="number">17.125</span>)) </span><br><span class="line"><span class="comment">#Hello, 小明, 成绩提升了 17.1%</span></span><br></pre></td></tr></table></figure>
+<h3 id="f-string格式化"><a href="#f-string格式化" class="headerlink" title="f-string格式化"></a>f-string格式化</h3><p>最后一种格式化字符串的方法是使用以f开头的字符串，称之为f-string，它和普通字符串不同之处在于，字符串如果包含{xxx}，就会以对应的变量替换：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="number">2.5</span></span><br><span class="line">s = <span class="number">3.14</span> * r ** <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;The area of a circle with radius <span class="subst">&#123;r&#125;</span> is <span class="subst">&#123;s:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment">#The area of a circle with radius 2.5 is 19.62</span></span><br></pre></td></tr></table></figure>
+<p>两个乘号是乘方的意思，优先级高于一个乘号</p>
 
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/STM32/SysTick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/01/STM32/SysTick/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 23:56:35" itemprop="dateCreated datePublished" datetime="2021-09-01T23:56:35+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-02 09:45:50" itemprop="dateModified" datetime="2021-09-02T09:45:50+08:00">2021-09-02</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E4%BD%8D%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/24/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E4%BD%8D%E6%95%B0/" class="post-title-link" itemprop="url">单片机位数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-24 00:52:36 / 修改时间：00:55:57" itemprop="dateCreated datePublished" datetime="2021-08-24T00:52:36+08:00">2021-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>569</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="位数定义"><a href="#位数定义" class="headerlink" title="位数定义"></a>位数定义</h3><p>32位单片机的32位是指单片机的“字长”，也就是一次运算中参与运算的数据长度，这个位是指二进制位。</p>
+<ul>
+<li><p>如果总线宽度与CPU一次处理的数据宽度相同，则这个宽度就是所说的单片机位数。</p>
+</li>
+<li><p>如果总线宽度与CPU一次处理的数据宽度不同，总线宽度小于CPU一次处理的数据宽度，则以CPU的数据宽度定义单片机的位数，但称为准多少位。比如某CPU是16位但总线是8位，所以它是准16位。</p>
+</li>
+</ul>
+<h3 id="位数影响"><a href="#位数影响" class="headerlink" title="位数影响"></a>位数影响</h3><p>单片机位数与单片机的性能密切相关，通常32位机的性能要高于16位机，而16位机的性能又要高于8位机。为什么会这样呢？</p>
+<ul>
+<li><p>位数不同，运算效率不同。对于8位机而言，当某个运算的结果或者中间值大于255时，如100+200=300这样的运算，它不能一次完成。因此，要对这样的一个式子进行运算，就要编写一段程序，将运算分步完成，最后合成起来得到一个正确的结果。而如果采用16位单片机来运算的话，那么一次运算就够了，显然分步完成所需要的时间要远远大于单步完成所需要的时间。</p>
+</li>
+<li><p>商业因素。通常运算能力越高，表示这个单片机性能越强，当然，价格高一些人们也可以接受，有了价格空间，生产商通常都会在这些芯片中提供更多的其他的功能，使得芯片的整体性能得到更大的提升。</p>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>8位单片机： 80C51系列，PIC系列，AVR系列</p>
+<p>16位单片机：80C196、MSP430系列</p>
+<p>32位单片机：ARM系列</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/09/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/09/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/" class="post-title-link" itemprop="url">RTT线程建立</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-09 22:44:53" itemprop="dateCreated datePublished" datetime="2021-08-09T22:44:53+08:00">2021-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-02 10:45:04" itemprop="dateModified" datetime="2021-09-02T10:45:04+08:00">2021-09-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">嵌入式操作系统</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的<strong>无限循环</strong>，这个无限循环里 面 CPU 按照顺序完成各种事情。在多线程系统中，我们根据功能的不同，把整个系统分割 成一个个独立的且无法返回的函数，这个函数我们称为线程。</p>
+<p>而所谓多线程实时操作系统就是多个线程之间来回切换看起来就像是并行。</p>
+<h2 id="线程栈"><a href="#线程栈" class="headerlink" title="线程栈"></a>线程栈</h2><p>在裸机编程中，全局变量，子函数发生局部变量，中断发生函数返回地址等都放在栈中，栈是RAM里面一段连续的存储空间。栈的大小一般在启动文件或者链接脚本指定，最后由C库函数_main进行初始化。</p>
+<p>而在多线程系统中，每个线程都是独立的，互不干扰，所以要为每个线程分配独立的栈空间。有多少个线程就需要定义多少个栈。    </p>
+<p>定义<strong>线程栈</strong>一般格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALIGN(RT_ALIGN_SIZE)<span class="comment">//ALIGN是一个带参数宏在rtdef.h文件中定义，RT_ALIGN_SIZE在rtconfig.h文件中定义，表示多少字节对齐，默认为4</span></span><br><span class="line"><span class="comment">/*定义线程栈*/</span></span><br><span class="line"><span class="keyword">rt_uint8_t</span> rt_flag1_thread_stack[<span class="number">512</span>];<span class="comment">//RTT数据类型重定义，在rtdef.h文件中</span></span><br><span class="line"><span class="keyword">rt_uint8_t</span> rt_flag2_thread_stack[<span class="number">512</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="线程入口函数"><a href="#线程入口函数" class="headerlink" title="线程入口函数"></a>线程入口函数</h2><p>线程是一个独立的函数，函数主体无限循环且不能返回。</p>
+<p><strong>线程函数</strong>声明一般格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">thread_entry</span><span class="params">(<span class="keyword">void</span> *parg)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* 线程主体，无限循环且不能返回 */</span></span><br><span class="line">	<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">	<span class="comment">/* 线程主体代码 */</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="线程控制块"><a href="#线程控制块" class="headerlink" title="线程控制块"></a>线程控制块</h2><p>在裸机系统中，程序的主体是 CPU 按照顺序执行的。而在多线程系统中，线程的执行 是由系统调度的。为了顺利调度，为每个线程定义了一个线程控制块，相当于线程的身份证。线程控制块里面包含了线程的所有信息，包括线程的栈指针，线程名称，线程的形参等等。定义一个线程控制块需要一个新的数据类型，这个数据类型定义在rtdef.h文件中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">void</span>        *sp;	          <span class="comment">/* 线程栈指针 */</span></span><br><span class="line">	<span class="keyword">void</span>        *entry;	          <span class="comment">/* 线程入口地址 */</span></span><br><span class="line">	<span class="keyword">void</span>        *parameter;	      <span class="comment">/* 线程形参 */</span>	</span><br><span class="line">	<span class="keyword">void</span>        *stack_addr;      <span class="comment">/* 线程栈起始地址 */</span></span><br><span class="line">	<span class="keyword">rt_uint32_t</span> stack_size;       <span class="comment">/* 线程栈大小，单位为字节 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">rt_list_t</span>   tlist;            <span class="comment">/* 线程链表节点 */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">rt_thread_t</span>;</span></span><br></pre></td></tr></table></figure>
+<h2 id="线程初始化函数"><a href="#线程初始化函数" class="headerlink" title="线程初始化函数"></a>线程初始化函数</h2><p>线程的栈，线程的函数实体，线程的控制块最终需要联系起来才能由系统进行统一调度。那么这个联系的工作就由线程初始化函数 rt_thread_init()来实现。该函数在thread.c文件中定义，在 rtthread.h 中声明，所有跟线程相关的函数都在这个文件定义。</p>
+<p>函数遵循以小写rt开头命名表明这是一个外部函数可供调用，以_rt开头表明是一个内部函数只能由RTT内部使用。</p>
+<p>函数定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">rt_err_t</span> <span class="title">rt_thread_init</span><span class="params">(struct rt_thread *thread,<span class="comment">//线程控制块指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span> (*entry)(<span class="keyword">void</span> *parameter),<span class="comment">//entry是线程函数名，形参是一个函数指针，可以看C语言回调函数，此处就是一个回调函数的使用，可以加&amp;也可以不加</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span>             *parameter,<span class="comment">//线程形参，传递线程参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">void</span>             *stack_start,<span class="comment">//线程栈起始地址</span></span></span></span><br><span class="line"><span class="params"><span class="function">                        <span class="keyword">rt_uint32_t</span>       stack_size)</span><span class="comment">//线程栈大小，单位为字节</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	rt_list_init(&amp;(thread-&gt;tlist));<span class="comment">//初始化链表节点</span></span><br><span class="line">	</span><br><span class="line">	thread-&gt;entry = (<span class="keyword">void</span> *)entry;<span class="comment">//将线程入口（函数起始地址）保存到线程控制块的entry成员</span></span><br><span class="line">	thread-&gt;parameter = parameter;<span class="comment">//将线程入口形参保存到线程控制块的 parameter 成员中</span></span><br><span class="line"></span><br><span class="line">	thread-&gt;stack_addr = stack_start;<span class="comment">//将线程栈起始地址保存到线程控制块的 stack_start 成员中</span></span><br><span class="line">	thread-&gt;stack_size = stack_size;<span class="comment">//将线程栈起大小保存到线程控制块的 stack_size 成员中</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 初始化线程栈，并返回线程栈指针 */</span></span><br><span class="line">	thread-&gt;sp = (<span class="keyword">void</span> *)rt_hw_stack_init( thread-&gt;entry, </span><br><span class="line">		                                   thread-&gt;parameter,</span><br><span class="line">							               (<span class="keyword">void</span> *)((<span class="keyword">char</span> *)thread-&gt;stack_addr + thread-&gt;stack_size - <span class="number">4</span>) );</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> RT_EOK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链表相关操作"><a href="#链表相关操作" class="headerlink" title="链表相关操作"></a>链表相关操作</h3><h4 id="定义链表节点数据类型"><a href="#定义链表节点数据类型" class="headerlink" title="定义链表节点数据类型"></a>定义链表节点数据类型</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">next</span>;</span>              <span class="comment">/* 指向后一个节点 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">prev</span>;</span>              <span class="comment">/* 指向前一个节点 */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> <span class="title">rt_list_t</span>;</span></span><br></pre></td></tr></table></figure>
+<p>双向链表相关操作函数均在rtservice.h函数中。</p>
+<h4 id="初始化链表节点"><a href="#初始化链表节点" class="headerlink" title="初始化链表节点"></a>初始化链表节点</h4><p>初始化节点就是节点的next和pre指向节点本身。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_init</span><span class="params">(<span class="keyword">rt_list_t</span> *l)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    l-&gt;next = l-&gt;prev = l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="在双向链表表头后面插入一个节点"><a href="#在双向链表表头后面插入一个节点" class="headerlink" title="在双向链表表头后面插入一个节点"></a>在双向链表表头后面插入一个节点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_insert_after</span><span class="params">(<span class="keyword">rt_list_t</span> *l, <span class="keyword">rt_list_t</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    l-&gt;next-&gt;prev = n;</span><br><span class="line">    n-&gt;next = l-&gt;next;</span><br><span class="line"></span><br><span class="line">    l-&gt;next = n;</span><br><span class="line">    n-&gt;prev = l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9.jpg" style="zoom: 80%;"></p>
+<h4 id="从双向链表删除一个节点"><a href="#从双向链表删除一个节点" class="headerlink" title="从双向链表删除一个节点"></a>从双向链表删除一个节点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">rt_inline <span class="keyword">void</span> <span class="title">rt_list_remove</span><span class="params">(<span class="keyword">rt_list_t</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n-&gt;next-&gt;prev = n-&gt;prev;</span><br><span class="line">    n-&gt;prev-&gt;next = n-&gt;next;</span><br><span class="line"></span><br><span class="line">    n-&gt;next = n-&gt;prev = n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg" style="zoom:80%;"></p>
+<h3 id="rt-hw-stack-init-函数"><a href="#rt-hw-stack-init-函数" class="headerlink" title="rt_hw_stack_init()函数"></a>rt_hw_stack_init()函数</h3><p>详情见书35页，大致就是返回剩余栈的栈顶指针并且初始化已经使用过的栈。一句话说就是栈的初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">rt_uint8_t</span> *<span class="title">rt_hw_stack_init</span><span class="params">(<span class="keyword">void</span>       *tentry,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="keyword">void</span>       *parameter,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="keyword">rt_uint8_t</span> *stack_addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stack_frame</span> *<span class="title">stack_frame</span>;</span></span><br><span class="line">	<span class="keyword">rt_uint8_t</span>         *stk;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span>       i;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 获取栈顶指针</span></span><br><span class="line"><span class="comment">	 实际上我们看下面的一个图，栈是想低地址生长的，栈一开始是空的，所以栈顶地址就是下面这个*/</span></span><br><span class="line">	stk  = stack_addr + <span class="keyword">sizeof</span>(<span class="keyword">rt_uint32_t</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 让stk指针向下8字节对齐 </span></span><br><span class="line"><span class="comment">	总线宽度32位，一般4字节对齐足够了，但是由于要处理8位浮点数，所以进行8字节对齐，这里的所谓对齐实际上就是对地址进行倍数处理，让它为8的倍数，地址为8的倍数，也即是8字节对齐。*/</span></span><br><span class="line">	stk  = (<span class="keyword">rt_uint8_t</span> *)RT_ALIGN_DOWN((<span class="keyword">rt_uint32_t</span>)stk, <span class="number">8</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* stk指针继续向下移动sizeof(struct stack_frame)个偏移，即16个字，64个字节 */</span></span><br><span class="line">	stk -= <span class="keyword">sizeof</span>(struct stack_frame);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 将stk指针强制转化为stack_frame类型后存到stack_frame */</span></span><br><span class="line">    <span class="comment">//强制转换以后，stk指针就指向一个结构体，这个结构体是向上生长的</span></span><br><span class="line">	stack_frame = (struct stack_frame *)stk;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 以stack_frame为起始地址，将栈空间里面的sizeof(struct stack_frame)</span></span><br><span class="line"><span class="comment">	个内存初始化为0xdeadbeef */</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(struct stack_frame) / <span class="keyword">sizeof</span>(<span class="keyword">rt_uint32_t</span>); i ++)</span><br><span class="line">	&#123;</span><br><span class="line">			((<span class="keyword">rt_uint32_t</span> *)stack_frame)[i] = <span class="number">0xdeadbeef</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 初始化异常发生时自动保存的寄存器 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r0  = (<span class="keyword">unsigned</span> <span class="keyword">long</span>)parameter; <span class="comment">/* r0 : argument */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r1  = <span class="number">0</span>;                        <span class="comment">/* r1 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r2  = <span class="number">0</span>;                        <span class="comment">/* r2 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r3  = <span class="number">0</span>;                        <span class="comment">/* r3 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.r12 = <span class="number">0</span>;                        <span class="comment">/* r12 */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.lr  = <span class="number">0</span>;                        <span class="comment">/* lr */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.pc  = (<span class="keyword">unsigned</span> <span class="keyword">long</span>)tentry;    <span class="comment">/* entry point, pc */</span></span><br><span class="line">	stack_frame-&gt;exception_stack_frame.psr = <span class="number">0x01000000</span>L;              <span class="comment">/* PSR */</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 返回线程栈指针 ，也就是赋值初始化完以后的栈顶指针*/</span></span><br><span class="line">	<span class="keyword">return</span> stk;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/1.jpg" style="zoom: 67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/2.jpg" style="zoom:67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/3.jpg" style="zoom:67%;"></p>
+<p><img src="/images/RT-Thread/%E7%BA%BF%E7%A8%8B%E5%BB%BA%E7%AB%8B/4.jpg" style="zoom:67%;"></p>
+<h4 id="RT-ALIGN-DOWN宏定义讲解"><a href="#RT-ALIGN-DOWN宏定义讲解" class="headerlink" title="RT_ALIGN_DOWN宏定义讲解"></a>RT_ALIGN_DOWN宏定义讲解</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">int</span>      <span class="keyword">uint32_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">short</span>    <span class="keyword">uint16_t</span>  ;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">char</span>     <span class="keyword">uint8_t</span>  ;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_DOWN(size, align)      ((size) &amp; ~((align) - 1))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_ALIGN_SIZE                    (4)</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">uint32_t</span> a;</span><br><span class="line">   a = <span class="number">5</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,RT_ALIGN_DOWN(a,RT_ALIGN_SIZE));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   getchar();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述程序可以得到4 4 4 ，这表明这个宏定义作用是将不是RT_ALIGN_SIZE倍数的数，向下变成RT_ALIGN_SIZE倍数的数。至于原因就是说一个为4的倍数的RT_ALIGN_SIZE，它的二进制最后两位减去一以后一定是11.然后进行&amp;操作时就是一个向下取倍数的效果。</p>
+<h2 id="实现就绪列表"><a href="#实现就绪列表" class="headerlink" title="实现就绪列表"></a>实现就绪列表</h2>
       
     </div>
 
@@ -967,7 +1288,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1035,14 +1356,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1099,12 +1420,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">149k</span>
+    <span title="站点总字数">157k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:16</span>
+    <span title="站点阅读时长">2:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="字节对齐概念许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。 为什么要字节对齐字节对齐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字节对齐">
+<meta property="og:url" content="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="字节对齐概念许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。 为什么要字节对齐字节对齐">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-18T12:54:36.354Z">
+<meta property="article:modified_time" content="2023-09-05T10:15:52.099Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>字节对齐 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字节对齐
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:52" itemprop="dateModified" datetime="2023-09-05T18:15:52+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="字节对齐概念"><a href="#字节对齐概念" class="headerlink" title="字节对齐概念"></a>字节对齐概念</h3><p>许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。</p>
+<h3 id="为什么要字节对齐"><a href="#为什么要字节对齐" class="headerlink" title="为什么要字节对齐"></a>为什么要字节对齐</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
+<p>各个硬件平台对存储空间的处理上有很大的不同，一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐。比如sparc系统，如果取未对齐的数据会发生错误，举个例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">8</span>];</span><br><span class="line"><span class="keyword">char</span> *p = &amp;ch[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> i = *(<span class="keyword">int</span> *)p;</span><br></pre></td></tr></table></figure>
+
+<p>运行时会报segment error，而在x86上就不会出现错误，只是效率下降。</p>
+<h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
+<li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
+<li><strong>结构体或者类的自身对齐值</strong>是其成员中自身对齐值最大的那个值。</li>
+<li><strong>指定对齐值</strong>：是指使用#pragma pack (value)时的指定对齐值value。</li>
+<li>数据成员、结构体和类的<strong>有效对齐值</strong>：自身对齐值和指定对齐值中小的那个值。</li>
+</ol>
+<h3 id="不同数据类型对齐原则"><a href="#不同数据类型对齐原则" class="headerlink" title="不同数据类型对齐原则"></a>不同数据类型对齐原则</h3><p>内存对齐主要遵循下面两个原则:</p>
+<ol>
+<li><ul>
+<li>结构体成员变量的起始地址能够被其成员变量<strong>有效对齐值</strong>整除。</li>
+<li>结构体总体大小能够被<strong>结构体有效对齐值</strong>整除，如不能则在后面补充字节。</li>
+</ul>
+<p>即结构体每一个数据类型都要对齐</p>
+</li>
+<li><p>标准数据类型，它的地址只要是它的长度的整数倍就行</p>
+</li>
+<li><p>数组 ：按照基本数据类型对齐，第一个对齐了后面的自然也就对齐了。</p>
+</li>
+<li><p>联合 ：按其包含的长度最大的数据类型对齐。</p>
+</li>
+<li><p>在一个struct中包含另一个struct，内部struct应该以它的最大数据成员大小的整数倍开始存储。如 struct A 中包含 struct B, struct B 中包含数据成员 char, int, double，则 struct B 应该以sizeof(double)&#x3D;8的整数倍为起始地址。</p>
+</li>
+</ol>
+<p>其实这里有点不严谨，编译器在编译的时候是可以指定对齐大小的，实际使用的有效对齐其实是取指定大小和自身大小的最小值，一般默认的对齐大小是4，这个模数是可以改变的，可以用预编译命令：</p>
+<p><code>#pragma pack(n)</code></p>
+<p>取消自定义字节对齐方式</p>
+<p><code>#pragma pack()</code></p>
+<h3 id="不同系统的数据模型"><a href="#不同系统的数据模型" class="headerlink" title="不同系统的数据模型"></a>不同系统的数据模型</h3><p>本机模型（LLP64）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
+
+<p>其他模型</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>ILP32</th>
+<th>ILP64</th>
+<th>LP64</th>
+<th>LLP64</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<p>绝大部分64位的Unix，linux都是使用的LP64模型；32位Linux系统是ILP32模型；64位的Windows使用的是LLP64(long long and point 64)模型。32单片机使用的是ILP32</p>
+<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		最后看一下D结构体，假如在64位系统中，就占用64个字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">long</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
+<p><strong>这种方法不能指定内存对齐小于默认对齐，也就是说它只能调大不能调小。而且比较坑的是调小的时候是没任何提示（包括警告和错误）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) &#x3D; 8，刚好占的空间大小是8的整数倍1倍</p>
+<p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
+<p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
+<p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
+<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f1;</span><br><span class="line">	<span class="keyword">char</span> f2;</span><br><span class="line">	<span class="keyword">char</span> f3;</span><br><span class="line">	<span class="keyword">int</span> f4;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
+
+<p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
+<p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
+<p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
+<p>当align作用于结构体定义时会改变结构体的大小。结构体最终大小为aligned指定大小的整数倍</p>
+<p>总结：</p>
+<p><code>#pragma pack(n)</code>：针对的是结构体内每一个成员相对第一个成员的偏移地址对齐。</p>
+<p><code>__attribute__((aligned (n)))</code>：针对的是整个结构体在整个内存地址空间分配时的对齐。</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" title="字节对齐">http://example.com/2023/06/18/C和C++/内存对齐/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/18/C%E5%92%8CC++/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" rel="prev" title="attribute关键字">
+      <i class="fa fa-chevron-left"></i> attribute关键字
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/18/C%E5%92%8CC++/%E5%86%8D%E8%B0%88getchar/" rel="next" title="getchar的几个例子">
+      getchar的几个例子 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">字节对齐概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">2.</span> <span class="nav-text">为什么要字节对齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%A7%8D%E7%B1%BB%E7%9A%84%E5%AF%B9%E9%BD%90%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">不同种类的对齐概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AF%B9%E9%BD%90%E5%8E%9F%E5%88%99"><span class="nav-number">4.</span> <span class="nav-text">不同数据类型对齐原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">不同系统的数据模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">6.</span> <span class="nav-text">实例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align%E5%9C%B0%E5%9D%80%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">align地址对齐方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align%E5%92%8Cpack%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">align和pack区别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">157k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:22</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

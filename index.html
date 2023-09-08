@@ -313,7 +313,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -327,7 +327,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">py知识</a>
+            <a href="/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">排序</a>
         </h2>
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-08-11 17:05:21 / 修改时间：17:10:55" itemprop="dateCreated datePublished" datetime="2023-08-11T17:05:21+08:00">2023-08-11</time>
+              <time title="创建时间：2023-09-08 17:21:43 / 修改时间：17:27:41" itemprop="dateCreated datePublished" datetime="2023-09-08T17:21:43+08:00">2023-09-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,7 +348,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
                 </span>
             </span>
 
@@ -358,7 +358,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>597</span>
+              <span>29</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -377,19 +377,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="with关键字"><a href="#with关键字" class="headerlink" title="with关键字"></a>with关键字</h2><p>在 Python 中，<code>with</code> 语句用于创建一个上下文管理器（Context Manager），用于管理一些资源的获取和释放，以确保资源得到正确的使用和清理。这种管理在处理文件、网络连接、数据库连接等需要显式打开和关闭资源的情况下非常有用，因为它可以帮助避免资源泄漏和错误处理。</p>
-<p><code>with</code> 语句的一般语法结构如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> context_expression <span class="keyword">as</span> target:</span><br><span class="line">    <span class="comment"># 代码块</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>context_expression</code>：通常是一个上下文管理器对象，它负责定义资源的获取和释放规则。</li>
-<li><code>target</code>：通常是一个变量，用于接收上下文管理器生成的资源。</li>
-<li>代码块：在代码块中，你可以使用 <code>target</code> 获取资源并进行操作，当代码块结束时，资源会自动被释放，无论是否发生异常。</li>
-</ul>
-<p>一个常见的使用案例是文件的读写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    content = file.read()</span><br><span class="line"><span class="comment"># 在代码块结束后，文件会自动关闭，不需要显式调用 file.close()</span></span><br></pre></td></tr></table></figure>
-
-<p>在你提供的代码中，<code>with torch.no_grad():</code> 语句的目的是在该上下文中执行一些操作，而在这个上下文中，PyTorch 不会跟踪梯度信息，从而避免不必要的内存占用和计算。这在进行一些不需要梯度信息的操作，如参数更新，时非常有用。当 <code>with</code> 代码块结束后，梯度追踪会自动恢复。</p>
+          <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>在最坏的情况下（所有元素全部是逆序），时间复杂度为</p>
 
       
     </div>
@@ -411,7 +399,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/%E5%8A%9B%E6%89%A3/%E9%9D%A2%E8%AF%95150/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -425,7 +413,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">虚拟环境</a>
+            <a href="/2023/09/07/%E5%8A%9B%E6%89%A3/%E9%9D%A2%E8%AF%95150/" class="post-title-link" itemprop="url">面试150</a>
         </h2>
 
         <div class="post-meta">
@@ -437,14 +425,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-08-06 16:35:06" itemprop="dateCreated datePublished" datetime="2023-08-06T16:35:06+08:00">2023-08-06</time>
+              <time title="创建时间：2023-09-07 23:31:28" itemprop="dateCreated datePublished" datetime="2023-09-07T23:31:28+08:00">2023-09-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-11 17:10:32" itemprop="dateModified" datetime="2023-08-11T17:10:32+08:00">2023-08-11</time>
+                <time title="修改时间：2023-09-08 16:55:37" itemprop="dateModified" datetime="2023-09-08T16:55:37+08:00">2023-09-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -452,7 +440,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
                 </span>
             </span>
 
@@ -462,7 +450,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>433</span>
+              <span>632</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -481,17 +469,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-关于anaconda的一些理解"><a href="#1-关于anaconda的一些理解" class="headerlink" title="1.关于anaconda的一些理解:"></a>1.关于anaconda的一些理解:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env list//用来查看虚拟环境清单</span><br></pre></td></tr></table></figure>
+          <h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>我的铸币写法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n+m; i++)&#123;</span><br><span class="line">            (i&lt;m)?(nums1[i]=nums1[i]):(nums1[i] = nums2[i-m]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n+m; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j<span class="number">-1</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums1[i + <span class="number">1</span>] &lt; nums1[i]) &#123;</span><br><span class="line">                    temp = nums1[i + <span class="number">1</span>];</span><br><span class="line">                    nums1[i + <span class="number">1</span>] = nums1[i];</span><br><span class="line">                    nums1[i] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<img src="\images\深度学习\基础知识\1.png" style="zoom:120%;">
+<p>排序函数实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != n; ++i) &#123;</span><br><span class="line">            nums1[m + i] = nums2[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kyxdjy/article/details/126272002">https://blog.csdn.net/kyxdjy/article/details/126272002</a></p>
-<h2 id="2-ERROR"><a href="#2-ERROR" class="headerlink" title="2.ERROR"></a>2.ERROR</h2><h3 id="2-1ERROR-Ignored-the-following-versions-that-require-a-different-python-version-1-21-2-Requires-Python"><a href="#2-1ERROR-Ignored-the-following-versions-that-require-a-different-python-version-1-21-2-Requires-Python" class="headerlink" title="2.1ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python"></a>2.1ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=版本号//降级py版本</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2解决-Could-not-build-wheels-for-pandas-which-is-required-to-install-pyproject-toml-based-projects"><a href="#2-2解决-Could-not-build-wheels-for-pandas-which-is-required-to-install-pyproject-toml-based-projects" class="headerlink" title="2.2解决 Could not build wheels for pandas, which is required to install pyproject.toml-based projects"></a>2.2解决 Could not build wheels for pandas, which is required to install pyproject.toml-based projects</h3><p>将py降级为3.9版本即可</p>
-<h2 id="3-创建conda虚拟环境"><a href="#3-创建conda虚拟环境" class="headerlink" title="3.创建conda虚拟环境"></a>3.创建conda虚拟环境</h2><h2 id="3-1查看安装了哪些包"><a href="#3-1查看安装了哪些包" class="headerlink" title="3.1查看安装了哪些包"></a>3.1查看安装了哪些包</h2><p><code>conda list</code></p>
-<h3 id="3-2查看存在哪些虚拟环境"><a href="#3-2查看存在哪些虚拟环境" class="headerlink" title="3.2查看存在哪些虚拟环境"></a>3.2查看存在哪些虚拟环境</h3><p><code>conda env list</code></p>
-<h3 id="3-3python创建虚拟环境"><a href="#3-3python创建虚拟环境" class="headerlink" title="3.3python创建虚拟环境"></a>3.3python创建虚拟环境</h3><p><code>conda create -n your env name python=x.x</code></p>
 
       
     </div>
@@ -513,7 +496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/C%E5%92%8CC++/%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -527,7 +510,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/18/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">dicom基础知识补充</a>
+            <a href="/2023/09/07/C%E5%92%8CC++/%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">模板编程</a>
         </h2>
 
         <div class="post-meta">
@@ -538,23 +521,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+              <time title="创建时间：2023-09-07 19:25:58 / 修改时间：20:15:09" itemprop="dateCreated datePublished" datetime="2023-09-07T19:25:58+08:00">2023-09-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-11 18:00:44" itemprop="dateModified" datetime="2023-05-11T18:00:44+08:00">2023-05-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -564,14 +541,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -583,27 +560,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="传输语法"><a href="#传输语法" class="headerlink" title="传输语法"></a>传输语法</h2><p>在DICOM（数字成像和通信医学）中，传输语法描述了DICOM文件中像素数据和其他元数据的编码方式和格式。传输语法还定义了DICOM文件的字节顺序、VR（值表示）类型和其他元数据的编码方式。</p>
-<p>传输语法可以是封装的或未封装的。封装的传输语法通常用于压缩像素数据，以减小DICOM文件的大小。因此，当检查DICOM文件的传输语法时，可以确定它是否包含压缩的像素数据。如果传输语法是封装的，那么解码图像数据时需要先进行解封装（解压缩），然后再将其转换为图像。</p>
-<h2 id="ExplicitVRLittleEndian"><a href="#ExplicitVRLittleEndian" class="headerlink" title="ExplicitVRLittleEndian"></a>ExplicitVRLittleEndian</h2><p>ExplicitVRLittleEndian是DICOM文件的一种传输语法，也称为明示VR（值表示）小端字节序。这种传输语法被广泛用于DICOM文件中，它指定了数据元素的VR类型和字节序。在ExplicitVRLittleEndian传输语法中，每个数据元素都由一个16位的标签和一个16位的VR值组成。如果数据元素的VR类型是数字、日期或时间等固定长度的值，则接下来的字节是该值的字节表示。如果数据元素的VR类型是可变长度的字符串或字节数组，则VR值指示了该值的长度，并在之后的字节中存储该值的内容。ExplicitVRLittleEndian传输语法使用小端字节序，即最低有效字节在最前面的方式来存储数据。因此，在读取DICOM文件时，需要按照这种顺序来解析数据元素的值。</p>
-<h2 id="DicomJpegLsParams"><a href="#DicomJpegLsParams" class="headerlink" title="DicomJpegLsParams"></a>DicomJpegLsParams</h2><p>DicomJpegLsParams是一个用于指定JPEG-LS压缩算法参数的类。在DICOM中，JPEG-LS是一种无损压缩算法，通常用于减小DICOM文件中像素数据的大小。DicomJpegLsParams类中包含了一些属性，用于指定JPEG-LS压缩算法的参数，例如压缩比例、预测算法、重构算法等。当使用DICOM库进行图像解码时，可以将DicomJpegLsParams参数传递给相关方法，以指定要使用的JPEG-LS压缩算法参数，从而更好地控制图像解码的过程。</p>
-<h2 id="DicomImage和DicomFile类区别"><a href="#DicomImage和DicomFile类区别" class="headerlink" title="DicomImage和DicomFile类区别"></a>DicomImage和DicomFile类区别</h2><p>在DICOM（数字成像和通信医学）中，DicomImage和DicomFile都是用于表示DICOM图像和文件的类，它们之间的区别如下：</p>
-<ol>
-<li>DicomImage表示DICOM图像数据，而DicomFile表示DICOM文件的数据和元数据。</li>
-<li>DicomImage是一个特定的图像类，它提供了一些用于访问和处理DICOM图像数据的方法和属性，例如获取像素数据、获取像素点的值、调整图像亮度和对比度等。而DicomFile是一个通用的文件类，它提供了一些用于访问和处理DICOM文件的方法和属性，例如获取文件元数据、获取文件中的数据元素、读取和写入DICOM文件等。</li>
-<li>DicomImage对象通常是从DicomFile对象中读取DICOM文件的像素数据得到的，可以通过将DicomFile对象传递给相关方法来创建DicomImage对象。因此，DicomFile对象是创建DicomImage对象的重要输入之一。</li>
-<li><strong>DicomFile对象可以包含一个或多个DICOM图像数据，每个图像数据可以使用不同的传输语法和编码方式。而DicomImage对象仅表示单个DICOM图像数据，通常使用一种特定的传输语法和编码方式。</strong></li>
-<li>在处理DICOM文件时，通常需要首先创建一个DicomFile对象，然后从中提取需要的图像数据，然后使用DicomImage对象对图像数据进行处理和显示。</li>
-</ol>
-<h2 id="Dicom图像帧数以及选取"><a href="#Dicom图像帧数以及选取" class="headerlink" title="Dicom图像帧数以及选取"></a>Dicom图像帧数以及选取</h2><p>在DICOM图像中，图像帧数指的是该图像中包含的图像帧（Image Frame）的数量。一个图像帧表示了图像在某个时间点的状态，可以理解为一个静止的图像。举个例子，一个磁共振成像（MRI）的DICOM图像可能包含多个图像帧，每个图像帧表示了扫描仪在不同的时间点捕获的MRI图像。</p>
-<p>在处理DICOM图像时，需要根据图像帧数的数量来确定需要处理的图像帧，以及如何将多个图像帧组合成完整的图像。例如，对于一张包含多个图像帧的DICOM图像，我们可以选择只处理其中的某一个图像帧，或者将所有图像帧合并成一个三维的立体图像。因此，在处理DICOM图像时，图像帧数是一个非常重要的参数。</p>
-<p>在DICOM图像中，像素数据是存储图像信息的最重要的数据元素之一。每个像素的值代表了图像中一个点的亮度或灰度。在多帧DICOM图像中，每一帧都包含了一组像素数据，用来表示该帧对应的图像。因此，一个多帧DICOM图像中的所有帧的像素数据总和就是整个图像的像素数据。并且帧数是从0开始计数的，即第一帧的帧数为0，第二帧的帧数为1，以此类推。这与一些其他编程语言或者图像处理库中可能采用的从1开始计数的方式略有不同，需要注意。在使用DICOM相关的编程库或者工具时，应该遵循DICOM标准，以保证正确解析和处理DICOM图像数据。</p>
-<p>在代码中，如果一个DICOM图像只有一帧，那么只需要获取这一帧的像素数据即可，因为它就是整个图像的像素数据。而如果一个DICOM图像有多帧，为了简化处理过程，代码中选择只获取第1帧的像素数据，而不是获取所有帧的像素数据并将它们组合起来。这是因为第1帧通常包含了完整的图像信息，而<strong>其他帧则可能只包含了该图像的某些局部信息或补充信息</strong>。同时，获取第1帧的像素数据可以让代码更加简洁和高效，因为不需要处理多个像素数据数组。当然，如果需要获取其他帧的像素数据，也可以在代码中进行相应的修改。</p>
-<h2 id="按列存储"><a href="#按列存储" class="headerlink" title="按列存储"></a>按列存储</h2><p>dicom图像的像素信息是按照列主序存储的。在此次设计例子中，<code>values</code>数组中前<code>height</code>个元素存储的是第一列像素的值，接下来的<code>height</code>个元素存储的是第二列像素的值，以此类推，直到最后一列。因此，在将<code>values</code>数组转换为<code>Bitmap</code>对象时，需要按照列进行遍历并设置像素的值。</p>
-<h2 id="SOP和服务类的区别"><a href="#SOP和服务类的区别" class="headerlink" title="SOP和服务类的区别"></a>SOP和服务类的区别</h2><p>SOP和服务类是DICOM中的两个概念，它们有相似之处，但又有一些区别。</p>
-<p>SOP（Service-Object Pair）是指DICOM中的服务和对象对，即一个服务与一个对象之间的关系。SOP包含两个方面：服务（Service）和对象（Object），表示在DICOM中，一个服务可以针对一个特定的对象进行操作。每个SOP的实例都有一个唯一的UID标识符。</p>
-<p>服务类（Service Class）是针对某种功能而定义的服务的集合，它是一组相关的SOP类的总称。服务类包括一组操作，这些操作的目的是在不同设备之间传输图像和相关信息。每个服务类都有一个唯一的UID标识符。</p>
-<p>两者的区别在于，SOP是服务和对象之间的关系，是具体的实例，而服务类是一组相关的SOP类的总称，是具有相同功能的一组服务的集合。SOP相当于一个文件的名称，服务类则相当于一组文件的集合。    </p>
+          <h2 id="例子1：一般模板创建"><a href="#例子1：一般模板创建" class="headerlink" title="例子1：一般模板创建"></a>例子1：一般模板创建</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设我们有一个包含嵌套类型的类 &#x27;MyClass&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 嵌套类型 &#x27;NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">using</span> NestedType = <span class="keyword">int</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UseNestedType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用 &#x27;T::NestedType&#x27; 表示 &#x27;T&#x27; 类型的嵌套类型 &#x27;NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">typename</span> T::NestedType variable = <span class="number">42</span>; <span class="comment">// 使用 &#x27;typename&#x27; 明确指示 &#x27;NestedType&#x27; 是一个类型名</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Value of variable: &quot;</span> &lt;&lt; variable &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    UseNestedType&lt;MyClass&gt;(); <span class="comment">// 在模板中使用嵌套类型 &#x27;MyClass::NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子2：非类型模板参数"><a href="#例子2：非类型模板参数" class="headerlink" title="例子2：非类型模板参数"></a>例子2：非类型模板参数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">size_t</span> <span class="title">N</span>=</span><span class="number">10</span>&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T _a[N];</span><br><span class="line">	<span class="keyword">size_t</span> top;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Stack&lt;<span class="keyword">int</span>&gt; sk1;<span class="comment">//10(使用缺省值：默认给10)</span></span><br><span class="line">	Stack&lt;<span class="keyword">int</span>, <span class="number">1000</span>&gt; sk2;<span class="comment">//1000（如果这里给了，不使用缺省值）</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子3：模板特化"><a href="#例子3：模板特化" class="headerlink" title="例子3：模板特化"></a>例子3：模板特化</h2><p><strong>全特化：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Date</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Date</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Date&lt;T1, T2&gt;&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T1 _d1;</span><br><span class="line">	T2 _d2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全特化</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Date</span>&lt;</span><span class="keyword">int</span>, <span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Date</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Date&lt;int, double&gt;&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _d1;</span><br><span class="line">	<span class="keyword">double</span> _d2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>部分特化：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span>T1, <span class="keyword">char</span>&gt;<span class="comment">//只要第二个类型是char就匹配这个</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1, char&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数限制：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span>T1*, T2*&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1*, T2*&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span> T1&amp;, T2&amp;&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1&amp;, T2&amp;&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span> T1&amp;, T2* &gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1&amp;, T2*&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -625,7 +594,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -639,7 +608,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/18/%E4%BF%A1%E5%8F%B7/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-title-link" itemprop="url">傅里叶变换</a>
+            <a href="/2023/09/03/C%E5%92%8CC++/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">拷贝构造函数</a>
         </h2>
 
         <div class="post-meta">
@@ -651,14 +620,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+              <time title="创建时间：2023-09-03 19:46:15" itemprop="dateCreated datePublished" datetime="2023-09-03T19:46:15+08:00">2023-09-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-11 17:08:32" itemprop="dateModified" datetime="2023-08-11T17:08:32+08:00">2023-08-11</time>
+                <time title="修改时间：2023-09-05 17:57:05" itemprop="dateModified" datetime="2023-09-05T17:57:05+08:00">2023-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -666,132 +635,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>220</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>傅里叶变换 FT Fourier transform</p>
-<p>傅里叶级数 FS Fourier series</p>
-<p>离散傅里叶变换 DFT discrete fourier transform</p>
-<p>离散时间傅立叶变换 DTFT Discrete time Fourier Transform</p>
-<p>加上I（inverse）就是逆变换</p>
-<p>时域连续周期对应频域离散非周期</p>
-<p>时域连续非周期对应频域连续非周期</p>
-<p>时域离散周期对应频域离散周期</p>
-<p>时域离散非周期对应频域连续周期</p>
-<p>综上：</p>
-<table>
-<thead>
-<tr>
-<th>时域</th>
-<th>频域</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>连续</td>
-<td>非周期</td>
-</tr>
-<tr>
-<td>周期</td>
-<td>离散</td>
-</tr>
-<tr>
-<td>离散</td>
-<td>周期</td>
-</tr>
-<tr>
-<td>非周期</td>
-<td>连续</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/Csharp/%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/18/Csharp/%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">dicom图像操作代码分析</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-20 15:38:06" itemprop="dateModified" datetime="2023-04-20T15:38:06+08:00">2023-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C#学习</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -820,102 +664,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="移动操作"><a href="#移动操作" class="headerlink" title="移动操作"></a>移动操作</h2><p>对dicom图像进行移动操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个指针类型变量，用于记录鼠标在图像上的初始位置</span><br><span class="line">      private Point _startPoint;</span><br><span class="line"></span><br><span class="line">      // 定义一个变量，用于记录图像当前的位置</span><br><span class="line">      private Point _imageLocation;</span><br><span class="line"></span><br><span class="line">      private void pictureBox1_MouseDown(object sender, MouseEventArgs e)//鼠标左击事件发生</span><br><span class="line">      &#123;</span><br><span class="line">          if (e.Button == MouseButtons.Left)</span><br><span class="line">          &#123;</span><br><span class="line">              _startPoint = e.Location;//记录鼠标按下时的位置，也即图像的起始位置</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      private void pictureBox1_MouseMove(object sender, MouseEventArgs e)//光标拖动事件发生</span><br><span class="line">      &#123;</span><br><span class="line">          if (e.Button == MouseButtons.Left &amp;&amp; _startPoint != null)//如果鼠标左键任然按下进行以下操作</span><br><span class="line">          &#123;</span><br><span class="line">              int x = _imageLocation.X + (e.Location.X - _startPoint.X);//定义新位置的x坐标</span><br><span class="line">              int y = _imageLocation.Y + (e.Location.Y - _startPoint.Y);//y坐标</span><br><span class="line"></span><br><span class="line">              // 将图像移动到新的位置</span><br><span class="line">              pictureBox1.Location = new Point(x, y);//使用Location方法移动图像至新的位置</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      private void pictureBox1_MouseUp(object sender, MouseEventArgs e)//鼠标抬起事件</span><br><span class="line">      &#123;</span><br><span class="line">          if (e.Button == MouseButtons.Left)</span><br><span class="line">          &#123;</span><br><span class="line">              _imageLocation = pictureBox1.Location;//将图像在鼠标抬起后的位置赋值给变量，方便进行下一次的移动操作</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="放大缩小操作"><a href="#放大缩小操作" class="headerlink" title="放大缩小操作"></a>放大缩小操作</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">float zoomFactor = 1.0f;//缩放因子，初始值为1</span><br><span class="line"></span><br><span class="line">private void button1_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    // 增加放大比例，并更新pictureBox1控件大小和SizeMode</span><br><span class="line">    zoomFactor += 0.1f;</span><br><span class="line">    pictureBox1.Size = new Size((int)(pictureBox1.Image.Width * zoomFactor), (int)(pictureBox1.Image.Height * zoomFactor));</span><br><span class="line">    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void button2_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    // 减小放大比例，并更新控件大小和SizeMode</span><br><span class="line">    zoomFactor -= 0.1f;</span><br><span class="line">    pictureBox1.Size = new Size((int)(pictureBox1.Image.Width * zoomFactor), (int)(pictureBox1.Image.Height * zoomFactor));</span><br><span class="line">    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="旋转操作"><a href="#旋转操作" class="headerlink" title="旋转操作"></a>旋转操作</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private void button3_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    // 获取目前控件中的Image对象赋值给一个新的Image类型变量</span><br><span class="line">    Image currentImage = pictureBox1.Image;</span><br><span class="line"></span><br><span class="line">    //使用自带的RotateFlip旋转翻转方法，使用参数RotateFlipType.Rotate90FlipNone实现旋转图像90°无翻转</span><br><span class="line">    currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);</span><br><span class="line"></span><br><span class="line">    // 将操作后的currentImage更新至控件图像</span><br><span class="line">    pictureBox1.Image = currentImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
+          <p>调用拷贝构造函数的示例：</p>
+<ol>
+<li><p><strong>使用一个对象初始化另一个对象：</strong> 当你使用一个已存在的对象来初始化另一个对象时，通常会调用拷贝构造函数。这是因为你要创建一个新对象，该对象是原始对象的副本。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass obj1;        <span class="comment">// 调用构造函数来创建 obj1</span></span><br><span class="line">MyClass obj2 = obj1; <span class="comment">// 调用拷贝构造函数，将 obj1 复制给 obj2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>将对象作为参数传递给函数：</strong> 如果你将一个对象按值（而不是按引用或指针）传递给函数，那么会调用拷贝构造函数来创建函数内的局部对象，该对象是传递对象的副本。这里我们也可得知<strong>函数按值传入的形参都是传入对象的副本。</strong></p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">someFunction</span><span class="params">(MyClass param)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 在函数内，param 是通过拷贝构造函数创建的副本</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj;      <span class="comment">// 调用构造函数创建 obj</span></span><br><span class="line">    <span class="built_in">someFunction</span>(obj); <span class="comment">// 调用拷贝构造函数，将 obj 传递给 someFunction</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在返回语句中返回对象的副本：</strong> 如果你的函数返回一个对象，并且返回语句中有一个对象，通常会触发拷贝构造函数，以创建函数返回值的副本。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MyClass <span class="title">createObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj; <span class="comment">// 调用构造函数创建 obj</span></span><br><span class="line">    <span class="keyword">return</span> obj; <span class="comment">// 调用拷贝构造函数，返回 obj 的副本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>总之，拷贝构造函数用于创建一个新对象，该对象是另一个对象的副本。在对象初始化的情况下，通常会调用构造函数或移动构造函数来进行对象的初始化。但如果需要创建对象的副本，则会调用拷贝构造函数。如果你没有显式定义拷贝构造函数，C++会生成一个默认的拷贝构造函数，执行浅拷贝操作（对成员变量进行简单的复制）。</p>
+<p><strong>例子：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Line</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">int</span> <span class="title">getLength</span><span class="params">( <span class="keyword">void</span> )</span></span>;</span><br><span class="line">      <span class="built_in">Line</span>( <span class="keyword">int</span> len );             <span class="comment">// 简单的构造函数</span></span><br><span class="line">      <span class="built_in">Line</span>( <span class="keyword">const</span> Line &amp;obj);      <span class="comment">// 拷贝构造函数</span></span><br><span class="line">      ~<span class="built_in">Line</span>();                     <span class="comment">// 析构函数</span></span><br><span class="line"> </span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">      <span class="keyword">int</span> *ptr;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 成员函数定义，包括构造函数</span></span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">int</span> len)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 为指针分配内存</span></span><br><span class="line">    ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">    *ptr = len;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">const</span> Line &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用拷贝构造函数并为指针 ptr 分配内存&quot;</span> &lt;&lt; endl;</span><br><span class="line">    ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">    *ptr = *obj.ptr; <span class="comment">// 拷贝值</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Line::~<span class="built_in">Line</span>(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;释放内存&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Line::getLength</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *ptr;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(Line obj)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;line 大小 : &quot;</span> &lt;&lt; obj.<span class="built_in">getLength</span>() &lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 程序的主函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="function">Line <span class="title">line</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">display</span>(line);</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出</span></span><br><span class="line">调用构造函数<span class="comment">//Line Line(10)调用构造函数</span></span><br><span class="line">调用拷贝构造函数并为指针 ptr 分配内存<span class="comment">//display(line)调用拷贝构造函数，复制对象</span></span><br><span class="line">line 大小 : <span class="number">10</span></span><br><span class="line">释放内存<span class="comment">//被复制对象调用析构函数释放内存</span></span><br><span class="line">释放内存<span class="comment">//line对象释放内存</span></span><br></pre></td></tr></table></figure>
 
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认的拷贝构造函数</span></span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">const</span> Line &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    ptr = obj.ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/Csharp/%E4%BA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/18/Csharp/%E4%BA%8C/" class="post-title-link" itemprop="url">dicom图像显示代码分析</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-20 13:36:58" itemprop="dateModified" datetime="2023-04-20T13:36:58+08:00">2023-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C#学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>由于先前并未学习使用过C#，本文采用<strong>Chatgpt</strong>进行辅助分析。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.ComponentModel;</span><br><span class="line">using System.Data;</span><br><span class="line">using System.Drawing;</span><br><span class="line">using System.Linq;</span><br><span class="line">using System.Text;</span><br><span class="line">using System.Windows.Forms;</span><br><span class="line">//using System.Drawing;</span><br><span class="line">using System.Drawing.Imaging;</span><br><span class="line">using System.IO;</span><br><span class="line">using System.Runtime;</span><br><span class="line">using System.Runtime.Serialization;</span><br><span class="line">using System.Runtime.Serialization.Formatters;</span><br><span class="line">using System.Runtime.Serialization.Formatters.Binary;</span><br><span class="line">using Dicom;</span><br><span class="line">using Dicom.IO;</span><br><span class="line">using Dicom.IO.Buffer;</span><br><span class="line">using Dicom.Imaging;</span><br><span class="line">using Dicom.Imaging.Codec;</span><br><span class="line">using Dicom.Imaging.Codec.Jpeg;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">namespace DrawingDCMExample //定义总命名空间</span><br><span class="line">&#123;</span><br><span class="line">    public partial class DICOMProcessDemo : Form //这段代码定义了一个名为DICOMProcessDemo的类，该类继承自Form类，并被定义为public和partial。由于它被定义为partial，可以在其他文件中定义该类的其他部分。</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// The Image member that inserted in PictureBox</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        </span><br><span class="line">        private string defaultImageBG;//用于存放默认背景的路径</span><br><span class="line">        </span><br><span class="line">        public DICOMProcessDemo()//DICOMProcessDemo类的初始化</span><br><span class="line">        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">            //这个方法的作用是初始化窗体中的控件，包括将控件添加到窗体中、设置控件的位置和大小、以及绑定事件处理程序等。</span><br><span class="line">            string appPath = Application.StartupPath;//定义appPath为程序启动路径</span><br><span class="line">            string imagePath = appPath + @&quot;\..\..\..\..\&quot; + @&quot;Resource\defaultbackgroundImage.bmp&quot;;</span><br><span class="line">            //具体地说，这个路径是通过将appPath（应用程序的路径）与一个相对路径拼接而成的。其中，@&quot;........&quot;表示向上跳四级目录，即到应用程序所在的根目录，然后再跳到Resource文件夹下，最后再拼接上文件名&quot;defaultbackgroundImage.bmp&quot;。</span><br><span class="line">            //换句话说，这个路径指向了应用程序根目录下的Resource文件夹中的一个名为&quot;defaultbackgroundImage.bmp&quot;的位图文件。</span><br><span class="line">            defaultImageBG = imagePath;</span><br><span class="line">            pictureBox1.Image = Image.FromFile(imagePath);</span><br><span class="line">            //PictureBox是一个Windows Forms控件，用于在用户界面中显示图像。Image属性是PictureBox控件中用于存储和显示图像的属性。通过将其设置为从文件加载的图像，可以更改PictureBox控件中显示的图像。</span><br><span class="line">			//Image.FromFile方法是一个静态方法，它可以从文件加载图像并返回一个Image对象。将返回的Image对象赋给PictureBox控件的Image属性，从而更改控件中显示的图像。</span><br><span class="line">            DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);</span><br><span class="line">            //这段代码DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);是用于加载DICOM图像编解码器的代码。</span><br><span class="line">			//在这里，DicomTranscoder是一个用于DICOM图像编解码的类。LoadCodecs是该类的一个静态方法，用于从指定目录中加载编解码器。Application.StartupPath是指当前应用程序的启动路径，而&quot;Dicom.Native*.dll&quot;则是指定要加载的编解码器的文件名模式。*通配符表示任何字符。通过加载编解码器，我们可以在应用程序中使用DICOM图像，并将其转换为其他格式，例如BMP或JPEG，以在屏幕上显示或进行分析。</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void openToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">            	//是一个事件处理方法，它是在用户单击菜单项 &quot;openToolStripMenuItem&quot; 时触发的。该方法的主要功能是打开一个文件对话框，允许用户选择一个文件，并将选择的文件加载到应用程序中。</span><br><span class="line">        &#123;</span><br><span class="line">            using(openFileDialog1 = new OpenFileDialog())</span><br><span class="line">                //这是 C# 中的一个 using 语句块，用于在代码块执行结束时自动释放资源。在这个例子中，using 语句块用于打开一个文件对话框，并在选择文件后自动关闭对话框并释放资源。</span><br><span class="line">            &#123;</span><br><span class="line">                openFileDialog1.Filter=&quot;DCM files(*.DCM)|*.DCM| dcm files(*.dcm)|*.dcm&quot;;</span><br><span class="line">                //这行代码是为 OpenFileDialog 对象设置一个过滤器，限制用户在打开文件对话框时只能选择特定类型的文件。</span><br><span class="line">				//在这个例子中，Filter 属性的值为 &quot;DCM files(*.DCM)|*.DCM| dcm files(*.dcm)|*.dcm&quot;，表示可以选择后缀名为 .dcm 或 .DCM 的文件。该属性值的格式为 &quot;文件类型描述|文件扩展名&quot;，多个文件类型描述和文件扩展名之间用竖线 | 分隔，每个文件类型描述和文件扩展名之间用逗号 , 分隔。</span><br><span class="line">				//因此，在这个例子中，文件类型描述分别为 &quot;DCM files&quot; 和 &quot;dcm files&quot;，文件扩展名分别为 &quot;*.DCM&quot; 和 &quot;*.dcm&quot;。用户在打开文件对话框时，只能选择这两种类型的文件，其他类型的文件会被过滤掉，不会显示在对话框中。在这里括号是进一步说明文件类型。</span><br><span class="line">                openFileDialog1.RestoreDirectory=true;</span><br><span class="line">				//作用是在关闭文件对话框后，恢复到打开文件对话框前的目录。这样做的好处是避免了在用户打开文件对话框时意外地改变了当前目录，从而导致后续操作出现问题的情况。</span><br><span class="line">                if (openFileDialog1.ShowDialog() == DialogResult.OK)//检查用户是否在文件打开对话框中单击了确认按钮</span><br><span class="line">                &#123;</span><br><span class="line">                    string dcmPath = openFileDialog1.FileName.ToString();//dcm文件路径存储在 OpenFileDialog 类的 FileName 属性中。转换为字符串并存储在 dcmPath 变量中。</span><br><span class="line">                    //string dcmFileName = Path.Substring(Path.LastIndexOf(&quot;\\&quot;) + 1);</span><br><span class="line">                    listView1.Items.Clear();//清空 ListView 控件，以便准备向其中添加新项</span><br><span class="line">                    ShowAndDrawingDCMImage(dcmPath);//加载和显示 DICOM 文件中的图像。</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Show the metaInfo of the DCM file and Drawing the image on the Screen</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcmFileName&quot;&gt;The path of your DCM file&lt;/param&gt;</span><br><span class="line">        private void ShowAndDrawingDCMImage(string dcmFileName)//加载显示DICOM图像</span><br><span class="line">        &#123;</span><br><span class="line">            try</span><br><span class="line">            &#123;</span><br><span class="line">                DicomFile dcmFile = DicomFile.Open(dcmFileName);//执行此行代码后，将拥有一个DicomFile对象，该对象表示由dcmFileName参数指定的DICOM文件</span><br><span class="line">                LoadAndShowDCMMetaInfo(dcmFile);//加载和显示dicom文件的元数据信息</span><br><span class="line">                listView1.Update();//ListView控件刷新其显示并根据其基础数据源更新其内容	</span><br><span class="line">                DrawingDCMData2Screen(dcmFile);//使用DICOM文件中的数据进行图像处理，并将其绘制到屏幕上，以便用户可以查看医学影像</span><br><span class="line">            &#125;</span><br><span class="line">            catch (System.Exception ex)</span><br><span class="line">            &#123;</span><br><span class="line">                MessageBox.Show(ex.Message);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Load all of the Elements in the DCM Meta </span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcm&quot;&gt;the DICOM file&lt;/param&gt;</span><br><span class="line">        private void LoadAndShowDCMMetaInfo(DicomFile dcm)</span><br><span class="line">        &#123;</span><br><span class="line">            //Show the message of DCM file to the listview in the dialog.</span><br><span class="line">            DicomDataset dcmDataset = dcm.Dataset;//dcm对象数据集存储到变量</span><br><span class="line">            DicomFileMetaInformation dcmMetaInfo = dcm.FileMetaInfo;//dcm对象文件元信息存储到变量</span><br><span class="line">            listView1.BeginUpdate();</span><br><span class="line">            //控件的显示将暂时被挂起。在调用BeginUpdate()方法之后，通常会对控件中的项和子项进行更改，然后再调用EndUpdate()方法。这样可以确保控件的显示更新只会在所有更改完成后才执行，从而避免出现不必要的重绘操作。</span><br><span class="line">            //DICOM MetaInfo</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.MediaStorageSOPClassUID==null?&quot;&quot;:dcmMetaInfo.MediaStorageSOPClassUID.ToString()))//利用String.IsNullOrWhiteSpace方法，判断dcm文件中的SOP类的UID信息是否为空</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID，</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                //用group号“0002”创建ListViewItem对象赋值给newItem变量。也就是说，ListViewItem的构造函数被调用，传入了一个表示Tag Group Number为&quot;0002&quot;的字符串。这个字符串将被作为该ListViewItem的主显示文本（即第一列）</span><br><span class="line">                newItem.SubItems.Add(&quot;0002&quot;);</span><br><span class="line">                //在ListView控件中，每一行都可以有多个列（即子项），用来显示多个数据。因此，在创建ListViewItem对象之后，可以通过调用ListViewItem的SubItems属性，来获取该项的子项集合。通过调用Add方法，可以向该集合中添加新的子项。这里添加的子项是Tag Element number</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.MediaStorageSOPClassUID.ToString());</span><br><span class="line">                //第三列添加SOP类UID信息</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">                //将包含DICOM文件Tag Group Number、Tag Element Number和SOP类UID信息的newItem对象添加到了listView1控件的行集合中，使其显示在控件中。</span><br><span class="line">            &#125;</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.MediaStorageSOPInstanceUID==null?&quot;&quot;:dcmMetaInfo.MediaStorageSOPInstanceUID.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0003&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.MediaStorageSOPInstanceUID.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加SOP实例UID信息</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.TransferSyntax==null?&quot;&quot;:dcmMetaInfo.TransferSyntax.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.TransferSyntax.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加传输语法UID信息</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.ImplementationClassUID==null?&quot;&quot;:dcmMetaInfo.ImplementationClassUID.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0012&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.ImplementationClassUID.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加实现类UID信息，实现类 UID（Implementation Class UID）是DICOM中的一个标识符，用于表示医学图像设备或软件的厂商和型号信息。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(dcmMetaInfo.ImplementationVersionName==null?&quot;&quot;:dcmMetaInfo.ImplementationVersionName.ToString()))</span><br><span class="line">            &#123;</span><br><span class="line">                //Insert the ImplementationClassUID</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0002&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0013&quot;);</span><br><span class="line">                newItem.SubItems.Add(dcmMetaInfo.ImplementationVersionName.ToString());</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line"></span><br><span class="line">            &#125;//添加版本号信息。DICOM 设备或软件的制造商会将 ImplementationVersionName 的值设置为特定的版本号或修订号。</span><br><span class="line"></span><br><span class="line">            //Patient Info</span><br><span class="line">            string patientName = dcmDataset.Get&lt;string&gt;(DicomTag.PatientName, &quot;&quot;);</span><br><span class="line">            //Get&lt;T&gt; 方法是 Dicom 数据集中的一个通用方法，用于获取指定标签号（Tag）对应的值，并将其转换为指定类型 T。在这里DicomTag.PatientName是一个表示患者姓名的标签号，并且使用空字符作为默认值。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientName))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientName);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者姓名信息</span><br><span class="line">            string patientID = dcmDataset.Get&lt;string&gt;(DicomTag.PatientID, &quot;&quot;);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者ID信息</span><br><span class="line">            string patientBirth = dcmDataset.Get&lt;string&gt;(DicomTag.PatientBirthDate);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientBirth))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0030&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientBirth);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者生日信息</span><br><span class="line">            string patientSex = dcmDataset.Get&lt;string&gt;(DicomTag.PatientSex);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientSex))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0040&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientSex);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者性别信息</span><br><span class="line">            string patientAge = dcmDataset.Get&lt;string&gt;(DicomTag.PatientAge);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(patientAge))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;1010&quot;);</span><br><span class="line">                newItem.SubItems.Add(patientAge);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加患者年龄信息</span><br><span class="line">            //Study &amp; Series Info</span><br><span class="line">            string studyDate = dcmDataset.Get&lt;string&gt;(DicomTag.StudyDate);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyDate))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0008&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyDate);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加检查日期信息</span><br><span class="line">            string studyTime = dcmDataset.Get&lt;string&gt;(DicomTag.StudyTime);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyTime))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0008&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0030&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyTime);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加检查的具体时间，包括时分秒和毫秒</span><br><span class="line">            string studyInstanceID = dcmDataset.Get&lt;string&gt;(DicomTag.StudyInstanceUID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyInstanceID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;000D&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyInstanceID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加病人检查唯一标志符信息，用于唯一标识病人的一次检查（即一个 study），它是一个由数字和句点组成的字符串，全球唯一，可用于跨医院或跨系统的病人信息交换。</span><br><span class="line">            string seriesInstanceID = dcmDataset.Get&lt;string&gt;(DicomTag.SeriesInstanceUID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(seriesInstanceID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;000E&quot;);</span><br><span class="line">                newItem.SubItems.Add(seriesInstanceID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加了一次检查中某个影像序列的唯一标识符，SeriesInstanceUID 标签用于唯一标识一组相关的影像（即一个 series），它也是一个由数字和句点组成的字符串，全球唯一。</span><br><span class="line">            string studyID = dcmDataset.Get&lt;string&gt;(DicomTag.StudyID);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(studyID))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0020&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(studyID);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加了病人的检查编号信息。StudyID 标签用于识别一个病人的检查，通常由医院或机构自己定义。</span><br><span class="line">            //Image Info</span><br><span class="line">            string imageHeight = dcmDataset.Get&lt;string&gt;(DicomTag.Rows);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(imageHeight))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0010&quot;);</span><br><span class="line">                newItem.SubItems.Add(imageHeight);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像高度信息，图像高度就是像素行数，也即Rows</span><br><span class="line">            string imageWidth = dcmDataset.Get&lt;string&gt;(DicomTag.Columns);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(imageWidth))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0011&quot;);</span><br><span class="line">                newItem.SubItems.Add(imageWidth);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像宽度信息，图像宽度就是像素列数，也即Columns</span><br><span class="line">            string bitsAlloctaed = dcmDataset.Get&lt;string&gt;(DicomTag.BitsAllocated);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(bitsAlloctaed))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0100&quot;);</span><br><span class="line">                newItem.SubItems.Add(bitsAlloctaed);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像像素深度信息，图像像素深度就是像素所占用的位数，常见位数为8，16，32.</span><br><span class="line">            string bitsStored = dcmDataset.Get&lt;string&gt;(DicomTag.BitsStored);</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(bitsStored))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0101&quot;);</span><br><span class="line">                newItem.SubItems.Add(bitsStored);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加图像实际像素深度信息。在DICOM中，像素深度可以分配比实际位深度更多的位，但实际位深度表示图像实际存储的精度。通常情况下，实际位深度等于或小于像素深度。</span><br><span class="line">            string highBits = dcmDataset.Get&lt;string&gt;(DicomTag.HighBit);</span><br><span class="line">            //这行代码是用于从DICOM数据集中获取像素值中最高位的位位置。在DICOM中，像素值是一个整数，其位数由像素深度决定，每个像素值可以被解释为灰度值或颜色分量等。</span><br><span class="line">            if (!String.IsNullOrWhiteSpace(highBits))</span><br><span class="line">            &#123;</span><br><span class="line">                ListViewItem newItem = new ListViewItem(&quot;0028&quot;);</span><br><span class="line">                newItem.SubItems.Add(&quot;0102&quot;);</span><br><span class="line">                newItem.SubItems.Add(highBits);</span><br><span class="line">                listView1.Items.Add(newItem);</span><br><span class="line">            &#125;//添加二进制像素值最高位位置信息</span><br><span class="line">            listView1.EndUpdate();//结束控件显示更新</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Drawing the image in your DCM to the Dialog</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dcm&quot;&gt;&lt;/param&gt;</span><br><span class="line">        private void DrawingDCMData2Screen(DicomFile dcm)//在窗口上显示dicom影像的bmp格式图象</span><br><span class="line">        &#123;</span><br><span class="line">            pictureBox1.Image = ConvertDCMData2BitImage(dcm);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// Convert the byte data retrieved from DCM file to Image</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;imagedata&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">        private Bitmap ConvertDCMData2BitImage(DicomFile dcm)//将dcm格式转换为bmp格式</span><br><span class="line">        &#123;</span><br><span class="line">            DicomFile newDcmFile = null;//定义一个空dicom文件用于存放压缩dicom文件实例</span><br><span class="line">            if (dcm.FileMetaInfo.TransferSyntax.IsEncapsulated)//判断传输语法是否被压缩</span><br><span class="line">            &#123;</span><br><span class="line">               // System.Reflection.Assembly.LoadFrom(Path.Combine(Application.StartupPath,&quot;Dicom.Native64.dll&quot;));</span><br><span class="line">                DicomTranscoder.LoadCodecs(Application.StartupPath, &quot;Dicom.Native*.dll&quot;);</span><br><span class="line">                newDcmFile=dcm.ChangeTransferSyntax(DicomTransferSyntax.ExplicitVRLittleEndian,new DicomJpegLsParams());//使用ExplicitVRLittleEndian传输语法，指定图像压缩算法以便后续处理            </span><br><span class="line">            &#125;</span><br><span class="line">            DicomImage imageDcm=null;//定义空的dicom图像类用于存放压缩dicom文件的图像信息</span><br><span class="line">            if (newDcmFile != null)//如果是被压缩的dicom文件，那么newDcmFile非空</span><br><span class="line">                imageDcm = new DicomImage(newDcmFile.Dataset);//将newDcmFile的数据集作为参数创建dicom图像类对象</span><br><span class="line">            else</span><br><span class="line">                imageDcm = new DicomImage(dcm.Dataset);//不是压缩文件就直接使用函数传入的dcm文件</span><br><span class="line">            DicomDataset dataset = dcm.Dataset;//使用变量方便传输</span><br><span class="line">            byte[] fs = imageDcm.PixelData.NumberOfFrames &lt; 2 ? imageDcm.PixelData.GetFrame(0).Data : imageDcm.PixelData.GetFrame(1).Data;//使用条件运算符判断是否是多帧图像，如果图象只有一帧，那么就是使用第0帧的图像数据，如果是多帧图像，那么就选用第1帧的图像数据。将图像数据存放在字节类型的数组fs中。</span><br><span class="line">            uint size = (uint)Marshal.SizeOf(typeof(short));//获取short类型的大小用于后续处理</span><br><span class="line">            uint padding = (uint)fs.Length % size;//字节数组长度与 short 类型大小的余数</span><br><span class="line">            uint count = (uint)fs.Length / size;//字节数组长度与 short 类型大小的商</span><br><span class="line">            short[] values = new short[count];//创建short类型数组存放基本的16位像素单元</span><br><span class="line">            System.Buffer.BlockCopy(fs, 0, values, 0, (int)(fs.Length - padding));//将字节数组复制到short类型数组中</span><br><span class="line"></span><br><span class="line">            int height = dataset.Get&lt;int&gt;(DicomTag.Rows);//获取图像高度，也即行数</span><br><span class="line">            int width = dataset.Get&lt;int&gt;(DicomTag.Columns);//获取图像宽度，也即列数</span><br><span class="line">            int windowsWidth = (int)dataset.Get&lt;double&gt;(DicomTag.WindowWidth);//窗宽定义</span><br><span class="line">            int windowsCenter = (int)dataset.Get&lt;double&gt;(DicomTag.WindowCenter);//窗位定义</span><br><span class="line">            //if the windowsWidth = 0, the DCM file is not standard type.</span><br><span class="line">            if (windowsWidth == 0 || windowsCenter==0)//对非标准dicom文件进行处理，并进行相应窗位窗宽计算</span><br><span class="line">            &#123;</span><br><span class="line">                windowsWidth = values.Max&lt;short&gt;()-values.Min&lt;short&gt;();</span><br><span class="line">                windowsCenter = windowsWidth / 2;</span><br><span class="line">            &#125;</span><br><span class="line">            int low = windowsCenter - windowsWidth / 2;//计算窗的范围</span><br><span class="line">            int high = windowsCenter + windowsWidth / 2;</span><br><span class="line">            Bitmap bitmap = new Bitmap(width, height);</span><br><span class="line">            for (int i = 0; i &lt; height; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j = 0; j &lt; width; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    int r, g, b;</span><br><span class="line">                    int temp = (int)values[(width - j - 1) * height + i];</span><br><span class="line">                    int val = temp &gt; high ? 255 : (temp &lt; low ? 0 : ((temp - low) * 255 / windowsWidth));</span><br><span class="line">                    r = g = b = val;</span><br><span class="line">                    bitmap.SetPixel(i, width-j-1, Color.FromArgb(r, g, b));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;//相当于从第一行末端到第一行第一个元素使用数组元素进行像素值赋值，接着第二行末端到第二行第一个元素，以此类推。</span><br><span class="line">            return bitmap;//返回Bitmap类型对象</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            MessageBox.Show(&quot;The program is just a demo written by C# using fo-dicom!****zssure****&quot;);</span><br><span class="line">        &#125;//帮助里的help提示</span><br><span class="line"></span><br><span class="line">        private void closeToolStripMenuItem_Click(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            listView1.Items.Clear();//清空ListView控件</span><br><span class="line">            pictureBox1.Image = Image.FromFile(defaultImageBG);//将图像替换成默认背景</span><br><span class="line">            MessageBox.Show(&quot;The close is just back to original state.Please click &#x27;X&#x27; to exit! &quot;);</span><br><span class="line">        &#125;//close选项提示</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果使用默认的拷贝构造函数，那么原对象和被复制对象的指针指向的是同一块地址，当一个对象执行析构函数时，此时指针指向空地址，原对象的指针就会变成悬空指针。</p>
 
       
     </div>
@@ -937,7 +705,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/16/Csharp/%E4%B8%80/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -951,269 +719,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/03/16/Csharp/%E4%B8%80/" class="post-title-link" itemprop="url">基础学习一</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-16 00:10:10" itemprop="dateCreated datePublished" datetime="2023-03-16T00:10:10+08:00">2023-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-11 15:56:07" itemprop="dateModified" datetime="2023-04-11T15:56:07+08:00">2023-04-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C#学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-程序结构"><a href="#C-程序结构" class="headerlink" title="C#程序结构"></a>C#程序结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Hello World&quot;);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个C#程序包含以下部分：</p>
-<ul>
-<li><strong>使用using关键字包含命名空间，一个程序一般有多个using语句。</strong>相当于System是一个系统命名空间，可以使用其中的类和方法。类比一下java的package，但是还是有去别的。</li>
-<li><strong>命名空间声明。</strong>使用namespace关键字定义一个命名空间。</li>
-<li><strong>一个class。</strong>class声明类包含了程序使用的数据和方法声明。类一般包含多个方法。方法定义了类的行为。只有一个  Main 方法。</li>
-<li><strong>Class方法。</strong></li>
-<li><strong>Class属性</strong>。</li>
-<li><strong>一个Main方法。</strong></li>
-<li><strong>语句&amp;表达式</strong></li>
-</ul>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>直接来看一个例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">using System;//包含系统包</span><br><span class="line">namespace RectangleApplication//定义命名空间</span><br><span class="line">&#123;</span><br><span class="line">    class Rectangle//定义矩形类</span><br><span class="line">    &#123;</span><br><span class="line">        // 成员变量</span><br><span class="line">        double length;</span><br><span class="line">        double width;</span><br><span class="line">        public void Acceptdetails()//定义获取成员变量值的函数</span><br><span class="line">        &#123;</span><br><span class="line">            length = 4.5;    </span><br><span class="line">            width = 3.5;</span><br><span class="line">        &#125;</span><br><span class="line">        public double GetArea()//定义计算面积的函数</span><br><span class="line">        &#123;</span><br><span class="line">            return length * width;</span><br><span class="line">        &#125;</span><br><span class="line">        public void Display()//定义显示函数</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Length: &#123;0&#125;&quot;, length);</span><br><span class="line">            Console.WriteLine(&quot;Width: &#123;0&#125;&quot;, width);</span><br><span class="line">            Console.WriteLine(&quot;Area: &#123;0&#125;&quot;, GetArea());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    class ExecuteRectangle//定义主函数类</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)//Main方法，程序入口</span><br><span class="line">        &#123;</span><br><span class="line">            Rectangle r = new Rectangle();//实例化矩形类，r为标识符，避免和C#关键字重复，如果非要用加一个@</span><br><span class="line">            r.Acceptdetails();//调用类的方法</span><br><span class="line">            r.Display();</span><br><span class="line">            Console.ReadLine();//等待输入退出程序</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="C-封装"><a href="#C-封装" class="headerlink" title="C#封装"></a>C#封装</h2><ul>
-<li><strong>public</strong>：所有对象都可以访问；</li>
-<li><strong>private</strong>：对象本身在对象内部可以访问；</li>
-<li><strong>protected</strong>：只有该类对象及其子类对象可以访问</li>
-<li><strong>internal</strong>：同一个程序集的对象可以访问；</li>
-<li><strong>protected</strong> <strong>internal</strong>：访问限于当前程序集或派生自包含类的类型。</li>
-</ul>
-<img src="\images\Csharp\一\1.png" style="zoom:120%;">
-
-<h2 id="C-方法"><a href="#C-方法" class="headerlink" title="C#方法"></a>C#方法</h2>
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/" class="post-title-link" itemprop="url">dicom影像显示</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-06 18:08:44" itemprop="dateCreated datePublished" datetime="2023-03-06T18:08:44+08:00">2023-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-08 19:43:12" itemprop="dateModified" datetime="2023-03-08T19:43:12+08:00">2023-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="位图显示方法"><a href="#位图显示方法" class="headerlink" title="位图显示方法"></a>位图显示方法</h2><p>Windows位图有两种：<strong>DDB</strong>以及<strong>DIB</strong>。</p>
-<p><strong>DDB</strong>中不包含调色板，通过硬件设备来显示图像，位图在内存中的位置和结构由硬件的驱动程序来管理,类似于MFC205中的Cbitmap类。由于不包含有调色板，图像的显示由硬件设备直接来实现，所以这种显示方式的速度非常快，与此同时，因为它的显示是依赖于设备的，所以在不同设备之间是不能够实现文件的兼容应用，从而决定了DDB的应用范围非常有限。</p>
-<p><strong>DIB</strong>设备无关位图却克服了DDB的确定，它不再依赖于硬件设备，是一种外部图像格式，从而完全能够实现不同设备之间的文件兼容应用。由于DIB位图中包含了一个调色板，而图像中的像素值表示了对应于该调色板的查找值，虽然相对于DDB位图多了一项查找过程，但是，DIB位图实现了不同设备之间的兼容显示，当需要显示图像的时候，只需要通过像素值找到调色板中对应的颜色进行显示，而不在关心硬件设备是否支持图像显示，从而实现了独立于硬件设备，所以目前大多数应用的图像基本都属于DIB类型。Windows中所有的图像生成都是由图形设备接口GDI来管理的，GDI是通过应用高层的绘图函数来实现生成的图像的，正由于这种生成方式，所以无论何种硬件设备都能够生成同样的图形，因此GDI构成了Windows系统的核心部件。</p>
-<h2 id="DICOM显示流程"><a href="#DICOM显示流程" class="headerlink" title="DICOM显示流程"></a>DICOM显示流程</h2><p>不同的操作系统中字节数据的排列顺序是不同的，一般主要有两种排列方式，即Big Endian和Little Endian。前者表示系统中的字节数据采用正常的顺序进行排列，而后者恰恰相反，采用高低字节调换的方式进行数据排列。通常情况下，在UNIX系统中采用正常顺序的Big Endian排列方式，而Windows中则采用髙低字节调换的Little Endian排列方式。</p>
-<p>数据解析流程：</p>
-<div id="flowchart-0" class="flow-chart"></div>
-
-
-
-<p>DICOM-BMP显示流程：</p>
-<div id="flowchart-1" class="flow-chart"></div>
-
-<h2 id="图像标注"><a href="#图像标注" class="headerlink" title="图像标注"></a>图像标注</h2><p>做为医学图像显示系统，对图像中重点关注区域的加以标注是不可或缺的，可以辅助医生对其感兴趣区域进行锁定和定性分析。同时标记对医学教学也是非常有帮助的。本文中设计的对DICOM文件中图像的热点关注区域进行标注，并对所标注的轨迹坐标等信息进行读取和保存。对影像图像进行标记，针对影像图像可能涉及到很多部位，及不同的病状，本设计采用画线、圆形、矩形三种标记方式对其进行标记定位。</p>
-<p>主要实现方法是通过调用Windows系统下的CClientDC类，以鼠标左键按下为坐标起点，以鼠标左键弹起为坐标终点，这样就能够画出标记线。</p>
-<h2 id="图像的旋转和放大"><a href="#图像的旋转和放大" class="headerlink" title="图像的旋转和放大"></a>图像的旋转和放大</h2><p><strong>图像旋转</strong>就是以空间的某一点为原点，然后改变旋转角度，但是每一点的相对位置关系是不变的。从数学方法上来描述，图像的旋转就是建立一幅图像与其变换后的图像中所有像素点之间映射关系的函数:(x,y)=(X(u,v),Y(u,v)),(x,y)表示输入的图像素点的坐标，(u,v)表示输出的图像素点的坐标。x,y,u,v表示了输入图像与输出图像所有点的几何对应关系。图像的旋转计算方法为:假设在X-Y坐标体系中，将点(x,y)旋转角度θ，得到点(u,v)。</p>
-<p>计算公式为：</p>
-<script type="math/tex; mode=display">
-[u,v] = 
-[x,y]
-\begin{bmatrix}
-cos\theta & -sin\theta \\ sin\theta & sin\theta
-\end{bmatrix}</script><p><strong>图像放大</strong>可以更好的帮助医生诊断，其最简单的方法就是将像素放大，变换的公式为：</p>
-<script type="math/tex; mode=display">
-u = r_x * x
-\\v = r_y * y</script><p>其中<code>r_x</code>为X方向的放大比例，7；为y方向的放大比例，然后将变换后的像素排列在的阵列中，但是这样的放大只是像素坐标的间隔变大。所以这样的放大以后会产生马赛克，为了解决这一问题，通常采用插值法来实现像素的平稳过度。</p>
-<p><img src="\images\毕设\dicom标准\6.jpg" style="zoom:50%;"></p>
-<p>图中的四个边角为放大后原像素的位置，而它们之间的像素需要插值来显示，具体算法如下：</p>
-<script type="math/tex; mode=display">
-g(u,v_1) = g(u_1,v_1)+\frac{u-u_1} {u_2-u_1}[g(u_2,v_1)-g(u_1,v_1)]\\
-g(u,v_2) = g(u_1,v_2)+\frac{u-u_1} {u_2-u_1}[g(u_2,v_2)-g(u_1,v_2)]\\
-g(u,v) = g(u,v_1)+\frac{v-v_1} {v_2-v_1}[g(u,v_2)-g(u,v_1)]</script><p>由于是通过线性插值的方法得到的放大图像，所以效果明显优于直接放大法，但是即使采用了插值旳方法，所得到的信息毕竟不是真实的信息，所以只能作为医学诊断辅助，不是绝对严格的医学测量。</p>
-<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
-op=>operation: 读取数据
-cond=>condition: Big Endian?
-op2=>operation: 数据处理
-op3=>operation: 字节交换
-e=>end: 结束
-st->op->cond->op2->e
-cond(yes)->op2
-cond(no)->op3
-op3->op2</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 开始
-e=>end: 结束
-op1=>operation: 打开文件
-op2=>operation: 提取传输输入法
-op3=>operation: 数据解析
-op4=>operation: 获取图像数据信息
-op5=>operation: 数据解析
-op6=>operation: 调用相应解压模块
-op7=>operation: 获取图像数据
-op8=>operation: 图像数据转换为8位数据
-op9=>operation: DIB显示
-cond1=>condition: DICOM？
-cond2=>condition: 图像是否为压缩数据？
-st->op1->cond1(yes)->op2->op3->op4->op5->cond2(no)->op7->op8->op9->e
-cond1(no)->e
-cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">dicom图像灰度理解</a>
+            <a href="/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">析构函数</a>
         </h2>
 
         <div class="post-meta">
@@ -1226,7 +732,7 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-03-05 21:17:39 / 修改时间：21:52:00" itemprop="dateCreated datePublished" datetime="2023-03-05T21:17:39+08:00">2023-03-05</time>
+              <time title="创建时间：2023-09-03 19:35:32 / 修改时间：19:49:04" itemprop="dateCreated datePublished" datetime="2023-09-03T19:35:32+08:00">2023-09-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1234,7 +740,7 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -1244,7 +750,7 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>756</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1263,15 +769,444 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="图像灰阶"><a href="#图像灰阶" class="headerlink" title="图像灰阶"></a>图像灰阶</h2><p>​        所谓灰阶，是将最亮与最暗之间的亮度变化，区分为若干份。以便于进行信号输入相对应的屏幕亮度管控。每张数字影像都是由许多点所组合而成的,这些点又称为像素(pixels)，通常每一个像素可以呈现出许多不同的颜色，它是由红、绿、蓝（RGB）三个子像素组成的。每一个子像素，其背后的光源都可以显现出不同的亮度级别。而灰阶代表了由最暗到最亮之间不同亮度的层次级别。这中间层级越多，所能够呈现的画面效果也就越细腻。以8bit panel为例，能表现2的8次方，等于256个亮度层次，我们就称之为256灰阶。LCD屏幕上每个像素，均由不同亮度层次的红、绿、蓝组合起来，最终形成不同的色彩点。也就是说，屏幕上每一个点的色彩变化，其实都是由构成这个点的三个RGB子像素的灰阶变化所带来的。</p>
-<h2 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h2><p>​        我们生活中通过三原色深浅组成不同的颜色，前端开发中常用RGB来指定色彩，R、G、B 都是 0-255， 比如 （255,255,255） 表示白色，用16进制表示255就是ff, 所以255,255,255 可以表示为 ffffff,  在css样式表中写为 #ffffff。</p>
-<h2 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h2><p>​        图片我们都知道是由多个像素组成的，是图像的最小单元，如果这个单元里只有一个bit大小，也就是只有0和1两个值，由这种像素组成的图像称二值图像，显然它可以表示一个黑白图。这个单位里也可以存一个16位二进制数，24位…, 可以想象存储的越大，一个像素能表达的颜色就越丰富，整体图像呈现就越精细，当然图片占用的空间也就越大。</p>
-<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>​        1位图像（即二值图像）只能表示黑白，那二位图像就可以表示4种颜色（00,01,10,11，VGA），依次类推，4位（16色，VGA），8位（256色），16位（增强色），24位和32位（真彩色）等。</p>
-<p>这其中8位RGB指的是3位元是R，3位元是G，2位元是B，故有8位RGB有256种颜色。其他以此类推。</p>
-<p><strong>色彩图像</strong>：以RGB图像为例，RGB图像每一个像素的颜色值（由RGB三原色表示）直接存放在图像矩阵中，由于每一像素的颜色需由R、G、B三个分量来表示，M、N分别表示图像的行列数，<strong>三个</strong>M x N的二维矩阵分别表示各个像素的R、G、B三个颜色分量，假设我们在绘图的时候只取第一个矩阵，那么绘制出来的就是红色分量的图片。<br> <strong>灰度图像</strong>：每个像素只有一个采样颜色，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。</p>
-<h2 id="灰度级"><a href="#灰度级" class="headerlink" title="灰度级"></a>灰度级</h2><p>​        灰度级表明图像中不同灰度的最大数量。灰度级越大，图像的亮度范围越大。二值图像一个像素只能存0和1，它的灰度级就为2，8位图一个像素表示0-255共256个灰度值，所有它的灰度级为256， 那么存储一张512*512,256级灰度的图片需要的空间就为</p>
-<script type="math/tex; mode=display">
-512*512*8 = 2097152\ bit ≈ 1.7\ Mb</script><h2 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h2><p>​        图像的灰度化是让像素点矩阵中的每一个像素点都满足关系：R=G=B，此时的这个值叫做灰度值。如RGB(100,100,100)就代表灰度值为100,RGB(50,50,50)代表灰度值为50。</p>
+          <p>析构函数是在对象生命周期结束时自动调用的特殊成员函数。它用于清理对象分配的资源、释放内存、关闭文件等一系列清理工作。析构函数通常在以下情况下被调用：</p>
+<ol>
+<li><p><strong>对象离开其作用域：</strong> 当对象在函数内被创建，并且函数结束或对象离开其作用域时，C++会自动调用对象的析构函数来销毁对象。这是最常见的情况。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">someFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj; <span class="comment">// 在函数内创建对象</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="comment">// 在函数结束时，obj 的析构函数被调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>动态分配对象的内存释放：</strong> 如果你使用 <code>new</code> 运算符在堆上动态分配了对象，必须显式调用 <code>delete</code> 来释放对象的内存。在调用 <code>delete</code> 时，对象的析构函数会被自动调用。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass *ptr = <span class="keyword">new</span> <span class="built_in">MyClass</span>(); <span class="comment">// 动态分配对象</span></span><br><span class="line"><span class="keyword">delete</span> ptr; <span class="comment">// 调用析构函数并释放内存</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>容器和数据结构的管理：</strong> 如果你将对象存储在容器（如 <code>std::vector</code>、<code>std::list</code>）或数据结构中，当容器或数据结构的生命周期结束时，其中的元素对象的析构函数会被调用。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;MyClass&gt; myVector;</span><br><span class="line">myVector.<span class="built_in">push_back</span>(<span class="built_in">MyClass</span>()); <span class="comment">// 向容器中添加对象</span></span><br><span class="line"><span class="comment">// 当 myVector 离开其作用域时，其中的对象的析构函数被调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>异常抛出：</strong> 如果在对象的构造函数中抛出了异常，并且在创建对象的上下文中没有捕获该异常，那么对象的析构函数会被调用以清理部分或全部资源。这是一种异常安全的机制，确保资源得到释放。</p>
+</li>
+</ol>
+<p>总之，析构函数在对象生命周期结束时（无论是因为离开作用域、动态内存释放、容器管理或异常处理）被自动调用，用于对象的清理和资源的释放工作。你可以自定义析构函数来确保在对象销毁时执行必要的清理工作，如释放动态分配的内存或关闭文件。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">派生类继承</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-03 17:08:28" itemprop="dateCreated datePublished" datetime="2023-09-03T17:08:28+08:00">2023-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:14:50" itemprop="dateModified" datetime="2023-09-05T18:14:50+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>415</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>私有继承影响的是继承的父类，继承的父类的所有变量和函数将变得对外部不可访问，但是子类的public部分依旧是对外部可见的。</li>
+<li>C++的类的成员函数也可以在类的外部用范围解析运算符实现定义。</li>
+<li>访问修饰符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>对外部代码是否可见</th>
+<th>派生类是否可见</th>
+<th>类的成员函数是否可见</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>private</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<ul>
+<li>三种继承，继承类型导致了基类成员变化，基类成员变化导致了基类成员在类外是否可访问。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>派生类可访问</th>
+<th>类外可访问</th>
+<th>基类成员变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>公共（默认）继承</td>
+<td>基类的public和protected</td>
+<td>基类public</td>
+<td>基类public，protected成员在派生类保持属性不变</td>
+</tr>
+<tr>
+<td>保护继承</td>
+<td>基类的public和protected</td>
+<td>基类任何成员都不可访问</td>
+<td>基类public，protected成员变成派生类protected成员</td>
+</tr>
+<tr>
+<td>私有继承</td>
+<td>基类的public和protected</td>
+<td>基类任何成员都不可访问</td>
+<td>基类public，protected成员变成派生类private成员</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/C%E5%92%8CC++/Untitled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/02/C%E5%92%8CC++/Untitled/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-02 16:38:08 / 修改时间：22:10:55" itemprop="dateCreated datePublished" datetime="2023-09-02T16:38:08+08:00">2023-09-02</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>38</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.内存泄漏</p>
+<p>2.新建对象是在堆上建立的</p>
+<p>3.堆内存和栈内存，什么叫动态分配内存</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">引用和指针</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-01 21:50:01 / 修改时间：22:07:25" itemprop="dateCreated datePublished" datetime="2023-09-01T21:50:01+08:00">2023-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>370</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="引用概念"><a href="#引用概念" class="headerlink" title="引用概念"></a>引用概念</h2><p>先说如何判别：和类型在一起的是引用，和变量在一起的是取址。</p>
+<p>引用的理解：实际上从字面意思上就可以很容易理解，所谓引用就是引用一个东西，在C++中，引用就是相当于一个变量的别名。</p>
+<p><code>int m; int &amp;n = m;</code>再看这两句代码就很容易理解引用的含义了，n相当于m的一个别名。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">5</span>；</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">6</span>；</span><br><span class="line"><span class="keyword">int</span> &amp;k = i；</span><br><span class="line">k = j； <span class="comment">// k 和i 的值都变成了6；</span></span><br></pre></td></tr></table></figure>
+
+<p>这里实际上就可以看出引用就是字面意思上的引用。</p>
+<h2 id="和指针的区别"><a href="#和指针的区别" class="headerlink" title="和指针的区别"></a>和指针的区别</h2><ul>
+<li><p>指针是一个实体，有具体的地址存放指针变量，但是关于引用一些书上写是不占用内存的。</p>
+<p>（这篇文章认为占用内存<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78800232%EF%BC%89">https://zhuanlan.zhihu.com/p/78800232）</a></p>
+</li>
+<li><p>引用不需要解引用，指针需要解引用</p>
+</li>
+<li><p>引用只能被初始化一次，之后不可变（可认为是常量指针），指针可变。</p>
+</li>
+<li><p>引用不能为空，必须初始化，指针可为空</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/py/r%E6%97%A0%E8%BE%93%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/18/py/r%E6%97%A0%E8%BE%93%E5%87%BA/" class="post-title-link" itemprop="url">python基础</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-18 15:55:03 / 修改时间：15:56:27" itemprop="dateCreated datePublished" datetime="2023-08-18T15:55:03+08:00">2023-08-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>147</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="python中print函数后面加上”-r”后不能显示任何打印信息"><a href="#python中print函数后面加上”-r”后不能显示任何打印信息" class="headerlink" title="python中print函数后面加上”\r”后不能显示任何打印信息"></a>python中print函数后面加上”\r”后不能显示任何打印信息</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">countdown = <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(countdown, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\r%d&#x27;</span>%i,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1292,7 +1227,7 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1360,14 +1295,14 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1424,12 +1359,12 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">149k</span>
+    <span title="站点总字数">157k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:16</span>
+    <span title="站点阅读时长">2:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
