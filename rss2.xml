@@ -9,8 +9,34 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Fri, 08 Sep 2023 09:27:41 GMT</pubDate>
+    <pubDate>Fri, 08 Sep 2023 09:44:58 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>复杂度</title>
+      <link>http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
+      <guid>http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/</guid>
+      <pubDate>Fri, 08 Sep 2023 09:44:31 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;时间复杂度和空间复杂度是用于分析算法性能的两个关键概念。让我们通过示例来解释它们。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;时间复杂度&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;时间复杂度表示算法执行所需的时间与输入数据规模之间的关系。通常用大 O 表示法（Big O Notation）来表</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>时间复杂度和空间复杂度是用于分析算法性能的两个关键概念。让我们通过示例来解释它们。</p><p><strong>时间复杂度</strong>：</p><p>时间复杂度表示算法执行所需的时间与输入数据规模之间的关系。通常用大 O 表示法（Big O Notation）来表示。以下是一些常见的时间复杂度示例：</p><ol><li><p>**O(1)**：常数时间复杂度。无论输入规模如何增加，算法的执行时间始终保持不变。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 执行时间与输入规模无关</span></span><br></pre></td></tr></table></figure></li><li><p>**O(n)**：线性时间复杂度。执行时间与输入规模成正比。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="comment">// 执行 n 次，所以是线性时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>**O(n^2)**：平方时间复杂度。执行时间与输入规模的平方成正比。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">        <span class="comment">// 执行 n*n 次，所以是平方时间复杂度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>**O(log n)**：对数时间复杂度。通常出现在二分查找等算法中，执行时间随着输入规模的增加而增加，但增长速度很慢。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 二分查找算法，对数时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p><strong>空间复杂度</strong>：</p><p>空间复杂度表示算法执行所需的额外空间与输入数据规模之间的关系。也通常使用大 O 表示法来表示。以下是一些常见的空间复杂度示例：</p><ol><li><p>**O(1)**：常数空间复杂度。算法执行所需的额外空间不随输入规模增加而增加。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 额外空间占用恒定</span></span><br></pre></td></tr></table></figure></li><li><p>**O(n)**：线性空间复杂度。额外空间占用与输入规模成正比。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n]; <span class="comment">// 创建一个长度为 n 的数组，占用线性空间</span></span><br></pre></td></tr></table></figure></li><li><p>**O(n^2)**：平方空间复杂度。额外空间占用与输入规模的平方成正比。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[n][n]; <span class="comment">// 创建一个 n x n 的矩阵，占用平方空间</span></span><br></pre></td></tr></table></figure></li><li><p>**O(log n)**：对数空间复杂度。通常出现在递归算法中，额外空间占用随着递归深度的增加而增加，但增长速度很慢。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recursiveFunction</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>) + <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p>总之，时间复杂度和空间复杂度是用于分析算法性能的重要工具，它们帮助我们了解算法如何随着输入规模的增加而执行。选择适当的算法可以帮助优化程序的性能，尤其是在处理大规模数据时。</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E5%8A%9B%E6%89%A3/">力扣</category>
+      
+      
+      
+      <comments>http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>排序</title>
@@ -20,13 +46,12 @@
       
         
         
-      <description>&lt;h2 id=&quot;冒泡排序&quot;&gt;&lt;a href=&quot;#冒泡排序&quot; class=&quot;headerlink&quot; title=&quot;冒泡排序&quot;&gt;&lt;/a&gt;冒泡排序&lt;/h2&gt;&lt;p&gt;在最坏的情况下（所有元素全部是逆序），时间复杂度为&lt;/p&gt;
-</description>
+      <description>&lt;h2 id=&quot;冒泡排序&quot;&gt;&lt;a href=&quot;#冒泡排序&quot; class=&quot;headerlink&quot; title=&quot;冒泡排序&quot;&gt;&lt;/a&gt;冒泡排序&lt;/h2&gt;&lt;p&gt;在最坏的情况下（所有元素全部是逆序），时间复杂度为$O(n^2)$，因为此时需要进行n-1轮交换和比较，每一轮需要进行n-1</description>
         
       
       
       
-      <content:encoded><![CDATA[<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>在最坏的情况下（所有元素全部是逆序），时间复杂度为</p>]]></content:encoded>
+      <content:encoded><![CDATA[<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>在最坏的情况下（所有元素全部是逆序），时间复杂度为$O(n^2)$，因为此时需要进行n-1轮交换和比较，每一轮需要进行n-1次比较，通常来讲比较操作相对交换操作更加耗时，所以时间复杂度就是$O(n^2)$。</p><p>再来说空间复杂度，空间复杂度是描述算法在运行过程中所需要的额外内存空间的量度，通常不包括输入数据的空间。所以冒泡排序是一种原地排序算法，它在原始数组上进行排序，只需要常数级别的额外内存空间来存储一些临时变量，如用于元素交换的临时变量。这些额外的内存空间的使用不会随着输入数据规模的增加而增加，因此空间复杂度是$ O(1)$。</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/%E5%8A%9B%E6%89%A3/">力扣</category>
@@ -239,30 +264,6 @@
       
       
       <comments>http://example.com/2023/08/18/py/r%E6%97%A0%E8%BE%93%E5%87%BA/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>py知识</title>
-      <link>http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/</link>
-      <guid>http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/</guid>
-      <pubDate>Fri, 11 Aug 2023 09:05:21 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;with关键字&quot;&gt;&lt;a href=&quot;#with关键字&quot; class=&quot;headerlink&quot; title=&quot;with关键字&quot;&gt;&lt;/a&gt;with关键字&lt;/h2&gt;&lt;p&gt;在 Python 中，&lt;code&gt;with&lt;/code&gt; 语句用于创建一个上下文管理器（Contex</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="with关键字"><a href="#with关键字" class="headerlink" title="with关键字"></a>with关键字</h2><p>在 Python 中，<code>with</code> 语句用于创建一个上下文管理器（Context Manager），用于管理一些资源的获取和释放，以确保资源得到正确的使用和清理。这种管理在处理文件、网络连接、数据库连接等需要显式打开和关闭资源的情况下非常有用，因为它可以帮助避免资源泄漏和错误处理。</p><p><code>with</code> 语句的一般语法结构如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> context_expression <span class="keyword">as</span> target:</span><br><span class="line">    <span class="comment"># 代码块</span></span><br></pre></td></tr></table></figure><ul><li><code>context_expression</code>：通常是一个上下文管理器对象，它负责定义资源的获取和释放规则。</li><li><code>target</code>：通常是一个变量，用于接收上下文管理器生成的资源。</li><li>代码块：在代码块中，你可以使用 <code>target</code> 获取资源并进行操作，当代码块结束时，资源会自动被释放，无论是否发生异常。</li></ul><p>一个常见的使用案例是文件的读写：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    content = file.read()</span><br><span class="line"><span class="comment"># 在代码块结束后，文件会自动关闭，不需要显式调用 file.close()</span></span><br></pre></td></tr></table></figure><p>在你提供的代码中，<code>with torch.no_grad():</code> 语句的目的是在该上下文中执行一些操作，而在这个上下文中，PyTorch 不会跟踪梯度信息，从而避免不必要的内存占用和计算。这在进行一些不需要梯度信息的操作，如参数更新，时非常有用。当 <code>with</code> 代码块结束后，梯度追踪会自动恢复。</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</category>
-      
-      
-      
-      <comments>http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/#disqus_thread</comments>
       
     </item>
     
