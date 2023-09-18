@@ -313,6 +313,599 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/" class="post-title-link" itemprop="url">梯度计算</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-17 12:24:41 / 修改时间：13:23:53" itemprop="dateCreated datePublished" datetime="2023-09-17T12:24:41+08:00">2023-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="向量对向量的梯度"><a href="#向量对向量的梯度" class="headerlink" title="向量对向量的梯度"></a>向量对向量的梯度</h2><p><strong>方法1：</strong></p>
+<p><strong>正确：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">y.backward(torch.ones_like(x))</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
+
+<p>也就是说(向量)矩阵对(向量)矩阵求导(tensor对tensor求导)，实际上是先求出Jacobian矩阵中每一个元素的梯度值(每一个元素的梯度值的求解过程对应上面的计算图的求解方法)，然后将这个Jacobian矩阵与<code>grad_tensors参数</code>对应的矩阵进行对应的点乘，得到最终的结果。</p>
+<h1 id="在这里就是，先根据计算图算出雅可比矩阵为：-frac-d-vec-y-d-vec-x-x3D-begin-bmatrix-frac-partial-y-1-partial-x-1-amp-frac-partial-y-1-partial-x-2-amp-frac-partial-y-1-partial-x-3-frac-partial-y-2-partial-x-1-amp-frac-partial-y-2-partial-x-2-amp-frac-partial-y-2-partial-x-3-frac-partial-y-3-partial-x-1-amp-frac-partial-y-3-partial-x-2-amp-frac-partial-y-3-partial-x-3-end-bmatrix"><a href="#在这里就是，先根据计算图算出雅可比矩阵为：-frac-d-vec-y-d-vec-x-x3D-begin-bmatrix-frac-partial-y-1-partial-x-1-amp-frac-partial-y-1-partial-x-2-amp-frac-partial-y-1-partial-x-3-frac-partial-y-2-partial-x-1-amp-frac-partial-y-2-partial-x-2-amp-frac-partial-y-2-partial-x-3-frac-partial-y-3-partial-x-1-amp-frac-partial-y-3-partial-x-2-amp-frac-partial-y-3-partial-x-3-end-bmatrix" class="headerlink" title="在这里就是，先根据计算图算出雅可比矩阵为：$$\frac {d\vec y} {d\vec x} &#x3D;\begin{bmatrix}\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial x_2} &amp; \frac {\partial y_1}{\partial x_3} \\frac{\partial y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac {\partial y_2}{\partial x_3}\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial x_2} &amp; \frac {\partial y_3}{\partial x_3}\end{bmatrix}"></a>在这里就是，先根据计算图算出雅可比矩阵为：<br>$$<br>\frac {d\vec y} {d\vec x} &#x3D;<br>\begin{bmatrix}<br>\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial x_2} &amp; \frac {\partial y_1}{\partial x_3} \\frac{\partial y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac {\partial y_2}{\partial x_3}<br>\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial x_2} &amp; \frac {\partial y_3}{\partial x_3}<br>\end{bmatrix}</h1><h1 id="begin-bmatrix-2-amp-0-amp-0-0-amp-2-amp-0-0-amp-0-amp-2-end-bmatrix-假设A-x3D-f-y1-y2-y3-接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad-tensors参数。-begin-bmatrix-frac-partial-A-partial-x-1-amp-frac-partial-A-partial-x-2-amp-frac-partial-A-partial-x-3-end-bmatrix"><a href="#begin-bmatrix-2-amp-0-amp-0-0-amp-2-amp-0-0-amp-0-amp-2-end-bmatrix-假设A-x3D-f-y1-y2-y3-接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad-tensors参数。-begin-bmatrix-frac-partial-A-partial-x-1-amp-frac-partial-A-partial-x-2-amp-frac-partial-A-partial-x-3-end-bmatrix" class="headerlink" title="\begin{bmatrix}2 &amp; 0 &amp; 0 \ 0 &amp; 2 &amp; 0 \ 0 &amp; 0 &amp; 2\end{bmatrix}$$假设A &#x3D; f(y1,y2,y3),接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad_tensors参数。$$\begin{bmatrix}\frac {\partial A}{\partial x_1} &amp; \frac {\partial A}{\partial x_2} &amp; \frac {\partial A}{\partial x_3}\end{bmatrix}"></a>\begin{bmatrix}<br>2 &amp; 0 &amp; 0 \ 0 &amp; 2 &amp; 0 \ 0 &amp; 0 &amp; 2<br>\end{bmatrix}<br>$$<br>假设A &#x3D; f(y1,y2,y3),接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad_tensors参数。<br>$$<br>\begin{bmatrix}<br>\frac {\partial A}{\partial x_1} &amp; \frac {\partial A}{\partial x_2} &amp; \frac {\partial A}{\partial x_3}<br>\end{bmatrix}</h1><h1 id="begin-bmatrix-frac-partial-A-partial-y-1-amp-frac-partial-A-partial-y-2-amp-frac-partial-A-partial-y-3-end-bmatrix-begin-bmatrix-frac-partial-y-1-partial-x-1-amp-frac-partial-y-1-partial-x-2-amp-frac-partial-y-1-partial-x-3-frac-partial-y-2-partial-x-1-amp-frac-partial-y-2-partial-x-2-amp-frac-partial-y-2-partial-x-3-frac-partial-y-3-partial-x-1-amp-frac-partial-y-3-partial-x-2-amp-frac-partial-y-3-partial-x-3-end-bmatrix"><a href="#begin-bmatrix-frac-partial-A-partial-y-1-amp-frac-partial-A-partial-y-2-amp-frac-partial-A-partial-y-3-end-bmatrix-begin-bmatrix-frac-partial-y-1-partial-x-1-amp-frac-partial-y-1-partial-x-2-amp-frac-partial-y-1-partial-x-3-frac-partial-y-2-partial-x-1-amp-frac-partial-y-2-partial-x-2-amp-frac-partial-y-2-partial-x-3-frac-partial-y-3-partial-x-1-amp-frac-partial-y-3-partial-x-2-amp-frac-partial-y-3-partial-x-3-end-bmatrix" class="headerlink" title="\begin{bmatrix}\frac {\partial A}{\partial y_1} &amp; \frac {\partial A}{\partial y_2} &amp; \frac {\partial A}{\partial y_3}\end{bmatrix}*\begin{bmatrix}\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial x_2} &amp; \frac {\partial y_1}{\partial x_3} \\frac{\partial y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac {\partial y_2}{\partial x_3}\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial x_2} &amp; \frac {\partial y_3}{\partial x_3}\end{bmatrix}"></a>\begin{bmatrix}<br>\frac {\partial A}{\partial y_1} &amp; \frac {\partial A}{\partial y_2} &amp; \frac {\partial A}{\partial y_3}<br>\end{bmatrix}<br>*<br>\begin{bmatrix}<br>\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial x_2} &amp; \frac {\partial y_1}{\partial x_3} \\frac{\partial y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac {\partial y_2}{\partial x_3}<br>\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial x_2} &amp; \frac {\partial y_3}{\partial x_3}<br>\end{bmatrix}</h1><h1 id="begin-bmatrix-1-amp-1-amp-1-end-bmatrix-begin-bmatrix-2-amp-0-amp-0-0-amp-2-amp-0-0-amp-0-amp-2-end-bmatrix"><a href="#begin-bmatrix-1-amp-1-amp-1-end-bmatrix-begin-bmatrix-2-amp-0-amp-0-0-amp-2-amp-0-0-amp-0-amp-2-end-bmatrix" class="headerlink" title="\begin{bmatrix}1 &amp; 1 &amp; 1\end{bmatrix}*\begin{bmatrix}2 &amp; 0 &amp; 0 \ 0 &amp; 2 &amp; 0 \ 0 &amp; 0 &amp; 2\end{bmatrix}"></a>\begin{bmatrix}<br>1 &amp; 1 &amp; 1<br>\end{bmatrix}<br>*<br>\begin{bmatrix}<br>2 &amp; 0 &amp; 0 \ 0 &amp; 2 &amp; 0 \ 0 &amp; 0 &amp; 2<br>\end{bmatrix}</h1><p>\begin{bmatrix}<br>2 &amp; 2 &amp; 2<br>\end{bmatrix}<br>$$<br>实际上方法2就是利用了sum函数对每个变量偏导为1进行操作的。</p>
+<p><strong>错误：</strong>backward方法只能对标量函数进行求导</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2：</strong></p>
+<p>将向量函数求和转换为标量值函数进行反向传播求取梯度，相当于sum_y&#x3D;y1+y2+y3,然后根据链式法则逐步求取每一个输出对每一个输入的梯度。因为dsum&#x2F;dy1&#x3D;1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">sum_y = torch.<span class="built_in">sum</span>(y)</span><br><span class="line">sum_y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考资料：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhouyang209117/p/11023160.html">https://www.cnblogs.com/zhouyang209117/p/11023160.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/65609544">https://zhuanlan.zhihu.com/p/65609544</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29923090">https://zhuanlan.zhihu.com/p/29923090</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9A%82%E9%80%80%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9A%82%E9%80%80%E6%B3%95/" class="post-title-link" itemprop="url">暂退法</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-14 20:04:31 / 修改时间：20:14:08" itemprop="dateCreated datePublished" datetime="2023-09-14T20:04:31+08:00">2023-09-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>802</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>Dropout 是一种用于正则化神经网络的技术，旨在减轻过拟合问题。它在训练过程中随机地丢弃（即关闭）神经网络中的一些单元（神经元），以减少神经元之间的协作，使模型更加健壮和泛化能力更强。</p>
+<p>以下是关于 Dropout 方法的一些要点：</p>
+<ol>
+<li><strong>随机丢弃神经元：</strong> 在每一次训练迭代中，Dropout 方法会随机选择一部分神经元并将它们的输出设置为零。这相当于将这些神经元暂时 “关闭”，不参与前向传播和反向传播。</li>
+<li><strong>减轻过拟合：</strong> Dropout 通过减少神经元之间的协作，迫使网络更多地依赖于各种特征和路径来进行学习。这有助于降低模型对训练数据的过度拟合，提高了泛化性能。</li>
+<li><strong>超参数：</strong> Dropout 的一个重要超参数是丢弃概率（dropout probability），通常在0.2到0.5之间选择。较小的丢弃概率表示丢弃较少的神经元，较大的丢弃概率表示丢弃更多的神经元。</li>
+<li><strong>测试时不使用 Dropout：</strong> 在测试或推理时，不再使用 Dropout。相反，通常会按比例缩放训练后的权重，以确保一致性。</li>
+<li><strong>适用于深度网络：</strong> Dropout 特别适用于深度神经网络，因为它们更容易过拟合。通过在不同层应用 Dropout，可以提高整个网络的鲁棒性。</li>
+</ol>
+<p>总的来说，Dropout 是一种有效的正则化技术，可以帮助改善神经网络的泛化性能，减轻过拟合问题。在实践中，它经常与其他正则化方法一起使用，如权重衰减（L2 正则化）来进一步提高模型性能。</p>
+<h2 id="dropout-操作会引入缩放效应"><a href="#dropout-操作会引入缩放效应" class="headerlink" title="dropout 操作会引入缩放效应"></a>dropout 操作会引入缩放效应</h2><p>我们随机丢弃一部分神经元（将它们的输出设置为零），以减轻过拟合问题。然而，在训练期间，由于某些神经元被随机丢弃，网络的输出会变得更小，这可能会导致网络的整体缩放效应。</p>
+<p>我们使用缩放因子 <code>(1.0 - dropout)</code>，它表示了保留神经元的输出应该被放大的比例。如果 <code>dropout</code> 为0.5（即丢弃50%的神经元），那么缩放因子为2，这意味着保留的神经元的输出应该扩大两倍，以补偿 Dropout 操作引入的缩放效应。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/" class="post-title-link" itemprop="url">权重衰减为什么可以降低模型复杂度</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-13 21:03:26 / 修改时间：22:59:40" itemprop="dateCreated datePublished" datetime="2023-09-13T21:03:26+08:00">2023-09-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>981</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>模型的容量（capacity）是指模型能够拟合的各种不同函数和模式的数量和复杂程度。当我说减小权重值可以减小模型的容量时，我指的是通过控制权重的大小，我们可以降低模型对于某些复杂模式的拟合能力。这可能听起来有些反直觉，因为通常人们认为模型容量与模型的参数数量成正比。</p>
+<p>但是，这里的关键是，模型容量不仅仅与参数数量有关，还与参数的范围（大小）有关。大的权重值意味着模型可以表示更复杂的函数，因为它们可以产生更大的输出值范围。这意味着模型可以更容易地适应训练数据中的噪声和细节，但也更容易过拟合。</p>
+<p>相反，小的权重值将限制模型的输出范围，使其更难以表示复杂的函数。这可以被视为对模型施加了一种正则化，迫使模型更加关注数据中的主要模式，而不是噪声。</p>
+<p>所以，减小权重值可以看作是一种正则化的形式，它可以降低模型的容量，使其更倾向于学习简单的、泛化性能更好的模式，从而降低了模型的复杂性。这种复杂性的降低有助于防止过拟合，并提高模型在未见过数据上的泛化能力。希望这个解释能够更清晰地说明这个观点。</p>
+<p>模型的表达能力是指模型可以表示的不同函数的范围。如果模型具有较大的参数范围，它可以表示更广泛的函数，包括复杂的函数。这意味着模型可以更好地拟合训练数据中的各种模式，包括信号和噪声。</p>
+<p>如果一个模型具有较大的参数范围，这意味着它有更多的自由度，可以调整其参数以适应更广泛的数据分布。这包括了可以表示更复杂函数的能力，因为模型可以学习到更多的特征和关系，包括数据中的细微差异。</p>
+<p>现在，这里的关键问题是，当模型具有高表达能力时，它不仅可以拟合数据中的真实模式（信号），还可以拟合数据中的随机性和噪声。噪声是指数据中的随机变化或不确定性，通常不包含有关数据的实际信息，但它存在于真实世界的数据中。如果模型过于复杂，它可能会过度适应数据中的噪声，而不仅仅是学习到有意义的模式。</p>
+<p>这就是为什么高表达能力的模型可能容易过拟合的原因。过拟合发生时，模型在训练数据上表现良好，但在未见过的数据上表现不佳，因为它在训练数据中学到了与噪声相关的信息，这些信息在未见过的数据上不适用。</p>
+<p>正则化技术，如权重衰减，通过控制参数的范围来限制模型的表达能力，从而降低了过拟合的风险。权重衰减惩罚较大的参数值，使模型更倾向于选择较小的参数值，从而限制了模型的复杂性，减少了过度拟合的可能性，使其更专注于学习真正的模式而不是噪声。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">入门操作</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-12 09:37:48" itemprop="dateCreated datePublished" datetime="2023-09-12T09:37:48+08:00">2023-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-14 10:51:21" itemprop="dateModified" datetime="2023-09-14T10:51:21+08:00">2023-09-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">opencv图像处理</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>260</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><p><strong>读取显示图像：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;image/1.jpg&#x27;</span>，<span class="number">0</span>)//image为工程文件夹下的image子文件夹，<span class="number">0</span>是加载方式</span><br><span class="line">cv.imshow(<span class="string">&#x27;image&#x27;</span>，img）</span><br><span class="line">cv.waitKey(<span class="number">0</span>)//等待键盘输入，返回值为ASCII码</span><br><span class="line">cv.destroyAllWindows()//键盘有输入后自动关闭显示窗口</span><br></pre></td></tr></table></figure>
+
+<p><strong>写入图像：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imwrite(<span class="string">&#x27;image/2.jpg&#x27;</span>,img)//将img写入image文件夹下的名为<span class="number">2</span>的jpg文件</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/" class="post-title-link" itemprop="url">面试2/150</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-10 15:54:31 / 修改时间：16:58:19" itemprop="dateCreated datePublished" datetime="2023-09-10T15:54:31+08:00">2023-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>799</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目：移除元素"><a href="#题目：移除元素" class="headerlink" title="题目：移除元素"></a>题目：移除元素</h2><p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a></strong> 移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 <code>O(1)</code> 额外空间并 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地 </a>修改输入数组</strong>。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<h2 id="me"><a href="#me" class="headerlink" title="me:"></a>me:</h2><p><strong>1：使用pop_back()方法删除尾元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]!=val) &#123;</span><br><span class="line">                nums[j++]=nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(;j&lt;nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            nums.<span class="built_in">pop_back</span>();<span class="comment">//删除向量末尾元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：$O(n)$</p>
+<p>空间复杂度：$O(1)$</p>
+<p><strong>2：使用erase()方法删除指定元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>,k = <span class="number">0</span>; i &lt; j;i++)&#123;<span class="comment">//注意：当删除向量中一个元素，向量长度会发生变化</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i-k]==val) &#123;</span><br><span class="line">                nums.<span class="built_in">erase</span>(nums.<span class="built_in">begin</span>() + i-k);</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：$O(n^2)$,n次循环，删除时最多移动n次位置，n*n</p>
+<p>空间复杂度：$O(1)$</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">多层感知机</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-09 16:06:14" itemprop="dateCreated datePublished" datetime="2023-09-09T16:06:14+08:00">2023-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-13 22:39:24" itemprop="dateModified" datetime="2023-09-13T22:39:24+08:00">2023-09-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="多层感知机网络的两种实现"><a href="#多层感知机网络的两种实现" class="headerlink" title="多层感知机网络的两种实现"></a>多层感知机网络的两种实现</h2><h3 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化模型参数</span></span><br><span class="line">num_inputs, num_outputs, num_hiddens = <span class="number">784</span>, <span class="number">10</span>, <span class="number">256</span></span><br><span class="line"></span><br><span class="line">W1 = nn.Parameter(torch.randn(</span><br><span class="line">    num_inputs, num_hiddens, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=<span class="literal">True</span>))</span><br><span class="line">W2 = nn.Parameter(torch.randn(</span><br><span class="line">    num_hiddens, num_outputs, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">params = [W1, b1, W2, b2]</span><br><span class="line"><span class="comment">#激活函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu</span>(<span class="params">X</span>):</span></span><br><span class="line">    a = torch.zeros_like(X)</span><br><span class="line">    <span class="keyword">return</span> torch.<span class="built_in">max</span>(X, a)</span><br><span class="line"><span class="comment">#模型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">net</span>(<span class="params">X</span>):</span></span><br><span class="line">    X = X.reshape((-<span class="number">1</span>, num_inputs))</span><br><span class="line">    H = relu(X@W1 + b1)  <span class="comment"># 这里“@”代表矩阵乘法</span></span><br><span class="line">    <span class="keyword">return</span> (H@W2 + b2)</span><br></pre></td></tr></table></figure>
+
+<p>这里网络使用的线性模型是$o&#x3D;Xw+b$,其中o为batch_size*outputs型输出矩阵，X为batch_size*inputs输入矩阵，w为inputs*outputs权重矩阵，b为1*outputs偏差矩阵。</p>
+<h3 id="简洁实现"><a href="#简洁实现" class="headerlink" title="简洁实现"></a>简洁实现</h3><p><strong>代码：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(nn.Flatten(),</span><br><span class="line">                    nn.Linear(<span class="number">784</span>, <span class="number">256</span>),</span><br><span class="line">                    nn.ReLU(),</span><br><span class="line">                    nn.Linear(<span class="number">256</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_weights</span>(<span class="params">m</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看网络参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个简单的神经网络模型</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(<span class="number">10</span>, <span class="number">20</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">20</span>, <span class="number">5</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用net.parameters()获取模型中的所有参数</span></span><br><span class="line">params = <span class="built_in">list</span>(net.parameters())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印每个参数的形状</span></span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">    <span class="built_in">print</span>(param.shape)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">torch.Size([<span class="number">20</span>, <span class="number">10</span>])</span><br><span class="line">torch.Size([<span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>, <span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+
+<p>因此鉴定为使用的线性模型是$o&#x3D;Wx+b$，这与从零实现刚好相反。其中o为outputs*batch_size型输出矩阵，W为outputs*inputs权重矩阵，x为inputs*batch_size输入矩阵，b为1*outputs偏差矩阵。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -338,17 +931,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-09-08 17:44:31 / 修改时间：17:44:58" itemprop="dateCreated datePublished" datetime="2023-09-08T17:44:31+08:00">2023-09-08</time>
+              <time title="创建时间：2023-09-08 17:44:31" itemprop="dateCreated datePublished" datetime="2023-09-08T17:44:31+08:00">2023-09-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-10 15:55:39" itemprop="dateModified" datetime="2023-09-10T15:55:39+08:00">2023-09-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
                 </span>
             </span>
 
@@ -455,102 +1054,15 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-09-08 17:21:43 / 修改时间：17:47:38" itemprop="dateCreated datePublished" datetime="2023-09-08T17:21:43+08:00">2023-09-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>268</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>在最坏的情况下（所有元素全部是逆序），时间复杂度为$O(n^2)$，因为此时需要进行n-1轮交换和比较，每一轮需要进行n-1次比较，通常来讲比较操作相对交换操作更加耗时，所以时间复杂度就是$O(n^2)$。</p>
-<p>再来说空间复杂度，空间复杂度是描述算法在运行过程中所需要的额外内存空间的量度，通常不包括输入数据的空间。所以冒泡排序是一种原地排序算法，它在原始数组上进行排序，只需要常数级别的额外内存空间来存储一些临时变量，如用于元素交换的临时变量。这些额外的内存空间的使用不会随着输入数据规模的增加而增加，因此空间复杂度是$ O(1)$。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/%E5%8A%9B%E6%89%A3/%E9%9D%A2%E8%AF%95150/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/07/%E5%8A%9B%E6%89%A3/%E9%9D%A2%E8%AF%95150/" class="post-title-link" itemprop="url">面试150</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-07 23:31:28" itemprop="dateCreated datePublished" datetime="2023-09-07T23:31:28+08:00">2023-09-07</time>
+              <time title="创建时间：2023-09-08 17:21:43" itemprop="dateCreated datePublished" datetime="2023-09-08T17:21:43+08:00">2023-09-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-08 16:55:37" itemprop="dateModified" datetime="2023-09-08T16:55:37+08:00">2023-09-08</time>
+                <time title="修改时间：2023-09-10 15:56:00" itemprop="dateModified" datetime="2023-09-10T15:56:00+08:00">2023-09-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,7 +1070,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
                 </span>
             </span>
 
@@ -568,98 +1080,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>632</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>我的铸币写法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n+m; i++)&#123;</span><br><span class="line">            (i&lt;m)?(nums1[i]=nums1[i]):(nums1[i] = nums2[i-m]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n+m; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j<span class="number">-1</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums1[i + <span class="number">1</span>] &lt; nums1[i]) &#123;</span><br><span class="line">                    temp = nums1[i + <span class="number">1</span>];</span><br><span class="line">                    nums1[i + <span class="number">1</span>] = nums1[i];</span><br><span class="line">                    nums1[i] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>排序函数实现：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != n; ++i) &#123;</span><br><span class="line">            nums1[m + i] = nums2[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/C%E5%92%8CC++/%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/07/C%E5%92%8CC++/%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">模板编程</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-07 19:25:58 / 修改时间：20:15:09" itemprop="dateCreated datePublished" datetime="2023-09-07T19:25:58+08:00">2023-09-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -678,20 +1099,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="例子1：一般模板创建"><a href="#例子1：一般模板创建" class="headerlink" title="例子1：一般模板创建"></a>例子1：一般模板创建</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设我们有一个包含嵌套类型的类 &#x27;MyClass&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 嵌套类型 &#x27;NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">using</span> NestedType = <span class="keyword">int</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UseNestedType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用 &#x27;T::NestedType&#x27; 表示 &#x27;T&#x27; 类型的嵌套类型 &#x27;NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">typename</span> T::NestedType variable = <span class="number">42</span>; <span class="comment">// 使用 &#x27;typename&#x27; 明确指示 &#x27;NestedType&#x27; 是一个类型名</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Value of variable: &quot;</span> &lt;&lt; variable &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    UseNestedType&lt;MyClass&gt;(); <span class="comment">// 在模板中使用嵌套类型 &#x27;MyClass::NestedType&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p><strong>代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = n+m; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j<span class="number">-1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums1[i + <span class="number">1</span>] &lt; nums1[i]) &#123;</span><br><span class="line">            temp = nums1[i + <span class="number">1</span>];</span><br><span class="line">            nums1[i + <span class="number">1</span>] = nums1[i];</span><br><span class="line">            nums1[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="例子2：非类型模板参数"><a href="#例子2：非类型模板参数" class="headerlink" title="例子2：非类型模板参数"></a>例子2：非类型模板参数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">size_t</span> <span class="title">N</span>=</span><span class="number">10</span>&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T _a[N];</span><br><span class="line">	<span class="keyword">size_t</span> top;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Stack&lt;<span class="keyword">int</span>&gt; sk1;<span class="comment">//10(使用缺省值：默认给10)</span></span><br><span class="line">	Stack&lt;<span class="keyword">int</span>, <span class="number">1000</span>&gt; sk2;<span class="comment">//1000（如果这里给了，不使用缺省值）</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>时间复杂度：</strong></p>
+<p>在最坏的情况下（所有元素全部是逆序），时间复杂度为$O(n^2)$，因为此时需要进行n-1轮交换和比较，每一轮需要进行n-1次比较，通常来讲比较操作相对交换操作更加耗时，所以时间复杂度就是$O(n^2)$。</p>
+<p><strong>空间复杂度：</strong></p>
+<p>再来说空间复杂度，空间复杂度是描述算法在运行过程中所需要的额外内存空间的量度，通常不包括输入数据的空间。所以冒泡排序是一种原地排序算法，它在原始数组上进行排序，只需要常数级别的额外内存空间来存储一些临时变量，如用于元素交换的临时变量。这些额外的内存空间的使用不会随着输入数据规模的增加而增加，因此空间复杂度是$ O(1)$。</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p><strong>代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> s[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l&lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> i = l, j = r, x = s[l];</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[j]&gt;= x) <span class="comment">// 从右向左找第一个小于x的数</span></span><br><span class="line">                j--;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)</span><br><span class="line">                s[i] = s[j];</span><br><span class="line">            <span class="keyword">while</span>(i &lt; j &amp;&amp; s[i]&lt; x) <span class="comment">// 从左向右找第一个大于等于x的数</span></span><br><span class="line">                i++;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)</span><br><span class="line">                s[j] = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        s[i] = x;</span><br><span class="line">        <span class="built_in">quickSort</span>(s, l, i - <span class="number">1</span>); <span class="comment">// 递归调用</span></span><br><span class="line">        <span class="built_in">quickSort</span>(s, i + <span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="例子3：模板特化"><a href="#例子3：模板特化" class="headerlink" title="例子3：模板特化"></a>例子3：模板特化</h2><p><strong>全特化：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Date</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Date</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Date&lt;T1, T2&gt;&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T1 _d1;</span><br><span class="line">	T2 _d2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全特化</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Date</span>&lt;</span><span class="keyword">int</span>, <span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Date</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Date&lt;int, double&gt;&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _d1;</span><br><span class="line">	<span class="keyword">double</span> _d2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>时间复杂度：</strong></p>
+<p>让我们通过一个具体的示例来分析快速排序的时间复杂度。</p>
+<p>假设我们有一个整数数组需要进行升序排序：[5, 2, 9, 3, 6, 8, 1, 4]。</p>
+<ol>
+<li><p><strong>选择枢纽元素</strong>：首先，我们选择数组中的第一个元素 5 作为枢纽元素。</p>
+</li>
+<li><p><strong>分区过程</strong>：将数组分为两部分，小于枢纽元素的部分和大于枢纽元素的部分。在这个例子中，分区过程可能如下所示：</p>
+<ul>
+<li>枢纽元素：5</li>
+<li>左侧子数组：[2, 3, 1, 4]</li>
+<li>右侧子数组：[9, 6, 8]</li>
+</ul>
+<p>分区过程中，我们通过比较元素的值，将它们放入合适的子数组中。枢纽元素 5 在分区后位于正确的位置。</p>
+</li>
+<li><p><strong>递归排序</strong>：接下来，我们递归地对左侧子数组 [2, 3, 1, 4] 和右侧子数组 [9, 6, 8] 进行排序。</p>
+<ul>
+<li><p>对左侧子数组进行排序：</p>
+<ul>
+<li>选择枢纽元素 2。</li>
+<li>左侧子数组为空。</li>
+<li>右侧子数组：[3, 1, 4]</li>
+</ul>
+</li>
+<li><p>对右侧子数组进行排序：</p>
+<ul>
+<li>选择枢纽元素 9。</li>
+<li>左侧子数组：[6, 8]</li>
+<li>右侧子数组为空。</li>
+</ul>
+</li>
+</ul>
+<p>继续递归排序直到子数组只包含一个或零个元素。</p>
+</li>
+<li><p><strong>合并</strong>：最后，合并所有已排序的子数组，得到最终的有序数组。</p>
+<ul>
+<li>左侧子数组排序后：[1, 2, 3, 4]</li>
+<li>右侧子数组排序后：[6, 8, 9]</li>
+</ul>
+<p>最终的有序数组为：[1, 2, 3, 4, 5, 6, 8, 9]</p>
+</li>
+</ol>
+<p>在这个示例中，每次分区过程都将数组分成两部分，而<strong>递归深度取决于分割的次数</strong>。在每一层递归中，需要对 n 个元素进行比较操作，其中 n 是子数组的长度。由于递归深度是 log n，因此总的比较次数约为 n * log n。</p>
+<p>因此，在平均情况下，快速排序的时间复杂度为$O(nlog(n))$。这是因为每次分区将问题分解成两个大致相等的子问题，而递归深度是 log n。所以，快速排序通常在平均情况下具有较高的效率。</p>
+<p><strong>空间复杂度：</strong></p>
+<p>在平均情况下，快速排序的空间复杂度是$O(log(n))$，其中 n 是待排序数组的长度。这是因为在每一次递归调用中，需要将当前子数组的范围（low 和 high）以及一些局部变量的信息存储在栈帧中。由于递归深度通常是$log(n)$（每次将数组分成两半），所以栈空间的使用也是$log(n)$。</p>
+<h2 id="归并递归排序"><a href="#归并递归排序" class="headerlink" title="归并递归排序"></a>归并递归排序</h2><p><strong>代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将有二个有序数列a[first...mid]和a[mid...last]合并。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergearray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> mid, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = first, j = mid + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> m = mid,   n = last;</span><br><span class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] &lt;= a[j])</span><br><span class="line">			temp[k++] = a[i++];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			temp[k++] = a[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (i &lt;= m)</span><br><span class="line">		temp[k++] = a[i++];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= n)</span><br><span class="line">		temp[k++] = a[j++];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</span><br><span class="line">		a[first + i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (first &lt; last)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = (first + last) / <span class="number">2</span>;</span><br><span class="line">		<span class="built_in">mergesort</span>(a, first, mid, temp);    <span class="comment">//左边有序</span></span><br><span class="line">		<span class="built_in">mergesort</span>(a, mid + <span class="number">1</span>, last, temp); <span class="comment">//右边有序</span></span><br><span class="line">		<span class="built_in">mergearray</span>(a, first, mid, last, temp); <span class="comment">//再将二个有序数列合并</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>部分特化：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span>T1, <span class="keyword">char</span>&gt;<span class="comment">//只要第二个类型是char就匹配这个</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1, char&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>参数限制：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span>T1*, T2*&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1*, T2*&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span> T1&amp;, T2&amp;&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1&amp;, T2&amp;&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span> &lt;</span> T1&amp;, T2* &gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Data</span>() &#123; cout &lt;&lt; <span class="string">&quot;Data&lt;T1&amp;, T2*&gt;&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
+<p><strong>时间复杂度：</strong></p>
+<p>归并排序的时间复杂度是 O(n log n)，其中 n 是待排序数组的长度。这是因为在每一次递归中，我们将数组分成两半，然后对每一半进行排序，这需要 O(log n) 层递归。在每一层递归中，我们需要线性时间（O(n)）来合并两个有序子数组。</p>
+<p><strong>空间复杂度：</strong></p>
+<p>归并排序的空间复杂度是 $O(n)$，其中 n 是待排序数组的长度。这是因为在排序过程中，我们需要一个额外的临时数组 <code>temp[]</code> 来存储合并过程中的中间结果。</p>
+<h2 id="归并排序迭代实现"><a href="#归并排序迭代实现" class="headerlink" title="归并排序迭代实现"></a>归并排序迭代实现</h2>
       
     </div>
 
@@ -712,7 +1182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/%E5%8A%9B%E6%89%A3/150_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -726,7 +1196,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/03/C%E5%92%8CC++/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">拷贝构造函数</a>
+            <a href="/2023/09/07/%E5%8A%9B%E6%89%A3/150_1/" class="post-title-link" itemprop="url">面试1/150</a>
         </h2>
 
         <div class="post-meta">
@@ -738,14 +1208,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-09-03 19:46:15" itemprop="dateCreated datePublished" datetime="2023-09-03T19:46:15+08:00">2023-09-03</time>
+              <time title="创建时间：2023-09-07 23:31:28" itemprop="dateCreated datePublished" datetime="2023-09-07T23:31:28+08:00">2023-09-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-05 17:57:05" itemprop="dateModified" datetime="2023-09-05T17:57:05+08:00">2023-09-05</time>
+                <time title="修改时间：2023-09-10 16:39:19" itemprop="dateModified" datetime="2023-09-10T16:39:19+08:00">2023-09-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -753,7 +1223,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
                 </span>
             </span>
 
@@ -782,462 +1252,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>调用拷贝构造函数的示例：</p>
-<ol>
-<li><p><strong>使用一个对象初始化另一个对象：</strong> 当你使用一个已存在的对象来初始化另一个对象时，通常会调用拷贝构造函数。这是因为你要创建一个新对象，该对象是原始对象的副本。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass obj1;        <span class="comment">// 调用构造函数来创建 obj1</span></span><br><span class="line">MyClass obj2 = obj1; <span class="comment">// 调用拷贝构造函数，将 obj1 复制给 obj2</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>将对象作为参数传递给函数：</strong> 如果你将一个对象按值（而不是按引用或指针）传递给函数，那么会调用拷贝构造函数来创建函数内的局部对象，该对象是传递对象的副本。这里我们也可得知<strong>函数按值传入的形参都是传入对象的副本。</strong></p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">someFunction</span><span class="params">(MyClass param)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 在函数内，param 是通过拷贝构造函数创建的副本</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj;      <span class="comment">// 调用构造函数创建 obj</span></span><br><span class="line">    <span class="built_in">someFunction</span>(obj); <span class="comment">// 调用拷贝构造函数，将 obj 传递给 someFunction</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>在返回语句中返回对象的副本：</strong> 如果你的函数返回一个对象，并且返回语句中有一个对象，通常会触发拷贝构造函数，以创建函数返回值的副本。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MyClass <span class="title">createObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj; <span class="comment">// 调用构造函数创建 obj</span></span><br><span class="line">    <span class="keyword">return</span> obj; <span class="comment">// 调用拷贝构造函数，返回 obj 的副本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>总之，拷贝构造函数用于创建一个新对象，该对象是另一个对象的副本。在对象初始化的情况下，通常会调用构造函数或移动构造函数来进行对象的初始化。但如果需要创建对象的副本，则会调用拷贝构造函数。如果你没有显式定义拷贝构造函数，C++会生成一个默认的拷贝构造函数，执行浅拷贝操作（对成员变量进行简单的复制）。</p>
-<p><strong>例子：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Line</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">int</span> <span class="title">getLength</span><span class="params">( <span class="keyword">void</span> )</span></span>;</span><br><span class="line">      <span class="built_in">Line</span>( <span class="keyword">int</span> len );             <span class="comment">// 简单的构造函数</span></span><br><span class="line">      <span class="built_in">Line</span>( <span class="keyword">const</span> Line &amp;obj);      <span class="comment">// 拷贝构造函数</span></span><br><span class="line">      ~<span class="built_in">Line</span>();                     <span class="comment">// 析构函数</span></span><br><span class="line"> </span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">      <span class="keyword">int</span> *ptr;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 成员函数定义，包括构造函数</span></span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">int</span> len)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 为指针分配内存</span></span><br><span class="line">    ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">    *ptr = len;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">const</span> Line &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用拷贝构造函数并为指针 ptr 分配内存&quot;</span> &lt;&lt; endl;</span><br><span class="line">    ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">    *ptr = *obj.ptr; <span class="comment">// 拷贝值</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Line::~<span class="built_in">Line</span>(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;释放内存&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Line::getLength</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *ptr;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(Line obj)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;line 大小 : &quot;</span> &lt;&lt; obj.<span class="built_in">getLength</span>() &lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 程序的主函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="function">Line <span class="title">line</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">display</span>(line);</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="题目：合并两个有序数组"><a href="#题目：合并两个有序数组" class="headerlink" title="题目：合并两个有序数组"></a>题目：合并两个有序数组</h2><p>给你两个按 <strong>非递减顺序</strong> 排列的整数数组 <code>nums1</code> 和 <code>nums2</code>，另有两个整数 <code>m</code> 和 <code>n</code> ，分别表示 <code>nums1</code> 和 <code>nums2</code> 中的元素数目。</p>
+<p>请你 <strong>合并</strong> <code>nums2</code> 到 <code>nums1</code> 中，使合并后的数组同样按 <strong>非递减顺序</strong> 排列。</p>
+<p><strong>注意：</strong>最终，合并后数组不应由函数返回，而是存储在数组 <code>nums1</code> 中。为了应对这种情况，<code>nums1</code> 的初始长度为 <code>m + n</code>，其中前 <code>m</code> 个元素表示应合并的元素，后 <code>n</code> 个元素为 <code>0</code> ，应忽略。<code>nums2</code> 的长度为 <code>n</code> 。</p>
+<h2 id="me-冒泡排序实现"><a href="#me-冒泡排序实现" class="headerlink" title="me:冒泡排序实现"></a>me:冒泡排序实现</h2><p>我的铸币写法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n+m; i++)&#123;</span><br><span class="line">            (i&lt;m)?(nums1[i]=nums1[i]):(nums1[i] = nums2[i-m]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n+m; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j<span class="number">-1</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums1[i + <span class="number">1</span>] &lt; nums1[i]) &#123;</span><br><span class="line">                    temp = nums1[i + <span class="number">1</span>];</span><br><span class="line">                    nums1[i + <span class="number">1</span>] = nums1[i];</span><br><span class="line">                    nums1[i] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出</span></span><br><span class="line">调用构造函数<span class="comment">//Line Line(10)调用构造函数</span></span><br><span class="line">调用拷贝构造函数并为指针 ptr 分配内存<span class="comment">//display(line)调用拷贝构造函数，复制对象</span></span><br><span class="line">line 大小 : <span class="number">10</span></span><br><span class="line">释放内存<span class="comment">//被复制对象调用析构函数释放内存</span></span><br><span class="line">释放内存<span class="comment">//line对象释放内存</span></span><br></pre></td></tr></table></figure>
+<p>排序函数实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != n; ++i) &#123;</span><br><span class="line">            nums1[m + i] = nums2[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认的拷贝构造函数</span></span><br><span class="line">Line::<span class="built_in">Line</span>(<span class="keyword">const</span> Line &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    ptr = obj.ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：$O(nlog(n))$</p>
+<p>空间复杂度：$O(log(n))$</p>
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sorted[m + n];</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m) &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2]) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != m + n; ++i) &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>如果使用默认的拷贝构造函数，那么原对象和被复制对象的指针指向的是同一块地址，当一个对象执行析构函数时，此时指针指向空地址，原对象的指针就会变成悬空指针。</p>
+<p>时间复杂度：$O(n)$</p>
+<p>空间复杂度：$O(n)$</p>
+<h2 id="逆向双指针"><a href="#逆向双指针" class="headerlink" title="逆向双指针"></a>逆向双指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt; &amp;nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n - <span class="number">1</span>, p = m + n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (p2 &gt;= <span class="number">0</span>) &#123; <span class="comment">// nums2 还有要合并的元素</span></span><br><span class="line">            <span class="comment">// 如果 p1 &lt; 0，那么走 else 分支，把 nums2 合并到 nums1 中</span></span><br><span class="line">            <span class="keyword">if</span> (p1 &gt;= <span class="number">0</span> &amp;&amp; nums1[p1] &gt; nums2[p2]) &#123;</span><br><span class="line">                nums1[p--] = nums1[p1--]; <span class="comment">// 填入 nums1[p1]</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums1[p--] = nums2[p2--]; <span class="comment">// 填入 nums2[p1]</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">析构函数</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-03 19:35:32 / 修改时间：19:49:04" itemprop="dateCreated datePublished" datetime="2023-09-03T19:35:32+08:00">2023-09-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>756</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>析构函数是在对象生命周期结束时自动调用的特殊成员函数。它用于清理对象分配的资源、释放内存、关闭文件等一系列清理工作。析构函数通常在以下情况下被调用：</p>
-<ol>
-<li><p><strong>对象离开其作用域：</strong> 当对象在函数内被创建，并且函数结束或对象离开其作用域时，C++会自动调用对象的析构函数来销毁对象。这是最常见的情况。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">someFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj; <span class="comment">// 在函数内创建对象</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="comment">// 在函数结束时，obj 的析构函数被调用</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>动态分配对象的内存释放：</strong> 如果你使用 <code>new</code> 运算符在堆上动态分配了对象，必须显式调用 <code>delete</code> 来释放对象的内存。在调用 <code>delete</code> 时，对象的析构函数会被自动调用。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass *ptr = <span class="keyword">new</span> <span class="built_in">MyClass</span>(); <span class="comment">// 动态分配对象</span></span><br><span class="line"><span class="keyword">delete</span> ptr; <span class="comment">// 调用析构函数并释放内存</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>容器和数据结构的管理：</strong> 如果你将对象存储在容器（如 <code>std::vector</code>、<code>std::list</code>）或数据结构中，当容器或数据结构的生命周期结束时，其中的元素对象的析构函数会被调用。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;MyClass&gt; myVector;</span><br><span class="line">myVector.<span class="built_in">push_back</span>(<span class="built_in">MyClass</span>()); <span class="comment">// 向容器中添加对象</span></span><br><span class="line"><span class="comment">// 当 myVector 离开其作用域时，其中的对象的析构函数被调用</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>异常抛出：</strong> 如果在对象的构造函数中抛出了异常，并且在创建对象的上下文中没有捕获该异常，那么对象的析构函数会被调用以清理部分或全部资源。这是一种异常安全的机制，确保资源得到释放。</p>
-</li>
-</ol>
-<p>总之，析构函数在对象生命周期结束时（无论是因为离开作用域、动态内存释放、容器管理或异常处理）被自动调用，用于对象的清理和资源的释放工作。你可以自定义析构函数来确保在对象销毁时执行必要的清理工作，如释放动态分配的内存或关闭文件。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">派生类继承</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-03 17:08:28" itemprop="dateCreated datePublished" datetime="2023-09-03T17:08:28+08:00">2023-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-05 18:14:50" itemprop="dateModified" datetime="2023-09-05T18:14:50+08:00">2023-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>415</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>私有继承影响的是继承的父类，继承的父类的所有变量和函数将变得对外部不可访问，但是子类的public部分依旧是对外部可见的。</li>
-<li>C++的类的成员函数也可以在类的外部用范围解析运算符实现定义。</li>
-<li>访问修饰符</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>对外部代码是否可见</th>
-<th>派生类是否可见</th>
-<th>类的成员函数是否可见</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public</td>
-<td>是</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>protected</td>
-<td>否</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>private</td>
-<td>否</td>
-<td>否</td>
-<td>是</td>
-</tr>
-</tbody></table>
-<ul>
-<li>三种继承，继承类型导致了基类成员变化，基类成员变化导致了基类成员在类外是否可访问。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>派生类可访问</th>
-<th>类外可访问</th>
-<th>基类成员变化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>公共（默认）继承</td>
-<td>基类的public和protected</td>
-<td>基类public</td>
-<td>基类public，protected成员在派生类保持属性不变</td>
-</tr>
-<tr>
-<td>保护继承</td>
-<td>基类的public和protected</td>
-<td>基类任何成员都不可访问</td>
-<td>基类public，protected成员变成派生类protected成员</td>
-</tr>
-<tr>
-<td>私有继承</td>
-<td>基类的public和protected</td>
-<td>基类任何成员都不可访问</td>
-<td>基类public，protected成员变成派生类private成员</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/C%E5%92%8CC++/Untitled/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/C%E5%92%8CC++/Untitled/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-02 16:38:08 / 修改时间：22:10:55" itemprop="dateCreated datePublished" datetime="2023-09-02T16:38:08+08:00">2023-09-02</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>38</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1.内存泄漏</p>
-<p>2.新建对象是在堆上建立的</p>
-<p>3.堆内存和栈内存，什么叫动态分配内存</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">引用和指针</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-01 21:50:01 / 修改时间：22:07:25" itemprop="dateCreated datePublished" datetime="2023-09-01T21:50:01+08:00">2023-09-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>370</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="引用概念"><a href="#引用概念" class="headerlink" title="引用概念"></a>引用概念</h2><p>先说如何判别：和类型在一起的是引用，和变量在一起的是取址。</p>
-<p>引用的理解：实际上从字面意思上就可以很容易理解，所谓引用就是引用一个东西，在C++中，引用就是相当于一个变量的别名。</p>
-<p><code>int m; int &amp;n = m;</code>再看这两句代码就很容易理解引用的含义了，n相当于m的一个别名。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">5</span>；</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">6</span>；</span><br><span class="line"><span class="keyword">int</span> &amp;k = i；</span><br><span class="line">k = j； <span class="comment">// k 和i 的值都变成了6；</span></span><br></pre></td></tr></table></figure>
-
-<p>这里实际上就可以看出引用就是字面意思上的引用。</p>
-<h2 id="和指针的区别"><a href="#和指针的区别" class="headerlink" title="和指针的区别"></a>和指针的区别</h2><ul>
-<li><p>指针是一个实体，有具体的地址存放指针变量，但是关于引用一些书上写是不占用内存的。</p>
-<p>（这篇文章认为占用内存<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78800232%EF%BC%89">https://zhuanlan.zhihu.com/p/78800232）</a></p>
-</li>
-<li><p>引用不需要解引用，指针需要解引用</p>
-</li>
-<li><p>引用只能被初始化一次，之后不可变（可认为是常量指针），指针可变。</p>
-</li>
-<li><p>引用不能为空，必须初始化，指针可为空</p>
-</li>
-</ul>
+<p>时间复杂度：$O(n)$</p>
+<p>空间复杂度：$O(1)$</p>
 
       
     </div>
@@ -1326,14 +1359,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1390,12 +1423,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">158k</span>
+    <span title="站点总字数">168k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:24</span>
+    <span title="站点阅读时长">2:32</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
