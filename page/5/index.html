@@ -198,6 +198,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" class="post-title-link" itemprop="url">动态内存分配</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:00" itemprop="dateModified" datetime="2023-09-05T18:15:00+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="malloc和free函数"><a href="#malloc和free函数" class="headerlink" title="malloc和free函数"></a>malloc和free函数</h3><h4 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h4><p>当声明数组时，我们通常定义一个足够大的宏，使其尽量容纳多的元素，但是这样造成内存浪费，使用动态内存分配可以避免这种内存浪费。</p>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *pointer)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>调用malloc函数时，malloc从内存池提取一块可用内存，向程序返回一个指向这块内存的指针。这块内存并没有初始化。malloc参数就是所需要的字节数，并且分配的内存是连续的。如果内存池是空的或者内存池可用内存无法满足要求那么就会返回NULL指针。</p>
+<p>当一块以前分配的内存不使用时，使用free函数把他归还给内存池。</p>
+<h3 id="calloc和realloc函数"><a href="#calloc和realloc函数" class="headerlink" title="calloc和realloc函数"></a>calloc和realloc函数</h3><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> num_elements, <span class="keyword">size_t</span> element_size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> new_size)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>calloc函数也用于内存分配，与malloc区别就是返回时指针可以初始化为0。并且参数是所需元素的数量和每个元素的字节数。</p>
+<p>realloc函数用于修改一个已经分配的内存块的大小。若用于扩大内存块，那么这块内存保留，新增加的内存添加到原本的后面。若用于缩小，该内存块尾部一部分被拿掉，剩余保留。若原先的内存块无法修改，realloc将重新分配一块内存，将原先那块内存内容复制到分配的内存块上。</p>
+<h3 id="使用动态内存分配"><a href="#使用动态内存分配" class="headerlink" title="使用动态内存分配"></a>使用动态内存分配</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *pi;</span><br><span class="line">   pi = <span class="built_in">malloc</span>(<span class="number">100</span>);<span class="comment">//更好的是pi = malloc(25 * sizeof(int));方便移植</span></span><br><span class="line">   <span class="keyword">if</span>(pi == <span class="literal">NULL</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Out of memory!\n&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">   &#125;<span class="comment">//检查是否分配成功，避免指向NULL指针</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">25</span>; i++)&#123;</span><br><span class="line">      pi[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,pi[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态内存分配常见错误"><a href="#动态内存分配常见错误" class="headerlink" title="动态内存分配常见错误"></a>动态内存分配常见错误</h3><ul>
+<li>对NULL指针间接访问</li>
+<li>对分配的内存越界操作</li>
+<li>释放并非动态分配的内存</li>
+<li>释放一块动态分配内存的一部分（解决方法：realloc函数可以有效缩小一块动态分配的内存，有效释放他尾部的部分内存）</li>
+<li>一块动态内存被释放后继续使用</li>
+</ul>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>分配内存但在使用完后不释放会引起内存泄漏，内存泄漏会一点点榨干内存。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -811,121 +923,6 @@
 <h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
 <hr>
 <p>于是本文的大体意思就清晰了，__attribute__((section(&quot;section_name&quot;)))，其作用是将作用的函数或数据放入指定为&quot;section_name&quot;对应的段中。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/18/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <i class="fa fa-thumb-tack"></i>
-            <font color=7D26CD>置顶</font>
-            <span class="post-meta-divider">|</span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-29 17:51:12" itemprop="dateModified" datetime="2023-06-29T17:51:12+08:00">2023-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>133</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to Erin. This is my very first post. </p>
-<h1 id="Try"><a href="#Try" class="headerlink" title="Try"></a>Try</h1><p><strong>HEXO搭建步骤</strong></p>
-<ul>
-<li><p>1.安装<code>Git</code></p>
-</li>
-<li><p>2.安装<code>Node.js</code></p>
-</li>
-<li><p>3.安装<code>Hexo</code></p>
-</li>
-<li><p>4.<code>GitHub</code>创建个人仓库</p>
-</li>
-<li><p>5.生成<code>SSH</code>添加到<code>GitHub</code></p>
-</li>
-<li><p>6.将<code>hexo</code>部署到<code>GitHub</code></p>
-</li>
-<li><p>7.设置个人域名</p>
-</li>
-<li><p>8.发布文章</p>
-</li>
-</ul>
 
       
     </div>
