@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="相机标定相机标定就是求解相机的内参数以及畸变参数的过程。 标定板信息来源一 5*9棋盘格 华为荣耀20拍摄后降低分辨率 分辨率：1000*750 72dpi 11张   来源2 5*7棋盘格 网上资源 分辨率：640*480 11张   标定步骤张正友标定：  打印一张棋盘方格图并贴在一个平面上 从不同角度拍摄若干张模板图像 检测出图像中的特征点 由检测到的特征点计算出每幅图像中的平面投影矩阵H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相机标定">
+<meta property="og:url" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="相机标定相机标定就是求解相机的内参数以及畸变参数的过程。 标定板信息来源一 5*9棋盘格 华为荣耀20拍摄后降低分辨率 分辨率：1000*750 72dpi 11张   来源2 5*7棋盘格 网上资源 分辨率：640*480 11张   标定步骤张正友标定：  打印一张棋盘方格图并贴在一个平面上 从不同角度拍摄若干张模板图像 检测出图像中的特征点 由检测到的特征点计算出每幅图像中的平面投影矩阵H">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/1.png">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/2.png">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/3.jpg">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/5.jpg">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/4.jpg">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/7.jpg">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/8.bmp">
+<meta property="og:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/6.jpg">
+<meta property="article:published_time" content="2023-09-23T06:16:14.824Z">
+<meta property="article:modified_time" content="2023-09-23T07:01:00.551Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin/source/images/计算机视觉/相机标定/1.png">
+
+<link rel="canonical" href="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>相机标定 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          相机标定
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-23 14:16:14 / 修改时间：15:01:00" itemprop="dateCreated datePublished" datetime="2023-09-23T14:16:14+08:00">2023-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="相机标定"><a href="#相机标定" class="headerlink" title="相机标定"></a>相机标定</h2><p>相机标定就是求解相机的内参数以及畸变参数的过程。</p>
+<h2 id="标定板信息"><a href="#标定板信息" class="headerlink" title="标定板信息"></a>标定板信息</h2><h3 id="来源一"><a href="#来源一" class="headerlink" title="来源一"></a>来源一</h3><ul>
+<li>5*9棋盘格</li>
+<li>华为荣耀20拍摄后降低分辨率</li>
+<li>分辨率：1000*750 72dpi</li>
+<li>11张</li>
+</ul>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\1.png" alt></p>
+<h3 id="来源2"><a href="#来源2" class="headerlink" title="来源2"></a>来源2</h3><ul>
+<li>5*7棋盘格</li>
+<li>网上资源</li>
+<li>分辨率：640*480</li>
+<li>11张</li>
+</ul>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\2.png" alt></p>
+<h2 id="标定步骤"><a href="#标定步骤" class="headerlink" title="标定步骤"></a>标定步骤</h2><p>张正友标定：</p>
+<ol>
+<li>打印一张棋盘方格图并贴在一个平面上</li>
+<li>从不同角度拍摄若干张模板图像</li>
+<li>检测出图像中的特征点</li>
+<li>由检测到的特征点计算出每幅图像中的平面投影矩阵H</li>
+<li>确定出摄像机的参数</li>
+</ol>
+<h2 id="标定程序"><a href="#标定程序" class="headerlink" title="标定程序"></a>标定程序</h2><p>python+opencv</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置寻找亚像素角点的参数，采用的停止准则是最大循环次数30和最大误差容限0.001</span></span><br><span class="line">criteria = (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, <span class="number">30</span>, <span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取标定板角点的位置</span></span><br><span class="line">objp = np.zeros((<span class="number">4</span> * <span class="number">6</span>, <span class="number">3</span>), np.float32)  <span class="comment">#格子数为5行7列，内角点为4*6的棋盘格图片</span></span><br><span class="line">objp[:, :<span class="number">2</span>] = np.mgrid[<span class="number">0</span>:<span class="number">4</span>, <span class="number">0</span>:<span class="number">6</span>].T.reshape(-<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># 将世界坐标系建在标定板上，所有点的Z坐标全部为0，所以只需要赋值x和y</span></span><br><span class="line">objp=objp*<span class="number">54067.2</span><span class="comment">#标定板尺寸（mm）</span></span><br><span class="line">obj_points = []  <span class="comment"># 存储3D点</span></span><br><span class="line">img_points = []  <span class="comment"># 存储2D点</span></span><br><span class="line"></span><br><span class="line">images = glob.glob(<span class="string">&quot;./image2/*.bmp&quot;</span>)<span class="comment">#glob.glob(&quot;./image1/*.jpg&quot;)，两种图像来源</span></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> images:</span><br><span class="line">    img = cv2.imread(fname)</span><br><span class="line">    <span class="comment">#图像灰度化</span></span><br><span class="line">    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    size = gray.shape[::-<span class="number">1</span>]</span><br><span class="line">    ret, corners = cv2.findChessboardCorners(gray, (<span class="number">4</span>, <span class="number">6</span>), <span class="literal">None</span>)  <span class="comment">#提取角点:第一个参数为图片，第二个为图片横纵角点的个数。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        obj_points.append(objp)</span><br><span class="line"></span><br><span class="line">        corners2 = cv2.cornerSubPix(gray, corners, (<span class="number">4</span>, <span class="number">6</span>), (-<span class="number">1</span>, -<span class="number">1</span>), criteria)  <span class="comment"># 在原角点的基础上寻找亚像素角点</span></span><br><span class="line">        <span class="comment"># 找寻亚像素角点：cornerSubPix(gray, corners, (winsize, winsize), (-1, -1), criteria)</span></span><br><span class="line">        <span class="comment"># winsize为搜索窗口边长的一半。</span></span><br><span class="line">        <span class="comment"># zeroZone：搜索区域中间的dead region边长的一半，有时用于避免自相关矩阵的奇异性。如果值设为(-1,-1)则表示没有这个区域。</span></span><br><span class="line">        <span class="comment"># criteria：角点精准化迭代过程的终止条件。也就是当迭代次数超过criteria.maxCount，或者角点位置变化小于criteria.epsilon时，停止迭代过程。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> [corners2]:</span><br><span class="line">            img_points.append(corners2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img_points.append(corners)</span><br><span class="line"></span><br><span class="line">        cv2.drawChessboardCorners(img, (<span class="number">4</span>, <span class="number">8</span>), corners, ret)  <span class="comment"># 记住，OpenCV的绘制函数一般无返回值</span></span><br><span class="line">        <span class="comment"># 可以使用该函数把角点画出来：drawChessboardCorners(image, (w, h), corners, ret);其中corners和ret为第一个函数的输出值。</span></span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;exp1.jpg&#x27;</span>, img)</span><br><span class="line">        <span class="comment">#cv2.imshow(&#x27;img&#x27;, img)#显示</span></span><br><span class="line">        <span class="comment">#cv2.waitKey(0) # 直到你按下任意一个键，才被关掉</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(img_points))</span><br><span class="line">cv2.destroyAllWindows()<span class="comment">#关闭窗口</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标定</span></span><br><span class="line">ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, size, <span class="literal">None</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(&quot;ret:&quot;, ret)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;mtx:\n&quot;</span>, mtx)  <span class="comment"># 内参数矩阵</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dist:\n&quot;</span>, dist)  <span class="comment"># 畸变系数</span></span><br><span class="line"><span class="comment"># print(&quot;rvecs:\n&quot;, rvecs)  # 旋转向量  # 外参数</span></span><br><span class="line"><span class="comment"># print(&quot;tvecs:\n&quot;, tvecs)  # 平移向量  # 外参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 畸变校正</span></span><br><span class="line">img = cv2.imread(images[<span class="number">4</span>])</span><br><span class="line"><span class="built_in">print</span>(images[<span class="number">4</span>])<span class="comment">#显示图像标号</span></span><br><span class="line">h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w, h), <span class="number">1</span>, (w, h))  <span class="comment">#显示更大范围的图片（正常重映射之后会删掉一部分图像）</span></span><br><span class="line"><span class="built_in">print</span>(newcameramtx)</span><br><span class="line"></span><br><span class="line">dst = cv2.undistort(img, mtx, dist, <span class="literal">None</span>, newcameramtx)</span><br><span class="line">x, y, w, h = roi</span><br><span class="line">dst1 = dst[y:y + h, x:x + w]</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;calibresult21.jpg&#x27;</span>, dst1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;大小为:&quot;</span>, dst1.shape)</span><br></pre></td></tr></table></figure>
+<h2 id="标定结果"><a href="#标定结果" class="headerlink" title="标定结果"></a>标定结果</h2><h3 id="来源一-1"><a href="#来源一-1" class="headerlink" title="来源一"></a>来源一</h3><p>角点提取示例：</p>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\3.jpg" alt></p>
+<p>实验结果：由于拍摄原因，只有两幅图像提取到了角点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line">mtx:</span><br><span class="line"> [[<span class="number">772.33456757</span>   <span class="number">0.</span>         <span class="number">499.11508102</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">774.71620422</span> <span class="number">375.35716407</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">dist:</span><br><span class="line"> [[<span class="number">-0.0447481</span>   <span class="number">0.78142203</span> <span class="number">-0.00301882</span> <span class="number">-0.00143604</span> <span class="number">-0.47591894</span>]]</span><br><span class="line">rvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[<span class="number">-0.53970125</span>],</span><br><span class="line">       [ <span class="number">0.51089422</span>],</span><br><span class="line">       [ <span class="number">1.47738494</span>]]), <span class="built_in">array</span>([[<span class="number">-0.78755033</span>],</span><br><span class="line">       [ <span class="number">0.2294393</span> ],</span><br><span class="line">       [ <span class="number">0.76333426</span>]]))</span><br><span class="line">tvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[ <span class="number">180689.44762485</span>],</span><br><span class="line">       [<span class="number">-123221.83525376</span>],</span><br><span class="line">       [ <span class="number">695606.21543874</span>]]), <span class="built_in">array</span>([[ <span class="number">106556.55379235</span>],</span><br><span class="line">       [<span class="number">-200041.99902293</span>],</span><br><span class="line">       [ <span class="number">664613.21661527</span>]]))</span><br><span class="line">./image1\<span class="number">1.</span>jpg</span><br><span class="line">新内参: [[<span class="number">823.13186717</span>   <span class="number">0.</span>         <span class="number">498.19172434</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">792.99482281</span> <span class="number">373.85746749</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">大小为: (<span class="number">683</span>, <span class="number">948</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>原始图像：</p>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\5.jpg" alt></p>
+<p>矫正图像：</p>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\4.jpg" alt></p>
+<h3 id="来源二"><a href="#来源二" class="headerlink" title="来源二"></a>来源二</h3><p>角点提取示例：</p>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\7.jpg" alt></p>
+<p>实验结果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span></span><br><span class="line">mtx:</span><br><span class="line"> [[<span class="number">1.47657156e+03</span> <span class="number">0.00000000e+00</span> <span class="number">3.19407867e+02</span>]</span><br><span class="line"> [<span class="number">0.00000000e+00</span> <span class="number">1.47571880e+03</span> <span class="number">2.39106138e+02</span>]</span><br><span class="line"> [<span class="number">0.00000000e+00</span> <span class="number">0.00000000e+00</span> <span class="number">1.00000000e+00</span>]]</span><br><span class="line">dist:</span><br><span class="line"> [[<span class="number">-9.34384061e-02</span>  <span class="number">5.75390963e+00</span> <span class="number">-6.41426583e-03</span> <span class="number">-3.27672153e-03</span></span><br><span class="line">  <span class="number">-2.66866291e+02</span>]]</span><br><span class="line">rvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[<span class="number">-0.08799559</span>],</span><br><span class="line">       [<span class="number">-0.88170326</span>],</span><br><span class="line">       [ <span class="number">1.29580617</span>]]), <span class="built_in">array</span>([[<span class="number">0.1834219</span> ],</span><br><span class="line">       [<span class="number">0.42279384</span>],</span><br><span class="line">       [<span class="number">0.02486376</span>]]), <span class="built_in">array</span>([[ <span class="number">0.28946309</span>],</span><br><span class="line">       [<span class="number">-0.18903552</span>],</span><br><span class="line">       [ <span class="number">1.48907145</span>]]), <span class="built_in">array</span>([[<span class="number">-0.36543641</span>],</span><br><span class="line">       [ <span class="number">0.39064732</span>],</span><br><span class="line">       [ <span class="number">1.42808332</span>]]), <span class="built_in">array</span>([[<span class="number">0.9038573</span> ],</span><br><span class="line">       [<span class="number">0.47195595</span>],</span><br><span class="line">       [<span class="number">1.20506172</span>]]), <span class="built_in">array</span>([[<span class="number">0.75213025</span>],</span><br><span class="line">       [<span class="number">0.02148614</span>],</span><br><span class="line">       [<span class="number">1.30797047</span>]]), <span class="built_in">array</span>([[ <span class="number">0.68084924</span>],</span><br><span class="line">       [<span class="number">-0.33114167</span>],</span><br><span class="line">       [ <span class="number">1.27814694</span>]]), <span class="built_in">array</span>([[ <span class="number">0.73722158</span>],</span><br><span class="line">       [<span class="number">-0.43175619</span>],</span><br><span class="line">       [ <span class="number">1.27016329</span>]]), <span class="built_in">array</span>([[ <span class="number">0.35793518</span>],</span><br><span class="line">       [<span class="number">-0.52540922</span>],</span><br><span class="line">       [ <span class="number">1.47462841</span>]]), <span class="built_in">array</span>([[<span class="number">-0.46024137</span>],</span><br><span class="line">       [ <span class="number">0.73646189</span>],</span><br><span class="line">       [ <span class="number">1.45107485</span>]]), <span class="built_in">array</span>([[<span class="number">0.19934207</span>],</span><br><span class="line">       [<span class="number">0.07550088</span>],</span><br><span class="line">       [<span class="number">0.04785288</span>]]))</span><br><span class="line">tvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[ <span class="number">117178.11244024</span>],</span><br><span class="line">       [<span class="number">-169298.96318086</span>],</span><br><span class="line">       [<span class="number">1634531.87581801</span>]]), <span class="built_in">array</span>([[<span class="number">-125791.46167628</span>],</span><br><span class="line">       [<span class="number">-130425.54445762</span>],</span><br><span class="line">       [<span class="number">1601513.39083069</span>]]), <span class="built_in">array</span>([[ <span class="number">146967.41250744</span>],</span><br><span class="line">       [ <span class="number">-92131.26444114</span>],</span><br><span class="line">       [<span class="number">1550781.85059322</span>]]), <span class="built_in">array</span>([[ <span class="number">180599.75075754</span>],</span><br><span class="line">       [ <span class="number">-56931.78664268</span>],</span><br><span class="line">       [<span class="number">1594295.08070419</span>]]), <span class="built_in">array</span>([[ <span class="number">115054.05240954</span>],</span><br><span class="line">       [ <span class="number">-85918.66203658</span>],</span><br><span class="line">       [<span class="number">1437113.294089</span>  ]]), <span class="built_in">array</span>([[ <span class="number">131788.41636345</span>],</span><br><span class="line">       [ <span class="number">-28288.35142592</span>],</span><br><span class="line">       [<span class="number">1474974.90788968</span>]]), <span class="built_in">array</span>([[ <span class="number">184198.80307728</span>],</span><br><span class="line">       [<span class="number">-126939.3224669</span> ],</span><br><span class="line">       [<span class="number">1566139.13731238</span>]]), <span class="built_in">array</span>([[ <span class="number">137107.29188499</span>],</span><br><span class="line">       [<span class="number">-138085.63750253</span>],</span><br><span class="line">       [<span class="number">1601409.89521068</span>]]), <span class="built_in">array</span>([[ <span class="number">164687.28220985</span>],</span><br><span class="line">       [  <span class="number">-3465.19075199</span>],</span><br><span class="line">       [<span class="number">1549941.49743267</span>]]), <span class="built_in">array</span>([[ <span class="number">186975.37895912</span>],</span><br><span class="line">       [<span class="number">-157304.83806326</span>],</span><br><span class="line">       [<span class="number">1574201.48451643</span>]]), <span class="built_in">array</span>([[ <span class="number">-74573.34064078</span>],</span><br><span class="line">       [<span class="number">-143365.14315542</span>],</span><br><span class="line">       [<span class="number">1612495.00455488</span>]]))</span><br><span class="line">./image2\chess1.bmp</span><br><span class="line">新内参: [[<span class="number">652.55497857</span>   <span class="number">0.</span>         <span class="number">484.42146612</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">661.75203353</span> <span class="number">366.64532688</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">大小为: (<span class="number">215</span>, <span class="number">282</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>原始图像：</p>
+<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\8.bmp" alt></p>
+<p>矫正图像：<br><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\6.jpg" alt></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" title="相机标定">http://example.com/2023/09/23/计算机视觉/相机标定/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/" rel="prev" title="CNN">
+      <i class="fa fa-chevron-left"></i> CNN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Untitled%201/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">相机标定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%AE%9A%E6%9D%BF%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">标定板信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text">来源一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A5%E6%BA%902"><span class="nav-number">2.2.</span> <span class="nav-text">来源2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%AE%9A%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">标定步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%AE%9A%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">标定程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%AE%9A%E7%BB%93%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">标定结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90%E4%B8%80-1"><span class="nav-number">5.1.</span> <span class="nav-text">来源一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90%E4%BA%8C"><span class="nav-number">5.2.</span> <span class="nav-text">来源二</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">175k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:39</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -22,19 +22,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="复数矩阵的转置、共轭、共轭转置conj是共轭运算  A &#x3D;  \begin{bmatrix} 2+3i &amp; 3-4i \\ 5+i &amp; 7-2i  \end{bmatrix} \ \\ conj(A) &#x3D;  \begin{bmatrix} 2-3i &amp; 3+4i \\ 5-i &amp; 7+2i \end{bmatrix} \ \\ A.&#39; &#x3D;  \begin{bmatrix} 2+3i &amp; 5+i \">
+  <meta name="description" content="全连接到卷积的转换 假设有一张(2,2)的单通道（Input Channel为1）灰度图片，特征展开后进入全连接层，即图中所示的Hidden layer，假设隐藏层的神经元个数与输入特征数量相同都为4个，那参数W的维度为（4，4），一共16个参数，我们用不同颜色表示与每个神经元相连的参数，隐藏层的输出就是一个（4，1）的矩阵。现在观察上图的下半部分，我们可以重新排列每个神经元的4个参数，变成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://example.com/2021/11/24/Matlab/Test/index.html">
+<meta property="og:title" content="CNN">
+<meta property="og:url" content="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="复数矩阵的转置、共轭、共轭转置conj是共轭运算  A &#x3D;  \begin{bmatrix} 2+3i &amp; 3-4i \\ 5+i &amp; 7-2i  \end{bmatrix} \ \\ conj(A) &#x3D;  \begin{bmatrix} 2-3i &amp; 3+4i \\ 5-i &amp; 7+2i \end{bmatrix} \ \\ A.&#39; &#x3D;  \begin{bmatrix} 2+3i &amp; 5+i \">
+<meta property="og:description" content="全连接到卷积的转换 假设有一张(2,2)的单通道（Input Channel为1）灰度图片，特征展开后进入全连接层，即图中所示的Hidden layer，假设隐藏层的神经元个数与输入特征数量相同都为4个，那参数W的维度为（4，4），一共16个参数，我们用不同颜色表示与每个神经元相连的参数，隐藏层的输出就是一个（4，1）的矩阵。现在观察上图的下半部分，我们可以重新排列每个神经元的4个参数，变成">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-24T14:58:06.014Z">
-<meta property="article:modified_time" content="2021-12-01T16:07:04.961Z">
+<meta property="og:image" content="http://example.com/images/深度学习/CNN/1.jpg">
+<meta property="og:image" content="http://example.com/images/深度学习/CNN/2.jpg">
+<meta property="article:published_time" content="2023-09-20T12:55:13.497Z">
+<meta property="article:modified_time" content="2023-09-23T12:45:03.376Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/深度学习/CNN/1.jpg">
 
-<link rel="canonical" href="http://example.com/2021/11/24/Matlab/Test/">
+<link rel="canonical" href="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>测试 | Erin枫</title>
+  <title>CNN | Erin枫</title>
   
 
 
@@ -201,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/24/Matlab/Test/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -214,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          测试
+          CNN
         </h1>
 
         <div class="post-meta">
@@ -226,14 +229,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-24 22:58:06" itemprop="dateCreated datePublished" datetime="2021-11-24T22:58:06+08:00">2021-11-24</time>
+              <time title="创建时间：2023-09-20 20:55:13" itemprop="dateCreated datePublished" datetime="2023-09-20T20:55:13+08:00">2023-09-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-02 00:07:04" itemprop="dateModified" datetime="2021-12-02T00:07:04+08:00">2021-12-02</time>
+                <time title="修改时间：2023-09-23 20:45:03" itemprop="dateModified" datetime="2023-09-23T20:45:03+08:00">2023-09-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +244,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Matlab/" itemprop="url" rel="index"><span itemprop="name">Matlab</span></a>
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
                 </span>
             </span>
 
@@ -258,14 +261,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>248</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -277,27 +280,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="复数矩阵的转置、共轭、共轭转置"><a href="#复数矩阵的转置、共轭、共轭转置" class="headerlink" title="复数矩阵的转置、共轭、共轭转置"></a>复数矩阵的转置、共轭、共轭转置</h4><p>conj是共轭运算</p>
-<script type="math/tex; mode=display">
-A = 
-\begin{bmatrix}
-2+3i & 3-4i \\ 5+i & 7-2i 
-\end{bmatrix}
-\ \\
-conj(A) = 
-\begin{bmatrix}
-2-3i & 3+4i \\ 5-i & 7+2i
-\end{bmatrix}
-\ \\
-A.' = 
-\begin{bmatrix}
-2+3i & 5+i \\ 3-4i & 7-2i 
-\end{bmatrix}
-\ \\
-conj(A.') = A' = 
-\begin{bmatrix}
-2-3i & 5-i \\ 3+4i & 7+2i 
-\end{bmatrix}</script>
+        <h2 id="全连接到卷积的转换">全连接到卷积的转换</h2>
+<p>假设有一张(2,2)的单通道（Input
+Channel为1）灰度图片，特征展开后进入全连接层，即图中所示的Hidden
+layer，假设隐藏层的神经元个数与输入特征数量相同都为4个，那参数W的维度为（4，4），一共16个参数，我们用不同颜色表示与每个神经元相连的参数，隐藏层的输出就是一个（4，1）的矩阵。现在观察上图的下半部分，我们可以重新排列每个神经元的4个参数，变成与输入一样的（2，2）矩阵，可以看成是宽、高与输入图片一样的Kernel，共4个Output
+Channel，通过卷积操作得到一个（4，1）的输出（确切说应该是(4,1,1,1)），和全连接的输出是一致的。到这里，我们就了解了全连接是如何转化为卷积的。</p>
+<p><img src="/images/深度学习/CNN/1.jpg" style="zoom:67%;"></p>
+<h2 id="卷积的数学表示">卷积的数学表示</h2>
+<p>使用<span class="math inline">\([\mathbf{X}]_{i, j}\)</span>和<span class="math inline">\([\mathbf{H}]_{i,
+j}\)</span>分别表示输入图像和隐藏表示中位置(i,j)处的像素。
+为了使每个隐藏神经元都能接收到每个输入像素的信息，我们将参数从权重矩阵（如同我们先前在多层感知机中所做的那样）替换为四阶权重张量<strong>W</strong>。假设<strong>U</strong>包含偏置参数，我们可以将全连接层形式化地表示为
+<span class="math display">\[
+\begin{split}\begin{aligned} \left[\mathbf{H}\right]_{i, j} &amp;=
+[\mathbf{U}]_{i, j} + \sum_k \sum_l[\mathsf{W}]_{i, j, k,
+l}  [\mathbf{X}]_{k, l}\\ &amp;=  [\mathbf{U}]_{i, j} +
+\sum_a \sum_b [\mathsf{V}]_{i, j, a, b}  [\mathbf{X}]_{i+a,
+j+b}.\end{aligned}\end{split}
+\]</span>
+4个维度按照我的理解已在图上标出，相当于第四维度就是在三维的情况下加了一个时间轴。</p>
+<p><img src="/images/深度学习/CNN/2.jpg" style="zoom:67%;"></p>
+<p>下面举例说明黄色(0,1)位置的神经元是如何被计算出来的： <span class="math display">\[
+\begin{split}\begin{aligned} \left[\mathbf{H}\right]_{0, 1}=
+[\mathbf{U}]_{0,
+1}+\sum\limits_{k=0}^{1}\sum\limits_{l=0}^{1}[\mathsf{W}]_{0, 1, k,
+l}[\mathbf{X}]_{k, l}
+\end{aligned}\end{split}
+\]</span>
+在这里1相当于是选取了第四维度的第一层，0相当于选取了dim4第一层的第0层，也即是黄色的2*2图像，然后再将2*2的输入图像与权重进行相乘，再加上偏差即可得到输出图像。</p>
+<h2 id="平移不变性">平移不变性</h2>
+<p>下面是Chatgpt的解释加上我的理解</p>
+<p>卷积神经网络（Convolutional Neural
+Network，CNN）之所以具有平移不变性，是因为它使用卷积操作来处理输入数据。卷积操作的一个关键特性是在处理输入时具有平移不变性。</p>
+<p>考虑一个一维卷积操作，可以表示为以下公式： <span class="math display">\[
+x(t)*h(t)=\int{x(a)h(t-a)}
+\]</span> 其中，x(t)是输入信号，h(t)是卷积核（滤波器）。</p>
+<p>这个公式说明了在卷积操作中，输出在时刻<em>t</em>
+处的值是通过将卷积核h与输入信号x在不同位置a进行卷积运算得到的。也就是说，卷积核在输入信号上滑动并与不同位置的输入进行卷积。这导致了平移不变性的出现，<strong>因为卷积核对于不同位置的输入都使用相同的权重(g(t-a)中的g
+是固定的）</strong>，只是在不同位置上进行卷积运算。</p>
+<p>这一平移不变性的特性在卷积神经网络中的图像处理中特别有用。因为卷积核对于图像的不同位置都使用相同的权重，所以网络可以检测到相同的特征或模式，无论这些特征或模式在图像中的位置如何改变。这使得CNN在图像分类、对象检测和图像分割等任务中表现出色，因为它们能够捕获和利用图像中的局部特征，而不受位置变化的影响。</p>
+<p><strong>总结：</strong>也就是说，在图像有关处理中，因为卷积核的卷积运算考虑到了每个相邻像素之间的关系，所以可以利用卷积检测到图像不同位置相同的特征或模式，也即利用了所谓卷积的平移不变性，所以从信号的角度理解，卷积核实际上就是系统响应，系统相应当然是不变的。</p>
+<h2 id="局部性">局部性</h2>
+<p>上面的卷积操作的关键在于它的权重g是局部的，它只与输入信号的一小部分区域（由卷积核的大小决定）进行卷积运算。这意味着卷积神经网络强调了数据的局部性，它关注数据中的局部特征和模式。这种局部性使得CNN非常适合处理具有空间结构的数据，例如图像。</p>
+<p>在二维卷积操作中，公式和概念类似，只是输入和卷积核都是二维的，卷积核在输入图像上滑动并与局部图像区域进行卷积运算，从而捕获图像中的局部特征。</p>
+<p>总之，卷积神经网络通过卷积操作强调了数据的局部性，这是它在图像处理等任务中表现出色的原因之一。这种局部性允许网络有效地捕获和学习数据中的局部特征，而不必考虑整个数据的全局性质。</p>
+
     </div>
 
     
@@ -334,7 +360,7 @@ conj(A.') = A' =
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/11/24/Matlab/Test/" title="测试">http://example.com/2021/11/24/Matlab/Test/</a>
+    <a href="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/" title="CNN">http://example.com/2023/09/20/深度学习/CNN/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -380,12 +406,12 @@ conj(A.') = A' =
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/12/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="prev" title="异常">
-      <i class="fa fa-chevron-left"></i> 异常
+    <a href="/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/" rel="prev" title="梯度计算">
+      <i class="fa fa-chevron-left"></i> 梯度计算
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/" rel="next" title="10M信号发生器">
-      10M信号发生器 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" rel="next" title="相机标定">
+      相机标定 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -445,7 +471,7 @@ conj(A.') = A' =
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE%E3%80%81%E5%85%B1%E8%BD%AD%E3%80%81%E5%85%B1%E8%BD%AD%E8%BD%AC%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">复数矩阵的转置、共轭、共轭转置</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%88%B0%E5%8D%B7%E7%A7%AF%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">全连接到卷积的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">卷积的数学表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E7%A7%BB%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">平移不变性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">局部性</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -461,14 +487,14 @@ conj(A.') = A' =
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -525,12 +551,12 @@ conj(A.') = A' =
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">168k</span>
+    <span title="站点总字数">175k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:32</span>
+    <span title="站点阅读时长">2:39</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
