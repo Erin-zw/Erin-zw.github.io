@@ -198,6 +198,1173 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E6%8C%87%E9%92%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">指针</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:16:34" itemprop="dateModified" datetime="2023-09-05T18:16:34+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>char* ，int* 都是一种类型，都是扩展类型。int*叫做指向整型的指针类型。定义了指针类型，指针类型是地址，地址里存放的数据类型就是前的类型。所以指针变量和整型变量是不一样的，不能相互赋值。如下所示是个错误赋值语句：</p>
+<p><code>d = 10- *d</code></p>
+<h3 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*<span class="number">100</span> = <span class="number">25</span>;</span><br><span class="line">*(<span class="keyword">int</span>*)<span class="number">100</span> = <span class="number">25</span>;</span><br></pre></td></tr></table></figure>
+
+<p>间接访问符号只能访问只能作用于指针类型，100是一个整型，所以是非法的。</p>
+<p>但是使用强制类型转换即可达到赋值的目的。</p>
+<h3 id="NULL指针"><a href="#NULL指针" class="headerlink" title="NULL指针"></a>NULL指针</h3><p>NULL指针不指向任何东西，要使一个指针变量为NULL可以给它赋零值，机器内部而言实际地址值可能不同。</p>
+<p><strong>对NULL指针解引用间接访问是非法的！</strong></p>
+<h3 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">...</span><br><span class="line">*a = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码指针变量a未进行初始化，a的初始值若是非法地址则报错，若为合法地址则修改了合法地址本来的值。</p>
+<p><strong>注意：所以对指针间接访问时，确保它们被初始化了！如果知道指针将被初始化为什么地址，就把它初始化为该值，如果不知道，就初始化为NULL指针。</strong></p>
+<h3 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">int</span>* b = &amp;a;</span><br><span class="line"><span class="keyword">int</span>** c = &amp;b;</span><br></pre></td></tr></table></figure>
+
+<p>int**实际上还是一种扩展类型，叫做指向整型变量的指针变量的指针类型。即指针的指针。int表明了指针的指针指向的类型。</p>
+<h3 id="指针左值和右值和指针表达式"><a href="#指针左值和右值和指针表达式" class="headerlink" title="指针左值和右值和指针表达式"></a>指针左值和右值和指针表达式</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
+<li>左值就是一个可被储存的单元，右值就是一个可被读取的数据。</li>
+<li>左值必须是<strong>一个被明确了地址的内存存储单元</strong>，可以用来被赋值；右值必须是一个能被读出来的确确实实的值，这个值可以是数据，可以是指针，可以是结构，反正只要能被读出来的，都可以定义为右值。</li>
+</ol>
+<p>通俗来说，右值指的是式子本身代表的值，左值代表存储式子的地址。左值即是等式左边的，右值即是等式右边的。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">112</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *d = &amp;a;</span><br><span class="line">b = *d;</span><br></pre></td></tr></table></figure>
+
+<p>d的值分为两种情况：<br>d左值：表达式 d 表示的是存储d这个指针变量本身的内存地址。<br>d右值：表达式 d 表示的是存储变量a的内存地址。<br>*d的值也分为两种情况：<br>*d左值：表达式 *d 表示的是存储变量a的内存地址。<br>*d右值：表达式 *d 表示的是存储变量a的内存地址中的所存的值。</p>
+<h4 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h4><p>声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">char</span> *cp = &amp;ch;</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>右值</th>
+<th>左值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;ch</td>
+<td>表示的是ch的地址可作为右值赋值</td>
+<td><strong>非法</strong>，相当于一个常量，没有指定地址，不能作为左值接受赋值</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>表示的是ch的地址可作为右值赋值</td>
+<td>表示cp指针变量所在的地址可以作为左值接受赋值</td>
+</tr>
+<tr>
+<td>&amp;cp</td>
+<td>表示cp的地址可以作为右值赋值</td>
+<td><strong>非法</strong>，相当于一个常量，没有清晰定义地址，不能作为左值</td>
+</tr>
+<tr>
+<td>*cp</td>
+<td>表示cp指向的值可以作为右值赋值</td>
+<td>表示cp存储的地址，可以作为左值</td>
+</tr>
+<tr>
+<td>*cp+1</td>
+<td>表示cp指向的值加一即’b’</td>
+<td><strong>非法</strong>，没有一个明确地址存放’b’这个值，就像b+25&#x3D;a这种赋值</td>
+</tr>
+<tr>
+<td>*(cp+1)</td>
+<td>表示cp指向的地址加一指向的值</td>
+<td>表示cp指向的地址加一</td>
+</tr>
+<tr>
+<td>++cp</td>
+<td>表示cp指向的地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放加一以后的地址</td>
+</tr>
+<tr>
+<td>cp++</td>
+<td>表示cp指向的地址，但是之后地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放加一以后的cp的地址</td>
+</tr>
+<tr>
+<td>*++cp</td>
+<td>表示cp加一后指向地址的值</td>
+<td>表示cp加一后的地址</td>
+</tr>
+<tr>
+<td>*cp++</td>
+<td>表示cp指向地址的值，之后cp地址加一</td>
+<td>表示cp存放的地址</td>
+</tr>
+<tr>
+<td>++*cp</td>
+<td>表示cp指向的值加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+<tr>
+<td>(*cp)++</td>
+<td>表示cp指向的值，之后这个值加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+<tr>
+<td>++*++cp</td>
+<td>表示cp指向地址加一后的值加一</td>
+<td><strong>非法</strong>，没有明确地址存放</td>
+</tr>
+<tr>
+<td>++*cp++</td>
+<td>表示cp指向地址的值加一，之后cp存储的地址加一</td>
+<td><strong>非法</strong>，没有明确地址存放’b’</td>
+</tr>
+</tbody></table>
+<p>就是说作为左值要有一个清晰明确的地址，比如&amp;ch这种就没有一个变量存储他的值，表示他的地址。</p>
+<p>作为左值时，实际上是右值对左值的地址进行赋值。</p>
+<h3 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h3><ul>
+<li>指针 ± 整数，目的地址 &#x3D; 源地址 ± 整数*数据类型占据大小</li>
+<li>指针-指针，同一数组内可进行操作，得出的数据类型为ptrdiff_t，可以为负数。比如p1指向a[i],p2指向a[j],p1-p2得到i-j。</li>
+<li>&lt; &gt; ≥ ≤ 这些关系符最有可能用到。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="post-title-link" itemprop="url">字符串，字符和字节以及几个函数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:16:55" itemprop="dateModified" datetime="2023-09-05T18:16:55+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="字符串长度"><a href="#字符串长度" class="headerlink" title="字符串长度"></a>字符串长度</h3><p>C语言标准库字符串长度函数是strlen()。返回值类型为size_t,是无符号整数类型。使用时应避免下面的错误：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">strlen</span>(x) &gt;= <span class="built_in">strlen</span>(y))</span><br><span class="line"><span class="comment">//正确的，可以比较两者大小</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">strlen</span>(x) - <span class="built_in">strlen</span>(y) &gt;= <span class="number">0</span>)</span><br><span class="line"><span class="comment">//错误的，左边运算结果为一个无符号数，运算结果始终为一个无符号数，始终是非负的。从二进制补码角度看。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复制字符串函数"><a href="#复制字符串函数" class="headerlink" title="复制字符串函数"></a>复制字符串函数</h3><p>函数原型：</p>
+<p><code>char *strcpy(char *dst, char const *str);</code></p>
+<p>考虑下面例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> message[] = <span class="string">&quot;Option message&quot;</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(message,<span class="string">&quot;different&quot;</span>);<span class="comment">//如果复制字符串长度小于原字符串空间，多余的字符将被舍弃</span></span><br><span class="line">    <span class="built_in">puts</span>(message);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">strlen</span>(message));</span><br><span class="line">    <span class="built_in">strcpy</span>(message,<span class="string">&quot;Optional message&quot;</span>);<span class="comment">//如果大于，则占用数组后面的部分内存空间，改写原先恰好存储在那里的变量</span></span><br><span class="line">    <span class="built_in">puts</span>(message);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">different</span><br><span class="line"><span class="number">9</span></span><br><span class="line">Optional message</span><br></pre></td></tr></table></figure>
+
+<p>所以尽量确保目标参数能够容纳被复制的字符串。</p>
+<p>函数返回值为message本身。</p>
+<h3 id="getchar和putchar"><a href="#getchar和putchar" class="headerlink" title="getchar和putchar"></a>getchar和putchar</h3><p>例子1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c,d;</span><br><span class="line">    c = getchar();</span><br><span class="line">    <span class="built_in">putchar</span>(c);</span><br><span class="line">    c = getchar();</span><br><span class="line">    <span class="built_in">putchar</span>(c);</span><br><span class="line">    d = getchar();</span><br><span class="line">    <span class="built_in">putchar</span>(d);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="number">1234</span></span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>当程序调用getchar时，程序就等着用户按键，用户输入的字符被存放在键盘缓冲区中，直到用户按回车为止（回车字符也放在缓冲区中）。当用户键入回车之后，getchar才开始从stdin流中每次读入一个字符，getchar函数的返回值是用户输入的第一个字符的ASCⅡ码，如出错返回-1，且将用户输入的字符回显到屏幕。</p>
+<p>如用户在按回车之前输入了不止一个字符，其他字符会保留在键盘缓存区中，等待后续getchar调用读取。也就是说，后续的getchar调用不会等待用户按键，而直接读取缓冲区中的字符，直到缓冲区中的字符读完为后，才等待用户按键。</p>
+<p>例子2：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">while</span>((c = getchar()) != EOF)</span><br><span class="line">    <span class="built_in">putchar</span>(c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">sjka</span><br><span class="line">sjka</span><br><span class="line">sss</span><br><span class="line">sss</span><br></pre></td></tr></table></figure>
+
+<p>解释一下上述程序就是输入的字符先存放在缓冲区，然后执行while循环getchar不断读取缓冲区字符，一边读取一边输出。</p>
+<p>上述程序执行程序，输入：abc，然后回车。则程序就会去执行puchar(c)，然后输出abc，<strong>这个地方不要忘了，系统输出的还有一个回车</strong>。然后可以继续输入，再次遇到换行符的时候，程序又会把那一行的输入的字符输出在终端上。</p>
+<p>补充：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hjy517744152/article/details/74908906">https://blog.csdn.net/hjy517744152/article/details/74908906</a></p>
+<h3 id="gets和puts"><a href="#gets和puts" class="headerlink" title="gets和puts"></a>gets和puts</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( )</span></span>&#123;</span><br><span class="line">   <span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line">   <span class="built_in">printf</span>( <span class="string">&quot;Enter a value :&quot;</span>);</span><br><span class="line">   gets( str );</span><br><span class="line">   <span class="built_in">printf</span>( <span class="string">&quot;You entered: &quot;</span>);</span><br><span class="line">   <span class="built_in">puts</span>( str );</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;ok\n&quot;</span>);</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">Enter a value :<span class="number">1</span>sd</span><br><span class="line">You entered: <span class="number">1</span>sd</span><br><span class="line">ok</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+
+<p>puts函数自己会打印一个换行</p>
+<h3 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h3><p>字符串实际上就是指向字符串第一个元素的指针</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,*<span class="string">&quot;xyz&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,<span class="string">&quot;xyz&quot;</span>[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,*(<span class="string">&quot;xyz&quot;</span>+<span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,<span class="string">&quot;**********&quot;</span>+<span class="number">2</span>);<span class="comment">//使用此方法可以快速打印星型金字塔</span></span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">x</span><br><span class="line">z</span><br><span class="line">y</span><br><span class="line">********</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">命令行参数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:46" itemprop="dateModified" datetime="2023-09-05T18:15:46+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>582</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>每个C语言程序都必须有一个称为main()的函数，作为程序启动的起点。当执行程序时，命令行参数（command-line  argument）（由shell逐一解析）通过两个入参提供给main()函数。第一个参数int  argc，表示命令行参数的个数。第二个参数char *argv[]，是一个指向命令行参数的指针数组，每一参数又都是以空字符（null）  结尾的字符串。第一个字符串，亦即argv[0]指向的，（通常）是该程序的名称。argv中的指针列表以NULL指针结尾（即argv[argc]为NULL）。</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,argc);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">3</span>]);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">D:\Vsc\test&gt;apple.exe a b c d<span class="comment">//在命令行中输入</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">apple.exe<span class="comment">//一般指向的第一个参数为程序名称</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理命令行参数"><a href="#处理命令行参数" class="headerlink" title="处理命令行参数"></a>处理命令行参数</h3><p>实际上就是对字符串的处理</p>
+<p>见书：p267</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" class="post-title-link" itemprop="url">动态内存分配</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:00" itemprop="dateModified" datetime="2023-09-05T18:15:00+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="malloc和free函数"><a href="#malloc和free函数" class="headerlink" title="malloc和free函数"></a>malloc和free函数</h3><h4 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h4><p>当声明数组时，我们通常定义一个足够大的宏，使其尽量容纳多的元素，但是这样造成内存浪费，使用动态内存分配可以避免这种内存浪费。</p>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *pointer)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>调用malloc函数时，malloc从内存池提取一块可用内存，向程序返回一个指向这块内存的指针。这块内存并没有初始化。malloc参数就是所需要的字节数，并且分配的内存是连续的。如果内存池是空的或者内存池可用内存无法满足要求那么就会返回NULL指针。</p>
+<p>当一块以前分配的内存不使用时，使用free函数把他归还给内存池。</p>
+<h3 id="calloc和realloc函数"><a href="#calloc和realloc函数" class="headerlink" title="calloc和realloc函数"></a>calloc和realloc函数</h3><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> num_elements, <span class="keyword">size_t</span> element_size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> new_size)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>calloc函数也用于内存分配，与malloc区别就是返回时指针可以初始化为0。并且参数是所需元素的数量和每个元素的字节数。</p>
+<p>realloc函数用于修改一个已经分配的内存块的大小。若用于扩大内存块，那么这块内存保留，新增加的内存添加到原本的后面。若用于缩小，该内存块尾部一部分被拿掉，剩余保留。若原先的内存块无法修改，realloc将重新分配一块内存，将原先那块内存内容复制到分配的内存块上。</p>
+<h3 id="使用动态内存分配"><a href="#使用动态内存分配" class="headerlink" title="使用动态内存分配"></a>使用动态内存分配</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *pi;</span><br><span class="line">   pi = <span class="built_in">malloc</span>(<span class="number">100</span>);<span class="comment">//更好的是pi = malloc(25 * sizeof(int));方便移植</span></span><br><span class="line">   <span class="keyword">if</span>(pi == <span class="literal">NULL</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Out of memory!\n&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">   &#125;<span class="comment">//检查是否分配成功，避免指向NULL指针</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">25</span>; i++)&#123;</span><br><span class="line">      pi[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,pi[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态内存分配常见错误"><a href="#动态内存分配常见错误" class="headerlink" title="动态内存分配常见错误"></a>动态内存分配常见错误</h3><ul>
+<li>对NULL指针间接访问</li>
+<li>对分配的内存越界操作</li>
+<li>释放并非动态分配的内存</li>
+<li>释放一块动态分配内存的一部分（解决方法：realloc函数可以有效缩小一块动态分配的内存，有效释放他尾部的部分内存）</li>
+<li>一块动态内存被释放后继续使用</li>
+</ul>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>分配内存但在使用完后不释放会引起内存泄漏，内存泄漏会一点点榨干内存。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数指针与回调函数（转换表）</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:06" itemprop="dateModified" datetime="2023-09-05T18:15:06+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><h3 id="概念区分"><a href="#概念区分" class="headerlink" title="概念区分"></a>概念区分</h3><table>
+<thead>
+<tr>
+<th>声明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int f;</code></td>
+<td>一个整型变量</td>
+</tr>
+<tr>
+<td><code>int *f;</code></td>
+<td>一个指向整型的指针</td>
+</tr>
+<tr>
+<td><code>int f();</code></td>
+<td>一个返回值为整型函数</td>
+</tr>
+<tr>
+<td><code>int *f();</code></td>
+<td>一个返回值为指向整型指针的函数，可以把int*连在一起看</td>
+</tr>
+<tr>
+<td><code>int (*f)();</code></td>
+<td>一个指向函数的指针即函数指针</td>
+</tr>
+<tr>
+<td><code>int *(*f)();</code></td>
+<td>一个指向 返回值为指向整型的指针的函数 的指针</td>
+</tr>
+<tr>
+<td><code>int f[];</code></td>
+<td>一个整型数组</td>
+</tr>
+<tr>
+<td><code>int *f[];</code></td>
+<td>一个存放指向整形的指针的数组</td>
+</tr>
+<tr>
+<td><code>int f()[];</code></td>
+<td><strong>非法</strong>，是一个返回值为数组的函数，但是函数只能返回标量值而不能返回数组</td>
+</tr>
+<tr>
+<td><code>int f[]();</code></td>
+<td><strong>非法</strong>，像是一个元素类型为返回值为整型的函数的数组，但是数组要求元素长度相同</td>
+</tr>
+<tr>
+<td><code>int (*f[])();</code></td>
+<td>一个元素为指向返回值为整型的函数的指针的数组</td>
+</tr>
+<tr>
+<td><code>int *(*f[])();</code></td>
+<td>一个元素为指向返回值为指向整型指针的函数的指针的数组</td>
+</tr>
+</tbody></table>
+<h3 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法"></a>声明方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*pf)(<span class="keyword">int</span>) = &amp;f;<span class="comment">//符号&amp;可加可不加，因为函数名被使用时总是由编译器把它转换为函数指针</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line">ans = f(<span class="number">25</span>);</span><br><span class="line">ans = (*pf)(<span class="number">25</span>);</span><br><span class="line">ans = pf(<span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p><strong>例子：在单链表中查找一个值</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">int</span> <span class="keyword">const</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;value == value)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了改善兼容性与便利性，能查找不同元素类型的链表如字符串或者数组而不只是整形，即能对任何类型的值进行比较。</p>
+<p><strong>修改一：</strong></p>
+<p>使用函数指针，编写一个比较两数大小的函数，将此函数指针作为参数传递给查找函数。</p>
+<p><strong>修改二：</strong></p>
+<p>向比较函数传递指针而不是值本身。</p>
+<hr>
+<p>使用这种技巧的函数被称为回调函数，因为用户把一个函数的指针作为参数传递给其他函数，后者将回调用户的函数。</p>
+<p>方便了不同时刻执行不同类型的工作。</p>
+<p><strong>修改后的查找函数：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">void</span> <span class="keyword">const</span> *value,<span class="keyword">int</span> (*compare)(<span class="keyword">void</span> <span class="keyword">const</span> *,<span class="keyword">void</span> <span class="keyword">const</span> *))</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(compare(&amp;node-&gt;value ,value) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用例子（整型）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_int</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> *a,<span class="keyword">void</span> <span class="keyword">const</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*(<span class="keyword">int</span> *)a == *(<span class="keyword">int</span>*)b)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,compare_int);</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">...</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,<span class="built_in">strcmp</span>);<span class="comment">//使用自带的字符串比较函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h2><p>假设要实现一个小型计算器，可以使用switch如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(oper)&#123;</span><br><span class="line">    <span class="keyword">case</span> ADD:</span><br><span class="line">        result = add(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SUB:</span><br><span class="line">        result = sub(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MUL:</span><br><span class="line">        result = mul(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DIV:</span><br><span class="line">        result = div(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了使用switch语句，操作符的代码必须是整数。如果他们是从零开始的整数，我们就可以使用<strong>转换表</strong>完成相同的任务。<strong>转换表</strong>就是一个<strong>函数指针数组</strong>。</p>
+<p>转换表声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sub</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">mul</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">div</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//其他运算函数声明</span></span><br><span class="line"><span class="keyword">double</span> (*oper_func[])(<span class="keyword">double</span>,<span class="keyword">double</span>) = &#123;add,sub,mul,div...&#125;;<span class="comment">//声明函数指针数组</span></span><br><span class="line"></span><br><span class="line">result = oper_func[oper](op1,op2);<span class="comment">//使用转换表</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%8D%E8%B0%88getchar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%86%8D%E8%B0%88getchar/" class="post-title-link" itemprop="url">getchar的几个例子</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:16:23" itemprop="dateModified" datetime="2023-09-05T18:16:23+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((c=getchar())!=<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%c,%d&quot;</span>,c, n);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>输入:<br> ssss回车<br> 得到:<br> s,0s,0s,0s,0<br> ,0 光标处(等待输入)<br> 其实循环执行了五次，前四次输出s，第五次输出的是回车，所以才会出现：输出ssss后下一行的光标出（等待输入）</li>
+<li>如果我们输入：<br> ksssa<br> 输出：<br> k,0s,0s,0s,0</li>
+</ol>
+<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,c);</span><br><span class="line">    getchar();</span><br><span class="line">    c=getchar();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,c);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>输入:<br> ssss回车<br> 得到:<br> ssss<br> 光标处(等待输入)<br> 其实循环执行了五次，前四次输出s，第五次输出的是回车，所以才会出现：输出ssss后下一行的光标出（等待输入）</p>
+</li>
+<li><p>如果我们输入：<br>ksssa回车<br>输出：<br>ksss光标处(等待输入)</p>
+<p>说明:程序已经跳出while循环,但是由于我们用getchar();吃掉了回车,后面第7句c&#x3D;getchar();需要你输入一个字符(因为ksssa回车后面并没有新的字符)，所以程序仍然没有结束.</p>
+<p>如果注释掉getchar();</p>
+<p>输入：ksssa回车</p>
+<p>输出：</p>
+<p>ksss</p>
+<p>光标处(程序结束) </p>
+<p>最后一个回车就被c &#x3D; getchar()读取了</p>
+</li>
+</ol>
+<h3 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.输入:<br>1234回车<br>得到：<br>Fine.Fine.Fine.Fine.Fine.光标处(等待输入)</p>
+<p>说明：ch依次被赋值1234回车，注意回车刷新缓冲区的同时也被赋值给ch，这个五个字符均不是‘#’故运行了五次，仍为跳出循环。</p>
+<p>2.输入：<br>1234#回车<br>得到：<br>Fine.Fine.Fine.Fine.光标处（程序结束）</p>
+<p>说明：ch依次被赋值1234#回车，循环执行到#时候跳出，故循环只执行4次。</p>
+<h3 id="例子4"><a href="#例子4" class="headerlink" title="例子4"></a>例子4</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        getchar();<span class="comment">//吃掉回车</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此方法只适合单个输入：</p>
+<p>1.输入：1回车<br>得到： Fine.光标处(等待输入)</p>
+<p>2.输入： 123回车<br>得到： Fine.Fine.光标处(等待输入)</p>
+<p>说明：实际上ch只接收了1和3 的值，2和回车都被getchar()这个语句吃掉了</p>
+<h3 id="例子5"><a href="#例子5" class="headerlink" title="例子5"></a>例子5</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完美解决问题</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" class="post-title-link" itemprop="url">字节对齐</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:52" itemprop="dateModified" datetime="2023-09-05T18:15:52+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="字节对齐概念"><a href="#字节对齐概念" class="headerlink" title="字节对齐概念"></a>字节对齐概念</h3><p>许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。</p>
+<h3 id="为什么要字节对齐"><a href="#为什么要字节对齐" class="headerlink" title="为什么要字节对齐"></a>为什么要字节对齐</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
+<p>各个硬件平台对存储空间的处理上有很大的不同，一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐。比如sparc系统，如果取未对齐的数据会发生错误，举个例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">8</span>];</span><br><span class="line"><span class="keyword">char</span> *p = &amp;ch[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> i = *(<span class="keyword">int</span> *)p;</span><br></pre></td></tr></table></figure>
+
+<p>运行时会报segment error，而在x86上就不会出现错误，只是效率下降。</p>
+<h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
+<li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
+<li><strong>结构体或者类的自身对齐值</strong>是其成员中自身对齐值最大的那个值。</li>
+<li><strong>指定对齐值</strong>：是指使用#pragma pack (value)时的指定对齐值value。</li>
+<li>数据成员、结构体和类的<strong>有效对齐值</strong>：自身对齐值和指定对齐值中小的那个值。</li>
+</ol>
+<h3 id="不同数据类型对齐原则"><a href="#不同数据类型对齐原则" class="headerlink" title="不同数据类型对齐原则"></a>不同数据类型对齐原则</h3><p>内存对齐主要遵循下面两个原则:</p>
+<ol>
+<li><ul>
+<li>结构体成员变量的起始地址能够被其成员变量<strong>有效对齐值</strong>整除。</li>
+<li>结构体总体大小能够被<strong>结构体有效对齐值</strong>整除，如不能则在后面补充字节。</li>
+</ul>
+<p>即结构体每一个数据类型都要对齐</p>
+</li>
+<li><p>标准数据类型，它的地址只要是它的长度的整数倍就行</p>
+</li>
+<li><p>数组 ：按照基本数据类型对齐，第一个对齐了后面的自然也就对齐了。</p>
+</li>
+<li><p>联合 ：按其包含的长度最大的数据类型对齐。</p>
+</li>
+<li><p>在一个struct中包含另一个struct，内部struct应该以它的最大数据成员大小的整数倍开始存储。如 struct A 中包含 struct B, struct B 中包含数据成员 char, int, double，则 struct B 应该以sizeof(double)&#x3D;8的整数倍为起始地址。</p>
+</li>
+</ol>
+<p>其实这里有点不严谨，编译器在编译的时候是可以指定对齐大小的，实际使用的有效对齐其实是取指定大小和自身大小的最小值，一般默认的对齐大小是4，这个模数是可以改变的，可以用预编译命令：</p>
+<p><code>#pragma pack(n)</code></p>
+<p>取消自定义字节对齐方式</p>
+<p><code>#pragma pack()</code></p>
+<h3 id="不同系统的数据模型"><a href="#不同系统的数据模型" class="headerlink" title="不同系统的数据模型"></a>不同系统的数据模型</h3><p>本机模型（LLP64）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
+
+<p>其他模型</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>ILP32</th>
+<th>ILP64</th>
+<th>LP64</th>
+<th>LLP64</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<p>绝大部分64位的Unix，linux都是使用的LP64模型；32位Linux系统是ILP32模型；64位的Windows使用的是LLP64(long long and point 64)模型。32单片机使用的是ILP32</p>
+<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		最后看一下D结构体，假如在64位系统中，就占用64个字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">long</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
+<p><strong>这种方法不能指定内存对齐小于默认对齐，也就是说它只能调大不能调小。而且比较坑的是调小的时候是没任何提示（包括警告和错误）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) &#x3D; 8，刚好占的空间大小是8的整数倍1倍</p>
+<p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
+<p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
+<p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
+<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f1;</span><br><span class="line">	<span class="keyword">char</span> f2;</span><br><span class="line">	<span class="keyword">char</span> f3;</span><br><span class="line">	<span class="keyword">int</span> f4;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
+
+<p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
+<p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
+<p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
+<p>当align作用于结构体定义时会改变结构体的大小。结构体最终大小为aligned指定大小的整数倍</p>
+<p>总结：</p>
+<p><code>#pragma pack(n)</code>：针对的是结构体内每一个成员相对第一个成员的偏移地址对齐。</p>
+<p><code>__attribute__((aligned (n)))</code>：针对的是整个结构体在整个内存地址空间分配时的对齐。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">attribute关键字</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:16:53" itemprop="dateModified" datetime="2023-09-05T18:16:53+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
+<h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))<span class="comment">//取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐。</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当aligned作用于变量时，其作用是告诉编译器为变量分配内存的时候，要分配在指定对齐的内存上.作用于变量之上不会改变变量的大小。   例如：int a <strong>attribute</strong>((aligned(16)));该变量a的内存起始地址为16的倍数。</p>
+<h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
+<li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
+<p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
+<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
+<hr>
+<p>于是本文的大体意思就清晰了，__attribute__((section(&quot;section_name&quot;)))，其作用是将作用的函数或数据放入指定为&quot;section_name&quot;对应的段中。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/16/Csharp/%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -456,868 +1623,10 @@ cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">dicom图像灰度理解</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-05 21:17:39 / 修改时间：21:52:00" itemprop="dateCreated datePublished" datetime="2023-03-05T21:17:39+08:00">2023-03-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像灰阶"><a href="#图像灰阶" class="headerlink" title="图像灰阶"></a>图像灰阶</h2><p>​        所谓灰阶，是将最亮与最暗之间的亮度变化，区分为若干份。以便于进行信号输入相对应的屏幕亮度管控。每张数字影像都是由许多点所组合而成的,这些点又称为像素(pixels)，通常每一个像素可以呈现出许多不同的颜色，它是由红、绿、蓝（RGB）三个子像素组成的。每一个子像素，其背后的光源都可以显现出不同的亮度级别。而灰阶代表了由最暗到最亮之间不同亮度的层次级别。这中间层级越多，所能够呈现的画面效果也就越细腻。以8bit panel为例，能表现2的8次方，等于256个亮度层次，我们就称之为256灰阶。LCD屏幕上每个像素，均由不同亮度层次的红、绿、蓝组合起来，最终形成不同的色彩点。也就是说，屏幕上每一个点的色彩变化，其实都是由构成这个点的三个RGB子像素的灰阶变化所带来的。</p>
-<h2 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h2><p>​        我们生活中通过三原色深浅组成不同的颜色，前端开发中常用RGB来指定色彩，R、G、B 都是 0-255， 比如 （255,255,255） 表示白色，用16进制表示255就是ff, 所以255,255,255 可以表示为 ffffff,  在css样式表中写为 #ffffff。</p>
-<h2 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h2><p>​        图片我们都知道是由多个像素组成的，是图像的最小单元，如果这个单元里只有一个bit大小，也就是只有0和1两个值，由这种像素组成的图像称二值图像，显然它可以表示一个黑白图。这个单位里也可以存一个16位二进制数，24位…, 可以想象存储的越大，一个像素能表达的颜色就越丰富，整体图像呈现就越精细，当然图片占用的空间也就越大。</p>
-<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>​        1位图像（即二值图像）只能表示黑白，那二位图像就可以表示4种颜色（00,01,10,11，VGA），依次类推，4位（16色，VGA），8位（256色），16位（增强色），24位和32位（真彩色）等。</p>
-<p>这其中8位RGB指的是3位元是R，3位元是G，2位元是B，故有8位RGB有256种颜色。其他以此类推。</p>
-<p><strong>色彩图像</strong>：以RGB图像为例，RGB图像每一个像素的颜色值（由RGB三原色表示）直接存放在图像矩阵中，由于每一像素的颜色需由R、G、B三个分量来表示，M、N分别表示图像的行列数，<strong>三个</strong>M x N的二维矩阵分别表示各个像素的R、G、B三个颜色分量，假设我们在绘图的时候只取第一个矩阵，那么绘制出来的就是红色分量的图片。<br> <strong>灰度图像</strong>：每个像素只有一个采样颜色，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。</p>
-<h2 id="灰度级"><a href="#灰度级" class="headerlink" title="灰度级"></a>灰度级</h2><p>​        灰度级表明图像中不同灰度的最大数量。灰度级越大，图像的亮度范围越大。二值图像一个像素只能存0和1，它的灰度级就为2，8位图一个像素表示0-255共256个灰度值，所有它的灰度级为256， 那么存储一张512*512,256级灰度的图片需要的空间就为</p>
-<script type="math/tex; mode=display">
-512*512*8 = 2097152\ bit ≈ 1.7\ Mb</script><h2 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h2><p>​        图像的灰度化是让像素点矩阵中的每一个像素点都满足关系：R=G=B，此时的这个值叫做灰度值。如RGB(100,100,100)就代表灰度值为100,RGB(50,50,50)代表灰度值为50。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/" class="post-title-link" itemprop="url">dicom窗位和窗宽</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-05 20:27:05" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-06 16:37:20" itemprop="dateModified" datetime="2023-03-06T16:37:20+08:00">2023-03-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p>
-<h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p>
-<p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p>
-<p>人体常见组织CT值：</p>
-<p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p>
-<h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p>
-<ul>
-<li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p>
-<p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p>
-</li>
-<li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p>
-<p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p>
-</li>
-</ul>
-<p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p>
-<p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p>
-<p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p>
-<script type="math/tex; mode=display">
-f(x) =
-\left \{ 
-\begin{array}{c}
-0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ 
-\frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 
-255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}
-\end{array}
-\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p>
-<h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p>
-<p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">dicom简介</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-04 19:47:57" itemprop="dateCreated datePublished" datetime="2023-03-04T19:47:57+08:00">2023-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-08 21:19:09" itemprop="dateModified" datetime="2023-03-08T21:19:09+08:00">2023-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="dicom基本概念和定义"><a href="#dicom基本概念和定义" class="headerlink" title="dicom基本概念和定义"></a>dicom基本概念和定义</h2><ul>
-<li><p><strong>实体(Entity):</strong>表示一个或者一类具有相同特性的应用对象。 </p>
-</li>
-<li><p><strong>关系(Relation):**</strong>表示各个实体之间的相互关系。比如医疗影像设备和患者之间，存在的就是检查的关系。</p>
-</li>
-<li><p><strong>实体-关系（E-R)模型：</strong>描述实际中具体的物体或者概念的一种信息模型。通过定义实体和实体间的关系，从而表达出系统所实现的功能。</p>
-</li>
-<li><p><strong>对象(Object):</strong>即现实中的实际事物在计算机内部的抽象表达，它包含了事物的属性以及对事物的处理方法，并且具有封装与继承的特征。</p>
-</li>
-<li><p><strong>唯一标识符UID:</strong>此标志无论在世界上的任何地点都是独一无二的，为了保证其唯一性，它的产生机制如下：&lt;根&gt;.&lt;后缀&gt;，即由根和后缀两部分组成，其中根部分是由权威部门来制定的，通过权威部门来确保它的唯一性，之后再通过其他的机构部门分配到医院，同时也必须要保证其在内部网络的唯一性。</p>
-</li>
-<li><p><strong>信息对象定义(Information Object Definition,==lOD==)：**</strong>指的是信息实体的集合。每一个信息实体都是一个单独的对象属性，例如人的名字就是人这一对象的信息实体，当这些信息实体组合到特定的模块中就会形成数据集。在DICOM中一个IOD可以包含单个的信息实体也可以包含多个信息实体。通常情况下，管理功能的服务类使用的是包含单个信息实体的IOD，而处理图像的服务类使用的则是包含有多个信息实体的IOD。</p>
-</li>
-<li><p><strong>服务(Service):**</strong>服务指的是为其他应用程序所提供的功能，通过下层服务原语和信息对象来实现服务的功能。服务类指的是将一项用于对象的指令抽象出来进行描述，比如用于对象的命令和结果。服务类中包含了应用实体的概念，指的是一个实际的应用程序。服务中包括有服务类提供者和服务类使用者，服务类提供者是提供DICOM服务的应用实体，服务类使用者则是通过网络要求DICOM服务的应用实体。</p>
-</li>
-</ul>
-<ul>
-<li><strong>服务对象对(Service Object Pair,==SOP==)：</strong>它是传递DICOM信息的基本单位。每一个DICOM都包含一个SOP类，而这个SOP类表示的是实际对象，SOP根据UID来进行唯一表示，并且其类型可根据UID来识别，DICOM应用实体可以支持一个或多个SOP类。</li>
-</ul>
-<h2 id="dicom标准信息模型"><a href="#dicom标准信息模型" class="headerlink" title="dicom标准信息模型"></a>dicom标准信息模型</h2><p>DICOM的信息模型中主要包含有四个层次：病人层次(Patient)、研究层次(Study)、序列层次(Series)以及图像层次(Image)。</p>
-<ul>
-<li><p><strong>病人层次（Patient):</strong>病人IOD封装了该病人的基本信息。如病人姓名、性别、年龄、身高以及体重等基本信息。</p>
-</li>
-<li><p><strong>研究层次（Study):</strong>研究层次表示对特定类型请求的一个结果，它是DICOM信息模型中最为关键的一部分，因为整个DICOM影像都以研究层次的正确引导而进行。研究层次也包含了一些标识信息，通过该标识信息可以连接医院的影像管理系统(HIS)。</p>
-</li>
-<li><p><strong>序列层次（Series):</strong>序列层次中包含的是图像的序列，同时也标识了图像相关的一些属性，如图像属于何种类型，图像生成的日期以及生成该图像所使用的设备等等。序列层次中规定了图像序列的排列类型，而图像序列的排列类型可根据具体的临床应用来决定。</p>
-</li>
-<li><p><strong>图像层次（Image):</strong>图像层次包含的就是DICOM中的图像数据，它也是整个信息模型的最底层。由于不同设备产生的图像不同，可以是单层的图像，也可以是双层的图像，甚至还会有一些器官的运动图像。</p>
-</li>
-</ul>
-<h2 id="dicom文件结构"><a href="#dicom文件结构" class="headerlink" title="dicom文件结构"></a>dicom文件结构</h2><p>DICOM文件的组成包括两部分：即文件头和数据集，同时每个DICOM文件中还包含一个服务对象的SOP实例，其中包含了一个图像实例。</p>
-<h3 id="dicom文件头"><a href="#dicom文件头" class="headerlink" title="dicom文件头"></a>dicom文件头</h3><p>文件头是为了保持与通用文件结构的兼容性。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>组成</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>文件导读</td>
-<td>由128个字节16进制数组成，主要是为了进行一些特定的操作和应用协议，方便访问其内部的图像数据以及其他的信息，通常情况下这部分无内容，即用128个字节的00H来表示</td>
-</tr>
-<tr>
-<td>DICOM前缀</td>
-<td>由4个字节组成，对应的ASCII码为“DICM”，是用来判定该文件的格式是否为DICOM</td>
-</tr>
-<tr>
-<td>文件元信息元素</td>
-<td>一些其他的信息，如文件的元信息版本、传输语法、媒介存储SOP类、文件应用类、源AE标题、私有信息以及程序生成器等等。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="dicom数据集"><a href="#dicom数据集" class="headerlink" title="dicom数据集"></a>dicom数据集</h3><p>​        数据集是由大量的按照一定顺序排列的数据元所组成，而数据元又由四部分组成：TAG(标签)、VR(值表示)、值长度和值域。DICOM数据集描述的就是现实中一个具体事物抽象成的实例，而数据元表示的则是实例的各个属性，数据元包含的信息可以是简单的字符信息，也可以是数字信息，每个数据元按照其标签的递增方式进行排列。比如，如果将一个患者抽象成为一个实例，那么数据元表示的可以是患者的名字、年龄、性别以及患者所做的检查中包含的图像生成的日期、图像的类型和图像数据本身等等。</p>
-<p><img src="\images\毕设\dicom标准\2.jpg" style="zoom:50%;"></p>
-<p>（1）<strong>TAG(标签)</strong>：在DICOM数据元中，标签是用来对数据元做唯一的标识，即同一个标签在数据元中只能出现一次，但是有一种情况例外，就是当数据元使用嵌套模式的时候。标签是一个4字节的无符号整数，它由两部分组成，即组号和元素号。标签分为标准标签（Standard Data Elements Tag)和留给用户自定义的标签，一般来说，组号为偶数的标签就是标准标签，但是在制定DICOM标准的时候为了以后对DICOM的发展进行更新应用，一些特殊的标签暂时没做任何定义，也不允许自定义，包括组号为：0000、0002、0004和0006的标签，每一个标准标签的详细定义和说明都可以通过数据字典来进行查阅。组号为奇数的标签通常是留给用户自定义的标签，同样有一些特殊的例外，其中包括组号为：0001、0003、0005和0007的标签。</p>
-<p>（2）<strong>VR(值表示）：</strong>VR表示数据元素的数据类型，由2个字节的整数组成。例如，当VR为<strong>“PN”</strong>时，表示的是病人的姓名，当VR为<strong>“UI”</strong>时，表示的是统一标识符，当VR为<strong>“AT”</strong>时，表示的是属性标签，当VR为<strong>“FL”</strong>时，表示的是数据域采用的是单精度浮点型的类型。根据传输语法的可选性，VR可分为两类：即显式和隐式，如图2-3和图2-4所示。当为显式的时候，VR不可以被省略，但是当为隐式的时候VR必须被置零省略。随着DICOM版本的发展，以前版本的一些数据类型可能在新版本不再在被支持，当VR为“RET”时，就表示该类型在DICOM3.0中不被支持，如果为了兼容使用，必须包含以前版本标准的全部有效数据，但是如果仅仅是为了兼容，而不使用这些数据，也可以不包含。当VR为“SQ”时，表示数据域里还有嵌套的子数据元，而当子数据元里的数据类型依然为“SQ”时，就形成了递归的嵌套模式，在嵌套的递归模式下，要求对DICOM进行数据解析的时候必须能够遍及所有的嵌套数据。</p>
-<p><img src="\images\毕设\dicom标准\3.jpg" style="zoom:50%;"></p>
-<p>（3）<strong>值长度：</strong>值长度分为两种。首先，是根据VR值是显式还是隐式的类型决定值长度用十六位或者三十二位无符号整数来表示，它说明了是值域中数据的长度的字节数，这个字节数必须是偶数。值长度仅仅表示数据元中值域数据的长度，而不包含标签、值表示和它本身的字节长度。其次，是一个固定的三十二位的字段，表示SQ嵌套模式下或者未知的数据长度，对于0B和OW的数据类型，根据协商的语法未定义的部分也可使用。</p>
-<p>（4）<strong>值域：</strong>长度为偶数个字节，表示数据元的具体数据，VR决定了值域中数据的类型。当表示值的多重性的VM大于1的时候，说明了元素可以是多重取值。</p>
-<h2 id="dicom图像编码"><a href="#dicom图像编码" class="headerlink" title="dicom图像编码"></a>dicom图像编码</h2><p>在图像显示方式上，DICOM采用的是位图的编码的方式，即以像素点为单位，按照从左向右，从上向下的排列方式显示出每个点的颜色和光度。不同的光度变现出DICOM图像的不同特征，DICOM标准中用Tag(0028，0004)来表示光度，通常有以下5种：</p>
-<ul>
-<li>MONOCHROMEI：用白色显示灰阶图像的最小值，黑色显示图像的最大值</li>
-<li>MONOCHROMEZ：用黑色显示灰阶图像的最小值，白色显示图像的最大值</li>
-<li>RGB：用红色、绿色和蓝色的组合显示彩色图像</li>
-<li>HUE：用色调、饱和度和亮度的组合显示彩色图像</li>
-<li>PALLETEC0L0R：利用调色板进行显示的彩色图像</li>
-</ul>
-<p>DICOM图像分为两类，即灰度图像和彩色图像。DICOM图像的像素数据分为按字节编码（VR显示为OB)和按字编码（VR显示为OW)两种。灰度图像的色彩范围就是从黑色到白色，因此每一个像素只用亮度值就可以表示。彩色图像如上所述有三种实现的方式，通常24位的RGB图像称为真彩图像，包含了计算机领域所有的颜色，显示效果最好。每一个像素的数据有以下3个因素来表示：</p>
-<p>(1)<strong>分配位数(Bits Allocate):</strong>定义了分配给该采样值的二进制位数，数据元的标签为(0028，0100)。</p>
-<p>(2)<strong>存储位数(Bits Stored):</strong>定义了实际使用中该采样值所占用的位数，数据元的标签为(0028，0101)表示。</p>
-<p>(3)<strong>最高位位置(High Bit):</strong>定义了采样值最高位的位置，数据元的标签为(0028，0102)。</p>
-<p>一个像素单元由上述的三个元素来决定，分配位数、存储位数和最高位位置分别规定了像素数据的大小、存储位数和最高位的位置。分配位数必须大于等于存储位数。当该像素点由多个采样值组合而成的时候，多个采样值将会按照一定语法规则进行排列，而当采样值小于8位时，就会按照字节的方式进行编码，当采样值大于8的时候则会以字的方式进行编码。根据语法的不同，字节的高地位顺序也会有所不同。由于原始的DICOM图像所占用的空间极其庞大，既浪费空间，输出效率也十分低下，所以在不丢失图像数据信息的条件下，去除图像的冗余部分，释放存储空间，提高传输效率是十分必要的，通常会采用压缩的方式对DICOM图像进行处理，而压缩方法包括有损压缩和无损压缩。</p>
-<p>(1)<strong>无损压缩：</strong>顾名思义，就是在不丢失原始数据的条件下，对图像进行压缩，降低图像占用空间的一种方法。其优点就是完全不破坏原始的DICOM数据，但是缺点是压缩比较低，通常只能压缩到原始图像的二分之一到十分之一的范围内。根据其不破坏原始图像的特点，一般我们将此种压缩方法应用到对文本信息的压缩，例如患者的名字、年龄等等，这些信息必须要完整，否则无法识别。无损压缩使用的方法游程编码(Run Length Encode,RLE)以及霍夫曼(Huffman)编码等等。</p>
-<p>(2)<strong>有损压缩：</strong>与无损压缩正好互补，它的优点就是有非常高的压缩比，可以压缩到原始图像的十分之一到二百分之一，极其有效的释放占用的存储空间，提高传输效率，可是缺点就是会丢失一些原始数据，不过对于图像声音等用人体的感觉器官感受的信息其实在一般情况下是有着很大的冗余度的，适当的丢失部分休息并不会对患者的诊断带来影响，所以这种方式通常用到DICOM图像以及动态的画面中。有损压缩通常使用的方法是变换数据的表示域，比如将数据进行傅里叶变换到频域里，然后将频域中的低频部分去掉，然后再进行傅里叶反变换，就能实现压缩。类似的方法还有很多，但是考虑到医学是一门极其严谨的学科，所以国外很多地方不提倡有损压缩，因此DICOM通常会使用RLE游程编码的无损压缩和JPEG-LS的无损压缩方式。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/" class="post-title-link" itemprop="url">大纲</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-07 14:35:35" itemprop="dateCreated datePublished" datetime="2023-02-07T14:35:35+08:00">2023-02-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-04 19:48:44" itemprop="dateModified" datetime="2023-03-04T19:48:44+08:00">2023-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>199</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="选题"><a href="#选题" class="headerlink" title="选题"></a>选题</h2><p>基于fo-dicom的医学影像客户端系统设计与开发</p>
-<h2 id="内容要求"><a href="#内容要求" class="headerlink" title="内容要求"></a>内容要求</h2><p>1.选用一种编程语言实现DICOM协议中的C-FIND和C-MOVE功能</p>
-<p>2.设计并实现影像数据传输的客户端系统，完成向服务器查询、申请并接收下载影像数据。完成对下载医学影像的展示、移动、缩放、旋转、调窗、加标注等操作</p>
-<h2 id="参考论文"><a href="#参考论文" class="headerlink" title="参考论文"></a>参考论文</h2><p>1<a target="_blank" rel="noopener" href="https://webvpn.whut.edu.cn/https/77726476706e69737468656265737421fbf952d2243e635930068cb8/KCMS/detail/detail.aspx?filename=1014269763.nh&dbname=CMFD201402&dbcode=cdmd&uid=WEEvREcwSlJHSldSdmVpa3VEMHZFclhEcXpKSTNqc3ZFVE5nSnJqTk8rMD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MTU1MzZWNzNNVkYyNkdyRytGOWJLckpFYlBJUitmbnM0eVJZYW16MTFQSGJrcVdBMEZyQ1VSN21mWk9ackZ5RG4=">医学影像DICOM的显示和处理</a></p>
-<p>2 高效完善DICOM图像显示软件的开发研究</p>
-<p>3 DICOM医学图像查看器的设计与实现</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/%E7%AC%AC%E4%B8%80%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/01/11/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="post-title-link" itemprop="url">数制和码制</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-01-11 10:32:46" itemprop="dateCreated datePublished" datetime="2023-01-11T10:32:46+08:00">2023-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-07 14:35:45" itemprop="dateModified" datetime="2023-02-07T14:35:45+08:00">2023-02-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">数字电路</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-09-09 09:03:31 / 修改时间：09:20:54" itemprop="dateCreated datePublished" datetime="2022-09-09T09:03:31+08:00">2022-09-09</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/" class="post-title-link" itemprop="url">10M信号发生器</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-13 23:03:04" itemprop="dateCreated datePublished" datetime="2021-12-13T23:03:04+08:00">2021-12-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-26 23:58:27" itemprop="dateModified" datetime="2021-12-26T23:58:27+08:00">2021-12-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>755</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>DDS简介</p>
-<p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p>
-<p>DDS原理</p>
-<p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p>
-<p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p>
-<p>在DDS模块中，输出频率的公式为：</p>
-<p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p>
-<script type="math/tex; mode=display">
-f_{out} = \frac {f_c*M} {2^N} 
-\\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)
-\\ \Delta f = \frac {f_c} {2^N}
-\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p>
-<script type="math/tex; mode=display">
-P_{off} = \frac {phase*(2^{N}-1)} {360°}
-\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1)，也可以不减。只需要看P_{off}是不是直接输出值)</script><p><strong>注意点：</strong>为了使</p>
-<p>10M信号发生器相关计算</p>
-<p>已知系统时钟为50M，</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/12/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/12/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/" class="post-title-link" itemprop="url">异常</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-11-12 21:13:33 / 修改时间：22:13:58" itemprop="dateCreated datePublished" datetime="2021-11-12T21:13:33+08:00">2021-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>731</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="异常处理基础"><a href="#异常处理基础" class="headerlink" title="异常处理基础"></a>异常处理基础</h1><p><img src="\images\Java\第五章\2.jpg" style="zoom:50%;"></p>
-<p><strong>异常是程序中的一些错误，但并不是所有的错误都是异常，并且错误有些时候是可以避免的。</strong></p>
-<p><strong>面向对象语言异常处理思想</strong>：</p>
-<ul>
-<li>将程序正常代码和错误处理代码分开。</li>
-<li>使程序具有处理运行错误的能力。</li>
-</ul>
-<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>错误（Error）指程序运行时遇到的<strong>硬件</strong>、<strong>操作系统</strong>、 <strong>虚拟机</strong>的错误。 Error错误类</p>
-<p><strong>Java程序不能处理错误，只能依靠外界干预。</strong></p>
-<p><img src="\images\Java\第五章\1.jpg" style="zoom:50%;"></p>
-<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>异常（Exception）指在硬件、操作系统、虚拟 机正常时，<strong>程序遇到的运行错（语义错)</strong>。</p>
-<p><img src="\images\Java\第五章\3.jpg" style="zoom:50%;"></p>
-<p><strong>异常处理方式：</strong></p>
-<ul>
-<li>程序应避免而不捕获的异常，运行异常 ，除数为0、数组下标越界等</li>
-<li>必须捕获的异常。数值格式异常，如果没有捕获，由Java虚拟机处理。文件不存在、网络连接中断、数据库连接中断等，必须捕获，否则编译不能通过。</li>
-</ul>
-<h1 id="异常处理措施"><a href="#异常处理措施" class="headerlink" title="异常处理措施"></a>异常处理措施</h1><h2 id="异常处理语句"><a href="#异常处理语句" class="headerlink" title="异常处理语句"></a>异常处理语句</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">1</span>； <span class="comment">//存在潜在异常的代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (异常类 异常对象)</span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">2</span>； <span class="comment">//捕获到异常并进行处理的代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">3</span>；<span class="comment">//最后必须执行的代码，无论是否捕获到异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;123a&quot;</span>; </span><br><span class="line"><span class="keyword">try</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i = Integer.parseInt(str); <span class="comment">//调用声明抛出异常方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(NumberFormatException ex) <span class="comment">//捕获异常对象</span></span><br><span class="line">&#123;</span><br><span class="line">    System.out.println(str+<span class="string">&quot;字符串不能转换为整数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception ex) <span class="comment">//捕获所有异常对象</span></span><br><span class="line">&#123;</span><br><span class="line">    ex.printStackTrace(); <span class="comment">//显示异常栈跟踪信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="try语句执行流程"><a href="#try语句执行流程" class="headerlink" title="try语句执行流程"></a>try语句执行流程</h2>
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1385,7 +1694,7 @@ P_{off} = \frac {phase*(2^{N}-1)} {360°}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1449,12 +1758,12 @@ P_{off} = \frac {phase*(2^{N}-1)} {360°}
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">175k</span>
+    <span title="站点总字数">190k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:39</span>
+    <span title="站点阅读时长">2:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

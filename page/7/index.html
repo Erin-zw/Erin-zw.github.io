@@ -198,6 +198,864 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">dicom图像灰度理解</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-05 21:17:39 / 修改时间：21:52:00" itemprop="dateCreated datePublished" datetime="2023-03-05T21:17:39+08:00">2023-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图像灰阶"><a href="#图像灰阶" class="headerlink" title="图像灰阶"></a>图像灰阶</h2><p>​        所谓灰阶，是将最亮与最暗之间的亮度变化，区分为若干份。以便于进行信号输入相对应的屏幕亮度管控。每张数字影像都是由许多点所组合而成的,这些点又称为像素(pixels)，通常每一个像素可以呈现出许多不同的颜色，它是由红、绿、蓝（RGB）三个子像素组成的。每一个子像素，其背后的光源都可以显现出不同的亮度级别。而灰阶代表了由最暗到最亮之间不同亮度的层次级别。这中间层级越多，所能够呈现的画面效果也就越细腻。以8bit panel为例，能表现2的8次方，等于256个亮度层次，我们就称之为256灰阶。LCD屏幕上每个像素，均由不同亮度层次的红、绿、蓝组合起来，最终形成不同的色彩点。也就是说，屏幕上每一个点的色彩变化，其实都是由构成这个点的三个RGB子像素的灰阶变化所带来的。</p>
+<h2 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h2><p>​        我们生活中通过三原色深浅组成不同的颜色，前端开发中常用RGB来指定色彩，R、G、B 都是 0-255， 比如 （255,255,255） 表示白色，用16进制表示255就是ff, 所以255,255,255 可以表示为 ffffff,  在css样式表中写为 #ffffff。</p>
+<h2 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h2><p>​        图片我们都知道是由多个像素组成的，是图像的最小单元，如果这个单元里只有一个bit大小，也就是只有0和1两个值，由这种像素组成的图像称二值图像，显然它可以表示一个黑白图。这个单位里也可以存一个16位二进制数，24位…, 可以想象存储的越大，一个像素能表达的颜色就越丰富，整体图像呈现就越精细，当然图片占用的空间也就越大。</p>
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>​        1位图像（即二值图像）只能表示黑白，那二位图像就可以表示4种颜色（00,01,10,11，VGA），依次类推，4位（16色，VGA），8位（256色），16位（增强色），24位和32位（真彩色）等。</p>
+<p>这其中8位RGB指的是3位元是R，3位元是G，2位元是B，故有8位RGB有256种颜色。其他以此类推。</p>
+<p><strong>色彩图像</strong>：以RGB图像为例，RGB图像每一个像素的颜色值（由RGB三原色表示）直接存放在图像矩阵中，由于每一像素的颜色需由R、G、B三个分量来表示，M、N分别表示图像的行列数，<strong>三个</strong>M x N的二维矩阵分别表示各个像素的R、G、B三个颜色分量，假设我们在绘图的时候只取第一个矩阵，那么绘制出来的就是红色分量的图片。<br> <strong>灰度图像</strong>：每个像素只有一个采样颜色，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。</p>
+<h2 id="灰度级"><a href="#灰度级" class="headerlink" title="灰度级"></a>灰度级</h2><p>​        灰度级表明图像中不同灰度的最大数量。灰度级越大，图像的亮度范围越大。二值图像一个像素只能存0和1，它的灰度级就为2，8位图一个像素表示0-255共256个灰度值，所有它的灰度级为256， 那么存储一张512*512,256级灰度的图片需要的空间就为</p>
+<script type="math/tex; mode=display">
+512*512*8 = 2097152\ bit ≈ 1.7\ Mb</script><h2 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h2><p>​        图像的灰度化是让像素点矩阵中的每一个像素点都满足关系：R=G=B，此时的这个值叫做灰度值。如RGB(100,100,100)就代表灰度值为100,RGB(50,50,50)代表灰度值为50。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/" class="post-title-link" itemprop="url">dicom窗位和窗宽</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-05 20:27:05" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-06 16:37:20" itemprop="dateModified" datetime="2023-03-06T16:37:20+08:00">2023-03-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p>
+<h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p>
+<p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p>
+<p>人体常见组织CT值：</p>
+<p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p>
+<h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p>
+<ul>
+<li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p>
+<p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p>
+</li>
+<li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p>
+<p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p>
+</li>
+</ul>
+<p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p>
+<p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p>
+<p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p>
+<script type="math/tex; mode=display">
+f(x) =
+\left \{ 
+\begin{array}{c}
+0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ 
+\frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 
+255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}
+\end{array}
+\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p>
+<h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p>
+<p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/04/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">dicom简介</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-04 19:47:57" itemprop="dateCreated datePublished" datetime="2023-03-04T19:47:57+08:00">2023-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-08 21:19:09" itemprop="dateModified" datetime="2023-03-08T21:19:09+08:00">2023-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="dicom基本概念和定义"><a href="#dicom基本概念和定义" class="headerlink" title="dicom基本概念和定义"></a>dicom基本概念和定义</h2><ul>
+<li><p><strong>实体(Entity):</strong>表示一个或者一类具有相同特性的应用对象。 </p>
+</li>
+<li><p><strong>关系(Relation):**</strong>表示各个实体之间的相互关系。比如医疗影像设备和患者之间，存在的就是检查的关系。</p>
+</li>
+<li><p><strong>实体-关系（E-R)模型：</strong>描述实际中具体的物体或者概念的一种信息模型。通过定义实体和实体间的关系，从而表达出系统所实现的功能。</p>
+</li>
+<li><p><strong>对象(Object):</strong>即现实中的实际事物在计算机内部的抽象表达，它包含了事物的属性以及对事物的处理方法，并且具有封装与继承的特征。</p>
+</li>
+<li><p><strong>唯一标识符UID:</strong>此标志无论在世界上的任何地点都是独一无二的，为了保证其唯一性，它的产生机制如下：&lt;根&gt;.&lt;后缀&gt;，即由根和后缀两部分组成，其中根部分是由权威部门来制定的，通过权威部门来确保它的唯一性，之后再通过其他的机构部门分配到医院，同时也必须要保证其在内部网络的唯一性。</p>
+</li>
+<li><p><strong>信息对象定义(Information Object Definition,==lOD==)：**</strong>指的是信息实体的集合。每一个信息实体都是一个单独的对象属性，例如人的名字就是人这一对象的信息实体，当这些信息实体组合到特定的模块中就会形成数据集。在DICOM中一个IOD可以包含单个的信息实体也可以包含多个信息实体。通常情况下，管理功能的服务类使用的是包含单个信息实体的IOD，而处理图像的服务类使用的则是包含有多个信息实体的IOD。</p>
+</li>
+<li><p><strong>服务(Service):**</strong>服务指的是为其他应用程序所提供的功能，通过下层服务原语和信息对象来实现服务的功能。服务类指的是将一项用于对象的指令抽象出来进行描述，比如用于对象的命令和结果。服务类中包含了应用实体的概念，指的是一个实际的应用程序。服务中包括有服务类提供者和服务类使用者，服务类提供者是提供DICOM服务的应用实体，服务类使用者则是通过网络要求DICOM服务的应用实体。</p>
+</li>
+</ul>
+<ul>
+<li><strong>服务对象对(Service Object Pair,==SOP==)：</strong>它是传递DICOM信息的基本单位。每一个DICOM都包含一个SOP类，而这个SOP类表示的是实际对象，SOP根据UID来进行唯一表示，并且其类型可根据UID来识别，DICOM应用实体可以支持一个或多个SOP类。</li>
+</ul>
+<h2 id="dicom标准信息模型"><a href="#dicom标准信息模型" class="headerlink" title="dicom标准信息模型"></a>dicom标准信息模型</h2><p>DICOM的信息模型中主要包含有四个层次：病人层次(Patient)、研究层次(Study)、序列层次(Series)以及图像层次(Image)。</p>
+<ul>
+<li><p><strong>病人层次（Patient):</strong>病人IOD封装了该病人的基本信息。如病人姓名、性别、年龄、身高以及体重等基本信息。</p>
+</li>
+<li><p><strong>研究层次（Study):</strong>研究层次表示对特定类型请求的一个结果，它是DICOM信息模型中最为关键的一部分，因为整个DICOM影像都以研究层次的正确引导而进行。研究层次也包含了一些标识信息，通过该标识信息可以连接医院的影像管理系统(HIS)。</p>
+</li>
+<li><p><strong>序列层次（Series):</strong>序列层次中包含的是图像的序列，同时也标识了图像相关的一些属性，如图像属于何种类型，图像生成的日期以及生成该图像所使用的设备等等。序列层次中规定了图像序列的排列类型，而图像序列的排列类型可根据具体的临床应用来决定。</p>
+</li>
+<li><p><strong>图像层次（Image):</strong>图像层次包含的就是DICOM中的图像数据，它也是整个信息模型的最底层。由于不同设备产生的图像不同，可以是单层的图像，也可以是双层的图像，甚至还会有一些器官的运动图像。</p>
+</li>
+</ul>
+<h2 id="dicom文件结构"><a href="#dicom文件结构" class="headerlink" title="dicom文件结构"></a>dicom文件结构</h2><p>DICOM文件的组成包括两部分：即文件头和数据集，同时每个DICOM文件中还包含一个服务对象的SOP实例，其中包含了一个图像实例。</p>
+<h3 id="dicom文件头"><a href="#dicom文件头" class="headerlink" title="dicom文件头"></a>dicom文件头</h3><p>文件头是为了保持与通用文件结构的兼容性。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>组成</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件导读</td>
+<td>由128个字节16进制数组成，主要是为了进行一些特定的操作和应用协议，方便访问其内部的图像数据以及其他的信息，通常情况下这部分无内容，即用128个字节的00H来表示</td>
+</tr>
+<tr>
+<td>DICOM前缀</td>
+<td>由4个字节组成，对应的ASCII码为“DICM”，是用来判定该文件的格式是否为DICOM</td>
+</tr>
+<tr>
+<td>文件元信息元素</td>
+<td>一些其他的信息，如文件的元信息版本、传输语法、媒介存储SOP类、文件应用类、源AE标题、私有信息以及程序生成器等等。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="dicom数据集"><a href="#dicom数据集" class="headerlink" title="dicom数据集"></a>dicom数据集</h3><p>​        数据集是由大量的按照一定顺序排列的数据元所组成，而数据元又由四部分组成：TAG(标签)、VR(值表示)、值长度和值域。DICOM数据集描述的就是现实中一个具体事物抽象成的实例，而数据元表示的则是实例的各个属性，数据元包含的信息可以是简单的字符信息，也可以是数字信息，每个数据元按照其标签的递增方式进行排列。比如，如果将一个患者抽象成为一个实例，那么数据元表示的可以是患者的名字、年龄、性别以及患者所做的检查中包含的图像生成的日期、图像的类型和图像数据本身等等。</p>
+<p><img src="\images\毕设\dicom标准\2.jpg" style="zoom:50%;"></p>
+<p>（1）<strong>TAG(标签)</strong>：在DICOM数据元中，标签是用来对数据元做唯一的标识，即同一个标签在数据元中只能出现一次，但是有一种情况例外，就是当数据元使用嵌套模式的时候。标签是一个4字节的无符号整数，它由两部分组成，即组号和元素号。标签分为标准标签（Standard Data Elements Tag)和留给用户自定义的标签，一般来说，组号为偶数的标签就是标准标签，但是在制定DICOM标准的时候为了以后对DICOM的发展进行更新应用，一些特殊的标签暂时没做任何定义，也不允许自定义，包括组号为：0000、0002、0004和0006的标签，每一个标准标签的详细定义和说明都可以通过数据字典来进行查阅。组号为奇数的标签通常是留给用户自定义的标签，同样有一些特殊的例外，其中包括组号为：0001、0003、0005和0007的标签。</p>
+<p>（2）<strong>VR(值表示）：</strong>VR表示数据元素的数据类型，由2个字节的整数组成。例如，当VR为<strong>“PN”</strong>时，表示的是病人的姓名，当VR为<strong>“UI”</strong>时，表示的是统一标识符，当VR为<strong>“AT”</strong>时，表示的是属性标签，当VR为<strong>“FL”</strong>时，表示的是数据域采用的是单精度浮点型的类型。根据传输语法的可选性，VR可分为两类：即显式和隐式，如图2-3和图2-4所示。当为显式的时候，VR不可以被省略，但是当为隐式的时候VR必须被置零省略。随着DICOM版本的发展，以前版本的一些数据类型可能在新版本不再在被支持，当VR为“RET”时，就表示该类型在DICOM3.0中不被支持，如果为了兼容使用，必须包含以前版本标准的全部有效数据，但是如果仅仅是为了兼容，而不使用这些数据，也可以不包含。当VR为“SQ”时，表示数据域里还有嵌套的子数据元，而当子数据元里的数据类型依然为“SQ”时，就形成了递归的嵌套模式，在嵌套的递归模式下，要求对DICOM进行数据解析的时候必须能够遍及所有的嵌套数据。</p>
+<p><img src="\images\毕设\dicom标准\3.jpg" style="zoom:50%;"></p>
+<p>（3）<strong>值长度：</strong>值长度分为两种。首先，是根据VR值是显式还是隐式的类型决定值长度用十六位或者三十二位无符号整数来表示，它说明了是值域中数据的长度的字节数，这个字节数必须是偶数。值长度仅仅表示数据元中值域数据的长度，而不包含标签、值表示和它本身的字节长度。其次，是一个固定的三十二位的字段，表示SQ嵌套模式下或者未知的数据长度，对于0B和OW的数据类型，根据协商的语法未定义的部分也可使用。</p>
+<p>（4）<strong>值域：</strong>长度为偶数个字节，表示数据元的具体数据，VR决定了值域中数据的类型。当表示值的多重性的VM大于1的时候，说明了元素可以是多重取值。</p>
+<h2 id="dicom图像编码"><a href="#dicom图像编码" class="headerlink" title="dicom图像编码"></a>dicom图像编码</h2><p>在图像显示方式上，DICOM采用的是位图的编码的方式，即以像素点为单位，按照从左向右，从上向下的排列方式显示出每个点的颜色和光度。不同的光度变现出DICOM图像的不同特征，DICOM标准中用Tag(0028，0004)来表示光度，通常有以下5种：</p>
+<ul>
+<li>MONOCHROMEI：用白色显示灰阶图像的最小值，黑色显示图像的最大值</li>
+<li>MONOCHROMEZ：用黑色显示灰阶图像的最小值，白色显示图像的最大值</li>
+<li>RGB：用红色、绿色和蓝色的组合显示彩色图像</li>
+<li>HUE：用色调、饱和度和亮度的组合显示彩色图像</li>
+<li>PALLETEC0L0R：利用调色板进行显示的彩色图像</li>
+</ul>
+<p>DICOM图像分为两类，即灰度图像和彩色图像。DICOM图像的像素数据分为按字节编码（VR显示为OB)和按字编码（VR显示为OW)两种。灰度图像的色彩范围就是从黑色到白色，因此每一个像素只用亮度值就可以表示。彩色图像如上所述有三种实现的方式，通常24位的RGB图像称为真彩图像，包含了计算机领域所有的颜色，显示效果最好。每一个像素的数据有以下3个因素来表示：</p>
+<p>(1)<strong>分配位数(Bits Allocate):</strong>定义了分配给该采样值的二进制位数，数据元的标签为(0028，0100)。</p>
+<p>(2)<strong>存储位数(Bits Stored):</strong>定义了实际使用中该采样值所占用的位数，数据元的标签为(0028，0101)表示。</p>
+<p>(3)<strong>最高位位置(High Bit):</strong>定义了采样值最高位的位置，数据元的标签为(0028，0102)。</p>
+<p>一个像素单元由上述的三个元素来决定，分配位数、存储位数和最高位位置分别规定了像素数据的大小、存储位数和最高位的位置。分配位数必须大于等于存储位数。当该像素点由多个采样值组合而成的时候，多个采样值将会按照一定语法规则进行排列，而当采样值小于8位时，就会按照字节的方式进行编码，当采样值大于8的时候则会以字的方式进行编码。根据语法的不同，字节的高地位顺序也会有所不同。由于原始的DICOM图像所占用的空间极其庞大，既浪费空间，输出效率也十分低下，所以在不丢失图像数据信息的条件下，去除图像的冗余部分，释放存储空间，提高传输效率是十分必要的，通常会采用压缩的方式对DICOM图像进行处理，而压缩方法包括有损压缩和无损压缩。</p>
+<p>(1)<strong>无损压缩：</strong>顾名思义，就是在不丢失原始数据的条件下，对图像进行压缩，降低图像占用空间的一种方法。其优点就是完全不破坏原始的DICOM数据，但是缺点是压缩比较低，通常只能压缩到原始图像的二分之一到十分之一的范围内。根据其不破坏原始图像的特点，一般我们将此种压缩方法应用到对文本信息的压缩，例如患者的名字、年龄等等，这些信息必须要完整，否则无法识别。无损压缩使用的方法游程编码(Run Length Encode,RLE)以及霍夫曼(Huffman)编码等等。</p>
+<p>(2)<strong>有损压缩：</strong>与无损压缩正好互补，它的优点就是有非常高的压缩比，可以压缩到原始图像的十分之一到二百分之一，极其有效的释放占用的存储空间，提高传输效率，可是缺点就是会丢失一些原始数据，不过对于图像声音等用人体的感觉器官感受的信息其实在一般情况下是有着很大的冗余度的，适当的丢失部分休息并不会对患者的诊断带来影响，所以这种方式通常用到DICOM图像以及动态的画面中。有损压缩通常使用的方法是变换数据的表示域，比如将数据进行傅里叶变换到频域里，然后将频域中的低频部分去掉，然后再进行傅里叶反变换，就能实现压缩。类似的方法还有很多，但是考虑到医学是一门极其严谨的学科，所以国外很多地方不提倡有损压缩，因此DICOM通常会使用RLE游程编码的无损压缩和JPEG-LS的无损压缩方式。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/07/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E8%A6%81%E6%B1%82/" class="post-title-link" itemprop="url">大纲</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-07 14:35:35" itemprop="dateCreated datePublished" datetime="2023-02-07T14:35:35+08:00">2023-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-04 19:48:44" itemprop="dateModified" datetime="2023-03-04T19:48:44+08:00">2023-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>199</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="选题"><a href="#选题" class="headerlink" title="选题"></a>选题</h2><p>基于fo-dicom的医学影像客户端系统设计与开发</p>
+<h2 id="内容要求"><a href="#内容要求" class="headerlink" title="内容要求"></a>内容要求</h2><p>1.选用一种编程语言实现DICOM协议中的C-FIND和C-MOVE功能</p>
+<p>2.设计并实现影像数据传输的客户端系统，完成向服务器查询、申请并接收下载影像数据。完成对下载医学影像的展示、移动、缩放、旋转、调窗、加标注等操作</p>
+<h2 id="参考论文"><a href="#参考论文" class="headerlink" title="参考论文"></a>参考论文</h2><p>1<a target="_blank" rel="noopener" href="https://webvpn.whut.edu.cn/https/77726476706e69737468656265737421fbf952d2243e635930068cb8/KCMS/detail/detail.aspx?filename=1014269763.nh&dbname=CMFD201402&dbcode=cdmd&uid=WEEvREcwSlJHSldSdmVpa3VEMHZFclhEcXpKSTNqc3ZFVE5nSnJqTk8rMD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MTU1MzZWNzNNVkYyNkdyRytGOWJLckpFYlBJUitmbnM0eVJZYW16MTFQSGJrcVdBMEZyQ1VSN21mWk9ackZ5RG4=">医学影像DICOM的显示和处理</a></p>
+<p>2 高效完善DICOM图像显示软件的开发研究</p>
+<p>3 DICOM医学图像查看器的设计与实现</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/%E7%AC%AC%E4%B8%80%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/01/11/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="post-title-link" itemprop="url">数制和码制</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-11 10:32:46" itemprop="dateCreated datePublished" datetime="2023-01-11T10:32:46+08:00">2023-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-07 14:35:45" itemprop="dateModified" datetime="2023-02-07T14:35:45+08:00">2023-02-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">数字电路</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/09/%E7%A1%AC%E4%BB%B6/CPU1/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-09 09:03:31 / 修改时间：09:20:54" itemprop="dateCreated datePublished" datetime="2022-09-09T09:03:31+08:00">2022-09-09</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/13/FPGA/10M%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8/" class="post-title-link" itemprop="url">10M信号发生器</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-13 23:03:04" itemprop="dateCreated datePublished" datetime="2021-12-13T23:03:04+08:00">2021-12-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-26 23:58:27" itemprop="dateModified" datetime="2021-12-26T23:58:27+08:00">2021-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>755</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>DDS简介</p>
+<p>DDS信号发生器采用<strong>直接数字频率合成</strong>(Direct Digital Synthesis，简称DDS)技术，把信号发生器的频率稳定度、准确度提高到与基准频率相同的水平，并且可以在很宽的频率范围内进行精细的频率调节。采用这种方法设计的信号源可工作于调制状态，可对输出电平进行调节，也可输出各种波形。</p>
+<p>DDS原理</p>
+<p><img src="\images\FPGA\DDS\2.png" style="zoom:50%;"></p>
+<p>在参考频率时钟的驱动下，DDS模块开始工作；当每来一个参考时钟时，累加器就把频率控制字M与N位相位寄存器输出的值进行累加，将相加后的结果再输入到相位寄存器中，而相位寄存器就将在上一个参考时钟作用时产生的数据通过反馈的方式输送到N位累加器中。这样，在时钟的作用下，就可以不停的对频率控制字进行累加。此时，用相位累加器输出的数据就是信号的相位，这个数据作为地址在波形存储器中通过查找地址所对应的幅值表，就可以完成其从相位到幅值之间的转化。</p>
+<p>在DDS模块中，输出频率的公式为：</p>
+<p>根据DDS的相位寄存器的位数N，把360°平均分成2的N次方份。系统时钟代表一秒多少个频率控制字，M占据2的N次方的多少，这样算出来就是一秒多少个2的N次方。也就是多少个周期，也就是频率。</p>
+<script type="math/tex; mode=display">
+f_{out} = \frac {f_c*M} {2^N} 
+\\(f_{out}为输出信号频率，f_c为系统时钟频率，M为频率控制字，N为相位寄存器位数)
+\\ \Delta f = \frac {f_c} {2^N}
+\\(\Delta f为频率分辨率)</script><p>所谓相位控制字，可以理解为就是信号的初相。相位控制字计算公式：</p>
+<script type="math/tex; mode=display">
+P_{off} = \frac {phase*(2^{N}-1)} {360°}
+\\(关于这里为什么要减一，是因为寄存器的范围是从0-(2^N-1)，也可以不减。只需要看P_{off}是不是直接输出值)</script><p><strong>注意点：</strong>为了使</p>
+<p>10M信号发生器相关计算</p>
+<p>已知系统时钟为50M，</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/12/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/12/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/" class="post-title-link" itemprop="url">异常</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-12 21:13:33 / 修改时间：22:13:58" itemprop="dateCreated datePublished" datetime="2021-11-12T21:13:33+08:00">2021-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>731</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="异常处理基础"><a href="#异常处理基础" class="headerlink" title="异常处理基础"></a>异常处理基础</h1><p><img src="\images\Java\第五章\2.jpg" style="zoom:50%;"></p>
+<p><strong>异常是程序中的一些错误，但并不是所有的错误都是异常，并且错误有些时候是可以避免的。</strong></p>
+<p><strong>面向对象语言异常处理思想</strong>：</p>
+<ul>
+<li>将程序正常代码和错误处理代码分开。</li>
+<li>使程序具有处理运行错误的能力。</li>
+</ul>
+<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>错误（Error）指程序运行时遇到的<strong>硬件</strong>、<strong>操作系统</strong>、 <strong>虚拟机</strong>的错误。 Error错误类</p>
+<p><strong>Java程序不能处理错误，只能依靠外界干预。</strong></p>
+<p><img src="\images\Java\第五章\1.jpg" style="zoom:50%;"></p>
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>异常（Exception）指在硬件、操作系统、虚拟 机正常时，<strong>程序遇到的运行错（语义错)</strong>。</p>
+<p><img src="\images\Java\第五章\3.jpg" style="zoom:50%;"></p>
+<p><strong>异常处理方式：</strong></p>
+<ul>
+<li>程序应避免而不捕获的异常，运行异常 ，除数为0、数组下标越界等</li>
+<li>必须捕获的异常。数值格式异常，如果没有捕获，由Java虚拟机处理。文件不存在、网络连接中断、数据库连接中断等，必须捕获，否则编译不能通过。</li>
+</ul>
+<h1 id="异常处理措施"><a href="#异常处理措施" class="headerlink" title="异常处理措施"></a>异常处理措施</h1><h2 id="异常处理语句"><a href="#异常处理语句" class="headerlink" title="异常处理语句"></a>异常处理语句</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">1</span>； <span class="comment">//存在潜在异常的代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (异常类 异常对象)</span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">2</span>； <span class="comment">//捕获到异常并进行处理的代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">    语句<span class="number">3</span>；<span class="comment">//最后必须执行的代码，无论是否捕获到异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;123a&quot;</span>; </span><br><span class="line"><span class="keyword">try</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i = Integer.parseInt(str); <span class="comment">//调用声明抛出异常方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(NumberFormatException ex) <span class="comment">//捕获异常对象</span></span><br><span class="line">&#123;</span><br><span class="line">    System.out.println(str+<span class="string">&quot;字符串不能转换为整数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception ex) <span class="comment">//捕获所有异常对象</span></span><br><span class="line">&#123;</span><br><span class="line">    ex.printStackTrace(); <span class="comment">//显示异常栈跟踪信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="try语句执行流程"><a href="#try语句执行流程" class="headerlink" title="try语句执行流程"></a>try语句执行流程</h2>
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -558,888 +1416,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/FPGA/parameter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/07/FPGA/parameter/" class="post-title-link" itemprop="url">parameter,defparame,`define,localparam四者区别</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-07 17:02:40" itemprop="dateCreated datePublished" datetime="2021-11-07T17:02:40+08:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:48" itemprop="dateModified" datetime="2021-12-15T21:40:48+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">define</span>:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;</span></span><br><span class="line">            范围 -&gt; 整个工程;</span><br><span class="line"></span><br><span class="line"><span class="keyword">parameter</span>:  作用 -&gt; 常用于模块间参数传递;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义;</span><br><span class="line"></span><br><span class="line"><span class="keyword">localparam</span>: 作用 -&gt; 常用于状态机的参数定义;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义，不可用于参数传递;</span><br><span class="line">			<span class="keyword">localparam</span> cannot be used <span class="keyword">within</span> the <span class="keyword">module</span> port <span class="keyword">parameter</span> list.</span><br></pre></td></tr></table></figure>
-<h2 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter"></a>Parameter</h2><p>可以放在模块头上也可以放在模块的内部，他可以通过defparameter的方式或者模块实例化的时候进行重写。</p>
-<p><strong>Example：</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line">#(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"> item;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> (port_list );</span><br><span class="line"> <span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span><span class="comment">//可以被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>一旦有模块参数被写在模块头部，则出现在模块内部的模块参数被视为本地参数，不能被重写。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> #(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"><span class="keyword">parameter</span> DEPTH=<span class="number">4</span>; <span class="comment">//不能被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>在上层模块对参数重写的方式如下:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>)F1<span class="variable">.MSB</span>=<span class="number">4</span>;F1<span class="variable">.LSB</span>=<span class="number">2</span>;fifo F1;</span><br><span class="line"><span class="number">2</span>) fifo <span class="variable">#(4,2) F1(port_list)</span>;</span><br><span class="line"><span class="number">3</span>) fifo <span class="variable">#(.LSB(2), .MSB(4)) fifo(port_list)</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="defparam修改参数"><a href="#defparam修改参数" class="headerlink" title="defparam修改参数"></a>defparam修改参数</h2><p>当一个模块引用另外一个模块时，高层模块可以改变低层模块用parameter定义的参数值。例子代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Width</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Polarity</span> = <span class="number">0</span>;<span class="comment">//使得U_D1的Width = 4， Polarity = 0；</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">defparam</span>    U_D2<span class="variable">.Width</span> = <span class="number">5</span>;<span class="comment">//使得U_D2的Width = 5，Polarity 不变，即为1；</span></span><br><span class="line">    Decode U_D1();</span><br><span class="line">    Decode U_D2(); </span><br><span class="line"><span class="keyword">endmodule</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>也可以模块实例化的时候进行修改，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    Decode <span class="variable">#(4,0) U_D1()</span>; <span class="comment">//使得Width = 4， Polarity = 0；</span></span><br><span class="line">    Decode <span class="variable">#(5) U_D2()</span>; <span class="comment">//使得 Width = 5，Polarity 不变，即为1；</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="define"><a href="#define" class="headerlink" title="`define"></a>`define</h2><p><strong>概念：</strong>可以跨模块的定义，写在模块名称上面，在整个设计工程都有效。一旦define指令被编译，其在整个编译过程中都有效。例如，通<br>过另一个文件中的define指令，定义的常量可以被其他文件调用,直到遇到undef；</p>
-<p><strong>举例：</strong>定义 define UART_CNT 10’d1024.使用UART_CNT</p>
-<h2 id="localparam："><a href="#localparam：" class="headerlink" title="localparam："></a>localparam：</h2><p><strong>概念：</strong>本module内有效的定义，不可用于参数传递；localparamcannot be used within the module port parameter list.一般情况下，状态机的参数都是用localparam的。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/%E4%BF%A1%E5%8F%B7/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E9%A2%91%E5%9F%9F%E7%9B%B8%E4%B9%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/07/%E4%BF%A1%E5%8F%B7/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E9%A2%91%E5%9F%9F%E7%9B%B8%E4%B9%98/" class="post-title-link" itemprop="url">时域卷积频域相乘</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-07 15:33:57" itemprop="dateCreated datePublished" datetime="2021-11-07T15:33:57+08:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-26 09:59:49" itemprop="dateModified" datetime="2022-08-26T09:59:49+08:00">2022-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>472</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>傅里叶级数（时域卷积频域相乘）</p>
-<p>​    一般教科书都是选择理论证明，但是如何直观去理解呢。我们知道一个信号可以傅里叶变换分解后然后变成很多个不同频率正弦信号。</p>
-<script type="math/tex; mode=display">
-f(t)=\frac {a_0} {2} +\sum_{n=1}^{+\infty}a_ncos(n\omega_0 t)+b_nsin(n\omega_0 t)\\
-a_0 =\frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)dt \ \ \ \ \ 
-a_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)cos(n\omega_0t)dt\ \ \ \ \
-b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script><p>我们将两个信号去卷积，正弦信号卷积分配，不同频率的正弦信号卷积后为0（“正交”）.</p>
-<p>那么就是相同频率的正弦信号相卷积，频率不变，辐值相乘。</p>
-<p>而频域就是不同频率分量的相对大小，因此这在频域上就表现为相乘。</p>
-<p>​    从知乎上看到的，写的很好，分享一下</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">Testbench文件编写方法</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-07 15:22:45" itemprop="dateCreated datePublished" datetime="2021-11-07T15:22:45+08:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:55" itemprop="dateModified" datetime="2021-12-15T21:40:55+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>转载：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46423500/article/details/113264878">https://blog.csdn.net/weixin_46423500/article/details/113264878</a></p>
-<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>testbench文件基本结构：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 仿真单位/仿真精度</span></span><br><span class="line"><span class="keyword">module</span> test_bench();</span><br><span class="line"><span class="comment">//通常 testbench没有输入与输出端口</span></span><br><span class="line">信号或变量定义声明</span><br><span class="line">使用<span class="keyword">initial</span>或<span class="keyword">always</span>语句产生激励波形</span><br><span class="line">例化设计模块</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="声明仿真精度和仿真单位"><a href="#声明仿真精度和仿真单位" class="headerlink" title="声明仿真精度和仿真单位"></a>声明仿真精度和仿真单位</h3><p>/#(延时时间)，#(10ns)代表延时10ns</p>
-<p>仿真精度就是说最低的延时精度，比如说<code>`timescale 1ns/1ns</code>，延时精度只能达到1ns</p>
-<p>如果想要延时10.001ns，就要把仿真精度改成1ps(1ns = 1000ps)。</p>
-<h3 id="定义模块名"><a href="#定义模块名" class="headerlink" title="定义模块名"></a>定义模块名</h3><p><code>module flow_led_tb();</code></p>
-<p>模块名的命名方式一般在被测模块名后面加上“ _ tb”，或者在被测模块名前面加上“tb_”，表示为哪个模块提供激励测试文件，通常激励文件不需要定义输入和输出端口。</p>
-<h3 id="信号或常量定义"><a href="#信号或常量定义" class="headerlink" title="信号或常量定义"></a>信号或常量定义</h3><p><strong>常量：</strong></p>
-<p> 代码中定义的常量有时需要频繁的修改，为了方便修改，可以把常量定义成参数的形式，定义参数的关键字为parameter，代码如下：</p>
-<p><code>parameter T = 20;</code></p>
-<p><strong>变量：</strong></p>
-<p>Verilog代码中，常用声明信号或变量的关键字为reg和wire，在initial语句或者always语句中使用的变量定义成reg类型，在assign语句或者用于连接被例化模块名的信号定义成wire类型，声明方法如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"><span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br></pre></td></tr></table></figure>
-<p><strong>使用initial或always语句产生激励波形：</strong><br> 产生时钟激励。代码表示每10ns（假设仿真单位是1ns），sys_clk的电平状态翻转一次，由于一个完整的时钟周期包括一个高电平和一个低电平，因此sys_clk的时钟周期为20ns，占空比为50%。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> #<span class="number">10</span> sys_clk = ~sys_clk;</span><br></pre></td></tr></table></figure>
-<p>如果要生成其它占空比时钟的话，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">#<span class="number">6</span> sys_clk = <span class="number">0</span>; #<span class="number">4</span> sys_clk = <span class="number">1</span>; <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>需要注意的是，在always语句中设置了sys_clk的时钟周期，并没有设置初始值，因此sys_clk需要在initial语句中进行初始化。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"> sys_clk = <span class="number">1&#x27;b0</span>; <span class="comment">// 时钟初始值</span></span><br><span class="line">sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位初始值</span></span><br><span class="line"> #<span class="number">20</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="例化设计模块"><a href="#例化设计模块" class="headerlink" title="例化设计模块"></a>例化设计模块</h3><p>例化的设计模块是指被测模块，例化被测模块的目的是把被测模块和激励模块实例化起来，并且把被测模块的端口与激励模块的端口进行相应的连接，使得激励可以输入到被测模块。如果被测模块是由多个模块组成的，激励模块中只需要例化多个模块的顶层模块，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flow_led u0_flow_led (</span><br><span class="line"> <span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line"> <span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line"> <span class="variable">.led</span> (led )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="完整文件"><a href="#完整文件" class="headerlink" title="完整文件"></a>完整文件</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns // 定义仿真时间单位1ns和仿真时间精度为1ns</span></span><br><span class="line"> <span class="keyword">module</span> flow_led_tb(); <span class="comment">// 测试模块</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//parameter define</span></span><br><span class="line"><span class="keyword">parameter</span> T = <span class="number">20</span>; <span class="comment">// 时钟周期为20ns</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"> <span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br><span class="line"><span class="comment">//给输入信号初始值</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">	sys_clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位</span></span><br><span class="line">	<span class="variable">#(T+1)</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//50Mhz的时钟，周期则为1/50Mhz=20ns,所以每10ns，电平取反一次</span></span><br><span class="line"><span class="keyword">always</span> <span class="variable">#(T/2)</span> sys_clk = ~sys_clk;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化flow_led模块</span></span><br><span class="line">flow_led u0_flow_led (</span><br><span class="line">	<span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line">	<span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line">	<span class="variable">.led</span> (led )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="post-title-link" itemprop="url">第二章</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-05 21:35:49" itemprop="dateCreated datePublished" datetime="2021-11-05T21:35:49+08:00">2021-11-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-19 23:16:32" itemprop="dateModified" datetime="2021-11-19T23:16:32+08:00">2021-11-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="语言成分"><a href="#语言成分" class="headerlink" title="语言成分"></a>语言成分</h1><h2 id="关键字和标识符"><a href="#关键字和标识符" class="headerlink" title="关键字和标识符"></a>关键字和标识符</h2><p><strong>关键字</strong>略。</p>
-<p><strong>标识符命名规则</strong>：</p>
-<ol>
-<li>标识符必须以字母、下划线_ 、美元符$开头。</li>
-<li>标识符其它部分可以是字母、下划线“_”、美元符“$”和数字的任意组合。</li>
-<li>Java 标识符大小写敏感，且长度无限制。</li>
-<li>不可以是Java的关键字。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">合法的标识符：</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> _123 = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> $12aa = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> 变量<span class="number">1</span> = <span class="number">55</span>;</span><br><span class="line">不合法的标识符：</span><br><span class="line"><span class="keyword">int</span> 1a = <span class="number">3</span>; <span class="comment">//不能用数字开头</span></span><br><span class="line"><span class="keyword">int</span> a# = <span class="number">3</span>; <span class="comment">//不能包含#这样的特殊字符</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">int</span> = <span class="number">3</span>; <span class="comment">//不能使用关键字</span></span><br></pre></td></tr></table></figure>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><img src="\images\Java\第二章\1.jpg" style="zoom:67%;"></p>
-<p><strong>注意：</strong><code>float f = 1.1;</code>是错误的，因为float类型要加上f或F后缀，不加默认就是double型。</p>
-<h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><p><strong>数组(Array),类(class),接口(interface)。</strong></p>
-<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>,<span class="keyword">short</span>,<span class="keyword">char</span>—&gt; <span class="keyword">int</span> —&gt; <span class="keyword">long</span>—&gt; <span class="keyword">float</span> —&gt; <span class="keyword">double</span> </span><br><span class="line"><span class="comment">//容量从高到低。</span></span><br></pre></td></tr></table></figure>
-<p><strong>转换规则：</strong></p>
-<ul>
-<li>不能对boolean类型进行类型转换。</li>
-<li>不能把对象类型转换成不相关类的对象。</li>
-<li>在把容量大的类型转换为容量小的类型时必须使用强制类型转换。</li>
-<li>转换过程中可能导致溢出或损失精度，如<code>int i =128;   byte b = (byte)i;</code>，byte类型最大127，此时b为-128.</li>
-<li>浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入</li>
-</ul>
-<h2 id="变量和常量"><a href="#变量和常量" class="headerlink" title="变量和常量"></a>变量和常量</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Java是一种强类型语言，每个变量都必须声明其类型。</p>
-<p><strong>变量类型划分：</strong></p>
-<ol>
-<li><strong>局部</strong>变量：方法或语句块内部定义的变量。生命周期是 从声明位置开始到”}”为止。在使用前必须先声明和初始化（赋初值）</li>
-<li><strong>实例</strong>变量：<strong>方法外部</strong>、<strong>类的内部</strong>定义的变 量。从属于对象，生命周期伴随对象始终。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初 始化值是16位的0，布尔型默认是false）</li>
-<li><strong>静态</strong>变量：使用static定义。 从属于类，生命周期伴随类始终，从类加载到卸载。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初始化值是16位的0，布尔型默认是false）</li>
-</ol>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>定义：<code>public static final double PI = 3.14;</code></p>
-<p>其值无法改变，只能被初始化一次。常量的命名通常使用全大写，如果单词较多则使用下划线进行分隔。</p>
-<h2 id="一些运算符"><a href="#一些运算符" class="headerlink" title="一些运算符"></a>一些运算符</h2><p><strong>&lt;&lt;：</strong>左移运算符（丢弃最高位，0补最低位）</p>
-<p><strong>>&gt;：</strong>右移运算符（符号位不变，左边补上符号位）</p>
-<p><strong>>&gt;&gt;：</strong>无符号移位运算符（无符号右移、忽略符号位扩展、0补最高位。无符号右移中的符号位也跟着变，<strong>无符号的意思是将符号位当作数字位看待</strong>。）</p>
-<p>右移一位相当于除2取商。左移 一位相当于乘2。</p>
-<h1 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h1><p>略</p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组为引用数据类型。相当于有一个指针值着吧。</p>
-<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p><strong>定义方法</strong>:<code>int x[] = new int[5];</code>或者<code>int x[]; x = new int[5];</code>或者<code>int x[] = &#123;1, 2, 3, 4, 5&#125;;</code></p>
-<p><img src="\images\Java\第二章\2.jpg" style="zoom:67%;"></p>
-<p><strong>for语句遍历：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (类型 变量 : 数组)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> value : fib)<span class="comment">//类似py迭代器</span></span><br><span class="line"><span class="comment">//vaue获得fib数组每个元素，</span></span><br><span class="line"><span class="comment">//相当于fib[i]</span></span><br><span class="line">	System.out.print(<span class="string">&quot; &quot;</span>+value);</span><br></pre></td></tr></table></figure>
-<p>关于<strong>引用数据类型</strong>这一说：</p>
-<p><img src="\images\Java\第二章\3.jpg" style="zoom:50%;"></p>
-<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p><strong>定义方法：</strong><code>int mat[][] = new int[3][4];或者int mat[][] = &#123; &#123;1,2,3&#125;,&#123;4,5,6&#125; &#125;</code></p>
-<p><img src="\images\Java\第二章\4.jpg" style="zoom:50%;"></p>
-<p><img src="\images\Java\第二章\5.jpg" style="zoom:50%;"></p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基本定义方法</span></span><br><span class="line">[修饰符…] 返回值类型 方法名([参数列表])</span><br><span class="line">&#123;</span><br><span class="line">	语句序列;</span><br><span class="line">	[<span class="keyword">return</span> [返回值]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p><img src="\images\Java\第二章\6.jpg" style="zoom:50%;"></p>
-<p><strong>引用模型：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String s1 = <span class="string">&quot;abcdef&quot;</span>;</span><br><span class="line">        String s2 = s1;</span><br><span class="line">        String s3 = <span class="keyword">new</span> String(s1);</span><br><span class="line">        System.out.println(s1 == s2);</span><br><span class="line">        System.out.println(s2.equals(s1));</span><br><span class="line">        System.out.println(s1 == s3);</span><br><span class="line">        System.out.println(s3.equals(s1));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#输出</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="post-title-link" itemprop="url">第一章</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-11-05 20:50:31 / 修改时间：21:38:08" itemprop="dateCreated datePublished" datetime="2021-11-05T20:50:31+08:00">2021-11-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h2><ul>
-<li>包规则</li>
-</ul>
-<ol>
-<li><p>package就是类的命名空间，用来唯一标识这个类，防止类的重名，比如你和我都有一个Hello类，将我们的代码合并，如果我们使用了package进行打包，我们的类属于不同的包，这时就避免了这种错误。实质就是将字节码文件（.class）分类存放。包其实就是文件夹。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> zhangsan;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> lisi;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一般情况，一个公司、组织、社团中所定义的包的名字，就是他们官网的域名（倒过来），因为域名一定是全球唯一的，不可能有俩个一样的域名。例如，<a target="_blank" rel="noopener" href="http://commons.apache.org/">http://commons.apache.org/</a> 这官网下的代码中的包，都是 <code>package org.apache.commons;</code> 开头的。</p>
-</li>
-<li><p>类加上包名之后，编译的时候要带上包名，用<code>java com.briup.test.Hello</code>在命令行运行，</p>
-</li>
-</ol>
-<ul>
-<li>运行规则</li>
-</ul>
-<ol>
-<li><p>如果运行的Hello类，没有指定包，Hello类一定对应的是Hello.class。那么当运行java Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有Hello.class这个文件，如果有那么就加载到内存，然后运行，如果没有那么就报错</p>
-</li>
-<li><p>如果运行的Hello类，指定了包，例如是package com.briup.test; Hello类一定对应的是com/briup/test/Hello.class（固定要求）。那么当运行java com.briup.test.Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有com/briup/test/Hello.class这个文件，如果有那么就加载到内存，然后运行，如果没有那么就报错。<br>注意，这个时候JVM从CLASSPATH的路径中，会先找com这个文件夹，然后依次找下去。因为如果有包存在的时候，这个包就是这个类不可分割的一部分。</p>
-<p>这个情况下，CLASSPATH中就要配置com文件夹所在的路径。</p>
-</li>
-<li><p>如果运行的Hello类，被打包到一个jar中，比如是me.jar。</p>
-<p>当运行java Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有me.jar，如果有那么就从me.jar中将Hello.class载到内存，然后运行，如果没有那么就报错。（这是Hello没指定包的情况）<br>当运行java com.briup.test.Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有me.jar，如果有那么就从me.jar中将com/briup/test/Hello.class加载到内存，然后运行，如果没有那么就报错。（这是Hello指定包的情况）</p>
-</li>
-</ol>
-<ul>
-<li>访问规则</li>
-</ul>
-<ol>
-<li>如果类不是public的，则在不同包中的其它类无法访问它</li>
-</ol>
-<h2 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h2><p>规则：</p>
-<ol>
-<li><p>使用<code>xxx.*</code>可以调用包下的所有结构，但是该包的子包的结构仍需import调用 例：<code>xxx.yyy.ABC</code></p>
-</li>
-<li><p>如果源文件中，使用了不同包下的同名的类，则必须至少有一个类需要以全名的方式显示。最好都加上包名进行区分。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xxx.yyy.aaa.ABC;</span><br><span class="line"></span><br><span class="line">ABC a=<span class="keyword">new</span> ABC();</span><br><span class="line"></span><br><span class="line">xxx.yyy.zzz.ABC a1=<span class="keyword">new</span> xxx.yyy.zzz.ABC();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>import static :导入指定类或接口中的静态结构：属性和方法。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/FPGA/Basics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/25/FPGA/Basics/" class="post-title-link" itemprop="url">Basic</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-25 17:57:52" itemprop="dateCreated datePublished" datetime="2021-09-25T17:57:52+08:00">2021-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:42" itemprop="dateModified" datetime="2021-12-15T21:40:42+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>136</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Wire"><a href="#Wire" class="headerlink" title="Wire"></a>Wire</h2><p>wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left = right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/24/numpy/%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/24/numpy/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">索引</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-24 10:24:53 / 修改时间：11:12:01" itemprop="dateCreated datePublished" datetime="2021-09-24T10:24:53+08:00">2021-09-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>676</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">rand = np.random.RandomState(<span class="number">42</span>)</span><br><span class="line">x = rand.randint(<span class="number">100</span>, size=<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">ind = [<span class="number">3</span>,<span class="number">7</span>,<span class="number">4</span>]</span><br><span class="line"><span class="built_in">print</span>(x[ind])</span><br><span class="line">ind = np.array([[<span class="number">3</span>, <span class="number">7</span>],[<span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"><span class="built_in">print</span>(x[ind])</span><br><span class="line">X = np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line">row = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">col = np.array([<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(X[row,col])<span class="comment">#一一对应</span></span><br><span class="line"><span class="comment">#在索引中，索引值的配对遵循广播的规则。因此当我们将一个</span></span><br><span class="line"><span class="comment">#列向量和一个行向量组合在一个索引中时，会得到一个二维的结果：</span></span><br><span class="line"><span class="comment">#print(row[:,np.newaxis]),维度变成3*1</span></span><br><span class="line"><span class="built_in">print</span>(X[row[:,np.newaxis], col])</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">51</span> <span class="number">92</span> <span class="number">14</span> <span class="number">71</span> <span class="number">60</span> <span class="number">20</span> <span class="number">82</span> <span class="number">86</span> <span class="number">74</span> <span class="number">74</span>]</span><br><span class="line">[<span class="number">71</span> <span class="number">86</span> <span class="number">60</span>]</span><br><span class="line">[[<span class="number">71</span> <span class="number">86</span>]</span><br><span class="line"> [<span class="number">60</span> <span class="number">20</span>]]</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]</span><br><span class="line">[ <span class="number">2</span>  <span class="number">5</span> <span class="number">11</span>]</span><br><span class="line">[[ <span class="number">2</span>  <span class="number">1</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">5</span>  <span class="number">7</span>]</span><br><span class="line"> [<span class="number">10</span>  <span class="number">9</span> <span class="number">11</span>]]</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#组合索引</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line"><span class="built_in">print</span>(X[<span class="number">2</span>, [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(X[<span class="number">1</span>:, [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]</span><br><span class="line">[<span class="number">10</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line">[[ <span class="number">6</span>  <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [<span class="number">10</span>  <span class="number">8</span>  <span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/%E4%BF%A1%E5%8F%B7/%E9%A2%91%E7%8E%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/18/%E4%BF%A1%E5%8F%B7/%E9%A2%91%E7%8E%87/" class="post-title-link" itemprop="url">频率</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-18 23:58:34" itemprop="dateCreated datePublished" datetime="2021-09-18T23:58:34+08:00">2021-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-05 23:27:34" itemprop="dateModified" datetime="2023-03-05T23:27:34+08:00">2023-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于模拟频率，模拟角频率，数字角频率"><a href="#关于模拟频率，模拟角频率，数字角频率" class="headerlink" title="关于模拟频率，模拟角频率，数字角频率"></a>关于模拟频率，模拟角频率，数字角频率</h2><script type="math/tex; mode=display">
-f = \frac 1T = \frac {1\rm次} {\rm需要的时间(单位秒)}(Hz) \ \ \ \ \ \ \ \  \ \ \ \ \ \  \Omega = 2\pi f(rad/s)</script><p>$f$公式分式的上部是1次，下部是需要的时间，意思是变化1次需要的时间，所以$f$除下来就是1秒内变化的次数，而角频率$\Omega$则是将1次替换成了2$\pi$，意思就是一周需要多少时间，除下来就是一秒内走的弧度。</p>
-<p>实际上在圆周运动或者交流电的变化中，这里的2$\pi$也就相当于一次变化。</p>
-<p>在信号与系统中一般用$\omega$表示模拟角频率，而在数字信号处理中一般用$\Omega$表示模拟角频率，使用$\omega$表示数字角频率。</p>
-<p>再来看一个例子：比如风扇1秒钟转10次，则其(模拟)频率$f$=10Hz，Hz=1/s；也即信号在一秒钟内重复的次数。便于理解，假设一个点在单位圆上运动，如图1所示，点在圆上一秒钟转10圈，则该点的运动频率为10Hz.</p>
-<p><img src="/images/信号/频率/1.png" style="zoom:67%;"></p>
-<p>而模拟角频率$\omega$，是以弧度来表示转的圈数，一圈是2$\pi$弧度，则该点的运动频率也可表示为2$\pi$10rad/s，由此可以看出，$\omega$ = 2<em>*$\pi$</em>*$f$。注意模拟角频率的单位是rad/s.</p>
-<p>数字频率是对模拟频率的采样，数字频率代表的是两个采样点之间的间隔。还是以一点在圆上运动为例，1秒钟转动10圈，从该点运动开始，<strong>以1秒钟采样100次进行采样</strong>，可以得到，每次采样都可得到该点在圆上的位置，该点在圆上的位置如图2所示，采样点之间存在间隔，要以弧度$\omega$表示这种间隔，$\omega$ = 2$\pi$10/100(将1秒替换成100Hz，也就是100次),可得到$\omega$ = 0.2$\pi$ rad</p>
-<p><img src="/images/信号/频率/2.png" style="zoom:67%;"></p>
-<p>由此得到数字频率,$\omega$对应着采样的密集程度，所以叫做数字频率：</p>
-<script type="math/tex; mode=display">
-\omega = \Omega * T_s =  \frac {\Omega} {f_s} = \frac {2\pi * \Omega} {\omega_s} = \frac {2\pi * f} {f_s}
-\ \ \ \ \ \  \rm数字角频率 = 模拟角频率 * 采样周期</script><p>由公式可以看出，数字频率是模拟频率对采样频率的归一化处理,只不过这里的一是一周（一圈）也就是$2\pi$。</p>
-<p>有奈奎斯特采样定律得知$\omega_s ≥ 2\Omega$,因此$\omega ≤ \pi$。</p>
-<p>模拟信号周期T的话意思就是进行一次需要多长时间，或者是进行一周($2\pi$)要多长时间.</p>
-<p>数字信号周期N的话意思就是经过$2\pi$需要多少点</p>
-<p>并且数字频率和数字周期满足下列关系：</p>
-<script type="math/tex; mode=display">
-N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a href="#另一种理解" class="headerlink" title="另一种理解"></a>另一种理解</h2><p>加入我们从最简单的正弦函数$sin(\Omega t)$出发，每一个信号都可以由正弦余弦组成，那么只需要看正弦函数的数字转换规律，比如数字周期，数字频率等。</p>
-<h2 id="一个实例"><a href="#一个实例" class="headerlink" title="一个实例"></a>一个实例</h2><p><img src="/images/信号/频率/3.jpg" style="zoom:40%;"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1507,7 +1487,7 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1571,12 +1551,12 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">175k</span>
+    <span title="站点总字数">190k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:39</span>
+    <span title="站点阅读时长">2:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
