@@ -198,6 +198,644 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9A%82%E9%80%80%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9A%82%E9%80%80%E6%B3%95/" class="post-title-link" itemprop="url">暂退法</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-14 20:04:31 / 修改时间：20:14:08" itemprop="dateCreated datePublished" datetime="2023-09-14T20:04:31+08:00">2023-09-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>802</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念">概念</h2>
+<p>Dropout
+是一种用于正则化神经网络的技术，旨在减轻过拟合问题。它在训练过程中随机地丢弃（即关闭）神经网络中的一些单元（神经元），以减少神经元之间的协作，使模型更加健壮和泛化能力更强。</p>
+<p>以下是关于 Dropout 方法的一些要点：</p>
+<ol type="1">
+<li><strong>随机丢弃神经元：</strong> 在每一次训练迭代中，Dropout
+方法会随机选择一部分神经元并将它们的输出设置为零。这相当于将这些神经元暂时
+"关闭"，不参与前向传播和反向传播。</li>
+<li><strong>减轻过拟合：</strong> Dropout
+通过减少神经元之间的协作，迫使网络更多地依赖于各种特征和路径来进行学习。这有助于降低模型对训练数据的过度拟合，提高了泛化性能。</li>
+<li><strong>超参数：</strong> Dropout
+的一个重要超参数是丢弃概率（dropout
+probability），通常在0.2到0.5之间选择。较小的丢弃概率表示丢弃较少的神经元，较大的丢弃概率表示丢弃更多的神经元。</li>
+<li><strong>测试时不使用 Dropout：</strong> 在测试或推理时，不再使用
+Dropout。相反，通常会按比例缩放训练后的权重，以确保一致性。</li>
+<li><strong>适用于深度网络：</strong> Dropout
+特别适用于深度神经网络，因为它们更容易过拟合。通过在不同层应用
+Dropout，可以提高整个网络的鲁棒性。</li>
+</ol>
+<p>总的来说，Dropout
+是一种有效的正则化技术，可以帮助改善神经网络的泛化性能，减轻过拟合问题。在实践中，它经常与其他正则化方法一起使用，如权重衰减（L2
+正则化）来进一步提高模型性能。</p>
+<h2 id="dropout-操作会引入缩放效应">dropout 操作会引入缩放效应</h2>
+<p>我们随机丢弃一部分神经元（将它们的输出设置为零），以减轻过拟合问题。然而，在训练期间，由于某些神经元被随机丢弃，网络的输出会变得更小，这可能会导致网络的整体缩放效应。</p>
+<p>我们使用缩放因子
+<code>(1.0 - dropout)</code>，它表示了保留神经元的输出应该被放大的比例。如果
+<code>dropout</code>
+为0.5（即丢弃50%的神经元），那么缩放因子为2，这意味着保留的神经元的输出应该扩大两倍，以补偿
+Dropout 操作引入的缩放效应。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/" class="post-title-link" itemprop="url">权重衰减为什么可以降低模型复杂度</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-13 21:03:26 / 修改时间：22:59:40" itemprop="dateCreated datePublished" datetime="2023-09-13T21:03:26+08:00">2023-09-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>981</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>模型的容量（capacity）是指模型能够拟合的各种不同函数和模式的数量和复杂程度。当我说减小权重值可以减小模型的容量时，我指的是通过控制权重的大小，我们可以降低模型对于某些复杂模式的拟合能力。这可能听起来有些反直觉，因为通常人们认为模型容量与模型的参数数量成正比。</p>
+<p>但是，这里的关键是，模型容量不仅仅与参数数量有关，还与参数的范围（大小）有关。大的权重值意味着模型可以表示更复杂的函数，因为它们可以产生更大的输出值范围。这意味着模型可以更容易地适应训练数据中的噪声和细节，但也更容易过拟合。</p>
+<p>相反，小的权重值将限制模型的输出范围，使其更难以表示复杂的函数。这可以被视为对模型施加了一种正则化，迫使模型更加关注数据中的主要模式，而不是噪声。</p>
+<p>所以，减小权重值可以看作是一种正则化的形式，它可以降低模型的容量，使其更倾向于学习简单的、泛化性能更好的模式，从而降低了模型的复杂性。这种复杂性的降低有助于防止过拟合，并提高模型在未见过数据上的泛化能力。希望这个解释能够更清晰地说明这个观点。</p>
+<p>模型的表达能力是指模型可以表示的不同函数的范围。如果模型具有较大的参数范围，它可以表示更广泛的函数，包括复杂的函数。这意味着模型可以更好地拟合训练数据中的各种模式，包括信号和噪声。</p>
+<p>如果一个模型具有较大的参数范围，这意味着它有更多的自由度，可以调整其参数以适应更广泛的数据分布。这包括了可以表示更复杂函数的能力，因为模型可以学习到更多的特征和关系，包括数据中的细微差异。</p>
+<p>现在，这里的关键问题是，当模型具有高表达能力时，它不仅可以拟合数据中的真实模式（信号），还可以拟合数据中的随机性和噪声。噪声是指数据中的随机变化或不确定性，通常不包含有关数据的实际信息，但它存在于真实世界的数据中。如果模型过于复杂，它可能会过度适应数据中的噪声，而不仅仅是学习到有意义的模式。</p>
+<p>这就是为什么高表达能力的模型可能容易过拟合的原因。过拟合发生时，模型在训练数据上表现良好，但在未见过的数据上表现不佳，因为它在训练数据中学到了与噪声相关的信息，这些信息在未见过的数据上不适用。</p>
+<p>正则化技术，如权重衰减，通过控制参数的范围来限制模型的表达能力，从而降低了过拟合的风险。权重衰减惩罚较大的参数值，使模型更倾向于选择较小的参数值，从而限制了模型的复杂性，减少了过度拟合的可能性，使其更专注于学习真正的模式而不是噪声。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">入门操作</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-12 09:37:48" itemprop="dateCreated datePublished" datetime="2023-09-12T09:37:48+08:00">2023-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-14 10:51:21" itemprop="dateModified" datetime="2023-09-14T10:51:21+08:00">2023-09-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">opencv图像处理</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>260</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><p><strong>读取显示图像：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;image/1.jpg&#x27;</span>，<span class="number">0</span>)//image为工程文件夹下的image子文件夹，<span class="number">0</span>是加载方式</span><br><span class="line">cv.imshow(<span class="string">&#x27;image&#x27;</span>，img）</span><br><span class="line">cv.waitKey(<span class="number">0</span>)//等待键盘输入，返回值为ASCII码</span><br><span class="line">cv.destroyAllWindows()//键盘有输入后自动关闭显示窗口</span><br></pre></td></tr></table></figure>
+
+<p><strong>写入图像：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imwrite(<span class="string">&#x27;image/2.jpg&#x27;</span>,img)//将img写入image文件夹下的名为<span class="number">2</span>的jpg文件</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/" class="post-title-link" itemprop="url">面试2/150</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-10 15:54:31" itemprop="dateCreated datePublished" datetime="2023-09-10T15:54:31+08:00">2023-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 21:18:27" itemprop="dateModified" datetime="2023-09-19T21:18:27+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>807</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目移除元素">题目：移除元素</h2>
+<p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要
+<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/原地算法">原地</a></strong>
+移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 <code>O(1)</code> 额外空间并
+<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/原地算法">原地</a>修改输入数组</strong>。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<h2 id="me">me:</h2>
+<p><strong>1：使用pop_back()方法删除尾元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]!=val) &#123;</span><br><span class="line">                nums[j++]=nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(;j&lt;nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            nums.<span class="built_in">pop_back</span>();<span class="comment">//删除向量末尾元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span></p>
+<p>空间复杂度：<span class="math inline">\(O(1)\)</span></p>
+<p><strong>2：使用erase()方法删除指定元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>,k = <span class="number">0</span>; i &lt; j;i++)&#123;<span class="comment">//注意：当删除向量中一个元素，向量长度会发生变化</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i-k]==val) &#123;</span><br><span class="line">                nums.<span class="built_in">erase</span>(nums.<span class="built_in">begin</span>() + i-k);</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n^2)\)</span>,n次循环，删除时最多移动n次位置，n*n</p>
+<p>空间复杂度：<span class="math inline">\(O(1)\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">线性变换的两种公式写法的建模</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-09 16:06:14" itemprop="dateCreated datePublished" datetime="2023-09-09T16:06:14+08:00">2023-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-20 21:56:08" itemprop="dateModified" datetime="2023-09-20T21:56:08+08:00">2023-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="多层感知机网络的两种实现">多层感知机网络的两种实现</h2>
+<h3 id="从零实现">从零实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化模型参数</span></span><br><span class="line">num_inputs, num_outputs, num_hiddens = <span class="number">784</span>, <span class="number">10</span>, <span class="number">256</span></span><br><span class="line"></span><br><span class="line">W1 = nn.Parameter(torch.randn(</span><br><span class="line">    num_inputs, num_hiddens, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=<span class="literal">True</span>))</span><br><span class="line">W2 = nn.Parameter(torch.randn(</span><br><span class="line">    num_hiddens, num_outputs, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">params = [W1, b1, W2, b2]</span><br><span class="line"><span class="comment">#激活函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu</span>(<span class="params">X</span>):</span></span><br><span class="line">    a = torch.zeros_like(X)</span><br><span class="line">    <span class="keyword">return</span> torch.<span class="built_in">max</span>(X, a)</span><br><span class="line"><span class="comment">#模型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">net</span>(<span class="params">X</span>):</span></span><br><span class="line">    X = X.reshape((-<span class="number">1</span>, num_inputs))</span><br><span class="line">    H = relu(X@W1 + b1)  <span class="comment"># 这里“@”代表矩阵乘法</span></span><br><span class="line">    <span class="keyword">return</span> (H@W2 + b2)</span><br></pre></td></tr></table></figure>
+<p>这里网络使用的线性模型是<span class="math inline">\(o=Xw+b\)</span>,其中o为batch_size*outputs型输出矩阵，X为batch_size*inputs输入矩阵，w为inputs*outputs权重矩阵，b为1*outputs偏差矩阵。</p>
+<h3 id="简洁实现">简洁实现</h3>
+<p><strong>代码：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(nn.Flatten(),</span><br><span class="line">                    nn.Linear(<span class="number">784</span>, <span class="number">256</span>),</span><br><span class="line">                    nn.ReLU(),</span><br><span class="line">                    nn.Linear(<span class="number">256</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_weights</span>(<span class="params">m</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br></pre></td></tr></table></figure>
+<p><strong>查看网络参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个简单的神经网络模型</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(<span class="number">10</span>, <span class="number">20</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">20</span>, <span class="number">5</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用net.parameters()获取模型中的所有参数</span></span><br><span class="line">params = <span class="built_in">list</span>(net.parameters())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印每个参数的形状</span></span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">    <span class="built_in">print</span>(param.shape)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">torch.Size([<span class="number">20</span>, <span class="number">10</span>])</span><br><span class="line">torch.Size([<span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>, <span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+<p>因此鉴定为使用的线性模型是<span class="math inline">\(o=Xw^T+b\)</span>，这与从零实现刚好相反。其中o为outputs*batch_size型输出矩阵，W为outputs*inputs权重矩阵，x为batch_size*inputs输入矩阵，b为1*outputs偏差矩阵（会被广播成batch_size*outputs形状）。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">复杂度</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-08 17:44:31" itemprop="dateCreated datePublished" datetime="2023-09-08T17:44:31+08:00">2023-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 23:03:40" itemprop="dateModified" datetime="2023-09-18T23:03:40+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>时间复杂度和空间复杂度是用于分析算法性能的两个关键概念。让我们通过示例来解释它们。</p>
+<p><strong>时间复杂度</strong>：</p>
+<p>时间复杂度表示算法执行所需的时间与输入数据规模之间的关系。通常用大 O 表示法（Big O Notation）来表示。以下是一些常见的时间复杂度示例：</p>
+<ol>
+<li><p>**O(1)**：常数时间复杂度。无论输入规模如何增加，算法的执行时间始终保持不变。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 执行时间与输入规模无关</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(n)**：线性时间复杂度。执行时间与输入规模成正比。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="comment">// 执行 n 次，所以是线性时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(n^2)**：平方时间复杂度。执行时间与输入规模的平方成正比。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">        <span class="comment">// 执行 n*n 次，所以是平方时间复杂度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(log n)**：对数时间复杂度。通常出现在二分查找等算法中，执行时间随着输入规模的增加而增加，但增长速度很慢。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 二分查找算法，对数时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>空间复杂度</strong>：</p>
+<p>空间复杂度表示算法执行所需的额外空间与输入数据规模之间的关系。也通常使用大 O 表示法来表示。以下是一些常见的空间复杂度示例：</p>
+<ol>
+<li><p>**O(1)**：常数空间复杂度。算法执行所需的额外空间不随输入规模增加而增加。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 额外空间占用恒定</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(n)**：线性空间复杂度。额外空间占用与输入规模成正比。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n]; <span class="comment">// 创建一个长度为 n 的数组，占用线性空间</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(n^2)**：平方空间复杂度。额外空间占用与输入规模的平方成正比。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[n][n]; <span class="comment">// 创建一个 n x n 的矩阵，占用平方空间</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**O(log n)**：对数空间复杂度。通常出现在递归算法中，额外空间占用随着递归深度的增加而增加，但增长速度很慢。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recursiveFunction</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>) + <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>总之，时间复杂度和空间复杂度是用于分析算法性能的重要工具，它们帮助我们了解算法如何随着输入规模的增加而执行。选择适当的算法可以帮助优化程序的性能，尤其是在处理大规模数据时。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -674,627 +1312,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/03/C%E5%92%8CC++/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">析构函数</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-03 19:35:32 / 修改时间：19:49:04" itemprop="dateCreated datePublished" datetime="2023-09-03T19:35:32+08:00">2023-09-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>756</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>析构函数是在对象生命周期结束时自动调用的特殊成员函数。它用于清理对象分配的资源、释放内存、关闭文件等一系列清理工作。析构函数通常在以下情况下被调用：</p>
-<ol>
-<li><p><strong>对象离开其作用域：</strong> 当对象在函数内被创建，并且函数结束或对象离开其作用域时，C++会自动调用对象的析构函数来销毁对象。这是最常见的情况。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">someFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj; <span class="comment">// 在函数内创建对象</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="comment">// 在函数结束时，obj 的析构函数被调用</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>动态分配对象的内存释放：</strong> 如果你使用 <code>new</code> 运算符在堆上动态分配了对象，必须显式调用 <code>delete</code> 来释放对象的内存。在调用 <code>delete</code> 时，对象的析构函数会被自动调用。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass *ptr = <span class="keyword">new</span> <span class="built_in">MyClass</span>(); <span class="comment">// 动态分配对象</span></span><br><span class="line"><span class="keyword">delete</span> ptr; <span class="comment">// 调用析构函数并释放内存</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>容器和数据结构的管理：</strong> 如果你将对象存储在容器（如 <code>std::vector</code>、<code>std::list</code>）或数据结构中，当容器或数据结构的生命周期结束时，其中的元素对象的析构函数会被调用。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;MyClass&gt; myVector;</span><br><span class="line">myVector.<span class="built_in">push_back</span>(<span class="built_in">MyClass</span>()); <span class="comment">// 向容器中添加对象</span></span><br><span class="line"><span class="comment">// 当 myVector 离开其作用域时，其中的对象的析构函数被调用</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>异常抛出：</strong> 如果在对象的构造函数中抛出了异常，并且在创建对象的上下文中没有捕获该异常，那么对象的析构函数会被调用以清理部分或全部资源。这是一种异常安全的机制，确保资源得到释放。</p>
-</li>
-</ol>
-<p>总之，析构函数在对象生命周期结束时（无论是因为离开作用域、动态内存释放、容器管理或异常处理）被自动调用，用于对象的清理和资源的释放工作。你可以自定义析构函数来确保在对象销毁时执行必要的清理工作，如释放动态分配的内存或关闭文件。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/03/C%E5%92%8CC++/%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">派生类继承</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-03 17:08:28" itemprop="dateCreated datePublished" datetime="2023-09-03T17:08:28+08:00">2023-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-05 18:14:50" itemprop="dateModified" datetime="2023-09-05T18:14:50+08:00">2023-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>415</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>私有继承影响的是继承的父类，继承的父类的所有变量和函数将变得对外部不可访问，但是子类的public部分依旧是对外部可见的。</li>
-<li>C++的类的成员函数也可以在类的外部用范围解析运算符实现定义。</li>
-<li>访问修饰符</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>对外部代码是否可见</th>
-<th>派生类是否可见</th>
-<th>类的成员函数是否可见</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public</td>
-<td>是</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>protected</td>
-<td>否</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>private</td>
-<td>否</td>
-<td>否</td>
-<td>是</td>
-</tr>
-</tbody></table>
-<ul>
-<li>三种继承，继承类型导致了基类成员变化，基类成员变化导致了基类成员在类外是否可访问。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>派生类可访问</th>
-<th>类外可访问</th>
-<th>基类成员变化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>公共（默认）继承</td>
-<td>基类的public和protected</td>
-<td>基类public</td>
-<td>基类public，protected成员在派生类保持属性不变</td>
-</tr>
-<tr>
-<td>保护继承</td>
-<td>基类的public和protected</td>
-<td>基类任何成员都不可访问</td>
-<td>基类public，protected成员变成派生类protected成员</td>
-</tr>
-<tr>
-<td>私有继承</td>
-<td>基类的public和protected</td>
-<td>基类任何成员都不可访问</td>
-<td>基类public，protected成员变成派生类private成员</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/C%E5%92%8CC++/Untitled/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/C%E5%92%8CC++/Untitled/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-02 16:38:08 / 修改时间：22:10:55" itemprop="dateCreated datePublished" datetime="2023-09-02T16:38:08+08:00">2023-09-02</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>38</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1.内存泄漏</p>
-<p>2.新建对象是在堆上建立的</p>
-<p>3.堆内存和栈内存，什么叫动态分配内存</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/C%E5%92%8CC++/%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">引用和指针</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-01 21:50:01 / 修改时间：22:07:25" itemprop="dateCreated datePublished" datetime="2023-09-01T21:50:01+08:00">2023-09-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>370</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="引用概念"><a href="#引用概念" class="headerlink" title="引用概念"></a>引用概念</h2><p>先说如何判别：和类型在一起的是引用，和变量在一起的是取址。</p>
-<p>引用的理解：实际上从字面意思上就可以很容易理解，所谓引用就是引用一个东西，在C++中，引用就是相当于一个变量的别名。</p>
-<p><code>int m; int &amp;n = m;</code>再看这两句代码就很容易理解引用的含义了，n相当于m的一个别名。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">5</span>；</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">6</span>；</span><br><span class="line"><span class="keyword">int</span> &amp;k = i；</span><br><span class="line">k = j； <span class="comment">// k 和i 的值都变成了6；</span></span><br></pre></td></tr></table></figure>
-
-<p>这里实际上就可以看出引用就是字面意思上的引用。</p>
-<h2 id="和指针的区别"><a href="#和指针的区别" class="headerlink" title="和指针的区别"></a>和指针的区别</h2><ul>
-<li><p>指针是一个实体，有具体的地址存放指针变量，但是关于引用一些书上写是不占用内存的。</p>
-<p>（这篇文章认为占用内存<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78800232%EF%BC%89">https://zhuanlan.zhihu.com/p/78800232）</a></p>
-</li>
-<li><p>引用不需要解引用，指针需要解引用</p>
-</li>
-<li><p>引用只能被初始化一次，之后不可变（可认为是常量指针），指针可变。</p>
-</li>
-<li><p>引用不能为空，必须初始化，指针可为空</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/py/r%E6%97%A0%E8%BE%93%E5%87%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/18/py/r%E6%97%A0%E8%BE%93%E5%87%BA/" class="post-title-link" itemprop="url">python基础</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-08-18 15:55:03 / 修改时间：15:56:27" itemprop="dateCreated datePublished" datetime="2023-08-18T15:55:03+08:00">2023-08-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>147</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="python中print函数后面加上”-r”后不能显示任何打印信息"><a href="#python中print函数后面加上”-r”后不能显示任何打印信息" class="headerlink" title="python中print函数后面加上”\r”后不能显示任何打印信息"></a>python中print函数后面加上”\r”后不能显示任何打印信息</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">countdown = <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(countdown, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\r%d&#x27;</span>%i,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/py%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">py知识</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-08-11 17:05:21 / 修改时间：17:10:55" itemprop="dateCreated datePublished" datetime="2023-08-11T17:05:21+08:00">2023-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>597</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="with关键字"><a href="#with关键字" class="headerlink" title="with关键字"></a>with关键字</h2><p>在 Python 中，<code>with</code> 语句用于创建一个上下文管理器（Context Manager），用于管理一些资源的获取和释放，以确保资源得到正确的使用和清理。这种管理在处理文件、网络连接、数据库连接等需要显式打开和关闭资源的情况下非常有用，因为它可以帮助避免资源泄漏和错误处理。</p>
-<p><code>with</code> 语句的一般语法结构如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> context_expression <span class="keyword">as</span> target:</span><br><span class="line">    <span class="comment"># 代码块</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>context_expression</code>：通常是一个上下文管理器对象，它负责定义资源的获取和释放规则。</li>
-<li><code>target</code>：通常是一个变量，用于接收上下文管理器生成的资源。</li>
-<li>代码块：在代码块中，你可以使用 <code>target</code> 获取资源并进行操作，当代码块结束时，资源会自动被释放，无论是否发生异常。</li>
-</ul>
-<p>一个常见的使用案例是文件的读写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    content = file.read()</span><br><span class="line"><span class="comment"># 在代码块结束后，文件会自动关闭，不需要显式调用 file.close()</span></span><br></pre></td></tr></table></figure>
-
-<p>在你提供的代码中，<code>with torch.no_grad():</code> 语句的目的是在该上下文中执行一些操作，而在这个上下文中，PyTorch 不会跟踪梯度信息，从而避免不必要的内存占用和计算。这在进行一些不需要梯度信息的操作，如参数更新，时非常有用。当 <code>with</code> 代码块结束后，梯度追踪会自动恢复。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1366,14 +1383,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1430,12 +1447,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">190k</span>
+    <span title="站点总字数">196k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:53</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

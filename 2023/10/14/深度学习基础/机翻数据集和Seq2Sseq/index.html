@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="数据集 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374class MTFraEng(d2l.DataModule):    &quot;&quot;&quot;The">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机翻数据集和Seq2Sseq">
+<meta property="og:url" content="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="数据集 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374class MTFraEng(d2l.DataModule):    &quot;&quot;&quot;The">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/深度学习/s2s/1.svg">
+<meta property="article:published_time" content="2023-10-14T03:04:05.530Z">
+<meta property="article:modified_time" content="2023-10-26T07:14:28.519Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/深度学习/s2s/1.svg">
+
+<link rel="canonical" href="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机翻数据集和Seq2Sseq | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机翻数据集和Seq2Sseq
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-14 11:04:05" itemprop="dateCreated datePublished" datetime="2023-10-14T11:04:05+08:00">2023-10-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-26 15:14:28" itemprop="dateModified" datetime="2023-10-26T15:14:28+08:00">2023-10-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="数据集">数据集</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MTFraEng</span>(<span class="params">d2l.DataModule</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The English-French dataset.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#下载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_download</span>(<span class="params">self</span>):</span></span><br><span class="line">        d2l.extract(d2l.download(</span><br><span class="line">            d2l.DATA_URL+<span class="string">&#x27;fra-eng.zip&#x27;</span>, self.root,</span><br><span class="line">            <span class="string">&#x27;94646ad1522d915e7b0f9296181140edcf86a4f5&#x27;</span>))</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.root + <span class="string">&#x27;/fra-eng/fra.txt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">return</span> f.read()</span><br><span class="line">	<span class="comment">#预处理文本</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_preprocess</span>(<span class="params">self, text</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># Replace non-breaking space with space</span></span><br><span class="line">        text = text.replace(<span class="string">&#x27;\u202f&#x27;</span>, <span class="string">&#x27; &#x27;</span>).replace(<span class="string">&#x27;\xa0&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="comment"># Insert space between words and punctuation marks</span></span><br><span class="line">        no_space = <span class="keyword">lambda</span> char, prev_char: char <span class="keyword">in</span> <span class="string">&#x27;,.!?&#x27;</span> <span class="keyword">and</span> prev_char != <span class="string">&#x27; &#x27;</span></span><br><span class="line">        out = [<span class="string">&#x27; &#x27;</span> + char <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> no_space(char, text[i - <span class="number">1</span>]) <span class="keyword">else</span> char</span><br><span class="line">               <span class="keyword">for</span> i, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.lower())]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(out)</span><br><span class="line">	<span class="comment">#将文本分成两部分，源文本和目标文本。</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_tokenize</span>(<span class="params">self, text, max_examples=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        src, tgt = [], []</span><br><span class="line">        <span class="keyword">for</span> i, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.split(<span class="string">&#x27;\n&#x27;</span>)):</span><br><span class="line">            <span class="keyword">if</span> max_examples <span class="keyword">and</span> i &gt; max_examples: <span class="keyword">break</span></span><br><span class="line">            parts = line.split(<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(parts) == <span class="number">2</span>:</span><br><span class="line">                <span class="comment"># Skip empty tokens</span></span><br><span class="line">                src.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">0</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">                tgt.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">1</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">        <span class="keyword">return</span> src, tgt</span><br><span class="line">	<span class="comment">#初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, batch_size, num_steps=<span class="number">9</span>, num_train=<span class="number">512</span>, num_val=<span class="number">128</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(MTFraEng, self).__init__()</span><br><span class="line">        self.save_hyperparameters()</span><br><span class="line">        self.arrays, self.src_vocab, self.tgt_vocab = self._build_arrays(</span><br><span class="line">            self._download())</span><br><span class="line">	<span class="comment">#构造词表，生成源文本序列和目标文本序列（数字标记化）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_build_arrays</span>(<span class="params">self, raw_text, src_vocab=<span class="literal">None</span>, tgt_vocab=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_build_array</span>(<span class="params">sentences, vocab, is_tgt=<span class="literal">False</span></span>):</span></span><br><span class="line">            pad_or_trim = <span class="keyword">lambda</span> seq, t: (</span><br><span class="line">                seq[:t] <span class="keyword">if</span> <span class="built_in">len</span>(seq) &gt; t <span class="keyword">else</span> seq + [<span class="string">&#x27;&lt;pad&gt;&#x27;</span>] * (t - <span class="built_in">len</span>(seq)))</span><br><span class="line">            sentences = [pad_or_trim(s, self.num_steps) <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> is_tgt:</span><br><span class="line">                sentences = [[<span class="string">&#x27;&lt;bos&gt;&#x27;</span>] + s <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> vocab <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                vocab = d2l.Vocab(sentences, min_freq=<span class="number">2</span>)</span><br><span class="line">            array = d2l.tensor([vocab[s] <span class="keyword">for</span> s <span class="keyword">in</span> sentences])</span><br><span class="line">            valid_len = d2l.reduce_sum(</span><br><span class="line">                d2l.astype(array != vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>], d2l.int32), <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> array, vocab, valid_len</span><br><span class="line">        src, tgt = self._tokenize(self._preprocess(raw_text),</span><br><span class="line">                                  self.num_train + self.num_val)</span><br><span class="line">        src_array, src_vocab, src_valid_len = _build_array(src, src_vocab)</span><br><span class="line">        tgt_array, tgt_vocab, _ = _build_array(tgt, tgt_vocab, <span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> ((src_array, tgt_array[:,:-<span class="number">1</span>], src_valid_len, tgt_array[:,<span class="number">1</span>:]),</span><br><span class="line">                src_vocab, tgt_vocab)</span><br><span class="line">	<span class="comment">#加载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_dataloader</span>(<span class="params">self, train</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        idx = <span class="built_in">slice</span>(<span class="number">0</span>, self.num_train) <span class="keyword">if</span> train <span class="keyword">else</span> <span class="built_in">slice</span>(self.num_train, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">return</span> self.get_tensorloader(self.arrays, train, idx)</span><br><span class="line">	<span class="comment">#构造</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">self, src_sentences, tgt_sentences</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        raw_text = <span class="string">&#x27;\n&#x27;</span>.join([src + <span class="string">&#x27;\t&#x27;</span> + tgt <span class="keyword">for</span> src, tgt <span class="keyword">in</span> <span class="built_in">zip</span>(</span><br><span class="line">            src_sentences, tgt_sentences)])</span><br><span class="line">        arrays, _, _ = self._build_arrays(</span><br><span class="line">            raw_text, self.src_vocab, self.tgt_vocab)</span><br><span class="line">        <span class="keyword">return</span> arrays</span><br></pre></td></tr></table></figure>
+<h2 id="seq2seq">Seq2Seq</h2>
+<h3 id="encoder">Encoder</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqEncoder</span>(<span class="params">d2l.Encoder</span>):</span>  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN encoder for sequence-to-sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#初始化，传入词表尺寸，嵌入尺寸，隐藏单元数量，隐藏层数，drop概率</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)<span class="comment">#嵌入层，这一步是首先根据词表的尺寸生成了一个维度为vocab_size*embed_size的向量表</span></span><br><span class="line">        self.rnn = d2l.GRU(embed_size, num_hiddens, num_layers, dropout)<span class="comment">#使用GRU循环神经网络，进行编码</span></span><br><span class="line">        self.apply(init_seq2seq)<span class="comment">#应用初始化</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, *args</span>):</span><span class="comment">#前向传播函数</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int64))<span class="comment">#根据向量表生成每一个输入对应的嵌入向量</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        outputs, state = self.rnn(embs)<span class="comment">#GRU前向传播，生成outputs每个时间步最后的状态输出，state最后是时间步每个隐藏单元层的状态输出，相当于是一个矩形，长是时间步输出，宽是隐藏状态</span></span><br><span class="line">        <span class="comment"># outputs shape: (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="comment"># state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, state</span><br></pre></td></tr></table></figure>
+<h3 id="decoder">Decoder</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqDecoder</span>(<span class="params">d2l.Decoder</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN decoder for sequence to sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)</span><br><span class="line">        self.rnn = d2l.GRU(embed_size+num_hiddens, num_hiddens,</span><br><span class="line">                           num_layers, dropout)</span><br><span class="line">        self.dense = nn.LazyLinear(vocab_size)</span><br><span class="line">        self.apply(init_seq2seq)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_state</span>(<span class="params">self, enc_all_outputs, *args</span>):</span></span><br><span class="line">        <span class="keyword">return</span> enc_all_outputs</span><br><span class="line">	<span class="comment">#</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, state</span>):</span><span class="comment">#输入tgt[:,:-1]，以及编码层输出，即outputs和state</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int32))<span class="comment">#嵌入转换</span></span><br><span class="line">        enc_output, hidden_state = state<span class="comment">#每一个时间步的最终输出状态作为enc_output，最后一个时间步的所有隐藏单元状态作为下一个GRU的初始状态</span></span><br><span class="line">        <span class="comment"># context shape: (batch_size, num_hiddens)</span></span><br><span class="line">        context = enc_output[-<span class="number">1</span>]<span class="comment">#取最后一个时间步的输出作为上下文</span></span><br><span class="line">        <span class="comment"># Broadcast context to (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        context = context.repeat(embs.shape[<span class="number">0</span>], <span class="number">1</span>, <span class="number">1</span>)<span class="comment">#维度扩展</span></span><br><span class="line">        <span class="comment"># Concat at the feature dimension</span></span><br><span class="line">        embs_and_context = torch.cat((embs, context), -<span class="number">1</span>)<span class="comment">#连接上下文和输入变量</span></span><br><span class="line">        outputs, hidden_state = self.rnn(embs_and_context, hidden_state)<span class="comment">#编码GRU前向传播</span></span><br><span class="line">        outputs = self.dense(outputs).swapaxes(<span class="number">0</span>, <span class="number">1</span>)<span class="comment">#全连接层将隐藏状态转换为尺寸为vocab_size的输出以便进行损失函数计算</span></span><br><span class="line">        <span class="comment"># outputs shape: (batch_size, num_steps, vocab_size)</span></span><br><span class="line">        <span class="comment"># hidden_state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, [enc_output, hidden_state]</span><br></pre></td></tr></table></figure>
+<h3 id="整合">整合</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EncoderDecoder</span>(<span class="params">d2l.Classifier</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The base class for the encoder--decoder architecture.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_encoder-decoder`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, encoder, decoder</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.encoder = encoder</span><br><span class="line">        self.decoder = decoder</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, enc_X, dec_X, *args</span>):</span><span class="comment">#前向传播函数，符合下面的图</span></span><br><span class="line">        enc_all_outputs = self.encoder(enc_X, *args)<span class="comment">#编码输出</span></span><br><span class="line">        dec_state = self.decoder.init_state(enc_all_outputs, *args)<span class="comment">#解码初始状态</span></span><br><span class="line">        <span class="comment"># Return decoder output only</span></span><br><span class="line">        <span class="keyword">return</span> self.decoder(dec_X, dec_state)[<span class="number">0</span>]<span class="comment">#解码输出</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习/s2s/1.svg" style="zoom:67%;"></p>
+<h3 id="训练">训练</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data = d2l.MTFraEng(batch_size=<span class="number">128</span>)<span class="comment">#数据集</span></span><br><span class="line">embed_size, num_hiddens, num_layers, dropout = <span class="number">256</span>, <span class="number">256</span>, <span class="number">2</span>, <span class="number">0.2</span><span class="comment">#参数</span></span><br><span class="line">encoder = Seq2SeqEncoder(</span><br><span class="line">    <span class="built_in">len</span>(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#编码器</span></span><br><span class="line">decoder = Seq2SeqDecoder(</span><br><span class="line">    <span class="built_in">len</span>(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#解码器</span></span><br><span class="line">model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>],<span class="comment">#模型</span></span><br><span class="line">                lr=<span class="number">0.005</span>)</span><br><span class="line">trainer = d2l.Trainer(max_epochs=<span class="number">30</span>, gradient_clip_val=<span class="number">1</span>, num_gpus=<span class="number">1</span>)</span><br><span class="line">trainer.fit(model, data)</span><br><span class="line"></span><br><span class="line">d2l.plt.show()</span><br></pre></td></tr></table></figure>
+<p><strong>训练分析：</strong></p>
+<p>解码器输出是一个形状为(batch_size, num_steps,
+vocab_size)的输出，这个输出和形状为(batch_size, num_steps,
+1)的target进行交叉熵损失函数计算损失，然后进行梯度反向传播优化模型</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/" title="机翻数据集和Seq2Sseq">http://example.com/2023/10/14/深度学习基础/机翻数据集和Seq2Sseq/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/RNN/" rel="prev" title="RNN">
+      <i class="fa fa-chevron-left"></i> RNN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/10/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/resnet-fmri/" rel="next" title="reshape逻辑">
+      reshape逻辑 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seq2seq"><span class="nav-number">2.</span> <span class="nav-text">Seq2Seq</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#encoder"><span class="nav-number">2.1.</span> <span class="nav-text">Encoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decoder"><span class="nav-number">2.2.</span> <span class="nav-text">Decoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88"><span class="nav-number">2.3.</span> <span class="nav-text">整合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.</span> <span class="nav-text">训练</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">196k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:59</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

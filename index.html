@@ -313,7 +313,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM_Med2D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -327,7 +327,123 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/" class="post-title-link" itemprop="url">机翻数据集和Seq2Sseq</a>
+            <a href="/2023/11/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM_Med2D/" class="post-title-link" itemprop="url">SAM_Med2D</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-04 18:41:00" itemprop="dateCreated datePublished" datetime="2023-11-04T18:41:00+08:00">2023-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-06 21:09:28" itemprop="dateModified" datetime="2023-11-06T21:09:28+08:00">2023-11-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">深度学习论文</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>352</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介绍">介绍</h2>
+<h3 id="如何微调">如何微调</h3>
+<ul>
+<li><p>收集并策划了一个医学图像分割数据集，该数据集包括超过460万个图像和1970万个掩模，使用了最大的医学影像分割数据集。</p></li>
+<li><p>交互式分割采用了不同的提示模式：边界框提示，点提示，掩膜提示。</p></li>
+</ul>
+<p><img src="/images/深度学习论文/SAM_Med2D/1.png" style="zoom:67%;"></p>
+<ul>
+<li>采用Adapter作为SAM大模型的微调策略。不需要重新训练整个模型，SAM原始知识不会忘记。是一种即插即用的组件。</li>
+</ul>
+<h3 id="如何评估模型表现">如何评估模型表现</h3>
+<ul>
+<li><p>数据多样化：CT,MR,X-Ray,不同器官，多种病理条件，例如肿瘤，发炎。</p></li>
+<li><p>微调策略：将SAM_Med2D和其他策略或者模型进行比较。</p></li>
+<li><p>泛化能力：使用9个MICCAI2023数据集进行泛化能力测试。</p></li>
+</ul>
+<h2 id="相关工作">相关工作</h2>
+<ul>
+<li>LVM:SegGPT,SEEM,CLIP,DALLE</li>
+<li>MIA（Medical Image Analysis）领域对SAM微调</li>
+<li>SAM在医学图像上的零样本分割评估</li>
+</ul>
+<h2 id="方法">方法</h2>
+<h3 id="将医学知识融入sam">将医学知识融入SAM</h3>
+<p><img src="/images/深度学习论文/SAM_Med2D/2.png" style="zoom:67%;"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Transformer%E9%9A%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Transformer%E9%9A%8F%E8%AE%B0/" class="post-title-link" itemprop="url">Transformer随记</a>
         </h2>
 
         <div class="post-meta">
@@ -340,8 +456,552 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-14 11:04:05 / 修改时间：15:11:54" itemprop="dateCreated datePublished" datetime="2023-10-14T11:04:05+08:00">2023-10-14</time>
+              <time title="创建时间：2023-10-28 11:30:32 / 修改时间：11:39:43" itemprop="dateCreated datePublished" datetime="2023-10-28T11:30:32+08:00">2023-10-28</time>
             </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>726</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/images/深度学习/Transformer/1.png" style="zoom:67%;"></p>
+<h2 id="为什么多头注意力qkv要先经过全连接层">为什么多头注意力qkv要先经过全连接层</h2>
+<p>全连接层的作用是通过可学习的参数来映射输入向量，以适应当前任务和模型结构的需要。这种映射能够增强模型的表达能力，使其能够更好地处理输入信息。在多头自注意力机制中，每个头都可以通过不同的映射来捕获不同的信息，从而提高模型的性能。</p>
+<p>也就是说每一个头是由输入分割而来，每一个头被单独映射可以进行单独学习，增加了模型表达能力。全连接层是一种特征映射。</p>
+<h2 id="自注意力原理">自注意力原理</h2>
+<p>自注意力实际上就是利用点积注意力实现对自身的多头注意力，自注意力（Self-Attention）模型的输出是一组权重，这些权重表示了输入序列中每个位置对其他位置的重要性。</p>
+<h2 id="位置编码作用">位置编码作用</h2>
+<p>在Transformer等注意力机制模型中，位置编码（Positional
+Encoding）的目的是为了将序列中的位置信息引入模型，以便模型能够处理序列中元素的顺序和位置信息。注意力机制本身是无法感知序列中元素的位置的，因此需要引入位置编码。</p>
+<p>位置编码是一组特殊的向量，其作用是为输入序列中的每个位置分配不同的编码。这些编码会与嵌入词向量相加，以在嵌入向量中包含位置信息。这个操作允许
+Transformer
+模型分辨不同位置的词或标记，从而能够处理具有序列性质的数据，如文本或时间序列。</p>
+<h2 id="transformer前馈网络的作用">Transformer前馈网络的作用</h2>
+<p>前馈网络主要有以下两个作用：</p>
+<ol type="1">
+<li>特征提取：前馈网络将自注意力机制的输出进行非线性变换，有助于提取更丰富的特征表示。这有助于模型更好地理解和捕捉输入序列中的语义和上下文信息。</li>
+<li>位置感知：前馈网络在自注意力机制之后，它帮助模型更好地处理序列中不同位置的信息。由于自注意力机制在不同位置之间是平凡的，因此前馈网络有助于区分不同位置上的信息，从而更好地捕捉输入序列的位置信息。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/BN%E5%92%8CLN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/BN%E5%92%8CLN/" class="post-title-link" itemprop="url">BN和LN</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-28 10:16:34 / 修改时间：10:18:23" itemprop="dateCreated datePublished" datetime="2023-10-28T10:16:34+08:00">2023-10-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>156</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>https://blog.csdn.net/weixin_44543648/article/details/124824265</p>
+<p>通俗理解就是，BN是对一个批次内的每一通道数据进行规范化，LN是对一个批次内的每一个样本分别进行规范化，因为LN一般用在NLP，而每一个样本所代表的句子语义是不同的，所以样本单独规范化。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BC%A0%E9%87%8F%E7%BB%B4%E5%BA%A6%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BC%A0%E9%87%8F%E7%BB%B4%E5%BA%A6%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">张量维度操作函数</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-26 09:44:12 / 修改时间：15:44:32" itemprop="dateCreated datePublished" datetime="2023-10-26T09:44:12+08:00">2023-10-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="stack和cat">stack和cat</h2>
+<ul>
+<li><code>torch.stack</code>:
+这个函数会在指定的维度上创建一个新的维度，并将输入张量堆叠到这个新维度上。因此，堆叠后的结果的维度比输入张量多一个。你需要指定
+<code>dim</code> 参数，以确定在哪个维度上堆叠。</li>
+<li><code>torch.cat</code>:
+这个函数会在指定的维度上将多个输入张量拼接在一起，不会创建新的维度。它会保持输入张量的维度不变，只是在指定的维度上合并。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建两个示例张量</span></span><br><span class="line">x1 = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">x2 = torch.tensor([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 torch.stack 在维度0上堆叠</span></span><br><span class="line">result_stack = torch.stack((x1, x2), dim=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 torch.cat 在维度0上拼接</span></span><br><span class="line">result_cat = torch.cat((x1, x2), dim=<span class="number">0</span>)<span class="comment">#这里dim=1报错</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;stack result:&quot;</span>, result_stack)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;cat result:&quot;</span>, result_cat)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="squeeze和unsqueeze">squeeze和unsqueeze</h2>
+<ul>
+<li><p><code>torch.squeeze</code>
+用于去除张量中大小为1的维度。如果带有参数例如squeeze(-1)会检测最后一个维度是否为1，如果为1则删除这个维度。</p></li>
+<li><p><code>torch.unsqueeze</code>
+用于在张量的指定位置插入大小为1的新维度。</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个具有大小为1的维度的张量</span></span><br><span class="line">x = torch.tensor([[[<span class="number">1</span>, <span class="number">2</span>]]])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Original shape:&quot;</span>, x.shape)  <span class="comment"># 输出: (1, 1, 2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 torch.squeeze 去除大小为1的维度</span></span><br><span class="line">y = torch.squeeze(x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Squeezed shape:&quot;</span>, y.shape)  <span class="comment"># 输出: (2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个张量</span></span><br><span class="line">x = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Original shape:&quot;</span>, x.shape)  <span class="comment"># 输出: (3,)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 torch.unsqueeze 在指定位置插入新维度</span></span><br><span class="line">y = torch.unsqueeze(x, dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Unsqueezed shape:&quot;</span>, y.shape)  <span class="comment"># 输出: (1, 3)</span></span><br></pre></td></tr></table></figure>
+<h2 id="transpose和permute">transpose和permute</h2>
+<ul>
+<li><code>torch.transpose</code>
+主要用于交换两个维度的位置，即将张量的维度重新排列，但不改变维度的个数。</li>
+<li><code>torch.permute</code>
+提供了更强大的功能，可以重新排列维度的顺序。可以使用
+<code>permute</code> 来对维度进行复杂的排列。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">y = x.transpose(<span class="number">0</span>, <span class="number">2</span>)  <span class="comment"># 交换维度 0 和 2</span></span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">y = x.permute(<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>)  <span class="comment"># 按顺序重新排列维度</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/" class="post-title-link" itemprop="url">视差估计</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-24 10:54:15 / 修改时间：11:36:05" itemprop="dateCreated datePublished" datetime="2023-10-24T10:54:15+08:00">2023-10-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="视差估计">视差估计</h2>
+<p>视差图是以图像对中任一幅图像为基准，其大小为该基准图像的大小，元素值为视差值的图像。由于视差图包含了场景的距离信息，因此从立体图像对中提取视差图的图像匹配非常重要。</p>
+<h2 id="ncc算法">NCC算法</h2>
+<h3 id="简介">简介</h3>
+<p>归一化相关性(NCC)(normalization
+cross-correlation)。顾名思义，就是用于归一化待匹配目标之间的相关程度，注意这里比较的是原始像素。通过在待匹配像素位置<span class="math inline">\(p(p_x,p_y)\)</span>,构建3*3邻域匹配窗口，与目标像素位置<span class="math inline">\(p&#39;(p_x,p_y)\)</span>同样构建邻域匹配窗口的方式建立目标函数来对匹配窗口进行度量相关性，注意这里构建相关窗口的前提是两帧图像之间已经校正到水平位置，即光心处于同一水平线上，此时极线是水平的，否则匹配过程只能在倾斜的极线方向上完成，这将消耗更多的计算资源。</p>
+<h3 id="原理">原理</h3>
+<p>NCC是一种基于统计学计算两组样本数据相关性的算法，其取值范围为[-1,
+1]之间，而对图像来说，每个像素点都可以看出是RGB数值，这样整幅图像就可以看成是一个样本数据的集合，如果它有一个子集与另外一个样本数据相互匹配则它的ncc值为1，表示相关性很高，如果是-1则表示完全不相关，基于这个原理，实现图像基于模板匹配识别算法，其中第一步就是要归一化数据。NCC计算公式如下所示：
+<span class="math display">\[
+NCC(p,d)=\frac
+{\sum_{(x,y)\epsilon
+W_p}(I_1(x,y)-\overline{I_1}(p_x,p_y))\cdot(I_2(x+d,y)-\overline{I_2}(p_x+d,p_y))}
+{\sqrt{\sum_{(x,y)\epsilon
+W_p}(I_1(x,y)-\overline{I_1}(p_x,p_y))^2\cdot\sum_{(x,y)\epsilon
+W_p}(I_2(x+d,y)-\overline{I_2}(p_x+d,p_y))^2}}
+\]</span></p>
+<ul>
+<li>其中NCC(p,d)得到的值得范围将在[-1,1]]之间。</li>
+<li><span class="math inline">\(W_p\)</span>为之前提到的匹配窗口。</li>
+<li><span class="math inline">\(I_1(x,y)\)</span>为原始图像的像素值。</li>
+<li><span class="math inline">\(\overline{I_1}(p_x,p_y)\)</span>为原始窗口内像素的均值。</li>
+<li><span class="math inline">\(I_2(x+d,y)\)</span>为原始图像在目标图像上对应点位置在xxx方向上偏移ddd后的像素值。</li>
+<li><span class="math inline">\(\overline{I_2}(p_x+d,p_y)\)</span>为目标图像匹配窗口像素均值。</li>
+<li>若NCC=-1,则表示两个匹配窗口完全不相关，相反，若NCC=1时，表示两个匹配窗口相关程度非常高。</li>
+</ul>
+<h2 id="匹配流程">匹配流程</h2>
+<h3 id="采集图像">采集图像</h3>
+<p>通过标定好的双目相机采集图像，也可以用两个单目相机来组合成双目相机。本次实验选用https://vision.middlebury.edu/stereo/data/网站的数据集</p>
+<h3 id="极线校正">极线校正</h3>
+<p>校正的目的是使两帧图像极线处于水平方向，或者说是使两帧图像的光心处于同一水平线上。通过校正极线可以方便后续的NCC操作。</p>
+<p>由标定得到的内参中畸变信息中可以对图像去除畸变。
+通过校正函数校正以后得到相机的矫正变换R和新的投影矩阵P，接下来是要对左右视图进行去畸变，并得到重映射矩阵。</p>
+<h3 id="特征匹配">特征匹配</h3>
+<p>匹配方法如上所述，右视图中与左视图待测像素同一水平线上相关性最高的即为最优匹配。完成匹配后，我们需要记录其视差d，即待测像素水平方向xl与匹配像素水平方向xr之间的差值d=xr−xl，最终我们可以得到一个与原始图像尺寸相同的视差图D。</p>
+<h3 id="深度恢复">深度恢复</h3>
+<p>通过上述匹配结果得到的视差图D，我们可以很简单的利用相似三角形反推出以左视图为参考系的深度图。</p>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> pylab <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> scipy.ndimage <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plane_sweep_ncc</span>(<span class="params">im_l, im_r, start, steps, wid</span>):</span></span><br><span class="line">    <span class="comment"># 使用归一化的互相关计算视差图像 &quot;&quot;&quot;</span></span><br><span class="line">    m, n = im_l.shape</span><br><span class="line">    <span class="comment"># 保存不同求和值的数组</span></span><br><span class="line">    mean_l = zeros((m, n))</span><br><span class="line">    mean_r = zeros((m, n))</span><br><span class="line">    s = zeros((m, n))</span><br><span class="line">    s_l = zeros((m, n))</span><br><span class="line">    s_r = zeros((m, n))</span><br><span class="line">    <span class="comment"># 保存深度平面的数组</span></span><br><span class="line">    dmaps = zeros((m, n, steps))</span><br><span class="line">    <span class="comment"># 计算图像块的平均值</span></span><br><span class="line">    filters.uniform_filter(im_l, wid, mean_l)</span><br><span class="line">    filters.uniform_filter(im_r, wid, mean_r)</span><br><span class="line">    <span class="comment"># 归一化图像</span></span><br><span class="line">    norm_l = im_l - mean_l</span><br><span class="line">    norm_r = im_r - mean_r</span><br><span class="line">    <span class="comment"># 尝试不同的视差</span></span><br><span class="line">    <span class="keyword">for</span> displ <span class="keyword">in</span> <span class="built_in">range</span>(steps):</span><br><span class="line">        <span class="comment"># 将左边图像移动到右边，计算加和</span></span><br><span class="line">        filters.uniform_filter(roll(norm_l, -displ - start) * norm_r, wid, s)  <span class="comment"># 和归一化</span></span><br><span class="line">        filters.uniform_filter(roll(norm_l, -displ - start) * roll(norm_l, -displ - start), wid, s_l)</span><br><span class="line">        filters.uniform_filter(norm_r * norm_r, wid, s_r)  <span class="comment"># 和反归一化</span></span><br><span class="line">        <span class="comment"># 保存 ncc 的分数</span></span><br><span class="line">        dmaps[:, :, displ] = s / sqrt(s_l * s_r)</span><br><span class="line">    <span class="comment"># 为每个像素选取最佳深度</span></span><br><span class="line">    <span class="keyword">return</span> argmax(dmaps, axis=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">im_l = array(Image.<span class="built_in">open</span>(<span class="string">&#x27;D:\Py docu\cv2\image\im2.png&#x27;</span>).convert(<span class="string">&#x27;L&#x27;</span>), <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line">im_r = array(Image.<span class="built_in">open</span>(<span class="string">&#x27;D:\Py docu\cv2\image\im6.png&#x27;</span>).convert(<span class="string">&#x27;L&#x27;</span>), <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line"><span class="comment"># 开始偏移，并设置步长</span></span><br><span class="line">steps = <span class="number">50</span></span><br><span class="line">start = <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ncc 的宽度</span></span><br><span class="line">wid = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">res = plane_sweep_ncc(im_l, im_r, start, steps, wid)</span><br><span class="line"></span><br><span class="line">imsave(<span class="string">&#x27;depth20.png&#x27;</span>, res)</span><br></pre></td></tr></table></figure>
+<h2 id="实验结果">实验结果</h2>
+<h3 id="原图像">原图像</h3>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\image\im2.png" alt="im2" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\image\im6.png" alt="im6" style="zoom: 67%;"></p>
+<h3 id="不同的窗口值">不同的窗口值</h3>
+<h4 id="wid35">wid=3，5</h4>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth3.png" alt="depth3" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth5.png" alt="depth5" style="zoom:67%;"></p>
+<h4 id="wid81020">wid=8，10，20</h4>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth8.png" alt="depth8" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth10.png" alt="depth10" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth20.png" alt="depth20" style="zoom:67%;"></p>
+<p>随着窗口值增大可以发现上面的判断纹理低的区域错误的匹配基本上得到矫正，但是在信息的细节上越来越模糊.</p>
+<p>从wid=20可以明显看出，图片中的噪声几乎被矫正完，但随之而然的图片细节鲁棒也越来越差。由此可以得出结论。wid值越小图片对噪声越敏感，在低纹理区会出现很多错误匹配，但细节鲁棒好，值越大噪声鲁棒好，错误匹配随之被纠正但细节随之会被忽略掉，导致图片的精度小。</p>
+<p>通过上图实现可以发现，面具表面的细节纹理都没有被算法所体现出来，这是光学失真(光线亮度)所引起的，所以在选取图片时，图片是否光线充足，是否透明，是否重叠都会影响算法的匹配精确度。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/resnet-fmri/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/resnet-fmri/" class="post-title-link" itemprop="url">reshape逻辑</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-15 21:12:00 / 修改时间：21:28:03" itemprop="dateCreated datePublished" datetime="2023-10-15T21:12:00+08:00">2023-10-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>533</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="abstract">Abstract</h2>
+<p>使用Resnet对rs-fMRI（静息功能磁共振成像）图像进行阿尔兹海默症多阶段分类。六个阶段：</p>
+<ol type="1">
+<li>CN（Cognitively
+Normal）：指的是认知正常的个体，即没有明显的认知功能下降或记忆问题。</li>
+<li>SMC（Subjective Memory
+Concerns）：主观记忆担忧，指的是个体自己报告存在记忆问题或担忧，但尚未达到明显的认知下降。</li>
+<li>EMCI（Early Mild Cognitive
+Impairment）：早期轻度认知功能障碍，是指一些认知功能的下降，但尚未达到明显的认知损害。</li>
+<li>MCI（Mild Cognitive
+Impairment）：轻度认知功能障碍，表示认知功能明显下降，但尚未满足诊断为阿尔兹海默症的标准。MCI患者可能有轻微的记忆问题，但日常生活能力尚未受到明显影响。</li>
+<li>LMCI（Late Mild Cognitive
+Impairment）：晚期轻度认知功能障碍，指的是MCI患者在认知功能方面进一步下降，接近阿尔兹海默症的认知损害水平。</li>
+<li>AD（Alzheimer's
+Disease）：阿尔兹海默症，是一种慢性神经系统疾病，表现为逐渐恶化的认知功能障碍，包括记忆问题、思维和日常生活能力的丧失。它是一种进行性的神经退行性疾病。</li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9C%BA%E7%BF%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8CSeq2Sseq/" class="post-title-link" itemprop="url">机翻数据集和Seq2Sseq</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-14 11:04:05" itemprop="dateCreated datePublished" datetime="2023-10-14T11:04:05+08:00">2023-10-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-26 15:14:28" itemprop="dateModified" datetime="2023-10-26T15:14:28+08:00">2023-10-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -377,14 +1037,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MTFraEng</span>(<span class="params">d2l.DataModule</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The English-French dataset.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#下载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_download</span>(<span class="params">self</span>):</span></span><br><span class="line">        d2l.extract(d2l.download(</span><br><span class="line">            d2l.DATA_URL+<span class="string">&#x27;fra-eng.zip&#x27;</span>, self.root,</span><br><span class="line">            <span class="string">&#x27;94646ad1522d915e7b0f9296181140edcf86a4f5&#x27;</span>))</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.root + <span class="string">&#x27;/fra-eng/fra.txt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">return</span> f.read()</span><br><span class="line">	<span class="comment">#预处理文本</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_preprocess</span>(<span class="params">self, text</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># Replace non-breaking space with space</span></span><br><span class="line">        text = text.replace(<span class="string">&#x27;\u202f&#x27;</span>, <span class="string">&#x27; &#x27;</span>).replace(<span class="string">&#x27;\xa0&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="comment"># Insert space between words and punctuation marks</span></span><br><span class="line">        no_space = <span class="keyword">lambda</span> char, prev_char: char <span class="keyword">in</span> <span class="string">&#x27;,.!?&#x27;</span> <span class="keyword">and</span> prev_char != <span class="string">&#x27; &#x27;</span></span><br><span class="line">        out = [<span class="string">&#x27; &#x27;</span> + char <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> no_space(char, text[i - <span class="number">1</span>]) <span class="keyword">else</span> char</span><br><span class="line">               <span class="keyword">for</span> i, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.lower())]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(out)</span><br><span class="line">	<span class="comment">#将文本分成两部分，源文本和目标文本。</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_tokenize</span>(<span class="params">self, text, max_examples=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        src, tgt = [], []</span><br><span class="line">        <span class="keyword">for</span> i, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.split(<span class="string">&#x27;\n&#x27;</span>)):</span><br><span class="line">            <span class="keyword">if</span> max_examples <span class="keyword">and</span> i &gt; max_examples: <span class="keyword">break</span></span><br><span class="line">            parts = line.split(<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(parts) == <span class="number">2</span>:</span><br><span class="line">                <span class="comment"># Skip empty tokens</span></span><br><span class="line">                src.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">0</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">                tgt.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">1</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">        <span class="keyword">return</span> src, tgt</span><br><span class="line">	<span class="comment">#初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, batch_size, num_steps=<span class="number">9</span>, num_train=<span class="number">512</span>, num_val=<span class="number">128</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(MTFraEng, self).__init__()</span><br><span class="line">        self.save_hyperparameters()</span><br><span class="line">        self.arrays, self.src_vocab, self.tgt_vocab = self._build_arrays(</span><br><span class="line">            self._download())</span><br><span class="line">	<span class="comment">#构造词表，生成源文本序列和目标文本序列（数字标记化）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_build_arrays</span>(<span class="params">self, raw_text, src_vocab=<span class="literal">None</span>, tgt_vocab=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_build_array</span>(<span class="params">sentences, vocab, is_tgt=<span class="literal">False</span></span>):</span></span><br><span class="line">            pad_or_trim = <span class="keyword">lambda</span> seq, t: (</span><br><span class="line">                seq[:t] <span class="keyword">if</span> <span class="built_in">len</span>(seq) &gt; t <span class="keyword">else</span> seq + [<span class="string">&#x27;&lt;pad&gt;&#x27;</span>] * (t - <span class="built_in">len</span>(seq)))</span><br><span class="line">            sentences = [pad_or_trim(s, self.num_steps) <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> is_tgt:</span><br><span class="line">                sentences = [[<span class="string">&#x27;&lt;bos&gt;&#x27;</span>] + s <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> vocab <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                vocab = d2l.Vocab(sentences, min_freq=<span class="number">2</span>)</span><br><span class="line">            array = d2l.tensor([vocab[s] <span class="keyword">for</span> s <span class="keyword">in</span> sentences])</span><br><span class="line">            valid_len = d2l.reduce_sum(</span><br><span class="line">                d2l.astype(array != vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>], d2l.int32), <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> array, vocab, valid_len</span><br><span class="line">        src, tgt = self._tokenize(self._preprocess(raw_text),</span><br><span class="line">                                  self.num_train + self.num_val)</span><br><span class="line">        src_array, src_vocab, src_valid_len = _build_array(src, src_vocab)</span><br><span class="line">        tgt_array, tgt_vocab, _ = _build_array(tgt, tgt_vocab, <span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> ((src_array, tgt_array[:,:-<span class="number">1</span>], src_valid_len, tgt_array[:,<span class="number">1</span>:]),</span><br><span class="line">                src_vocab, tgt_vocab)</span><br><span class="line">	<span class="comment">#加载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_dataloader</span>(<span class="params">self, train</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        idx = <span class="built_in">slice</span>(<span class="number">0</span>, self.num_train) <span class="keyword">if</span> train <span class="keyword">else</span> <span class="built_in">slice</span>(self.num_train, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">return</span> self.get_tensorloader(self.arrays, train, idx)</span><br><span class="line">	<span class="comment">#构造</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">self, src_sentences, tgt_sentences</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        raw_text = <span class="string">&#x27;\n&#x27;</span>.join([src + <span class="string">&#x27;\t&#x27;</span> + tgt <span class="keyword">for</span> src, tgt <span class="keyword">in</span> <span class="built_in">zip</span>(</span><br><span class="line">            src_sentences, tgt_sentences)])</span><br><span class="line">        arrays, _, _ = self._build_arrays(</span><br><span class="line">            raw_text, self.src_vocab, self.tgt_vocab)</span><br><span class="line">        <span class="keyword">return</span> arrays</span><br></pre></td></tr></table></figure>
-<h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h2><h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqEncoder</span>(<span class="params">d2l.Encoder</span>):</span>  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN encoder for sequence-to-sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#初始化，传入词表尺寸，嵌入尺寸，隐藏单元数量，隐藏层数，drop概率</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)<span class="comment">#嵌入层，根据词表的尺寸生成了一个维度为vocab_size*embed_size的向量表</span></span><br><span class="line">        self.rnn = d2l.GRU(embed_size, num_hiddens, num_layers, dropout)<span class="comment">#使用GRU循环神经网络，进行编码</span></span><br><span class="line">        self.apply(init_seq2seq)<span class="comment">#应用初始化</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, *args</span>):</span><span class="comment">#前向传播函数</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int64))<span class="comment">#生成嵌入向量</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        outputs, state = self.rnn(embs)<span class="comment">#GRU前向传播，生成outputs每个时间步最后的状态输出，state最后是时间步每个隐藏单元层的状态输出</span></span><br><span class="line">        <span class="comment"># outputs shape: (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="comment"># state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, state</span><br></pre></td></tr></table></figure>
-<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqDecoder</span>(<span class="params">d2l.Decoder</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN decoder for sequence to sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)</span><br><span class="line">        self.rnn = d2l.GRU(embed_size+num_hiddens, num_hiddens,</span><br><span class="line">                           num_layers, dropout)</span><br><span class="line">        self.dense = nn.LazyLinear(vocab_size)</span><br><span class="line">        self.apply(init_seq2seq)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_state</span>(<span class="params">self, enc_all_outputs, *args</span>):</span></span><br><span class="line">        <span class="keyword">return</span> enc_all_outputs</span><br><span class="line">	<span class="comment">#</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, state</span>):</span><span class="comment">#输入tgt[:,:-1]，以及编码层输出，即outputs和state</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int32))<span class="comment">#嵌入转换</span></span><br><span class="line">        enc_output, hidden_state = state<span class="comment">#outputs最后一个时间步的最终输出状态作为context，最后一个时间步的所有隐藏单元状态作为下一个GRU的初始状态</span></span><br><span class="line">        <span class="comment"># context shape: (batch_size, num_hiddens)</span></span><br><span class="line">        context = enc_output[-<span class="number">1</span>]<span class="comment">#去最后一个时间步的状态输出作为上下文</span></span><br><span class="line">        <span class="comment"># Broadcast context to (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        context = context.repeat(embs.shape[<span class="number">0</span>], <span class="number">1</span>, <span class="number">1</span>)<span class="comment">#维度扩展</span></span><br><span class="line">        <span class="comment"># Concat at the feature dimension</span></span><br><span class="line">        embs_and_context = torch.cat((embs, context), -<span class="number">1</span>)<span class="comment">#连接上下文和输入变量</span></span><br><span class="line">        outputs, hidden_state = self.rnn(embs_and_context, hidden_state)<span class="comment">#编码GRU前向传播</span></span><br><span class="line">        outputs = self.dense(outputs).swapaxes(<span class="number">0</span>, <span class="number">1</span>)<span class="comment">#全连接层将隐藏状态转换为尺寸为vocab_size的输出以便进行损失函数计算</span></span><br><span class="line">        <span class="comment"># outputs shape: (batch_size, num_steps, vocab_size)</span></span><br><span class="line">        <span class="comment"># hidden_state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, [enc_output, hidden_state]</span><br></pre></td></tr></table></figure>
-<h3 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EncoderDecoder</span>(<span class="params">d2l.Classifier</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The base class for the encoder--decoder architecture.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_encoder-decoder`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, encoder, decoder</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.encoder = encoder</span><br><span class="line">        self.decoder = decoder</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, enc_X, dec_X, *args</span>):</span><span class="comment">#前向传播函数，符合下面的图</span></span><br><span class="line">        enc_all_outputs = self.encoder(enc_X, *args)<span class="comment">#编码输出</span></span><br><span class="line">        dec_state = self.decoder.init_state(enc_all_outputs, *args)<span class="comment">#解码初始状态</span></span><br><span class="line">        <span class="comment"># Return decoder output only</span></span><br><span class="line">        <span class="keyword">return</span> self.decoder(dec_X, dec_state)[<span class="number">0</span>]<span class="comment">#解码输出</span></span><br></pre></td></tr></table></figure>
+          <h2 id="数据集">数据集</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MTFraEng</span>(<span class="params">d2l.DataModule</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The English-French dataset.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#下载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_download</span>(<span class="params">self</span>):</span></span><br><span class="line">        d2l.extract(d2l.download(</span><br><span class="line">            d2l.DATA_URL+<span class="string">&#x27;fra-eng.zip&#x27;</span>, self.root,</span><br><span class="line">            <span class="string">&#x27;94646ad1522d915e7b0f9296181140edcf86a4f5&#x27;</span>))</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.root + <span class="string">&#x27;/fra-eng/fra.txt&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">return</span> f.read()</span><br><span class="line">	<span class="comment">#预处理文本</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_preprocess</span>(<span class="params">self, text</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># Replace non-breaking space with space</span></span><br><span class="line">        text = text.replace(<span class="string">&#x27;\u202f&#x27;</span>, <span class="string">&#x27; &#x27;</span>).replace(<span class="string">&#x27;\xa0&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="comment"># Insert space between words and punctuation marks</span></span><br><span class="line">        no_space = <span class="keyword">lambda</span> char, prev_char: char <span class="keyword">in</span> <span class="string">&#x27;,.!?&#x27;</span> <span class="keyword">and</span> prev_char != <span class="string">&#x27; &#x27;</span></span><br><span class="line">        out = [<span class="string">&#x27; &#x27;</span> + char <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> no_space(char, text[i - <span class="number">1</span>]) <span class="keyword">else</span> char</span><br><span class="line">               <span class="keyword">for</span> i, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.lower())]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(out)</span><br><span class="line">	<span class="comment">#将文本分成两部分，源文本和目标文本。</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_tokenize</span>(<span class="params">self, text, max_examples=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        src, tgt = [], []</span><br><span class="line">        <span class="keyword">for</span> i, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(text.split(<span class="string">&#x27;\n&#x27;</span>)):</span><br><span class="line">            <span class="keyword">if</span> max_examples <span class="keyword">and</span> i &gt; max_examples: <span class="keyword">break</span></span><br><span class="line">            parts = line.split(<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(parts) == <span class="number">2</span>:</span><br><span class="line">                <span class="comment"># Skip empty tokens</span></span><br><span class="line">                src.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">0</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">                tgt.append([t <span class="keyword">for</span> t <span class="keyword">in</span> <span class="string">f&#x27;<span class="subst">&#123;parts[<span class="number">1</span>]&#125;</span> &lt;eos&gt;&#x27;</span>.split(<span class="string">&#x27; &#x27;</span>) <span class="keyword">if</span> t])</span><br><span class="line">        <span class="keyword">return</span> src, tgt</span><br><span class="line">	<span class="comment">#初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, batch_size, num_steps=<span class="number">9</span>, num_train=<span class="number">512</span>, num_val=<span class="number">128</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_machine_translation`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(MTFraEng, self).__init__()</span><br><span class="line">        self.save_hyperparameters()</span><br><span class="line">        self.arrays, self.src_vocab, self.tgt_vocab = self._build_arrays(</span><br><span class="line">            self._download())</span><br><span class="line">	<span class="comment">#构造词表，生成源文本序列和目标文本序列（数字标记化）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_build_arrays</span>(<span class="params">self, raw_text, src_vocab=<span class="literal">None</span>, tgt_vocab=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_build_array</span>(<span class="params">sentences, vocab, is_tgt=<span class="literal">False</span></span>):</span></span><br><span class="line">            pad_or_trim = <span class="keyword">lambda</span> seq, t: (</span><br><span class="line">                seq[:t] <span class="keyword">if</span> <span class="built_in">len</span>(seq) &gt; t <span class="keyword">else</span> seq + [<span class="string">&#x27;&lt;pad&gt;&#x27;</span>] * (t - <span class="built_in">len</span>(seq)))</span><br><span class="line">            sentences = [pad_or_trim(s, self.num_steps) <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> is_tgt:</span><br><span class="line">                sentences = [[<span class="string">&#x27;&lt;bos&gt;&#x27;</span>] + s <span class="keyword">for</span> s <span class="keyword">in</span> sentences]</span><br><span class="line">            <span class="keyword">if</span> vocab <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                vocab = d2l.Vocab(sentences, min_freq=<span class="number">2</span>)</span><br><span class="line">            array = d2l.tensor([vocab[s] <span class="keyword">for</span> s <span class="keyword">in</span> sentences])</span><br><span class="line">            valid_len = d2l.reduce_sum(</span><br><span class="line">                d2l.astype(array != vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>], d2l.int32), <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> array, vocab, valid_len</span><br><span class="line">        src, tgt = self._tokenize(self._preprocess(raw_text),</span><br><span class="line">                                  self.num_train + self.num_val)</span><br><span class="line">        src_array, src_vocab, src_valid_len = _build_array(src, src_vocab)</span><br><span class="line">        tgt_array, tgt_vocab, _ = _build_array(tgt, tgt_vocab, <span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> ((src_array, tgt_array[:,:-<span class="number">1</span>], src_valid_len, tgt_array[:,<span class="number">1</span>:]),</span><br><span class="line">                src_vocab, tgt_vocab)</span><br><span class="line">	<span class="comment">#加载数据集</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_dataloader</span>(<span class="params">self, train</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        idx = <span class="built_in">slice</span>(<span class="number">0</span>, self.num_train) <span class="keyword">if</span> train <span class="keyword">else</span> <span class="built_in">slice</span>(self.num_train, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">return</span> self.get_tensorloader(self.arrays, train, idx)</span><br><span class="line">	<span class="comment">#构造</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">self, src_sentences, tgt_sentences</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Defined in :numref:`subsec_loading-seq-fixed-len`&quot;&quot;&quot;</span></span><br><span class="line">        raw_text = <span class="string">&#x27;\n&#x27;</span>.join([src + <span class="string">&#x27;\t&#x27;</span> + tgt <span class="keyword">for</span> src, tgt <span class="keyword">in</span> <span class="built_in">zip</span>(</span><br><span class="line">            src_sentences, tgt_sentences)])</span><br><span class="line">        arrays, _, _ = self._build_arrays(</span><br><span class="line">            raw_text, self.src_vocab, self.tgt_vocab)</span><br><span class="line">        <span class="keyword">return</span> arrays</span><br></pre></td></tr></table></figure>
+<h2 id="seq2seq">Seq2Seq</h2>
+<h3 id="encoder">Encoder</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqEncoder</span>(<span class="params">d2l.Encoder</span>):</span>  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN encoder for sequence-to-sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#初始化，传入词表尺寸，嵌入尺寸，隐藏单元数量，隐藏层数，drop概率</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)<span class="comment">#嵌入层，这一步是首先根据词表的尺寸生成了一个维度为vocab_size*embed_size的向量表</span></span><br><span class="line">        self.rnn = d2l.GRU(embed_size, num_hiddens, num_layers, dropout)<span class="comment">#使用GRU循环神经网络，进行编码</span></span><br><span class="line">        self.apply(init_seq2seq)<span class="comment">#应用初始化</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, *args</span>):</span><span class="comment">#前向传播函数</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int64))<span class="comment">#根据向量表生成每一个输入对应的嵌入向量</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        outputs, state = self.rnn(embs)<span class="comment">#GRU前向传播，生成outputs每个时间步最后的状态输出，state最后是时间步每个隐藏单元层的状态输出，相当于是一个矩形，长是时间步输出，宽是隐藏状态</span></span><br><span class="line">        <span class="comment"># outputs shape: (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="comment"># state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, state</span><br></pre></td></tr></table></figure>
+<h3 id="decoder">Decoder</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seq2SeqDecoder</span>(<span class="params">d2l.Decoder</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The RNN decoder for sequence to sequence learning.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers,</span></span></span><br><span class="line"><span class="params"><span class="function">                 dropout=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)</span><br><span class="line">        self.rnn = d2l.GRU(embed_size+num_hiddens, num_hiddens,</span><br><span class="line">                           num_layers, dropout)</span><br><span class="line">        self.dense = nn.LazyLinear(vocab_size)</span><br><span class="line">        self.apply(init_seq2seq)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_state</span>(<span class="params">self, enc_all_outputs, *args</span>):</span></span><br><span class="line">        <span class="keyword">return</span> enc_all_outputs</span><br><span class="line">	<span class="comment">#</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, state</span>):</span><span class="comment">#输入tgt[:,:-1]，以及编码层输出，即outputs和state</span></span><br><span class="line">        <span class="comment"># X shape: (batch_size, num_steps)</span></span><br><span class="line">        <span class="comment"># embs shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        embs = self.embedding(X.t().<span class="built_in">type</span>(torch.int32))<span class="comment">#嵌入转换</span></span><br><span class="line">        enc_output, hidden_state = state<span class="comment">#每一个时间步的最终输出状态作为enc_output，最后一个时间步的所有隐藏单元状态作为下一个GRU的初始状态</span></span><br><span class="line">        <span class="comment"># context shape: (batch_size, num_hiddens)</span></span><br><span class="line">        context = enc_output[-<span class="number">1</span>]<span class="comment">#取最后一个时间步的输出作为上下文</span></span><br><span class="line">        <span class="comment"># Broadcast context to (num_steps, batch_size, num_hiddens)</span></span><br><span class="line">        context = context.repeat(embs.shape[<span class="number">0</span>], <span class="number">1</span>, <span class="number">1</span>)<span class="comment">#维度扩展</span></span><br><span class="line">        <span class="comment"># Concat at the feature dimension</span></span><br><span class="line">        embs_and_context = torch.cat((embs, context), -<span class="number">1</span>)<span class="comment">#连接上下文和输入变量</span></span><br><span class="line">        outputs, hidden_state = self.rnn(embs_and_context, hidden_state)<span class="comment">#编码GRU前向传播</span></span><br><span class="line">        outputs = self.dense(outputs).swapaxes(<span class="number">0</span>, <span class="number">1</span>)<span class="comment">#全连接层将隐藏状态转换为尺寸为vocab_size的输出以便进行损失函数计算</span></span><br><span class="line">        <span class="comment"># outputs shape: (batch_size, num_steps, vocab_size)</span></span><br><span class="line">        <span class="comment"># hidden_state shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        <span class="keyword">return</span> outputs, [enc_output, hidden_state]</span><br></pre></td></tr></table></figure>
+<h3 id="整合">整合</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EncoderDecoder</span>(<span class="params">d2l.Classifier</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;The base class for the encoder--decoder architecture.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Defined in :numref:`sec_encoder-decoder`&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, encoder, decoder</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.encoder = encoder</span><br><span class="line">        self.decoder = decoder</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, enc_X, dec_X, *args</span>):</span><span class="comment">#前向传播函数，符合下面的图</span></span><br><span class="line">        enc_all_outputs = self.encoder(enc_X, *args)<span class="comment">#编码输出</span></span><br><span class="line">        dec_state = self.decoder.init_state(enc_all_outputs, *args)<span class="comment">#解码初始状态</span></span><br><span class="line">        <span class="comment"># Return decoder output only</span></span><br><span class="line">        <span class="keyword">return</span> self.decoder(dec_X, dec_state)[<span class="number">0</span>]<span class="comment">#解码输出</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/深度学习/s2s/1.svg" style="zoom:67%;"></p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data = d2l.MTFraEng(batch_size=<span class="number">128</span>)<span class="comment">#数据集</span></span><br><span class="line">embed_size, num_hiddens, num_layers, dropout = <span class="number">256</span>, <span class="number">256</span>, <span class="number">2</span>, <span class="number">0.2</span><span class="comment">#参数</span></span><br><span class="line">encoder = Seq2SeqEncoder(</span><br><span class="line">    <span class="built_in">len</span>(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#编码器</span></span><br><span class="line">decoder = Seq2SeqDecoder(</span><br><span class="line">    <span class="built_in">len</span>(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#解码器</span></span><br><span class="line">model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>],<span class="comment">#模型</span></span><br><span class="line">                lr=<span class="number">0.005</span>)</span><br><span class="line">trainer = d2l.Trainer(max_epochs=<span class="number">30</span>, gradient_clip_val=<span class="number">1</span>, num_gpus=<span class="number">1</span>)</span><br><span class="line">trainer.fit(model, data)</span><br><span class="line"></span><br><span class="line">d2l.plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="训练">训练</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data = d2l.MTFraEng(batch_size=<span class="number">128</span>)<span class="comment">#数据集</span></span><br><span class="line">embed_size, num_hiddens, num_layers, dropout = <span class="number">256</span>, <span class="number">256</span>, <span class="number">2</span>, <span class="number">0.2</span><span class="comment">#参数</span></span><br><span class="line">encoder = Seq2SeqEncoder(</span><br><span class="line">    <span class="built_in">len</span>(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#编码器</span></span><br><span class="line">decoder = Seq2SeqDecoder(</span><br><span class="line">    <span class="built_in">len</span>(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)<span class="comment">#解码器</span></span><br><span class="line">model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab[<span class="string">&#x27;&lt;pad&gt;&#x27;</span>],<span class="comment">#模型</span></span><br><span class="line">                lr=<span class="number">0.005</span>)</span><br><span class="line">trainer = d2l.Trainer(max_epochs=<span class="number">30</span>, gradient_clip_val=<span class="number">1</span>, num_gpus=<span class="number">1</span>)</span><br><span class="line">trainer.fit(model, data)</span><br><span class="line"></span><br><span class="line">d2l.plt.show()</span><br></pre></td></tr></table></figure>
 <p><strong>训练分析：</strong></p>
-<p>解码器输出是一个形状为(batch_size, num_steps, vocab_size)的输出，这个输出和形状为(batch_size, num_steps, 1)的target进行交叉熵损失函数计算损失，然后进行梯度反向传播优化模型</p>
+<p>解码器输出是一个形状为(batch_size, num_steps,
+vocab_size)的输出，这个输出和形状为(batch_size, num_steps,
+1)的target进行交叉熵损失函数计算损失，然后进行梯度反向传播优化模型</p>
 
       
     </div>
@@ -406,7 +1074,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RNN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/RNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -420,7 +1088,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RNN/" class="post-title-link" itemprop="url">RNN</a>
+            <a href="/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/RNN/" class="post-title-link" itemprop="url">RNN</a>
         </h2>
 
         <div class="post-meta">
@@ -470,28 +1138,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="原理流程"><a href="#原理流程" class="headerlink" title="原理流程"></a>原理流程</h2><p>这篇文章我们从后向前分析：</p>
+          <h2 id="原理流程">原理流程</h2>
+<p>这篇文章我们从后向前分析：</p>
 <p>以下是训练过程：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = d2l.TimeMachine(batch_size=<span class="number">1024</span>, num_steps=<span class="number">32</span>)<span class="comment">#数据集</span></span><br><span class="line">rnn = RNNScratch(num_inputs=<span class="built_in">len</span>(data.vocab), num_hiddens=<span class="number">32</span>)<span class="comment">#rnn模型</span></span><br><span class="line">model = RNNLMScratch(rnn, vocab_size=<span class="built_in">len</span>(data.vocab), lr=<span class="number">1</span>)<span class="comment">#语言模型</span></span><br><span class="line">trainer = d2l.Trainer(max_epochs=<span class="number">100</span>, gradient_clip_val=<span class="number">1</span>, num_gpus=<span class="number">1</span>)<span class="comment">#训练器</span></span><br><span class="line">trainer.fit(model, data)<span class="comment">#训练</span></span><br></pre></td></tr></table></figure>
-<p><strong>1.</strong>在训练过程中，我们首先调用了 d2l.TimeMachine数据集，这个数据集是我们自建的，简要建立过程如下：每一个X代表了一个字母。输入表的行数就是num_steps，列数就是数据集大小。并且数据集还将出现的字母和空格还有未知编成了一个vocab表以便索引和编码，所以实际上X是不同的数字，范围从0-27.</p>
+<p><strong>1.</strong>在训练过程中，我们首先调用了
+d2l.TimeMachine数据集，这个数据集是我们自建的，简要建立过程如下：每一个X代表了一个字母。输入表的行数就是num_steps，列数就是数据集大小。并且数据集还将出现的字母和空格还有未知编成了一个vocab表以便索引和编码，所以实际上X是不同的数字，范围从0-27.</p>
 <table>
-    <tr>
-        <td colspan="3">输入</td><td colspan="3">输出</td>
-    </tr>
-    <tr>
-        <th>x[0]</th><th>x[1]</th><th>x[2]</th><th>x[1]</th><th>x[2]</th><th>x[3]</th>
-    </tr>
-    <tr>
-        <th>x[1]</th><th>x[2]</th><th>x[3]</th><th>x[2]</th><th>x[3]</th><th>x[4]</th>
-    </tr>
-    <tr>
-        <th>x[2]</th><th>x[3]</th><th>x[4]</th><th>x[3]</th><th>x[4]</th><th>x[5]</th>
-    </tr>
-    <tr>
-        <td colspan="6">....</td>
-    </tr>
+<tr>
+<td colspan="3">
+输入
+</td>
+<td colspan="3">
+输出
+</td>
+</tr>
+<tr>
+<th>
+x[0]
+</th>
+<th>
+x[1]
+</th>
+<th>
+x[2]
+</th>
+<th>
+x[1]
+</th>
+<th>
+x[2]
+</th>
+<th>
+x[3]
+</th>
+</tr>
+<tr>
+<th>
+x[1]
+</th>
+<th>
+x[2]
+</th>
+<th>
+x[3]
+</th>
+<th>
+x[2]
+</th>
+<th>
+x[3]
+</th>
+<th>
+x[4]
+</th>
+</tr>
+<tr>
+<th>
+x[2]
+</th>
+<th>
+x[3]
+</th>
+<th>
+x[4]
+</th>
+<th>
+x[3]
+</th>
+<th>
+x[4]
+</th>
+<th>
+x[5]
+</th>
+</tr>
+<tr>
+<td colspan="6">
+....
+</td>
+</tr>
 </table>
-
 <p><strong>2.</strong>紧接着初始化了rnn模型，初始化参数为输入数和隐藏单元数量。</p>
 <p>RNN的前向传播函数如下所示，在for循环中生成了隐藏层的输出并用state临时保存，再存入outputs以便后续使用。outputs形状为n*b*h</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inputs, state=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> state <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># Initial state with shape: (batch_size, num_hiddens)</span></span><br><span class="line">        state = torch.zeros((inputs.shape[<span class="number">1</span>], self.num_hiddens),</span><br><span class="line">                          device=inputs.device)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        state, = state</span><br><span class="line">    outputs = []</span><br><span class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> inputs:  <span class="comment"># Shape of inputs: (num_steps, batch_size, num_inputs)</span></span><br><span class="line">        state = torch.tanh(torch.matmul(X, self.W_xh) +</span><br><span class="line">                         torch.matmul(state, self.W_hh) + self.b_h)</span><br><span class="line">        outputs.append(state)</span><br><span class="line">    <span class="keyword">return</span> outputs, state</span><br></pre></td></tr></table></figure>
@@ -526,7 +1253,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -540,7 +1267,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">序列模型</a>
+            <a href="/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">序列模型</a>
         </h2>
 
         <div class="post-meta">
@@ -725,641 +1452,6 @@ x[999]
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">N-W核回归</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-04 14:16:38" itemprop="dateCreated datePublished" datetime="2023-10-04T14:16:38+08:00">2023-10-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-05 18:26:59" itemprop="dateModified" datetime="2023-10-05T18:26:59+08:00">2023-10-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理">原理</h2>
-<p><img src="\images\深度学习\attention\1.png" style="zoom:67%;"></p>
-<p><img src="\images\深度学习\attention\2.png" style="zoom:67%;"></p>
-<p>在这里，对于key，value，query可以这么理解，key相当于非自主提示，例如咖啡杯是红的十分显眼，他的key对应的value非常大，value相当于是不同key不同非自主提示所对应的一个输入值，而query在这里充当了一个自主提示的作用，和key键值通过某种映射产生不同的权值。因为我们知道注意力汇聚的公式如下：α相当于就是一种映射规则。
-<span class="math display">\[
-f(\mathbf{q}) = \sum_i \mathbf{v}_i \frac{\alpha(\mathbf{q},
-\mathbf{k}_i)}{\sum_j \alpha(\mathbf{q}, \mathbf{k}_j)}.
-\]</span> 正是因为有这样的query将注意力机制和全连接层进行了区分。</p>
-<p>经过学习，我们知道α是核函数： <span class="math display">\[
-\begin{split}\begin{aligned}
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2}
-\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;} \\
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = 1 \textrm{ if } \|\mathbf{q} -
-\mathbf{k}\| \leq 1 &amp;&amp; \textrm{Boxcar;} \\
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \mathop{\mathrm{max}}\left(0, 1 -
-\|\mathbf{q} - \mathbf{k}\|\right) &amp;&amp; \textrm{Epanechikov.}
-\end{aligned}\end{split}
-\]</span> 常见核函数图像：</p>
-<p><img src="\images\深度学习\attention\3.png" style="zoom:67%;"></p>
-<p><img src="\images\深度学习\attention\4.png" style="zoom:67%;"></p>
-<p>内核函数理解为query和key之间的距离，这些距离是内核函数的输入，并且内核函数在query=key也即输入为0达到最大值，这很正常，因为query等于key就说明这个key所对应value占比重很大。故也就可以用注意力汇聚实现N-W核回归。</p>
-<p>“The attention weight is assigned according to the similarity (or
-distance) between query and key”很好地解释了。</p>
-<p>也就是说我们要拟合一个函数，可以将x_val，y_val作为一个已知数据，x_val是键值key，我们再定义x_train作为query（x_val和x_train范围一致，分布不同），而根据函数再给予y_train一定的扰动作为噪音，这样我们将x_train*attention_weight就可以得到我们的注意力汇集输出y_hat，我们再将y_hat与y_val放在同一图像进行对比即可观察拟合情况。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * torch.sin(x) + x</span><br><span class="line">n = <span class="number">40</span></span><br><span class="line">x_train, _ = torch.sort(torch.rand(n) * <span class="number">5</span>)</span><br><span class="line">y_train = f(x_train) + torch.randn(n)</span><br><span class="line">x_val = torch.arange(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0.1</span>)</span><br><span class="line">y_val = f(x_val)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nadaraya_watson</span>(<span class="params">x_train, y_train, x_val, kernel</span>):</span></span><br><span class="line">    dists = x_train.reshape((-<span class="number">1</span>, <span class="number">1</span>)) - x_val.reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">    <span class="comment"># Each column/row corresponds to each query/key</span></span><br><span class="line">    k = kernel(dists).<span class="built_in">type</span>(torch.float32)</span><br><span class="line">    <span class="comment"># Normalization over keys for each query</span></span><br><span class="line">    attention_w = k / k.<span class="built_in">sum</span>(<span class="number">0</span>)</span><br><span class="line">    y_hat = y_train@attention_w</span><br><span class="line">    <span class="keyword">return</span> y_hat, attention_w</span><br><span class="line"><span class="comment">#我们要展示的对比</span></span><br><span class="line">ax.plot(x_val, y_hat)</span><br><span class="line">ax.plot(x_val, y_val, <span class="string">&#x27;m--&#x27;</span>)</span><br><span class="line">ax.plot(x_train, y_train, <span class="string">&#x27;o&#x27;</span>, alpha=<span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
-<p>我们再进行观察，例如上侧的高斯核函数，我们知道实际上的高斯函数是这样的：
-<span class="math display">\[
-\begin{split}\begin{aligned}
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2\sigma^2}
-\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;}\\
-\end{aligned}\end{split}
-\]</span> 我们知道随着<span class="math inline">\(\sigma\)</span>的增大，高斯函数会变窄，也就是说我们可以通过调节<span class="math inline">\(\sigma\)</span>的值就可以调整高斯核函数的形状，也就可以改变注意力矩阵权重，从而通过调整对函数达到理想的拟合。</p>
-<p>关于注意力机制没学RNN还是有难度，先学RNN去了（</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/reshape%E9%80%BB%E8%BE%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/reshape%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">reshape逻辑</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-03 21:06:39 / 修改时间：21:08:00" itemprop="dateCreated datePublished" datetime="2023-10-03T21:06:39+08:00">2023-10-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>240</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">attention_weights = torch.eye(<span class="number">4</span>).reshape((<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>]])</span><br><span class="line">tensor([[[[<span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">1.</span>]]]])</span><br></pre></td></tr></table></figure>
-<p>优先选取行，取完一行再取下一行。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/" class="post-title-link" itemprop="url">分类网络原理初步</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-01 17:14:25 / 修改时间：17:56:32" itemprop="dateCreated datePublished" datetime="2023-10-01T17:14:25+08:00">2023-10-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>768</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="lenet">Lenet</h2>
-<p><img src="/images/深度学习/class/4.png" style="zoom:67%;"></p>
-<h2 id="alexnet">Alexnet</h2>
-<p><img src="/images/深度学习/class/5.png" style="zoom:67%;"></p>
-<h2 id="vgg">VGG</h2>
-<p><img src="/images/深度学习/class/1.png" style="zoom:67%;"></p>
-<h2 id="nin">NiN</h2>
-<p>LeNet、AlexNet和VGG都有一个共同的设计模式：通过一系列的卷积层与汇聚层来提取空间结构特征；然后通过全连接层对特征的表征进行处理。
-AlexNet和VGG对LeNet的改进主要在于如何扩大和加深这两个模块。
-或者，可以想象在这个过程的早期使用全连接层。然而，如果使用了全连接层，可能会完全放弃表征的空间结构。
-<em>网络中的网络</em>（<em>NiN</em>）提供了一个非常简单的解决方案：在每个像素的通道上分别使用多层感知机</p>
-<p><img src="/images/深度学习/class/6.png" style="zoom:67%;"></p>
-<h2 id="googlenet">Googlenet</h2>
-<p><img src="/images/深度学习/class/7.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/class/8.png" style="zoom:67%;"></p>
-<h2 id="resnet">Resnet</h2>
-<p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
-<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
-<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
-<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
-<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
-<p>同时在输出的Relu激活端，由于shortcut的X，信息冗余度提高，可以有效防止激活函数丢失有效信息。</p>
-<p>1×1卷积让输入输出形状相同。</p>
-<p><img src="/images/深度学习/class/3.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/class/2.png" style="zoom:67%;"></p>
-<h2 id="densenet">Densenet</h2>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Resnet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Resnet/" class="post-title-link" itemprop="url">Resnet</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-30 09:36:32" itemprop="dateCreated datePublished" datetime="2023-09-30T09:36:32+08:00">2023-09-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-01 14:01:28" itemprop="dateModified" datetime="2023-10-01T14:01:28+08:00">2023-10-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>468</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Resnet在干什么"><a href="#Resnet在干什么" class="headerlink" title="Resnet在干什么"></a>Resnet在干什么</h2><p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
-<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
-<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
-<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
-<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">二维互相关预算</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-24 20:34:56" itemprop="dateCreated datePublished" datetime="2023-09-24T20:34:56+08:00">2023-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-30 10:26:55" itemprop="dateModified" datetime="2023-09-30T10:26:55+08:00">2023-09-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>982</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像卷积"><a href="#图像卷积" class="headerlink" title="图像卷积"></a>图像卷积</h2><p>在深度学习中，卷积一般是二维互相关运算。</p>
-<p><img src="/images/深度学习/二维互相关/1.png" style="zoom:67%;"></p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="填充和步幅"><a href="#填充和步幅" class="headerlink" title="填充和步幅"></a>填充和步幅</h3><p>我们使用一个pytorch附带的函数作为例子：<br><code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
-<p>下面是一个padding=1（实际上行列填充为2），垂直stride为3，水平stride为2的卷积运算。</p>
-<p>代码为：<code>torch.nn.Conv2d(1, 1, 2, (2,3), 1)</code></p>
-<p><img src="/images/深度学习/二维互相关/2.png" style="zoom:67%;"></p>
-<p>输出形状计算公式：</p>
-<script type="math/tex; mode=display">
-\frac{n_h-k_h+p_h+s_h}{s_h}×\frac{n_w-k_w+p_w+s_w}{s_w}
-\\=
-\frac{3-2+2+2}{2}×\frac{3-2+2+3}{3}
-\\=
-2.5×2
-\\=
-2×2</script><p>一般来讲在pytorch中，如果遇到输出形状有小数，舍去为整数（不是四舍五入）。</p>
-<p>如果padding参数为(1,0)这样的元组，代表在第一个维度也即行上添加了两行0元素，第二个维度也即列上没有填充。</p>
-<h3 id="多输入多输出"><a href="#多输入多输出" class="headerlink" title="多输入多输出"></a>多输入多输出</h3><p>我们使用一个pytorch附带的函数作为例子：<br><code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
-<p>in_channels代表输入通道数，类似灰白图像一个通道，RGB图像三个通道。</p>
-<p>out_channels代表输出通道数，通俗来讲就是卷积核的个数。</p>
-<p>且多输入和多输出通道卷积要求输入通道数等于每个卷积核通道数。</p>
-<p>也就是说在这个函数中，你只需要设置好in_channels参数确定好输入通道数，kernel_size卷积核每个通道尺寸，框架会自动设置每个卷积核通道个数。</p>
-<p>总结来说就是：</p>
-<ul>
-<li>输出通道数=卷积核个数=out_channels参数</li>
-<li>输入通道数=每个卷积核的通道数=in_channels参数</li>
-</ul>
-<p>下面看一个例子：<br><img src="/images/深度学习/二维互相关/3.png" style="zoom:67%;"></p>
-<p>实际上在这里，in_channels=3，out_channels=2，kernel_size=1,卷积核通道数自动设置为3.</p>
-<p>并且这边也是一个1<em>1卷积，实际上是对图像不同通道的同一位置像素的一个权重线性和，类似于全连接。使用1\</em>1卷积可以关注到每个输入通道之间的关系，更容易捕捉到特征。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">卷积</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-23 19:57:08 / 修改时间：20:21:09" itemprop="dateCreated datePublished" datetime="2023-09-23T19:57:08+08:00">2023-09-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>398</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>拿一维卷积举个例子：</p>
-<p><span class="math display">\[
-假设x(t)为输入,h(t)为系统响应\\
-x(t)*h(t)=\int{x(a)h(t-a)}\\
-\delta(t)*h(t)=h(t)\\
-\delta(t-k\Delta)*h(t)=h(t-k\Delta)\\
-x(t)= \sum_{k=-\infty}^{\infty}{x(k\Delta)\delta(t-k\Delta)\Delta}
-\\当x(t)输入，输入x(t)是这些冲击信号的叠加，每一个\delta(t-k\Delta)都是\delta(t)的平移，并且会对h(t)进行响应，
-\\那么输出也是这些冲激信号对于系统响应的叠加，即：\\
-y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
-\]</span>
-所以也就可以看成是输入在每一个点的值是一个系数或者权重，这些系数分别乘上系统响应再求和就是输入了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1431,14 +1523,14 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1495,12 +1587,12 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">190k</span>
+    <span title="站点总字数">196k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:53</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

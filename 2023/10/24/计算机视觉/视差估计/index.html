@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="视差估计 视差图是以图像对中任一幅图像为基准，其大小为该基准图像的大小，元素值为视差值的图像。由于视差图包含了场景的距离信息，因此从立体图像对中提取视差图的图像匹配非常重要。 NCC算法 简介 归一化相关性(NCC)(normalization cross-correlation)。顾名思义，就是用于归一化待匹配目标之间的相关程度，注意这里比较的是原始像素。通过在待匹配像素位置\(p(p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视差估计">
+<meta property="og:url" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="视差估计 视差图是以图像对中任一幅图像为基准，其大小为该基准图像的大小，元素值为视差值的图像。由于视差图包含了场景的距离信息，因此从立体图像对中提取视差图的图像匹配非常重要。 NCC算法 简介 归一化相关性(NCC)(normalization cross-correlation)。顾名思义，就是用于归一化待匹配目标之间的相关程度，注意这里比较的是原始像素。通过在待匹配像素位置\(p(p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/image/im2.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/image/im6.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/depth3.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/depth5.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/depth8.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/depth10.png">
+<meta property="og:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/depth20.png">
+<meta property="article:published_time" content="2023-10-24T02:54:15.588Z">
+<meta property="article:modified_time" content="2023-10-24T03:36:05.408Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py%20docu/cv2/image/im2.png">
+
+<link rel="canonical" href="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>视差估计 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          视差估计
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-24 10:54:15 / 修改时间：11:36:05" itemprop="dateCreated datePublished" datetime="2023-10-24T10:54:15+08:00">2023-10-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="视差估计">视差估计</h2>
+<p>视差图是以图像对中任一幅图像为基准，其大小为该基准图像的大小，元素值为视差值的图像。由于视差图包含了场景的距离信息，因此从立体图像对中提取视差图的图像匹配非常重要。</p>
+<h2 id="ncc算法">NCC算法</h2>
+<h3 id="简介">简介</h3>
+<p>归一化相关性(NCC)(normalization
+cross-correlation)。顾名思义，就是用于归一化待匹配目标之间的相关程度，注意这里比较的是原始像素。通过在待匹配像素位置<span class="math inline">\(p(p_x,p_y)\)</span>,构建3*3邻域匹配窗口，与目标像素位置<span class="math inline">\(p&#39;(p_x,p_y)\)</span>同样构建邻域匹配窗口的方式建立目标函数来对匹配窗口进行度量相关性，注意这里构建相关窗口的前提是两帧图像之间已经校正到水平位置，即光心处于同一水平线上，此时极线是水平的，否则匹配过程只能在倾斜的极线方向上完成，这将消耗更多的计算资源。</p>
+<h3 id="原理">原理</h3>
+<p>NCC是一种基于统计学计算两组样本数据相关性的算法，其取值范围为[-1,
+1]之间，而对图像来说，每个像素点都可以看出是RGB数值，这样整幅图像就可以看成是一个样本数据的集合，如果它有一个子集与另外一个样本数据相互匹配则它的ncc值为1，表示相关性很高，如果是-1则表示完全不相关，基于这个原理，实现图像基于模板匹配识别算法，其中第一步就是要归一化数据。NCC计算公式如下所示：
+<span class="math display">\[
+NCC(p,d)=\frac
+{\sum_{(x,y)\epsilon
+W_p}(I_1(x,y)-\overline{I_1}(p_x,p_y))\cdot(I_2(x+d,y)-\overline{I_2}(p_x+d,p_y))}
+{\sqrt{\sum_{(x,y)\epsilon
+W_p}(I_1(x,y)-\overline{I_1}(p_x,p_y))^2\cdot\sum_{(x,y)\epsilon
+W_p}(I_2(x+d,y)-\overline{I_2}(p_x+d,p_y))^2}}
+\]</span></p>
+<ul>
+<li>其中NCC(p,d)得到的值得范围将在[-1,1]]之间。</li>
+<li><span class="math inline">\(W_p\)</span>为之前提到的匹配窗口。</li>
+<li><span class="math inline">\(I_1(x,y)\)</span>为原始图像的像素值。</li>
+<li><span class="math inline">\(\overline{I_1}(p_x,p_y)\)</span>为原始窗口内像素的均值。</li>
+<li><span class="math inline">\(I_2(x+d,y)\)</span>为原始图像在目标图像上对应点位置在xxx方向上偏移ddd后的像素值。</li>
+<li><span class="math inline">\(\overline{I_2}(p_x+d,p_y)\)</span>为目标图像匹配窗口像素均值。</li>
+<li>若NCC=-1,则表示两个匹配窗口完全不相关，相反，若NCC=1时，表示两个匹配窗口相关程度非常高。</li>
+</ul>
+<h2 id="匹配流程">匹配流程</h2>
+<h3 id="采集图像">采集图像</h3>
+<p>通过标定好的双目相机采集图像，也可以用两个单目相机来组合成双目相机。本次实验选用https://vision.middlebury.edu/stereo/data/网站的数据集</p>
+<h3 id="极线校正">极线校正</h3>
+<p>校正的目的是使两帧图像极线处于水平方向，或者说是使两帧图像的光心处于同一水平线上。通过校正极线可以方便后续的NCC操作。</p>
+<p>由标定得到的内参中畸变信息中可以对图像去除畸变。
+通过校正函数校正以后得到相机的矫正变换R和新的投影矩阵P，接下来是要对左右视图进行去畸变，并得到重映射矩阵。</p>
+<h3 id="特征匹配">特征匹配</h3>
+<p>匹配方法如上所述，右视图中与左视图待测像素同一水平线上相关性最高的即为最优匹配。完成匹配后，我们需要记录其视差d，即待测像素水平方向xl与匹配像素水平方向xr之间的差值d=xr−xl，最终我们可以得到一个与原始图像尺寸相同的视差图D。</p>
+<h3 id="深度恢复">深度恢复</h3>
+<p>通过上述匹配结果得到的视差图D，我们可以很简单的利用相似三角形反推出以左视图为参考系的深度图。</p>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> pylab <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> scipy.ndimage <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plane_sweep_ncc</span>(<span class="params">im_l, im_r, start, steps, wid</span>):</span></span><br><span class="line">    <span class="comment"># 使用归一化的互相关计算视差图像 &quot;&quot;&quot;</span></span><br><span class="line">    m, n = im_l.shape</span><br><span class="line">    <span class="comment"># 保存不同求和值的数组</span></span><br><span class="line">    mean_l = zeros((m, n))</span><br><span class="line">    mean_r = zeros((m, n))</span><br><span class="line">    s = zeros((m, n))</span><br><span class="line">    s_l = zeros((m, n))</span><br><span class="line">    s_r = zeros((m, n))</span><br><span class="line">    <span class="comment"># 保存深度平面的数组</span></span><br><span class="line">    dmaps = zeros((m, n, steps))</span><br><span class="line">    <span class="comment"># 计算图像块的平均值</span></span><br><span class="line">    filters.uniform_filter(im_l, wid, mean_l)</span><br><span class="line">    filters.uniform_filter(im_r, wid, mean_r)</span><br><span class="line">    <span class="comment"># 归一化图像</span></span><br><span class="line">    norm_l = im_l - mean_l</span><br><span class="line">    norm_r = im_r - mean_r</span><br><span class="line">    <span class="comment"># 尝试不同的视差</span></span><br><span class="line">    <span class="keyword">for</span> displ <span class="keyword">in</span> <span class="built_in">range</span>(steps):</span><br><span class="line">        <span class="comment"># 将左边图像移动到右边，计算加和</span></span><br><span class="line">        filters.uniform_filter(roll(norm_l, -displ - start) * norm_r, wid, s)  <span class="comment"># 和归一化</span></span><br><span class="line">        filters.uniform_filter(roll(norm_l, -displ - start) * roll(norm_l, -displ - start), wid, s_l)</span><br><span class="line">        filters.uniform_filter(norm_r * norm_r, wid, s_r)  <span class="comment"># 和反归一化</span></span><br><span class="line">        <span class="comment"># 保存 ncc 的分数</span></span><br><span class="line">        dmaps[:, :, displ] = s / sqrt(s_l * s_r)</span><br><span class="line">    <span class="comment"># 为每个像素选取最佳深度</span></span><br><span class="line">    <span class="keyword">return</span> argmax(dmaps, axis=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">im_l = array(Image.<span class="built_in">open</span>(<span class="string">&#x27;D:\Py docu\cv2\image\im2.png&#x27;</span>).convert(<span class="string">&#x27;L&#x27;</span>), <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line">im_r = array(Image.<span class="built_in">open</span>(<span class="string">&#x27;D:\Py docu\cv2\image\im6.png&#x27;</span>).convert(<span class="string">&#x27;L&#x27;</span>), <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line"><span class="comment"># 开始偏移，并设置步长</span></span><br><span class="line">steps = <span class="number">50</span></span><br><span class="line">start = <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ncc 的宽度</span></span><br><span class="line">wid = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">res = plane_sweep_ncc(im_l, im_r, start, steps, wid)</span><br><span class="line"></span><br><span class="line">imsave(<span class="string">&#x27;depth20.png&#x27;</span>, res)</span><br></pre></td></tr></table></figure>
+<h2 id="实验结果">实验结果</h2>
+<h3 id="原图像">原图像</h3>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\image\im2.png" alt="im2" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\image\im6.png" alt="im6" style="zoom: 67%;"></p>
+<h3 id="不同的窗口值">不同的窗口值</h3>
+<h4 id="wid35">wid=3，5</h4>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth3.png" alt="depth3" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth5.png" alt="depth5" style="zoom:67%;"></p>
+<h4 id="wid81020">wid=8，10，20</h4>
+<p><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth8.png" alt="depth8" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth10.png" alt="depth10" style="zoom:67%;"><img src="/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/Py docu\cv2\depth20.png" alt="depth20" style="zoom:67%;"></p>
+<p>随着窗口值增大可以发现上面的判断纹理低的区域错误的匹配基本上得到矫正，但是在信息的细节上越来越模糊.</p>
+<p>从wid=20可以明显看出，图片中的噪声几乎被矫正完，但随之而然的图片细节鲁棒也越来越差。由此可以得出结论。wid值越小图片对噪声越敏感，在低纹理区会出现很多错误匹配，但细节鲁棒好，值越大噪声鲁棒好，错误匹配随之被纠正但细节随之会被忽略掉，导致图片的精度小。</p>
+<p>通过上图实现可以发现，面具表面的细节纹理都没有被算法所体现出来，这是光学失真(光线亮度)所引起的，所以在选取图片时，图片是否光线充足，是否透明，是否重叠都会影响算法的匹配精确度。</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/10/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1/" title="视差估计">http://example.com/2023/10/24/计算机视觉/视差估计/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/resnet-fmri/" rel="prev" title="reshape逻辑">
+      <i class="fa fa-chevron-left"></i> reshape逻辑
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BC%A0%E9%87%8F%E7%BB%B4%E5%BA%A6%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0/" rel="next" title="张量维度操作函数">
+      张量维度操作函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%B7%AE%E4%BC%B0%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">视差估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ncc%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">NCC算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">匹配流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E9%9B%86%E5%9B%BE%E5%83%8F"><span class="nav-number">3.1.</span> <span class="nav-text">采集图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%BA%BF%E6%A0%A1%E6%AD%A3"><span class="nav-number">3.2.</span> <span class="nav-text">极线校正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">特征匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%81%A2%E5%A4%8D"><span class="nav-number">3.4.</span> <span class="nav-text">深度恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%BE%E5%83%8F"><span class="nav-number">5.1.</span> <span class="nav-text">原图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E7%AA%97%E5%8F%A3%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text">不同的窗口值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wid35"><span class="nav-number">5.2.1.</span> <span class="nav-text">wid&#x3D;3，5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wid81020"><span class="nav-number">5.2.2.</span> <span class="nav-text">wid&#x3D;8，10，20</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">196k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:59</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/dim/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -212,7 +212,666 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/dim/" class="post-title-link" itemprop="url">pytorch中dim=0，1求mean，sum</a>
+            <a href="/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">N-W核回归</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-04 14:16:38" itemprop="dateCreated datePublished" datetime="2023-10-04T14:16:38+08:00">2023-10-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-05 18:26:59" itemprop="dateModified" datetime="2023-10-05T18:26:59+08:00">2023-10-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原理">原理</h2>
+<p><img src="\images\深度学习\attention\1.png" style="zoom:67%;"></p>
+<p><img src="\images\深度学习\attention\2.png" style="zoom:67%;"></p>
+<p>在这里，对于key，value，query可以这么理解，key相当于非自主提示，例如咖啡杯是红的十分显眼，他的key对应的value非常大，value相当于是不同key不同非自主提示所对应的一个输入值，而query在这里充当了一个自主提示的作用，和key键值通过某种映射产生不同的权值。因为我们知道注意力汇聚的公式如下：α相当于就是一种映射规则。
+<span class="math display">\[
+f(\mathbf{q}) = \sum_i \mathbf{v}_i \frac{\alpha(\mathbf{q},
+\mathbf{k}_i)}{\sum_j \alpha(\mathbf{q}, \mathbf{k}_j)}.
+\]</span> 正是因为有这样的query将注意力机制和全连接层进行了区分。</p>
+<p>经过学习，我们知道α是核函数： <span class="math display">\[
+\begin{split}\begin{aligned}
+\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2}
+\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;} \\
+\alpha(\mathbf{q}, \mathbf{k}) &amp; = 1 \textrm{ if } \|\mathbf{q} -
+\mathbf{k}\| \leq 1 &amp;&amp; \textrm{Boxcar;} \\
+\alpha(\mathbf{q}, \mathbf{k}) &amp; = \mathop{\mathrm{max}}\left(0, 1 -
+\|\mathbf{q} - \mathbf{k}\|\right) &amp;&amp; \textrm{Epanechikov.}
+\end{aligned}\end{split}
+\]</span> 常见核函数图像：</p>
+<p><img src="\images\深度学习\attention\3.png" style="zoom:67%;"></p>
+<p><img src="\images\深度学习\attention\4.png" style="zoom:67%;"></p>
+<p>内核函数理解为query和key之间的距离，这些距离是内核函数的输入，并且内核函数在query=key也即输入为0达到最大值，这很正常，因为query等于key就说明这个key所对应value占比重很大。故也就可以用注意力汇聚实现N-W核回归。</p>
+<p>“The attention weight is assigned according to the similarity (or
+distance) between query and key”很好地解释了。</p>
+<p>也就是说我们要拟合一个函数，可以将x_val，y_val作为一个已知数据，x_val是键值key，我们再定义x_train作为query（x_val和x_train范围一致，分布不同），而根据函数再给予y_train一定的扰动作为噪音，这样我们将x_train*attention_weight就可以得到我们的注意力汇集输出y_hat，我们再将y_hat与y_val放在同一图像进行对比即可观察拟合情况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * torch.sin(x) + x</span><br><span class="line">n = <span class="number">40</span></span><br><span class="line">x_train, _ = torch.sort(torch.rand(n) * <span class="number">5</span>)</span><br><span class="line">y_train = f(x_train) + torch.randn(n)</span><br><span class="line">x_val = torch.arange(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0.1</span>)</span><br><span class="line">y_val = f(x_val)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nadaraya_watson</span>(<span class="params">x_train, y_train, x_val, kernel</span>):</span></span><br><span class="line">    dists = x_train.reshape((-<span class="number">1</span>, <span class="number">1</span>)) - x_val.reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">    <span class="comment"># Each column/row corresponds to each query/key</span></span><br><span class="line">    k = kernel(dists).<span class="built_in">type</span>(torch.float32)</span><br><span class="line">    <span class="comment"># Normalization over keys for each query</span></span><br><span class="line">    attention_w = k / k.<span class="built_in">sum</span>(<span class="number">0</span>)</span><br><span class="line">    y_hat = y_train@attention_w</span><br><span class="line">    <span class="keyword">return</span> y_hat, attention_w</span><br><span class="line"><span class="comment">#我们要展示的对比</span></span><br><span class="line">ax.plot(x_val, y_hat)</span><br><span class="line">ax.plot(x_val, y_val, <span class="string">&#x27;m--&#x27;</span>)</span><br><span class="line">ax.plot(x_train, y_train, <span class="string">&#x27;o&#x27;</span>, alpha=<span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
+<p>我们再进行观察，例如上侧的高斯核函数，我们知道实际上的高斯函数是这样的：
+<span class="math display">\[
+\begin{split}\begin{aligned}
+\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2\sigma^2}
+\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;}\\
+\end{aligned}\end{split}
+\]</span> 我们知道随着<span class="math inline">\(\sigma\)</span>的增大，高斯函数会变窄，也就是说我们可以通过调节<span class="math inline">\(\sigma\)</span>的值就可以调整高斯核函数的形状，也就可以改变注意力矩阵权重，从而通过调整对函数达到理想的拟合。</p>
+<p>关于注意力机制没学RNN还是有难度，先学RNN去了（</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/reshape%E9%80%BB%E8%BE%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/reshape%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">reshape逻辑</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-03 21:06:39" itemprop="dateCreated datePublished" datetime="2023-10-03T21:06:39+08:00">2023-10-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-27 17:44:13" itemprop="dateModified" datetime="2023-10-27T17:44:13+08:00">2023-10-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>361</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">attention_weights = torch.eye(<span class="number">4</span>).reshape((<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>]])</span><br><span class="line">tensor([[[[<span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">1.</span>]]]])</span><br></pre></td></tr></table></figure>
+<p>优先选取行，取完一行再取下一行。</p>
+<p><span class="math inline">\(\text{positional encoding}*{(i, 2j)} =
+\sin(i / 10000^{2j / d})\)</span> 和 <span class="math inline">\(\text{positional encoding}*{(i, 2j+1)} = \cos(i /
+10000^{2j / d})\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/" class="post-title-link" itemprop="url">分类网络原理初步</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-01 17:14:25" itemprop="dateCreated datePublished" datetime="2023-10-01T17:14:25+08:00">2023-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-28 17:12:27" itemprop="dateModified" datetime="2023-10-28T17:12:27+08:00">2023-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>763</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="lenet">Lenet</h2>
+<p><img src="/images/深度学习/class/4.png" style="zoom:67%;"></p>
+<h2 id="alexnet">Alexnet</h2>
+<p><img src="/images/深度学习/class/5.png" style="zoom:67%;"></p>
+<h2 id="vgg">VGG</h2>
+<p><img src="/images/深度学习/class/1.png" style="zoom:67%;"></p>
+<h2 id="nin">NiN</h2>
+<p>LeNet、AlexNet和VGG都有一个共同的设计模式：通过一系列的卷积层与汇聚层来提取空间结构特征；然后通过全连接层对特征的表征进行处理。
+AlexNet和VGG对LeNet的改进主要在于如何扩大和加深这两个模块。
+或者，可以想象在这个过程的早期使用全连接层。然而，如果使用了全连接层，可能会完全放弃表征的空间结构。
+<em>网络中的网络</em>（<em>NiN</em>）提供了一个非常简单的解决方案：在每个像素的通道上分别使用多层感知机</p>
+<p><img src="/images/深度学习/class/6.png" style="zoom:67%;"></p>
+<h2 id="googlenet">Googlenet</h2>
+<p><img src="/images/深度学习/class/7.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/class/8.png" style="zoom:67%;"></p>
+<h2 id="resnet">Resnet</h2>
+<p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
+<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
+<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
+<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
+<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
+<p>同时在输出的Relu激活端，由于shortcut的X，信息冗余度提高，可以有效防止激活函数丢失有效信息。</p>
+<p>1×1卷积让输入输出形状相同。</p>
+<p><img src="/images/深度学习/class/3.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/class/2.png" style="zoom:67%;"></p>
+<h2 id="vit">ViT</h2>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Resnet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Resnet/" class="post-title-link" itemprop="url">Resnet</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-30 09:36:32" itemprop="dateCreated datePublished" datetime="2023-09-30T09:36:32+08:00">2023-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-01 14:01:28" itemprop="dateModified" datetime="2023-10-01T14:01:28+08:00">2023-10-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>468</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="resnet在干什么">Resnet在干什么</h2>
+<p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
+<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
+<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
+<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
+<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">二维互相关预算</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-24 20:34:56" itemprop="dateCreated datePublished" datetime="2023-09-24T20:34:56+08:00">2023-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-30 10:26:55" itemprop="dateModified" datetime="2023-09-30T10:26:55+08:00">2023-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>987</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图像卷积">图像卷积</h2>
+<p>在深度学习中，卷积一般是二维互相关运算。</p>
+<p><img src="/images/深度学习/二维互相关/1.png" style="zoom:67%;"></p>
+<h2 id="参数">参数</h2>
+<h3 id="填充和步幅">填充和步幅</h3>
+<p>我们使用一个pytorch附带的函数作为例子：
+<code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
+<p>下面是一个padding=1（实际上行列填充为2），垂直stride为3，水平stride为2的卷积运算。</p>
+<p>代码为：<code>torch.nn.Conv2d(1, 1, 2, (2,3), 1)</code></p>
+<p><img src="/images/深度学习/二维互相关/2.png" style="zoom:67%;"></p>
+<p>输出形状计算公式： <span class="math display">\[
+\frac{n_h-k_h+p_h+s_h}{s_h}×\frac{n_w-k_w+p_w+s_w}{s_w}
+\\=
+\frac{3-2+2+2}{2}×\frac{3-2+2+3}{3}
+\\=
+2.5×2
+\\=
+2×2
+\]</span>
+一般来讲在pytorch中，如果遇到输出形状有小数，舍去为整数（不是四舍五入）。</p>
+<p>如果padding参数为(1,0)这样的元组，代表在第一个维度也即行上添加了两行0元素，第二个维度也即列上没有填充。</p>
+<h3 id="多输入多输出">多输入多输出</h3>
+<p>我们使用一个pytorch附带的函数作为例子：
+<code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
+<p>in_channels代表输入通道数，类似灰白图像一个通道，RGB图像三个通道。</p>
+<p>out_channels代表输出通道数，通俗来讲就是卷积核的个数。</p>
+<p>且多输入和多输出通道卷积要求输入通道数等于每个卷积核通道数。</p>
+<p>也就是说在这个函数中，你只需要设置好in_channels参数确定好输入通道数，kernel_size卷积核每个通道尺寸，框架会自动设置每个卷积核通道个数。</p>
+<p>总结来说就是：</p>
+<ul>
+<li>输出通道数=卷积核个数=out_channels参数</li>
+<li>输入通道数=每个卷积核的通道数=in_channels参数</li>
+</ul>
+<p>下面看一个例子：
+<img src="/images/深度学习/二维互相关/3.png" style="zoom:67%;"></p>
+<p>实际上在这里，in_channels=3，out_channels=2，kernel_size=1,卷积核通道数自动设置为3.</p>
+<p>并且这边也是一个1*1卷积，实际上是对图像不同通道的同一位置像素的一个权重线性和，类似于全连接。使用1*1卷积可以关注到每个输入通道之间的关系，更容易捕捉到特征。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">卷积</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-23 19:57:08 / 修改时间：20:21:09" itemprop="dateCreated datePublished" datetime="2023-09-23T19:57:08+08:00">2023-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>398</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>拿一维卷积举个例子：</p>
+<p><span class="math display">\[
+假设x(t)为输入,h(t)为系统响应\\
+x(t)*h(t)=\int{x(a)h(t-a)}\\
+\delta(t)*h(t)=h(t)\\
+\delta(t-k\Delta)*h(t)=h(t-k\Delta)\\
+x(t)= \sum_{k=-\infty}^{\infty}{x(k\Delta)\delta(t-k\Delta)\Delta}
+\\当x(t)输入，输入x(t)是这些冲击信号的叠加，每一个\delta(t-k\Delta)都是\delta(t)的平移，并且会对h(t)进行响应，
+\\那么输出也是这些冲激信号对于系统响应的叠加，即：\\
+y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
+\]</span>
+所以也就可以看成是输入在每一个点的值是一个系数或者权重，这些系数分别乘上系统响应再求和就是输入了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B1%82%E5%92%8C%E5%B9%B3%E5%9D%87%E7%BB%B4%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B1%82%E5%92%8C%E5%B9%B3%E5%9D%87%E7%BB%B4%E5%BA%A6/" class="post-title-link" itemprop="url">pytorch中dim=0，1求mean，sum</a>
         </h2>
 
         <div class="post-meta">
@@ -268,7 +927,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>dim=（1，2，3）也就是说把这三个维度求平均，保留dim=0维度不变。故求平均后其他维度变成1，dim=0仍是2.</p>
+          <h2 id="结论">结论</h2>
+<p>dim=（1，2，3）也就是说把这三个维度求平均，保留dim=0维度不变。故求平均后其他维度变成1，dim=0仍是2.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">X = torch.arange(<span class="number">24</span>,dtype = <span class="built_in">float</span>).reshape((<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line">mean = X.mean(dim=(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), keepdim=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(mean,mean.shape)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">tensor([[[[ <span class="number">0.</span>,  <span class="number">1.</span>],</span><br><span class="line">          [ <span class="number">2.</span>,  <span class="number">3.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">4.</span>,  <span class="number">5.</span>],</span><br><span class="line">          [ <span class="number">6.</span>,  <span class="number">7.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">          [<span class="number">10.</span>, <span class="number">11.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">12.</span>, <span class="number">13.</span>],</span><br><span class="line">          [<span class="number">14.</span>, <span class="number">15.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">16.</span>, <span class="number">17.</span>],</span><br><span class="line">          [<span class="number">18.</span>, <span class="number">19.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">20.</span>, <span class="number">21.</span>],</span><br><span class="line">          [<span class="number">22.</span>, <span class="number">23.</span>]]]], dtype=torch.float64)</span><br><span class="line">tensor([[[[ <span class="number">5.5000</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">17.5000</span>]]]], dtype=torch.float64) torch.Size([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 <p>下面看dim=（0，2，3）的输出，也就是说保留通道数不变，其他维度求平均变为1.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[[ <span class="number">0.</span>,  <span class="number">1.</span>],</span><br><span class="line">          [ <span class="number">2.</span>,  <span class="number">3.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">4.</span>,  <span class="number">5.</span>],</span><br><span class="line">          [ <span class="number">6.</span>,  <span class="number">7.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">          [<span class="number">10.</span>, <span class="number">11.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">12.</span>, <span class="number">13.</span>],</span><br><span class="line">          [<span class="number">14.</span>, <span class="number">15.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">16.</span>, <span class="number">17.</span>],</span><br><span class="line">          [<span class="number">18.</span>, <span class="number">19.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">20.</span>, <span class="number">21.</span>],</span><br><span class="line">          [<span class="number">22.</span>, <span class="number">23.</span>]]]], dtype=torch.float64)</span><br><span class="line">tensor([[[[ <span class="number">7.5000</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">11.5000</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">15.5000</span>]]]], dtype=torch.float64) torch.Size([<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
@@ -418,7 +1078,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -432,7 +1092,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/" class="post-title-link" itemprop="url">全连接到卷积</a>
+            <a href="/2023/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/CNN/" class="post-title-link" itemprop="url">全连接到卷积</a>
         </h2>
 
         <div class="post-meta">
@@ -552,7 +1212,7 @@ x(t)*h(t)=\int{x(a)h(t-a)}
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -566,7 +1226,7 @@ x(t)*h(t)=\int{x(a)h(t-a)}
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/" class="post-title-link" itemprop="url">梯度计算</a>
+            <a href="/2023/09/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%A2%AF%E5%BA%A6%E8%AE%A1%E7%AE%97/" class="post-title-link" itemprop="url">梯度计算</a>
         </h2>
 
         <div class="post-meta">
@@ -603,7 +1263,7 @@ x(t)*h(t)=\int{x(a)h(t-a)}
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -622,672 +1282,67 @@ x(t)*h(t)=\int{x(a)h(t-a)}
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="向量对向量的梯度"><a href="#向量对向量的梯度" class="headerlink" title="向量对向量的梯度"></a>向量对向量的梯度</h2><p><strong>方法1：</strong></p>
+          <h2 id="向量对向量的梯度">向量对向量的梯度</h2>
+<p><strong>方法1：</strong></p>
 <p><strong>正确：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">y.backward(torch.ones_like(x))</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
 <p>也就是说(向量)矩阵对(向量)矩阵求导(tensor对tensor求导)，实际上是先求出Jacobian矩阵中每一个元素的梯度值(每一个元素的梯度值的求解过程对应上面的计算图的求解方法)，然后将这个Jacobian矩阵与<code>grad_tensors参数</code>对应的矩阵进行对应的点乘，得到最终的结果。</p>
-<p>在这里就是，先根据计算图算出雅可比矩阵为：</p>
-<script type="math/tex; mode=display">
-\frac {d\vec y} {d\vec x} = 
+<p>在这里就是，先根据计算图算出雅可比矩阵为： <span class="math display">\[
+\frac {d\vec y} {d\vec x} =
 \begin{bmatrix}
-\frac {\partial y_1}{\partial x_1} & \frac {\partial y_1}{\partial x_2} & \frac {\partial y_1}{\partial x_3} \\\frac{\partial y_2}{\partial x_1} & \frac {\partial y_2}{\partial x_2} & \frac {\partial y_2}{\partial x_3}
-\\\frac{\partial y_3}{\partial x_1} & \frac {\partial y_3}{\partial x_2} & \frac {\partial y_3}{\partial x_3}
+\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial
+x_2} &amp; \frac {\partial y_1}{\partial x_3} \\\frac{\partial
+y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac
+{\partial y_2}{\partial x_3}
+\\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial
+x_2} &amp; \frac {\partial y_3}{\partial x_3}
 \end{bmatrix}
 =
 \begin{bmatrix}
-2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 
-\end{bmatrix}</script><p>假设A = f(y1,y2,y3),接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad_tensors参数。</p>
-<script type="math/tex; mode=display">
+2 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2
+\end{bmatrix}
+\]</span> 假设A =
+f(y1,y2,y3),接着将雅可比矩阵同A对y的梯度相乘，这里A对y的梯度就是grad_tensors参数。
+<span class="math display">\[
 \begin{bmatrix}
-\frac {\partial A}{\partial x_1} & \frac {\partial A}{\partial x_2} & \frac {\partial A}{\partial x_3}
+\frac {\partial A}{\partial x_1} &amp; \frac {\partial A}{\partial x_2}
+&amp; \frac {\partial A}{\partial x_3}
 \end{bmatrix}
 =
 \begin{bmatrix}
-\frac {\partial A}{\partial y_1} & \frac {\partial A}{\partial y_2} & \frac {\partial A}{\partial y_3}
+\frac {\partial A}{\partial y_1} &amp; \frac {\partial A}{\partial y_2}
+&amp; \frac {\partial A}{\partial y_3}
 \end{bmatrix}
 *
 \begin{bmatrix}
-\frac {\partial y_1}{\partial x_1} & \frac {\partial y_1}{\partial x_2} & \frac {\partial y_1}{\partial x_3} \\\frac{\partial y_2}{\partial x_1} & \frac {\partial y_2}{\partial x_2} & \frac {\partial y_2}{\partial x_3}
-\\\frac{\partial y_3}{\partial x_1} & \frac {\partial y_3}{\partial x_2} & \frac {\partial y_3}{\partial x_3}
+\frac {\partial y_1}{\partial x_1} &amp; \frac {\partial y_1}{\partial
+x_2} &amp; \frac {\partial y_1}{\partial x_3} \\\frac{\partial
+y_2}{\partial x_1} &amp; \frac {\partial y_2}{\partial x_2} &amp; \frac
+{\partial y_2}{\partial x_3}
+\\\frac{\partial y_3}{\partial x_1} &amp; \frac {\partial y_3}{\partial
+x_2} &amp; \frac {\partial y_3}{\partial x_3}
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 & 1 & 1 
+1 &amp; 1 &amp; 1
 \end{bmatrix}
 *
 \begin{bmatrix}
-2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 
+2 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2
 \end{bmatrix}
 =
 \begin{bmatrix}
-2 & 2 & 2
-\end{bmatrix}</script><p>实际上方法2就是利用了sum函数对每个变量偏导为1进行操作的。</p>
+2 &amp; 2 &amp; 2
+\end{bmatrix}
+\]</span> 实际上方法2就是利用了sum函数对每个变量偏导为1进行操作的。</p>
 <p><strong>错误：</strong>backward方法只能对标量函数进行求导</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
 <p><strong>方法2：</strong></p>
 <p>将向量函数求和转换为标量值函数进行反向传播求取梯度，相当于sum_y=y1+y2+y3,然后根据链式法则逐步求取每一个输出对每一个输入的梯度。因为dsum/dy1=1。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = <span class="number">2</span> * x  <span class="comment"># 这是一个向量</span></span><br><span class="line">sum_y = torch.<span class="built_in">sum</span>(y)</span><br><span class="line">sum_y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhouyang209117/p/11023160.html">https://www.cnblogs.com/zhouyang209117/p/11023160.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/65609544">https://zhuanlan.zhihu.com/p/65609544</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29923090">https://zhuanlan.zhihu.com/p/29923090</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9A%82%E9%80%80%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9A%82%E9%80%80%E6%B3%95/" class="post-title-link" itemprop="url">暂退法</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-14 20:04:31 / 修改时间：20:14:08" itemprop="dateCreated datePublished" datetime="2023-09-14T20:04:31+08:00">2023-09-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>802</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>Dropout 是一种用于正则化神经网络的技术，旨在减轻过拟合问题。它在训练过程中随机地丢弃（即关闭）神经网络中的一些单元（神经元），以减少神经元之间的协作，使模型更加健壮和泛化能力更强。</p>
-<p>以下是关于 Dropout 方法的一些要点：</p>
-<ol>
-<li><strong>随机丢弃神经元：</strong> 在每一次训练迭代中，Dropout 方法会随机选择一部分神经元并将它们的输出设置为零。这相当于将这些神经元暂时 “关闭”，不参与前向传播和反向传播。</li>
-<li><strong>减轻过拟合：</strong> Dropout 通过减少神经元之间的协作，迫使网络更多地依赖于各种特征和路径来进行学习。这有助于降低模型对训练数据的过度拟合，提高了泛化性能。</li>
-<li><strong>超参数：</strong> Dropout 的一个重要超参数是丢弃概率（dropout probability），通常在0.2到0.5之间选择。较小的丢弃概率表示丢弃较少的神经元，较大的丢弃概率表示丢弃更多的神经元。</li>
-<li><strong>测试时不使用 Dropout：</strong> 在测试或推理时，不再使用 Dropout。相反，通常会按比例缩放训练后的权重，以确保一致性。</li>
-<li><strong>适用于深度网络：</strong> Dropout 特别适用于深度神经网络，因为它们更容易过拟合。通过在不同层应用 Dropout，可以提高整个网络的鲁棒性。</li>
-</ol>
-<p>总的来说，Dropout 是一种有效的正则化技术，可以帮助改善神经网络的泛化性能，减轻过拟合问题。在实践中，它经常与其他正则化方法一起使用，如权重衰减（L2 正则化）来进一步提高模型性能。</p>
-<h2 id="dropout-操作会引入缩放效应"><a href="#dropout-操作会引入缩放效应" class="headerlink" title="dropout 操作会引入缩放效应"></a>dropout 操作会引入缩放效应</h2><p>我们随机丢弃一部分神经元（将它们的输出设置为零），以减轻过拟合问题。然而，在训练期间，由于某些神经元被随机丢弃，网络的输出会变得更小，这可能会导致网络的整体缩放效应。</p>
-<p>我们使用缩放因子 <code>(1.0 - dropout)</code>，它表示了保留神经元的输出应该被放大的比例。如果 <code>dropout</code> 为0.5（即丢弃50%的神经元），那么缩放因子为2，这意味着保留的神经元的输出应该扩大两倍，以补偿 Dropout 操作引入的缩放效应。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/" class="post-title-link" itemprop="url">权重衰减为什么可以降低模型复杂度</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-13 21:03:26 / 修改时间：22:59:40" itemprop="dateCreated datePublished" datetime="2023-09-13T21:03:26+08:00">2023-09-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>981</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>模型的容量（capacity）是指模型能够拟合的各种不同函数和模式的数量和复杂程度。当我说减小权重值可以减小模型的容量时，我指的是通过控制权重的大小，我们可以降低模型对于某些复杂模式的拟合能力。这可能听起来有些反直觉，因为通常人们认为模型容量与模型的参数数量成正比。</p>
-<p>但是，这里的关键是，模型容量不仅仅与参数数量有关，还与参数的范围（大小）有关。大的权重值意味着模型可以表示更复杂的函数，因为它们可以产生更大的输出值范围。这意味着模型可以更容易地适应训练数据中的噪声和细节，但也更容易过拟合。</p>
-<p>相反，小的权重值将限制模型的输出范围，使其更难以表示复杂的函数。这可以被视为对模型施加了一种正则化，迫使模型更加关注数据中的主要模式，而不是噪声。</p>
-<p>所以，减小权重值可以看作是一种正则化的形式，它可以降低模型的容量，使其更倾向于学习简单的、泛化性能更好的模式，从而降低了模型的复杂性。这种复杂性的降低有助于防止过拟合，并提高模型在未见过数据上的泛化能力。希望这个解释能够更清晰地说明这个观点。</p>
-<p>模型的表达能力是指模型可以表示的不同函数的范围。如果模型具有较大的参数范围，它可以表示更广泛的函数，包括复杂的函数。这意味着模型可以更好地拟合训练数据中的各种模式，包括信号和噪声。</p>
-<p>如果一个模型具有较大的参数范围，这意味着它有更多的自由度，可以调整其参数以适应更广泛的数据分布。这包括了可以表示更复杂函数的能力，因为模型可以学习到更多的特征和关系，包括数据中的细微差异。</p>
-<p>现在，这里的关键问题是，当模型具有高表达能力时，它不仅可以拟合数据中的真实模式（信号），还可以拟合数据中的随机性和噪声。噪声是指数据中的随机变化或不确定性，通常不包含有关数据的实际信息，但它存在于真实世界的数据中。如果模型过于复杂，它可能会过度适应数据中的噪声，而不仅仅是学习到有意义的模式。</p>
-<p>这就是为什么高表达能力的模型可能容易过拟合的原因。过拟合发生时，模型在训练数据上表现良好，但在未见过的数据上表现不佳，因为它在训练数据中学到了与噪声相关的信息，这些信息在未见过的数据上不适用。</p>
-<p>正则化技术，如权重衰减，通过控制参数的范围来限制模型的表达能力，从而降低了过拟合的风险。权重衰减惩罚较大的参数值，使模型更倾向于选择较小的参数值，从而限制了模型的复杂性，减少了过度拟合的可能性，使其更专注于学习真正的模式而不是噪声。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/12/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">入门操作</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-12 09:37:48" itemprop="dateCreated datePublished" datetime="2023-09-12T09:37:48+08:00">2023-09-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-14 10:51:21" itemprop="dateModified" datetime="2023-09-14T10:51:21+08:00">2023-09-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">opencv图像处理</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>260</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><p><strong>读取显示图像：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">&#x27;image/1.jpg&#x27;</span>，<span class="number">0</span>)//image为工程文件夹下的image子文件夹，<span class="number">0</span>是加载方式</span><br><span class="line">cv.imshow(<span class="string">&#x27;image&#x27;</span>，img）</span><br><span class="line">cv.waitKey(<span class="number">0</span>)//等待键盘输入，返回值为ASCII码</span><br><span class="line">cv.destroyAllWindows()//键盘有输入后自动关闭显示窗口</span><br></pre></td></tr></table></figure>
-
-<p><strong>写入图像：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imwrite(<span class="string">&#x27;image/2.jpg&#x27;</span>,img)//将img写入image文件夹下的名为<span class="number">2</span>的jpg文件</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/10/%E5%8A%9B%E6%89%A3/150_2/" class="post-title-link" itemprop="url">面试2/150</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-10 15:54:31" itemprop="dateCreated datePublished" datetime="2023-09-10T15:54:31+08:00">2023-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 21:18:27" itemprop="dateModified" datetime="2023-09-19T21:18:27+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>807</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目移除元素">题目：移除元素</h2>
-<p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要
-<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/原地算法">原地</a></strong>
-移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
-<p>不要使用额外的数组空间，你必须仅使用 <code>O(1)</code> 额外空间并
-<strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/原地算法">原地</a>修改输入数组</strong>。</p>
-<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<h2 id="me">me:</h2>
-<p><strong>1：使用pop_back()方法删除尾元素</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]!=val) &#123;</span><br><span class="line">                nums[j++]=nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(;j&lt;nums.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            nums.<span class="built_in">pop_back</span>();<span class="comment">//删除向量末尾元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度：<span class="math inline">\(O(n)\)</span></p>
-<p>空间复杂度：<span class="math inline">\(O(1)\)</span></p>
-<p><strong>2：使用erase()方法删除指定元素</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> j = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>,k = <span class="number">0</span>; i &lt; j;i++)&#123;<span class="comment">//注意：当删除向量中一个元素，向量长度会发生变化</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i-k]==val) &#123;</span><br><span class="line">                nums.<span class="built_in">erase</span>(nums.<span class="built_in">begin</span>() + i-k);</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度：<span class="math inline">\(O(n^2)\)</span>,n次循环，删除时最多移动n次位置，n*n</p>
-<p>空间复杂度：<span class="math inline">\(O(1)\)</span></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%A4%E7%A7%8D%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">线性变换的两种公式写法的建模</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-09 16:06:14" itemprop="dateCreated datePublished" datetime="2023-09-09T16:06:14+08:00">2023-09-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-20 21:56:08" itemprop="dateModified" datetime="2023-09-20T21:56:08+08:00">2023-09-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多层感知机网络的两种实现"><a href="#多层感知机网络的两种实现" class="headerlink" title="多层感知机网络的两种实现"></a>多层感知机网络的两种实现</h2><h3 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化模型参数</span></span><br><span class="line">num_inputs, num_outputs, num_hiddens = <span class="number">784</span>, <span class="number">10</span>, <span class="number">256</span></span><br><span class="line"></span><br><span class="line">W1 = nn.Parameter(torch.randn(</span><br><span class="line">    num_inputs, num_hiddens, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=<span class="literal">True</span>))</span><br><span class="line">W2 = nn.Parameter(torch.randn(</span><br><span class="line">    num_hiddens, num_outputs, requires_grad=<span class="literal">True</span>) * <span class="number">0.01</span>)</span><br><span class="line">b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">params = [W1, b1, W2, b2]</span><br><span class="line"><span class="comment">#激活函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu</span>(<span class="params">X</span>):</span></span><br><span class="line">    a = torch.zeros_like(X)</span><br><span class="line">    <span class="keyword">return</span> torch.<span class="built_in">max</span>(X, a)</span><br><span class="line"><span class="comment">#模型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">net</span>(<span class="params">X</span>):</span></span><br><span class="line">    X = X.reshape((-<span class="number">1</span>, num_inputs))</span><br><span class="line">    H = relu(X@W1 + b1)  <span class="comment"># 这里“@”代表矩阵乘法</span></span><br><span class="line">    <span class="keyword">return</span> (H@W2 + b2)</span><br></pre></td></tr></table></figure>
-<p>这里网络使用的线性模型是$o=Xw+b$,其中o为batch_size*outputs型输出矩阵，X为batch_size*inputs输入矩阵，w为inputs<em>outputs权重矩阵，b为1\</em>outputs偏差矩阵。</p>
-<h3 id="简洁实现"><a href="#简洁实现" class="headerlink" title="简洁实现"></a>简洁实现</h3><p><strong>代码：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(nn.Flatten(),</span><br><span class="line">                    nn.Linear(<span class="number">784</span>, <span class="number">256</span>),</span><br><span class="line">                    nn.ReLU(),</span><br><span class="line">                    nn.Linear(<span class="number">256</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_weights</span>(<span class="params">m</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br></pre></td></tr></table></figure>
-<p><strong>查看网络参数：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个简单的神经网络模型</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(<span class="number">10</span>, <span class="number">20</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">20</span>, <span class="number">5</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用net.parameters()获取模型中的所有参数</span></span><br><span class="line">params = <span class="built_in">list</span>(net.parameters())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印每个参数的形状</span></span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">    <span class="built_in">print</span>(param.shape)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">torch.Size([<span class="number">20</span>, <span class="number">10</span>])</span><br><span class="line">torch.Size([<span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>, <span class="number">20</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
-<p>因此鉴定为使用的线性模型是$o=Xw^T+b$，这与从零实现刚好相反。其中o为outputs*batch_size型输出矩阵，W为outputs*inputs权重矩阵，x为batch_size<em>inputs输入矩阵，b为1\</em>outputs偏差矩阵（会被广播成batch_size*outputs形状）。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/08/%E5%8A%9B%E6%89%A3/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">复杂度</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-08 17:44:31" itemprop="dateCreated datePublished" datetime="2023-09-08T17:44:31+08:00">2023-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 23:03:40" itemprop="dateModified" datetime="2023-09-18T23:03:40+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>时间复杂度和空间复杂度是用于分析算法性能的两个关键概念。让我们通过示例来解释它们。</p>
-<p><strong>时间复杂度</strong>：</p>
-<p>时间复杂度表示算法执行所需的时间与输入数据规模之间的关系。通常用大 O 表示法（Big O Notation）来表示。以下是一些常见的时间复杂度示例：</p>
-<ol>
-<li><p>**O(1)**：常数时间复杂度。无论输入规模如何增加，算法的执行时间始终保持不变。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 执行时间与输入规模无关</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(n)**：线性时间复杂度。执行时间与输入规模成正比。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="comment">// 执行 n 次，所以是线性时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(n^2)**：平方时间复杂度。执行时间与输入规模的平方成正比。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">        <span class="comment">// 执行 n*n 次，所以是平方时间复杂度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(log n)**：对数时间复杂度。通常出现在二分查找等算法中，执行时间随着输入规模的增加而增加，但增长速度很慢。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 二分查找算法，对数时间复杂度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>空间复杂度</strong>：</p>
-<p>空间复杂度表示算法执行所需的额外空间与输入数据规模之间的关系。也通常使用大 O 表示法来表示。以下是一些常见的空间复杂度示例：</p>
-<ol>
-<li><p>**O(1)**：常数空间复杂度。算法执行所需的额外空间不随输入规模增加而增加。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>; <span class="comment">// 额外空间占用恒定</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(n)**：线性空间复杂度。额外空间占用与输入规模成正比。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n]; <span class="comment">// 创建一个长度为 n 的数组，占用线性空间</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(n^2)**：平方空间复杂度。额外空间占用与输入规模的平方成正比。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[n][n]; <span class="comment">// 创建一个 n x n 的矩阵，占用平方空间</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>**O(log n)**：对数空间复杂度。通常出现在递归算法中，额外空间占用随着递归深度的增加而增加，但增长速度很慢。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recursiveFunction</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>) + <span class="built_in">recursiveFunction</span>(n / <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>总之，时间复杂度和空间复杂度是用于分析算法性能的重要工具，它们帮助我们了解算法如何随着输入规模的增加而执行。选择适当的算法可以帮助优化程序的性能，尤其是在处理大规模数据时。</p>
+<p>参考资料：https://www.cnblogs.com/zhouyang209117/p/11023160.html</p>
+<p>https://zhuanlan.zhihu.com/p/65609544</p>
+<p>https://zhuanlan.zhihu.com/p/29923090</p>
 
       
     </div>
@@ -1376,14 +1431,14 @@ x(t)*h(t)=\int{x(a)h(t-a)}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1440,12 +1495,12 @@ x(t)*h(t)=\int{x(a)h(t-a)}
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">190k</span>
+    <span title="站点总字数">196k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:53</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
