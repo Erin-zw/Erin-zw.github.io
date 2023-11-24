@@ -30,7 +30,7 @@
 <meta property="og:description" content="模型的容量（capacity）是指模型能够拟合的各种不同函数和模式的数量和复杂程度。当我说减小权重值可以减小模型的容量时，我指的是通过控制权重的大小，我们可以降低模型对于某些复杂模式的拟合能力。这可能听起来有些反直觉，因为通常人们认为模型容量与模型的参数数量成正比。 但是，这里的关键是，模型容量不仅仅与参数数量有关，还与参数的范围（大小）有关。大的权重值意味着模型可以表示更复杂的函数，因为它们可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-13T13:03:26.331Z">
-<meta property="article:modified_time" content="2023-09-13T14:59:40.364Z">
+<meta property="article:modified_time" content="2023-11-16T14:37:30.354Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
@@ -225,10 +225,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-09-13 21:03:26 / 修改时间：22:59:40" itemprop="dateCreated datePublished" datetime="2023-09-13T21:03:26+08:00">2023-09-13</time>
+              <time title="创建时间：2023-09-13 21:03:26" itemprop="dateCreated datePublished" datetime="2023-09-13T21:03:26+08:00">2023-09-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-16 22:37:30" itemprop="dateModified" datetime="2023-11-16T22:37:30+08:00">2023-11-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -276,7 +282,7 @@
 <p>相反，小的权重值将限制模型的输出范围，使其更难以表示复杂的函数。这可以被视为对模型施加了一种正则化，迫使模型更加关注数据中的主要模式，而不是噪声。</p>
 <p>所以，减小权重值可以看作是一种正则化的形式，它可以降低模型的容量，使其更倾向于学习简单的、泛化性能更好的模式，从而降低了模型的复杂性。这种复杂性的降低有助于防止过拟合，并提高模型在未见过数据上的泛化能力。希望这个解释能够更清晰地说明这个观点。</p>
 <p>模型的表达能力是指模型可以表示的不同函数的范围。如果模型具有较大的参数范围，它可以表示更广泛的函数，包括复杂的函数。这意味着模型可以更好地拟合训练数据中的各种模式，包括信号和噪声。</p>
-<p>如果一个模型具有较大的参数范围，这意味着它有更多的自由度，可以调整其参数以适应更广泛的数据分布。这包括了可以表示更复杂函数的能力，因为模型可以学习到更多的特征和关系，包括数据中的细微差异。</p>
+<p><strong>如果一个模型具有较大的参数范围，这意味着它有更多的自由度，可以调整其参数以适应更广泛的数据分布。这包括了可以表示更复杂函数的能力，因为模型可以学习到更多的特征和关系，包括数据中的细微差异。</strong></p>
 <p>现在，这里的关键问题是，当模型具有高表达能力时，它不仅可以拟合数据中的真实模式（信号），还可以拟合数据中的随机性和噪声。噪声是指数据中的随机变化或不确定性，通常不包含有关数据的实际信息，但它存在于真实世界的数据中。如果模型过于复杂，它可能会过度适应数据中的噪声，而不仅仅是学习到有意义的模式。</p>
 <p>这就是为什么高表达能力的模型可能容易过拟合的原因。过拟合发生时，模型在训练数据上表现良好，但在未见过的数据上表现不佳，因为它在训练数据中学到了与噪声相关的信息，这些信息在未见过的数据上不适用。</p>
 <p>正则化技术，如权重衰减，通过控制参数的范围来限制模型的表达能力，从而降低了过拟合的风险。权重衰减惩罚较大的参数值，使模型更倾向于选择较小的参数值，从而限制了模型的复杂性，减少了过度拟合的可能性，使其更专注于学习真正的模式而不是噪声。</p>
@@ -443,7 +449,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -507,12 +513,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">201k</span>
+    <span title="站点总字数">219k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:03</span>
+    <span title="站点阅读时长">3:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

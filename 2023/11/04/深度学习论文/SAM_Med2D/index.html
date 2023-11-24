@@ -22,24 +22,41 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="介绍如何微调 收集并策划了一个医学图像分割数据集，该数据集包括超过460万个图像和1970万个掩模，使用了最大的医学影像分割数据集。  交互式分割采用了不同的提示模式：边界框提示，点提示，掩码提示。     采用Adapter作为SAM大模型的微调策略。不需要重新训练整个模型，SAM原始知识不会忘记。是一种即插即用的组件。  如何评估模型表现 数据多样化：CT,MR,X-Ray,不同器官，多种病理">
+  <meta name="description" content="研究背景 SAM代表了自然图像分割领域最先进的研究进展，通过点和边界框等输入提示取得了令人印象深刻的结果。然而，许多评估和最近的研究表明，直接将预训练的 SAM 应用于医学图像分割并不能产生令人满意的性能。这种限制主要源于自然图像和医学图像之间的显着域差距。为了弥补这一差距，作者引入了 SAM-Med2D，这是将 SAM 应用于医学 2D 图像的最全面的研究。 介绍 如何微调  收">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SAM_Med2D">
 <meta property="og:url" content="http://example.com/2023/11/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM_Med2D/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="介绍如何微调 收集并策划了一个医学图像分割数据集，该数据集包括超过460万个图像和1970万个掩模，使用了最大的医学影像分割数据集。  交互式分割采用了不同的提示模式：边界框提示，点提示，掩码提示。     采用Adapter作为SAM大模型的微调策略。不需要重新训练整个模型，SAM原始知识不会忘记。是一种即插即用的组件。  如何评估模型表现 数据多样化：CT,MR,X-Ray,不同器官，多种病理">
+<meta property="og:description" content="研究背景 SAM代表了自然图像分割领域最先进的研究进展，通过点和边界框等输入提示取得了令人印象深刻的结果。然而，许多评估和最近的研究表明，直接将预训练的 SAM 应用于医学图像分割并不能产生令人满意的性能。这种限制主要源于自然图像和医学图像之间的显着域差距。为了弥补这一差距，作者引入了 SAM-Med2D，这是将 SAM 应用于医学 2D 图像的最全面的研究。 介绍 如何微调  收">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/1.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/1.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/2.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/2.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/3.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/3.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/4.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/4.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/5.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/5.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/6.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/6.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/7.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/7.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/8.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/8.png">
 <meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/9.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/9.png">
+<meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/10.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/10.png">
+<meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/11.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/11.png">
+<meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/11.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/12.png">
+<meta property="og:image" content="http://example.com/images/深度学习论文/SAM_Med2D/13.png">
+<meta property="og:image" content="http://example.com/深度学习论文/SAM_Med2D/13.png">
 <meta property="article:published_time" content="2023-11-04T10:41:00.390Z">
-<meta property="article:modified_time" content="2023-11-07T03:22:17.026Z">
+<meta property="article:modified_time" content="2023-11-11T04:13:34.030Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/深度学习论文/SAM_Med2D/1.png">
@@ -243,7 +260,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-07 11:22:17" itemprop="dateModified" datetime="2023-11-07T11:22:17+08:00">2023-11-07</time>
+                <time title="修改时间：2023-11-11 12:13:34" itemprop="dateModified" datetime="2023-11-11T12:13:34+08:00">2023-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,14 +285,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -287,29 +304,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="如何微调"><a href="#如何微调" class="headerlink" title="如何微调"></a>如何微调</h3><ul>
-<li><p>收集并策划了一个医学图像分割数据集，该数据集包括超过460万个图像和1970万个掩模，使用了最大的医学影像分割数据集。</p>
-</li>
-<li><p>交互式分割采用了不同的提示模式：边界框提示，点提示，掩码提示。</p>
-</li>
+        <h1 id="研究背景">研究背景</h1>
+<p>SAM代表了自然图像分割领域最先进的研究进展，通过点和边界框等输入提示取得了令人印象深刻的结果。然而，许多评估和最近的研究表明，直接将预训练的
+SAM
+应用于医学图像分割并不能产生令人满意的性能。这种限制主要源于自然图像和医学图像之间的显着域差距。为了弥补这一差距，作者引入了
+SAM-Med2D，这是将 SAM 应用于医学 2D 图像的最全面的研究。</p>
+<h1 id="介绍">介绍</h1>
+<h2 id="如何微调">如何微调</h2>
+<ul>
+<li><p>收集并策划了一个医学图像分割数据集，该数据集包括超过460万个图像和1970万个掩模，使用了最大的医学影像分割数据集。</p></li>
+<li><p>交互式分割采用了不同的提示模式：边界框提示，点提示，掩膜提示。</p></li>
 </ul>
 <p><img src="/images/深度学习论文/SAM_Med2D/1.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/1.png"></p>
 <ul>
 <li>采用Adapter作为SAM大模型的微调策略。不需要重新训练整个模型，SAM原始知识不会忘记。是一种即插即用的组件。</li>
 </ul>
-<h3 id="如何评估模型表现"><a href="#如何评估模型表现" class="headerlink" title="如何评估模型表现"></a>如何评估模型表现</h3><ul>
-<li><p>数据多样化：CT,MR,X-Ray,不同器官，多种病理条件，例如肿瘤，发炎。</p>
-</li>
-<li><p>微调策略：将SAM_Med2D和其他策略或者模型进行比较。</p>
-</li>
-<li>泛化能力：使用9个MICCAI2023数据集进行泛化能力测试。</li>
+<h2 id="如何评估模型表现">如何评估模型表现</h2>
+<ul>
+<li><p>数据多样化：CT,MR,X-Ray,不同器官，多种病理条件，例如肿瘤，发炎。</p></li>
+<li><p>微调策略：将SAM_Med2D和其他策略或者模型进行比较。</p></li>
+<li><p>泛化能力：使用9个MICCAI2023数据集进行泛化能力测试。</p></li>
 </ul>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><ul>
-<li>LVM:SegGPT,SEEM,CLIP,DALLE</li>
-<li>MIA（Medical Image Analysis）领域对SAM微调</li>
+<h1 id="相关工作">相关工作</h1>
+<ul>
+<li>最近的LVM:SegGPT,SEEM,CLIP,DALLE</li>
+<li>一些论文在MIA（Medical Image
+Analysis）领域对SAM的微调，例如FT-SAM</li>
 <li>SAM在医学图像上的零样本分割评估</li>
 </ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="将医学知识融入SAM"><a href="#将医学知识融入SAM" class="headerlink" title="将医学知识融入SAM"></a>将医学知识融入SAM</h3><p><img src="/images/深度学习论文/SAM_Med2D/2.png" style="zoom:67%;"></p>
+<h1 id="方法">方法</h1>
+<h2 id="将医学知识融入sam">将医学知识融入SAM</h2>
+<p><img src="/images/深度学习论文/SAM_Med2D/2.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/2.png"></p>
 <p>收集并整理了迄今为止最大的医学图像分割数据集。该数据集由众多公共和私人数据集组成，确保了全面覆盖和多样性。</p>
 <ul>
 <li>图3（b）说明了数据集的10种不同成像模式及其相应的数据比例。为了增强视觉呈现，使用对数缩放来可视化数量上的差异。</li>
@@ -317,46 +344,130 @@
 <li>图3（a）对这些数据集中271个标签中的31个主要器官进行了整理和合并</li>
 </ul>
 <p>对于3D数据集，将每个体积的强度值归一化到范围[0，255]，并提取沿x、y和z轴的所有切片图像及其对应的掩模。在提取过程中，丢弃最短边缘小于最长边缘长度一半的切片图像，以防止在调整具有大宽高比的图像时目标区域变得极其模糊。</p>
-<p>对于2D数据集，只检查像素值是否在[0，255]范围内，并且所有处理的图像都以PNG格式保存，以保持数据加载的一致性。其次，当一个掩码包含多个类时，我们生成了多个掩码，每个掩码只包含一个类。我们还将具有多个连接组件（例如，左肺和右肺）的掩码拆分为具有单个连接组件的多个掩码。如果存在多个器官，并且只包含一个连接的成分，保留掩码以增加数据多样性。最后，排除了目标区域占总图像的0.153%（100/256×256）以下的掩模，这意味着当图像大小调整为256×256时，其目标区域必须超过100个像素。</p>
-<p>获得了大约460万张图像和1970万个掩模。根据图像指数随机划分80%的数据用于训练，20%用于测试。训练集包括大约367万张图像和1580万个掩模，而测试集包含92万张图像，390万个掩码。还介绍了9个MICCAI2023数据集（包括约52万个图像和131万个掩模），这些数据集仅用于验证模型的泛化能力。</p>
-<h3 id="从SAM迁移到SAM-Med2D"><a href="#从SAM迁移到SAM-Med2D" class="headerlink" title="从SAM迁移到SAM_Med2D"></a>从SAM迁移到SAM_Med2D</h3><p>SAM组成：大规模图像编码器（ViT），一个提示编码器，一个轻量级掩码解码器。图像编码器利用预训练的ViT处理高分辨率输入，将输入原始图像转换成1/16比例的特征图，提示编码器包括稀疏提示和密集提示，将点、边界框或文本映射到256维向量并在每个级别使用GELU激活函数对密集提示应用卷积下采样。掩码解码器从两个编码器接收嵌入信息，并通过交叉注意力机制更新图像嵌入和提示嵌入。</p>
+<p>对于2D数据集，只检查像素值是否在[0，255]范围内，并且所有处理的图像都以PNG格式保存，以保持数据加载的一致性。其次，当一个掩膜包含多个类时，我们生成了多个掩膜，每个掩膜只包含一个类。我们还将具有多个连接组件（例如，左肺和右肺）的掩膜拆分为具有单个连接组件的多个掩膜。如果存在多个器官，并且只包含一个连接的成分，保留掩膜以增加数据多样性。最后，排除了目标区域占总图像的0.153%（100/256×256）以下的掩模，这意味着当图像大小调整为256×256时，其目标区域必须超过100个像素。</p>
+<p>获得了大约460万张图像和1970万个掩模。根据图像指数随机划分80%的数据用于训练，20%用于测试。训练集包括大约367万张图像和1580万个掩模，而测试集包含92万张图像，390万个掩膜。还介绍了9个MICCAI2023数据集（包括约52万个图像和131万个掩模），这些数据集仅用于验证模型的泛化能力。</p>
+<h2 id="从sam迁移到sam_med2d">从SAM迁移到SAM_Med2D</h2>
+<p>SAM组成：大规模图像编码器（ViT），一个提示编码器，一个轻量级掩膜解码器。图像编码器利用预训练的ViT处理高分辨率输入，将输入原始图像转换成1/16比例的特征图，提示编码器包括稀疏提示和密集提示，将点、边界框或文本映射到256维向量并在每个级别使用GELU激活函数对密集提示应用卷积下采样。掩膜解码器从两个编码器接收嵌入信息，并通过交叉注意力机制更新图像嵌入和提示嵌入。</p>
 <p><img src="/images/深度学习论文/SAM_Med2D/3.png" style="zoom:67%;"></p>
-<h4 id="适配图像编码器-Adapting-Image-Encoder"><a href="#适配图像编码器-Adapting-Image-Encoder" class="headerlink" title="适配图像编码器(Adapting Image Encoder)"></a>适配图像编码器(Adapting Image Encoder)</h4><p>在微调期间全局更新图像编码器会产生显著的计算成本。具体来说，在微调期间冻结原始图像编码器的所有参数，并为每个Transformer块部署一个适配器。沿着通道和空间维度调整图像编码器。对于通道维度，我们首先使用全局平均池化将输入特征图的分辨率压缩为C×1×1。然后，我们使用一个线性层来压缩通道嵌入，并使用另一个线性图层来恢复它们，压缩比为0.25。最后，我们通过sigmoid函数获得通道维度的权重，并将其与输入特征图相乘，作为下一级的输入。对于空间维度，我们使用卷积层将特征图的空间分辨率下采样2倍，并使用转置卷积恢复空间分辨率，保持与输入相同的通道数量。在每个适配器层之后添加一个跳跃连接。</p>
-<h4 id="提示编码器和掩模解码器"><a href="#提示编码器和掩模解码器" class="headerlink" title="提示编码器和掩模解码器"></a>提示编码器和掩模解码器</h4><p>分为稀疏提示（点提示，边界框提示），稠密提示（掩码提示）。</p>
+<p><img src="/深度学习论文/SAM_Med2D/3.png"></p>
+<h3 id="适配图像编码器adapting-image-encoder">适配图像编码器(Adapting
+Image Encoder)</h3>
+<p>在微调期间全局更新图像编码器会产生显著的计算成本。具体来说，在微调期间冻结原始图像编码器的所有参数，并为每个Transformer块部署一个适配器。沿着通道和空间维度调整图像编码器。对于通道维度，我们首先使用全局平均池化将输入特征图的分辨率压缩为C×1×1。然后，我们使用一个线性层来压缩通道嵌入，并使用另一个线性图层来恢复它们，压缩比为0.25。最后，我们通过sigmoid函数获得通道维度的权重，并将其与输入特征图相乘，作为下一级的输入。对于空间维度，我们使用卷积层将特征图的空间分辨率下采样2倍，并使用转置卷积恢复空间分辨率，保持与输入相同的通道数量。在每个适配器层之后添加一个跳跃连接。</p>
+<h3 id="提示编码器和掩模解码器">提示编码器和掩模解码器</h3>
+<p>分为稀疏提示（点提示，边界框提示），稠密提示（掩膜提示）。</p>
 <p>对于稀疏提示，每个点都表示为其位置编码的向量嵌入以及指示其前景或背景位置的两个学习嵌入的总和。每个边界框使用其左上角和右下角的位置编码，以及将“左上角”和“右下角”表示为向量嵌入的学习嵌入。</p>
-<p>对于密集提示，使用模型第一次迭代后生成的低分辨率特征图作为掩码提示，应用两个卷积嵌入，将输入掩码的规模减少 4 倍，输出通道为 原始输入的1/4和 1/16。最后，使用1×1卷积将通道维度映射到256。</p>
-<p>没有对掩码解码器结构进行任何更改，并在训练过程中不断更新其参数。在反向传播中使用IoU分数进行损失计算。采用 SAM 的训练策略，在最后一次迭代和一次随机中间迭代中，只提供密集提示来鼓励模型从提供的掩模中受益。</p>
-<h4 id="微调策略"><a href="#微调策略" class="headerlink" title="微调策略"></a>微调策略</h4><p>对于每批数据，迭代训练模型 9 次。在第一次迭代中，以相等的概率随机选择一个前景点或边界框作为稀疏提示。前景点是从真实情况中采样的，边界框是真实情况的最大外接矩形，每个坐标最多偏移五个像素。值得注意的是，除了第一次迭代同时更新Adapter层、提示编码器和掩码解码器的参数外，后续迭代仅更新掩码解码器的参数。第二次迭代开始，从之前的掩模预测与真实值之间的误差区域中随机选择1、3、5或9个点作为后续的稀疏提示，允许用户进行单点或多点交互式分割。</p>
-<h3 id="评估SAM-Med2D"><a href="#评估SAM-Med2D" class="headerlink" title="评估SAM_Med2D"></a>评估SAM_Med2D</h3><p>以SAM为基本模型，从其交互方式中选择Bbox和Points两种直观的提示模式来评估SAM-Med2D。</p>
-<p><strong>多模态：</strong>评估 SAM-Med2D 在 10 种不同模式的医学图像上的性能，包括 MRI、CT、超声等。这种全面的评估将使我们能够了解 SAM-Med2D 在特定模态下的优势和挑战，并揭示其在多模态图像中的潜在应用能力。评估 SAM-Med2D 在 10 种不同模式的医学图像上的性能，包括 MRI、CT、超声等。这种全面的评估将使我们能够了解 SAM-Med2D 在特定模态下的优势和挑战，并揭示其在多模态图像中的潜在应用能力。</p>
-<p><strong>不同器官以及解剖结构：</strong>考虑到不同的解剖结构和器官具有独特的形态、特征和变异模式，对 4 个解剖结构和 31 个主要器官进行了 SAM-Med2D 评估。此类评估有助于深入了解 SAM-Med2D 在不同场景下的性能差异，并进行有针对性的改进，以应对特定结构和器官的挑战。</p>
-<p><strong>泛化能力：</strong>在 9 个 MICCAI 2023 数据集上对其进行测试。</p>
-<h2 id="实验以及评估"><a href="#实验以及评估" class="headerlink" title="实验以及评估"></a>实验以及评估</h2><h3 id="实验细节"><a href="#实验细节" class="headerlink" title="实验细节"></a>实验细节</h3><p>8个A100GPU，每个80GB显存进行训练。初始学习率1e-4，12个轮次，在第七和第十轮次，学习率除2。训练过程中，图像重新调整为256*256，对于长宽都小于256的，用0进行填充边界，其他情况下使用双线性插值。每一幅图像随机选取5个相对应的掩码。如果可用掩码较少，随机重复样本。每个GPU处理50个图像以及对应的250个掩码，掩码预测损失函数是focal损失和dice损失的线性组合，组合系数是20：1。使用IoU预测和带有真实掩码的预测掩码之间的均方损失函数进行训练。最后使用Dice分数评估分割结果。</p>
-<h3 id="定量评估"><a href="#定量评估" class="headerlink" title="定量评估"></a>定量评估</h3><h4 id="总体表现"><a href="#总体表现" class="headerlink" title="总体表现"></a>总体表现</h4><p><img src="/images/深度学习论文/SAM_Med2D/4.png" style="zoom:67%;"></p>
+<p>对于密集提示，使用模型第一次迭代后生成的低分辨率特征图作为掩膜提示，应用两个卷积嵌入，将输入掩膜的规模减少
+4 倍，输出通道为 原始输入的1/4和
+1/16。最后，使用1×1卷积将通道维度映射到256。</p>
+<p>没有对掩膜解码器结构进行任何更改，并在训练过程中不断更新其参数。在反向传播中使用IoU分数进行损失计算。采用
+SAM
+的训练策略，在最后一次迭代和一次随机中间迭代中，只提供密集提示来鼓励模型从提供的掩模中受益。</p>
+<h3 id="微调策略">微调策略</h3>
+<p>对于每批数据，迭代训练模型 9
+次。在第一次迭代中，以相等的概率随机选择一个前景点或边界框作为稀疏提示。前景点是从真实情况中采样的，边界框是真实情况的最大外接矩形，每个坐标最多偏移五个像素。值得注意的是，除了第一次迭代同时更新Adapter层、提示编码器和掩膜解码器的参数外，后续迭代仅更新掩膜解码器的参数。第二次迭代开始，从之前的掩模预测与真实值之间的误差区域中随机选择1、3、5或9个点作为后续的稀疏提示，允许用户进行单点或多点交互式分割。</p>
+<h2 id="评估sam_med2d">评估SAM_Med2D</h2>
+<p>以SAM为基本模型，从其交互方式中选择Bbox和Points两种直观的提示模式来评估SAM-Med2D。</p>
+<p><strong>多模态：</strong>评估 SAM-Med2D 在 10
+种不同模式的医学图像上的性能，包括
+MRI、CT、超声等。这种全面的评估将使我们能够了解 SAM-Med2D
+在特定模态下的优势和挑战，并揭示其在多模态图像中的潜在应用能力。评估
+SAM-Med2D 在 10 种不同模式的医学图像上的性能，包括
+MRI、CT、超声等。这种全面的评估将使我们能够了解 SAM-Med2D
+在特定模态下的优势和挑战，并揭示其在多模态图像中的潜在应用能力。</p>
+<p><strong>不同器官以及解剖结构：</strong>考虑到不同的解剖结构和器官具有独特的形态、特征和变异模式，对
+4 个解剖结构和 31 个主要器官进行了 SAM-Med2D
+评估。此类评估有助于深入了解 SAM-Med2D
+在不同场景下的性能差异，并进行有针对性的改进，以应对特定结构和器官的挑战。</p>
+<p><strong>泛化能力：</strong>在 9 个 MICCAI 2023
+数据集上对其进行测试。</p>
+<h1 id="实验以及评估">实验以及评估</h1>
+<h2 id="实验细节">实验细节</h2>
+<p>8个A100GPU，每个80GB显存进行训练。初始学习率1e-4，12个轮次，在第七和第十轮次，学习率除2。训练过程中，图像重新调整为256*256，对于长宽都小于256的，用0进行填充边界，其他情况下使用双线性插值。每一幅图像随机选取5个相对应的掩膜。如果可用掩膜较少，随机重复样本。每个GPU处理50个图像以及对应的250个掩膜，掩膜预测损失函数是focal损失和dice损失的线性组合，组合系数是20：1。使用IoU预测和带有真实掩膜的预测掩膜之间的均方损失函数进行训练。最后使用Dice分数评估分割结果。</p>
+<h2 id="定量评估">定量评估</h2>
+<h3 id="总体表现">总体表现</h3>
+<p><img src="/images/深度学习论文/SAM_Med2D/4.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/4.png"></p>
 <p>1024*1024的分辨率不如微调策略。随着点提示增加，dice分数超过边界框提示。证明了点提示的可行性。</p>
-<h4 id="不同解剖结构的表现"><a href="#不同解剖结构的表现" class="headerlink" title="不同解剖结构的表现"></a>不同解剖结构的表现</h4><p>不同模型和分辨率在HN，Tx，Abd，Pl其他区域的表现。主要关注边界框提示以及1-点提示的表现。</p>
+<h3 id="不同解剖结构的表现">不同解剖结构的表现</h3>
+<p>不同模型和分辨率在HN，Tx，Abd，Pl其他区域的表现。主要关注边界框提示以及1-点提示的表现。</p>
 <p><img src="/images/深度学习论文/SAM_Med2D/5.png" style="zoom:67%;"></p>
-<p>图a中左侧为Box预测对比，右为point预测对比。在Bbox提示中，1024<em>1024SAM在Tx, Abd和其他区域表现得比FT-SAM好，但在H&amp;N区域表现略差，这可能是因为H&amp;N区域的病变和器官区域相对较小，并且更少的清晰边界。SAM_Med2D表现的非常好。而在点提示中，FT-SAM表现得比1024\</em>1024SAM更好，这是因为微调SAM从数据集中在目标区域学习到了点的位置关系。</p>
+<p><img src="/深度学习论文/SAM_Med2D/5.png"></p>
+<p>图a中左侧为Box预测对比，右为point预测对比。在Bbox提示中，1024*1024SAM在Tx,
+Abd和其他区域表现得比FT-SAM好，但在H&amp;N区域表现略差，这可能是因为H&amp;N区域的病变和器官区域相对较小，并且更少的清晰边界。SAM_Med2D表现的非常好。而在点提示中，FT-SAM表现得比1024*1024SAM更好，这是因为微调SAM从数据集中在目标区域学习到了点的位置关系。</p>
 <p>SAM_Med2D表现得很好除了H&amp;N区域，这表明还需要更好的改进措施。</p>
-<h4 id="不同模态的表现评估"><a href="#不同模态的表现评估" class="headerlink" title="不同模态的表现评估"></a>不同模态的表现评估</h4><p>如图（b）所示所有四种方法在皮肤镜检查、内窥镜检查、眼底摄影、组织病理学和显微镜检查中的 Dice 分数均超过 70%。当部署分辨率为 1024×1024 的预测图像时，SAM 在内窥镜、组织病理学和显微镜模式方面优于其他方法。</p>
+<h3 id="不同模态的表现评估">不同模态的表现评估</h3>
+<p>如图（b）所示所有四种方法在皮肤镜检查、内窥镜检查、眼底摄影、组织病理学和显微镜检查中的
+Dice 分数均超过 70%。当部署分辨率为 1024×1024 的预测图像时，SAM
+在内窥镜、组织病理学和显微镜模式方面优于其他方法。</p>
 <p>这可能是因为：</p>
-<p>（1）这三种模式源自 2D 数据集，由 RGB 图像组成，与自然图像有相似之处。</p>
+<p>（1）这三种模式源自 2D 数据集，由 RGB
+图像组成，与自然图像有相似之处。</p>
 <p>（2）用于微调的可用数据量有限，限制了微调方法的性能（如图中红线所示，代表对数变换后的掩模计数）</p>
 <p>（3）较大的图像分辨率可提供更多细节并带来更高的预测性能。</p>
 <p><img src="/images/深度学习论文/SAM_Med2D/6.png" style="zoom:67%;"></p>
-<p>表格内左边的数据是1-点提示的dice分数，括号内是5-点提示分数。据观察，分割性能随着迭代次数的增加而显着提高，并且 SAM 在所有模式中都实现了超过 10% 的改进。可以发现SAM_Med2D在1-点提示时的表现好于其他模型在5-点提示的表现。</p>
-<p>同时注意到，对于组织病理学和显微镜模式，1024 × 1024 分辨率下 SAM 的多点相互作用实际上比单点相互作用表现更差。这可能是因为模型已经根据单点提示做出了最优决策，而旨在纠正分割结果的进一步点提示可能会干扰模型的判断。</p>
-<h4 id="主要器官的表现评估"><a href="#主要器官的表现评估" class="headerlink" title="主要器官的表现评估"></a>主要器官的表现评估</h4><p>图（c）中条形图代表了5-点提示，五角星代表了Bbox提示。SAM-Med2D在24个器官中取得了较高的结果，最大差异达到6.95%。通过观察同一器官在不同提示方式下的实验结果可以看出，5-点提示与Bbox提示的性能差距较小。这一发现表明，当将 SAM 应用到医疗领域时，边界框交互可能不是最有效的方法。</p>
-<h4 id="泛化评估"><a href="#泛化评估" class="headerlink" title="泛化评估"></a>泛化评估</h4><p><img src="/images/深度学习论文/SAM_Med2D/7.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/6.png"></p>
+<p>表格内左边的数据是1-点提示的dice分数，括号内是5-点提示分数。据观察，分割性能随着迭代次数的增加而显着提高，并且
+SAM 在所有模式中都实现了超过 10%
+的改进。可以发现SAM_Med2D在1-点提示时的表现好于其他模型在5-点提示的表现。</p>
+<p>同时注意到，对于组织病理学和显微镜模式，1024 × 1024 分辨率下 SAM
+的多点相互作用实际上比单点相互作用表现更差。这可能是因为模型已经根据单点提示做出了最优决策，而旨在纠正分割结果的进一步点提示可能会干扰模型的判断。</p>
+<h3 id="主要器官的表现评估">主要器官的表现评估</h3>
+<p>图（c）中条形图代表了5-点提示，五角星代表了Bbox提示。SAM-Med2D在24个器官中取得了较高的结果，最大差异达到6.95%。通过观察同一器官在不同提示方式下的实验结果可以看出，5-点提示与Bbox提示的性能差距较小。这一发现表明，当将
+SAM 应用到医疗领域时，边界框交互可能不是最有效的方法。</p>
+<h3 id="泛化评估">泛化评估</h3>
+<p><img src="/images/深度学习论文/SAM_Med2D/7.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/7.png"></p>
 <p>表格显示SAM在Bbox提示下表现出优异的性能，加权平均Dice为85.35%。然而，其在单点提示下的表现并不令人满意（48.08%）。</p>
-<p>适配器层参数是即插即用的，测试了两种场景：保留和删除适配器层参数。SAM-Med2D 在 Bbox 提示下获得了 81.93% 的 Dice 分数，并且当去除适配器层参数时性能提高了 8.19%。</p>
-<p>SAM 仅在边界框提示下表现出良好的泛化性能，而 SAM-Med2D 在两种提示模式下都实现了更好的泛化性能。</p>
-<h3 id="定性比较"><a href="#定性比较" class="headerlink" title="定性比较"></a>定性比较</h3><p><img src="/images/深度学习论文/SAM_Med2D/8.png" style="zoom:67%;"></p>
-<p>前三行表明SAM-Med2D在不同模态时视觉结果中的边界更清晰并且更接近真实情况。在 1-点提示的情况下，SAM 难以定位目标区域，导致分割结果与预期结果之间存在显着差异。</p>
-<p>最后三行描述了两种模型对肝脏、肺和前列腺器官的分割结果。对于Bbox提示模式，两种方法都可以生成相似质量的掩码。在相同点提示数量的模型中，SAM-Med2D 能够比 SAM 更好地描述目标区域，这意味着 SAM-Med2D 需要更少的交互操作和更少的时间达到想要的结果。</p>
+<p>适配器层参数是即插即用的，测试了两种场景：保留和删除适配器层参数。SAM-Med2D
+在 Bbox 提示下获得了 81.93% 的 Dice
+分数，并且当去除适配器层参数时性能提高了 8.19%。</p>
+<p>SAM 仅在边界框提示下表现出良好的泛化性能，而 SAM-Med2D
+在两种提示模式下都实现了更好的泛化性能。</p>
+<h2 id="定性比较">定性比较</h2>
+<p><img src="/images/深度学习论文/SAM_Med2D/8.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/8.png"></p>
+<p>前三行表明SAM-Med2D在不同模态时视觉结果中的边界更清晰并且更接近真实情况。在
+1-点提示的情况下，SAM
+难以定位目标区域，导致分割结果与预期结果之间存在显着差异。</p>
+<p>最后三行描述了两种模型对肝脏、肺和前列腺器官的分割结果。对于Bbox提示模式，两种方法都可以生成相似质量的掩膜。在相同点提示数量的模型中，SAM-Med2D
+能够比 SAM 更好地描述目标区域，这意味着 SAM-Med2D
+需要更少的交互操作和更少的时间达到想要的结果。</p>
 <p><img src="/images/深度学习论文/SAM_Med2D/9.png" style="zoom:67%;"></p>
-<p>图中显示了合并同一图像内多个目标区域的结果。当目标边界清晰时，SAM 和我们的 SAM-Med2D 之间存在细微的视觉差异。在其他情况下，SAM-Med2D可以实现人眼难以识别的部分的精确分割。</p>
-<h2 id="讨论和总结"><a href="#讨论和总结" class="headerlink" title="讨论和总结"></a>讨论和总结</h2><p>未来需要进一步优化以获得更鲁棒的医学图像分割。从定性分割结果来看，对于复杂形状/边界、小尺寸或低对比度的物体，不同提示模式产生的分割结果仍有改进的空间。未来建立相关的优化策略可能会提高分割结果，例如为不同器官设置窗口宽度以及设计交互式分割的边界损失。除了本文使用的提示策略之外，自然语言可以作为医学图像分割中用户交互的另一种常见形式，但目前缺乏相关数据集。这是我们积极追求的方向，旨在让SAM-Med2D具备医疗领域的自然语言理解能力，满足多样化的用户需求。虽然我们已经在超过 1970 万个掩模上训练了 SAM-Med2D，但与 SAM 的训练数据和分辨率相比仍然存在差距。这导致 SAM-Med2D 可以有效处理常见器官或病变，但缺乏医疗领域的“一切”能力。我们计划通过数据引擎生成更大量、更广泛的高质量掩模，使 SAM-Med2D 能够真正分割所有类型的医学图像。</p>
+<p><img src="/深度学习论文/SAM_Med2D/9.png"></p>
+<p>图中显示了合并同一图像内多个目标区域的结果。当目标边界清晰时，SAM
+和我们的 SAM-Med2D
+之间存在细微的视觉差异。在其他情况下，SAM-Med2D可以实现人眼难以识别的部分的精确分割。</p>
+<h1 id="讨论和总结">讨论和总结</h1>
+<p>未来需要进一步优化以获得更鲁棒的医学图像分割。从定性分割结果来看，对于复杂形状/边界、小尺寸或低对比度的物体，不同提示模式产生的分割结果仍有改进的空间。未来建立相关的优化策略可能会提高分割结果，例如为不同器官设置窗口宽度以及设计交互式分割的边界损失。除了本文使用的提示策略之外，自然语言可以作为医学图像分割中用户交互的另一种常见形式，但目前缺乏相关数据集。这是我们积极追求的方向，旨在让SAM-Med2D具备医疗领域的自然语言理解能力，满足多样化的用户需求。虽然我们已经在超过
+1970 万个掩模上训练了 SAM-Med2D，但与 SAM
+的训练数据和分辨率相比仍然存在差距。这导致 SAM-Med2D
+可以有效处理常见器官或病变，但缺乏医疗领域的“一切”能力。我们计划通过数据引擎生成更大量、更广泛的高质量掩模，使
+SAM-Med2D 能够真正分割所有类型的医学图像。</p>
+<h1 id="分割测试">分割测试</h1>
+<p>此处只对模型分割进行定性测试。使用ipynb文件在google
+colab中进行测试。</p>
+<h2 id="环境设置">环境设置</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">using_colab = <span class="literal">True</span></span><br><span class="line">!git clone https://github.com/OpenGVLab/SAM-Med2D.git SAM_Med2D</span><br><span class="line"><span class="keyword">if</span> using_colab:</span><br><span class="line">    <span class="keyword">import</span> torch</span><br><span class="line">    <span class="keyword">import</span> torchvision</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;PyTorch version:&quot;</span>, torch.__version__)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Torchvision version:&quot;</span>, torchvision.__version__)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CUDA is available:&quot;</span>, torch.cuda.is_available())</span><br><span class="line">    <span class="keyword">import</span> sys</span><br><span class="line">    !&#123;sys.executable&#125; -m pip install opencv-python matplotlib</span><br><span class="line">    <span class="comment"># !&#123;sys.executable&#125; -m pip install &#x27;git+https://github.com/facebookresearch/segment-anything.git&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># !mkdir images</span></span><br><span class="line">    <span class="comment"># !wget -P images https://raw.githubusercontent.com/facebookresearch/segment-anything/main/notebooks/images/dog.jpg</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># not sure for this part! Please check!</span></span><br><span class="line">    !pip install torch==<span class="number">1.11</span><span class="number">.0</span>+cu113 torchvision==<span class="number">0.12</span><span class="number">.0</span>+cu113 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line">    !pip install opencv-python matplotlib</span><br><span class="line">    <span class="comment"># !pip install &#x27;git+https://github.com/facebookresearch/segment-anything.git&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="权重下载">权重下载</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pydrive.auth <span class="keyword">import</span> GoogleAuth</span><br><span class="line"><span class="keyword">from</span> pydrive.drive <span class="keyword">import</span> GoogleDrive</span><br><span class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> auth</span><br><span class="line"><span class="keyword">from</span> oauth2client.client <span class="keyword">import</span> GoogleCredentials</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">ROOT_DIR = <span class="string">&#x27;.&#x27;</span></span><br><span class="line">CODE_DIR = <span class="string">f&quot;<span class="subst">&#123;ROOT_DIR&#125;</span>/SAM_Med2D&quot;</span></span><br><span class="line">MODEL_DIR = <span class="string">f&quot;<span class="subst">&#123;CODE_DIR&#125;</span>/pretrain_model&quot;</span></span><br><span class="line">os.makedirs(<span class="string">f&#x27;<span class="subst">&#123;MODEL_DIR&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">download_with_pydrive = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Downloader</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, use_pydrive, save_dir=<span class="string">&#x27;.&#x27;</span></span>):</span></span><br><span class="line">    self.use_pydrive = use_pydrive</span><br><span class="line">    current_directory = os.getcwd()</span><br><span class="line">    self.save_dir = save_dir</span><br><span class="line">    <span class="keyword">if</span> self.use_pydrive:</span><br><span class="line">      self.authenticate()</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">self</span>):</span></span><br><span class="line">    auth.authenticate_user()</span><br><span class="line">    gauth = GoogleAuth()</span><br><span class="line">    gauth.credentials = GoogleCredentials.get_application_default()</span><br><span class="line">    self.drive = GoogleDrive(gauth)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">download_file</span>(<span class="params">self, file_id, file_name</span>):</span></span><br><span class="line">    file_dst = <span class="string">f&#x27;<span class="subst">&#123;self.save_dir&#125;</span>/<span class="subst">&#123;file_name&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(file_dst):</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;file_name&#125;</span> already exists&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    downloaded = self.drive.CreateFile(&#123;<span class="string">&#x27;id&#x27;</span>: file_id&#125;)</span><br><span class="line">    downloaded.FetchMetadata(fetch_all=<span class="literal">True</span>)</span><br><span class="line">    downloaded.GetContentFile(file_dst)</span><br><span class="line"></span><br><span class="line">downloader = Downloader(download_with_pydrive, MODEL_DIR)</span><br><span class="line"></span><br><span class="line">sam_med2d_model = &#123;<span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;1ARiB5RkSsWmAB_8mqWnwDF8ZKTtFwsjl&#x27;</span>, <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;sam-med2d_b.pth&#x27;</span>&#125;</span><br><span class="line"><span class="comment"># samed_model = &#123;&#x27;id&#x27;: &#x27;1P0Bm-05l-rfeghbrT1B62v5eN-3A-uOr&#x27;, &#x27;name&#x27;: &#x27;epoch_159.pth&#x27;&#125;</span></span><br><span class="line"><span class="comment"># medsam_model = &#123;&#x27;id&#x27;: &#x27;1UAmWL88roYR7wKlnApw5Bcuzf2iQgk6_&#x27;, &#x27;name&#x27;: &#x27;medsam_vit_b.pth&#x27;&#125;</span></span><br><span class="line">downloader.download_file(file_id=sam_med2d_model[<span class="string">&#x27;id&#x27;</span>], file_name=sam_med2d_model[<span class="string">&#x27;name&#x27;</span>])</span><br><span class="line"><span class="comment"># !wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P $MODEL_DIR</span></span><br><span class="line"><span class="comment"># downloader.download_file(file_id=medsam_model[&#x27;id&#x27;], file_name=medsam_model[&#x27;name&#x27;])</span></span><br><span class="line"><span class="comment"># downloader.download_file(file_id=samed_model[&#x27;id&#x27;], file_name=samed_model[&#x27;name&#x27;])</span></span><br></pre></td></tr></table></figure>
+<h2 id="基于提示生成掩膜">基于提示生成掩膜</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path.append(ROOT_DIR) <span class="comment"># make sure the import SAM_Med2D.segment_anything work</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_mask</span>(<span class="params">mask, ax, random_color=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> random_color:</span><br><span class="line">        color = np.concatenate([np.random.random(<span class="number">3</span>), np.array([<span class="number">0.6</span>])], axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        color = np.array([<span class="number">30</span>/<span class="number">255</span>, <span class="number">144</span>/<span class="number">255</span>, <span class="number">255</span>/<span class="number">255</span>, <span class="number">0.6</span>])</span><br><span class="line">    h, w = mask.shape[-<span class="number">2</span>:]</span><br><span class="line">    mask_image = mask.reshape(h, w, <span class="number">1</span>) * color.reshape(<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line">    ax.imshow(mask_image)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_points</span>(<span class="params">coords, labels, ax, marker_size=<span class="number">375</span></span>):</span></span><br><span class="line">    pos_points = coords[labels==<span class="number">1</span>]</span><br><span class="line">    neg_points = coords[labels==<span class="number">0</span>]</span><br><span class="line">    ax.scatter(pos_points[:, <span class="number">0</span>], pos_points[:, <span class="number">1</span>], color=<span class="string">&#x27;green&#x27;</span>, marker=<span class="string">&#x27;*&#x27;</span>, s=marker_size, edgecolor=<span class="string">&#x27;white&#x27;</span>, linewidth=<span class="number">1.25</span>)</span><br><span class="line">    ax.scatter(neg_points[:, <span class="number">0</span>], neg_points[:, <span class="number">1</span>], color=<span class="string">&#x27;red&#x27;</span>, marker=<span class="string">&#x27;*&#x27;</span>, s=marker_size, edgecolor=<span class="string">&#x27;white&#x27;</span>, linewidth=<span class="number">1.25</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_box</span>(<span class="params">box, ax</span>):</span></span><br><span class="line">    x0, y0 = box[<span class="number">0</span>], box[<span class="number">1</span>]</span><br><span class="line">    w, h = box[<span class="number">2</span>] - box[<span class="number">0</span>], box[<span class="number">3</span>] - box[<span class="number">1</span>]</span><br><span class="line">    ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor=<span class="string">&#x27;green&#x27;</span>, facecolor=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>), lw=<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="打开图片加载模型">打开图片加载模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">os.chdir(<span class="string">f&#x27;<span class="subst">&#123;CODE_DIR&#125;</span>&#x27;</span>)</span><br><span class="line">image = cv2.imread(<span class="string">&#x27;data_demo/images/amos_0507_31.png&#x27;</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.imshow(image)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="keyword">from</span> SAM_Med2D.segment_anything <span class="keyword">import</span> sam_model_registry</span><br><span class="line"><span class="keyword">from</span> SAM_Med2D.segment_anything.predictor_sammed <span class="keyword">import</span> SammedPredictor</span><br><span class="line"><span class="keyword">from</span> argparse <span class="keyword">import</span> Namespace</span><br><span class="line">args = Namespace()</span><br><span class="line">device = torch.device(<span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span>)</span><br><span class="line">args.image_size = <span class="number">256</span></span><br><span class="line">args.encoder_adapter = <span class="literal">True</span></span><br><span class="line">args.sam_checkpoint = <span class="string">&quot;pretrain_model/sam-med2d_b.pth&quot;</span></span><br><span class="line">model = sam_model_registry[<span class="string">&quot;vit_b&quot;</span>](args).to(device)</span><br><span class="line">predictor = SammedPredictor(model)</span><br><span class="line">predictor.set_image(image)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习论文/SAM_Med2D/10.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/10.png" style="zoom: 50%;"></p>
+<h2 id="单点分割">单点分割</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ori_h, ori_w, _ = image.shape</span><br><span class="line">input_point = np.array([[<span class="number">162</span>, <span class="number">127</span>]])</span><br><span class="line">input_label = np.array([<span class="number">1</span>])</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.imshow(image)</span><br><span class="line">show_points(input_point, input_label, plt.gca())</span><br><span class="line">plt.axis(<span class="string">&#x27;on&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line">masks, scores, logits = predictor.predict(</span><br><span class="line">    point_coords=input_point,</span><br><span class="line">    point_labels=input_label,</span><br><span class="line">    multimask_output=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line">masks.shape  <span class="comment"># (number_of_masks) x H x W</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.imshow(image)</span><br><span class="line">show_mask(masks, plt.gca())</span><br><span class="line">show_points(input_point, input_label, plt.gca())</span><br><span class="line">plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习论文/SAM_Med2D/11.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/11.png" style="zoom:50%;"></p>
+<h2 id="两点分割">两点分割</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">input_point1 = np.array([[<span class="number">169</span>, <span class="number">140</span>]])</span><br><span class="line">input_label1 = np.array([<span class="number">0</span>])</span><br><span class="line">input_points = np.concatenate((input_point, input_point1))</span><br><span class="line">input_labels = np.concatenate((input_label, input_label1))</span><br><span class="line">mask_inputs = torch.sigmoid(torch.as_tensor(logits, dtype=torch.<span class="built_in">float</span>, device=device))</span><br><span class="line">masks, scores, logits = predictor.predict(</span><br><span class="line">    point_coords=input_points,</span><br><span class="line">    point_labels=input_labels,</span><br><span class="line">    mask_input = mask_inputs,</span><br><span class="line">    multimask_output=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line">masks.shape  <span class="comment"># (number_of_masks) x H x W</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.imshow(image)</span><br><span class="line">show_mask(masks, plt.gca())</span><br><span class="line">show_points(input_points, input_labels, plt.gca())</span><br><span class="line">plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习论文/SAM_Med2D/11.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/12.png" style="zoom:50%;"></p>
+<h2 id="多边界框分割">多边界框分割</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">image = cv2.imread(<span class="string">&#x27;data_demo/images/s0114_111.png&#x27;</span>)</span><br><span class="line">predictor.set_image(image)</span><br><span class="line">input_boxes = torch.tensor([[<span class="number">72</span>,<span class="number">110</span>,<span class="number">136</span>,<span class="number">143</span>],[<span class="number">124</span>,<span class="number">92</span>,<span class="number">160</span>,<span class="number">132</span>]], device=predictor.device)</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">plt.imshow(image)</span><br><span class="line"><span class="keyword">for</span> mask <span class="keyword">in</span> masks:</span><br><span class="line">    show_mask(mask.cpu().numpy(), plt.gca(), random_color=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> box <span class="keyword">in</span> input_boxes:</span><br><span class="line">    show_box(box.cpu().numpy(), plt.gca())</span><br><span class="line">plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习论文/SAM_Med2D/13.png" style="zoom:67%;"></p>
+<p><img src="/深度学习论文/SAM_Med2D/13.png" style="zoom:50%;"></p>
 
     </div>
 
@@ -443,7 +554,10 @@
     <a href="/2023/10/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Transformer%E9%9A%8F%E8%AE%B0/" rel="prev" title="Transformer随记">
       <i class="fa fa-chevron-left"></i> Transformer随记
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/11/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/SVD/" rel="next" title="SVD">
+      SVD <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -502,7 +616,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BE%AE%E8%B0%83"><span class="nav-number">1.1.</span> <span class="nav-text">如何微调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">如何评估模型表现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%8C%BB%E5%AD%A6%E7%9F%A5%E8%AF%86%E8%9E%8D%E5%85%A5SAM"><span class="nav-number">3.1.</span> <span class="nav-text">将医学知识融入SAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8ESAM%E8%BF%81%E7%A7%BB%E5%88%B0SAM-Med2D"><span class="nav-number">3.2.</span> <span class="nav-text">从SAM迁移到SAM_Med2D</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E5%99%A8-Adapting-Image-Encoder"><span class="nav-number">3.2.1.</span> <span class="nav-text">适配图像编码器(Adapting Image Encoder)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E6%8E%A9%E6%A8%A1%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">3.2.2.</span> <span class="nav-text">提示编码器和掩模解码器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E8%B0%83%E7%AD%96%E7%95%A5"><span class="nav-number">3.2.3.</span> <span class="nav-text">微调策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0SAM-Med2D"><span class="nav-number">3.3.</span> <span class="nav-text">评估SAM_Med2D</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%A5%E5%8F%8A%E8%AF%84%E4%BC%B0"><span class="nav-number">4.</span> <span class="nav-text">实验以及评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%86%E8%8A%82"><span class="nav-number">4.1.</span> <span class="nav-text">实验细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="nav-number">4.2.</span> <span class="nav-text">定量评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E8%A1%A8%E7%8E%B0"><span class="nav-number">4.2.1.</span> <span class="nav-text">总体表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%A3%E5%89%96%E7%BB%93%E6%9E%84%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">不同解剖结构的表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%A8%A1%E6%80%81%E7%9A%84%E8%A1%A8%E7%8E%B0%E8%AF%84%E4%BC%B0"><span class="nav-number">4.2.3.</span> <span class="nav-text">不同模态的表现评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%99%A8%E5%AE%98%E7%9A%84%E8%A1%A8%E7%8E%B0%E8%AF%84%E4%BC%B0"><span class="nav-number">4.2.4.</span> <span class="nav-text">主要器官的表现评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%9B%E5%8C%96%E8%AF%84%E4%BC%B0"><span class="nav-number">4.2.5.</span> <span class="nav-text">泛化评估</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%80%A7%E6%AF%94%E8%BE%83"><span class="nav-number">4.3.</span> <span class="nav-text">定性比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%E5%92%8C%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">讨论和总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">研究背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BE%AE%E8%B0%83"><span class="nav-number">2.1.</span> <span class="nav-text">如何微调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">如何评估模型表现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%8C%BB%E5%AD%A6%E7%9F%A5%E8%AF%86%E8%9E%8D%E5%85%A5sam"><span class="nav-number">4.1.</span> <span class="nav-text">将医学知识融入SAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8Esam%E8%BF%81%E7%A7%BB%E5%88%B0sam_med2d"><span class="nav-number">4.2.</span> <span class="nav-text">从SAM迁移到SAM_Med2D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E5%99%A8adapting-image-encoder"><span class="nav-number">4.2.1.</span> <span class="nav-text">适配图像编码器(Adapting
+Image Encoder)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E6%8E%A9%E6%A8%A1%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">4.2.2.</span> <span class="nav-text">提示编码器和掩模解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E8%B0%83%E7%AD%96%E7%95%A5"><span class="nav-number">4.2.3.</span> <span class="nav-text">微调策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0sam_med2d"><span class="nav-number">4.3.</span> <span class="nav-text">评估SAM_Med2D</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%A5%E5%8F%8A%E8%AF%84%E4%BC%B0"><span class="nav-number">5.</span> <span class="nav-text">实验以及评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%86%E8%8A%82"><span class="nav-number">5.1.</span> <span class="nav-text">实验细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="nav-number">5.2.</span> <span class="nav-text">定量评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E8%A1%A8%E7%8E%B0"><span class="nav-number">5.2.1.</span> <span class="nav-text">总体表现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%A3%E5%89%96%E7%BB%93%E6%9E%84%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">5.2.2.</span> <span class="nav-text">不同解剖结构的表现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%A8%A1%E6%80%81%E7%9A%84%E8%A1%A8%E7%8E%B0%E8%AF%84%E4%BC%B0"><span class="nav-number">5.2.3.</span> <span class="nav-text">不同模态的表现评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%99%A8%E5%AE%98%E7%9A%84%E8%A1%A8%E7%8E%B0%E8%AF%84%E4%BC%B0"><span class="nav-number">5.2.4.</span> <span class="nav-text">主要器官的表现评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%8C%96%E8%AF%84%E4%BC%B0"><span class="nav-number">5.2.5.</span> <span class="nav-text">泛化评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E6%80%A7%E6%AF%94%E8%BE%83"><span class="nav-number">5.3.</span> <span class="nav-text">定性比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%E5%92%8C%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">讨论和总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E6%B5%8B%E8%AF%95"><span class="nav-number">7.</span> <span class="nav-text">分割测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">7.1.</span> <span class="nav-text">环境设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E4%B8%8B%E8%BD%BD"><span class="nav-number">7.2.</span> <span class="nav-text">权重下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%8E%A9%E8%86%9C"><span class="nav-number">7.3.</span> <span class="nav-text">基于提示生成掩膜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="nav-number">7.4.</span> <span class="nav-text">打开图片加载模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E5%88%86%E5%89%B2"><span class="nav-number">7.5.</span> <span class="nav-text">单点分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%82%B9%E5%88%86%E5%89%B2"><span class="nav-number">7.6.</span> <span class="nav-text">两点分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%BE%B9%E7%95%8C%E6%A1%86%E5%88%86%E5%89%B2"><span class="nav-number">7.7.</span> <span class="nav-text">多边界框分割</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -518,7 +633,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -582,12 +697,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">201k</span>
+    <span title="站点总字数">219k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:03</span>
+    <span title="站点阅读时长">3:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
