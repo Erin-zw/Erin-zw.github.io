@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="线性代数基础线性空间以及线性子空间满足数乘 空间维数分解定理定理：$设V_1，V_2是线性空间V的子空间，则dim(V_1+V_2)&#x3D;dim(V_1)+dim(V_2)-dim(V_1\cap V_2)$ 欧氏空间酉空间内积空间： 两个概念：  $V(P),P上的线性空间$ $(\cdot,\cdot),内积，特殊的二元函数$  内积空间V，V为P（R，C）上的内积空间。 内积可以理解为V空间的二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些矩阵结论知识记忆">
+<meta property="og:url" content="http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="线性代数基础线性空间以及线性子空间满足数乘 空间维数分解定理定理：$设V_1，V_2是线性空间V的子空间，则dim(V_1+V_2)&#x3D;dim(V_1)+dim(V_2)-dim(V_1\cap V_2)$ 欧氏空间酉空间内积空间： 两个概念：  $V(P),P上的线性空间$ $(\cdot,\cdot),内积，特殊的二元函数$  内积空间V，V为P（R，C）上的内积空间。 内积可以理解为V空间的二">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-22T07:15:48.856Z">
+<meta property="article:modified_time" content="2023-12-23T08:05:14.465Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一些矩阵结论知识记忆 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一些矩阵结论知识记忆
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-22 15:15:48" itemprop="dateCreated datePublished" datetime="2023-12-22T15:15:48+08:00">2023-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-23 16:05:14" itemprop="dateModified" datetime="2023-12-23T16:05:14+08:00">2023-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="线性代数基础"><a href="#线性代数基础" class="headerlink" title="线性代数基础"></a>线性代数基础</h2><h3 id="线性空间以及线性子空间"><a href="#线性空间以及线性子空间" class="headerlink" title="线性空间以及线性子空间"></a>线性空间以及线性子空间</h3><p>满足数乘</p>
+<h3 id="空间维数分解定理"><a href="#空间维数分解定理" class="headerlink" title="空间维数分解定理"></a>空间维数分解定理</h3><p><strong>定理：</strong>$设V_1，V_2是线性空间V的子空间，则dim(V_1+V_2)=dim(V_1)+dim(V_2)-dim(V_1\cap V_2)$</p>
+<h3 id="欧氏空间酉空间"><a href="#欧氏空间酉空间" class="headerlink" title="欧氏空间酉空间"></a>欧氏空间酉空间</h3><p><strong>内积空间：</strong></p>
+<p>两个概念：</p>
+<ul>
+<li>$V(P),P上的线性空间$</li>
+<li>$(\cdot,\cdot),内积，特殊的二元函数$</li>
+</ul>
+<p>内积空间V，V为P（R，C）上的内积空间。</p>
+<p>内积可以理解为V空间的二元函数映射到P上。符号表述为$\forall \alpha,\beta \in V,f(\alpha,\beta)=k\in P$</p>
+<p>内积要满足三个性质：</p>
+<ul>
+<li><strong>双线性</strong>：$\begin{cases}f(x,a_1y_1+a_2y_2)=a_1f(x,y_1)+a_2f(x,y_2) \\ f(a_1x_1+a_2x_2,y)=\overline a_1f(x_1,y)+\overline a_2f(x_2,y)\end{cases},a_i\in P$</li>
+<li><strong>正定性</strong>:$f(x,x)\ge0,当且仅当x=0取等$</li>
+<li><strong>对称性</strong>：$f(x,y)=\overline{f(y,x)}$</li>
+</ul>
+<p>欧氏空间酉空间都要满足以上三个性质</p>
+<p><strong>长度：</strong>$设V是欧氏(酉)空间，\forall \alpha \in V,\alpha的长度定义为||\alpha||=\sqrt{(\alpha,\alpha)}$</p>
+<p>满足以下性质：</p>
+<ul>
+<li>$||\alpha||\ge0当且仅当\alpha=0取等$</li>
+<li>$||k\alpha||=|k|\cdot||\alpha||$</li>
+<li>$||\alpha+\beta||\le||\alpha||+||\beta||$</li>
+<li>$|(\alpha,\beta)|\le||\alpha||\cdot||\beta||$</li>
+</ul>
+<h3 id="初等矩阵"><a href="#初等矩阵" class="headerlink" title="初等矩阵"></a>初等矩阵</h3><p><strong>定义</strong>：$u,v\in C^n,\sigma \in C,E(u,v,\sigma)=E-\sigma uv^H$</p>
+<p>几个结论：</p>
+<ul>
+<li>特征向量,不想写</li>
+<li><strong>特征值</strong>：$\lambda=\{1,1,\cdots,1,1-\sigma v^Hu\}$</li>
+<li>行列式：$det = 1-\sigma v^Hu$</li>
+<li>逆矩阵：${E(u,v,\sigma)}^{-1}=E(u,v,\frac{\sigma}{\sigma v^Hu-1},1-\sigma v^Hu\ne0)$</li>
+</ul>
+<h2 id="向量与矩阵范数"><a href="#向量与矩阵范数" class="headerlink" title="向量与矩阵范数"></a>向量与矩阵范数</h2><h3 id="向量范数"><a href="#向量范数" class="headerlink" title="向量范数"></a>向量范数</h3><ul>
+<li>满足<strong>正定性，齐次性，三角不等式。</strong></li>
+</ul>
+<h3 id="矩阵范数"><a href="#矩阵范数" class="headerlink" title="矩阵范数"></a>矩阵范数</h3><ul>
+<li>满足<strong>正定性，齐次性，三角不等式。</strong></li>
+<li>m1,m2范数<strong>自相容</strong>，但是m无穷范数<strong>不自相容</strong></li>
+<li><strong>m2范数</strong>的结论：$||A||_F^2=||A||_{m2}^2=\sum_{j=1}^n||a_j||_2^2=tr(A^HA)=\sum_{i=1}^n\lambda_i(A^HA),同时m2范数具有酉不变性$</li>
+<li><strong>与向量范数的相容性</strong>：m1范数，m2范数分别和向量1，2范数相容</li>
+<li>算子范数$||A||_a$自相容，且与向量范数$||x||_a$相容，同时算子范数$||A||_a$也是所有和向量范数$||x||_a$相容的矩阵范数中最小的</li>
+<li>$||E||_a=1$</li>
+<li>自相容的矩阵范数一定有与其相容的向量范数</li>
+<li>特殊的算子范数：$||A||_1=max_j\sum_{i=1}^n|a_{ij}|,||A||_{\infty}=max_i\sum_{j=1}^n|a_{ij}|$</li>
+<li>谱范数：$||A||_2=\sqrt{r(A^HA)},r(A)=max_i|\lambda_i|叫做谱半径$，具有酉不变性，$||A||_2^2\le||A||_1||A||_{\infty}$</li>
+</ul>
+<h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><h3 id="QR分解"><a href="#QR分解" class="headerlink" title="QR分解"></a>QR分解</h3><h4 id="n阶可逆矩阵的分解"><a href="#n阶可逆矩阵的分解" class="headerlink" title="n阶可逆矩阵的分解"></a>n阶可逆矩阵的分解</h4><p><strong>概念：</strong>A=UR或A=LU，U是n阶酉矩阵，R，L是n阶正线上（下）三角复矩阵。</p>
+<p><strong>推论：</strong>A为Hermite（实对称）正定矩阵，则存在唯一正线上三角矩阵R使$A=R^HR(R^TR)$</p>
+<h4 id="行列满秩矩阵的QR分解"><a href="#行列满秩矩阵的QR分解" class="headerlink" title="行列满秩矩阵的QR分解"></a>行列满秩矩阵的QR分解</h4><p>概念：</p>
+<p>一种分解：</p>
+<script type="math/tex; mode=display">
+A=U\begin{bmatrix}R\\0\end{bmatrix},A=\begin{bmatrix}L&0\end{bmatrix}U</script><p>另一种：</p>
+<p>A=UR，A=LU，U此时是m*n阶。</p>
+<h4 id="任意矩阵QR分解"><a href="#任意矩阵QR分解" class="headerlink" title="任意矩阵QR分解"></a>任意矩阵QR分解</h4><script type="math/tex; mode=display">
+A=U\begin{bmatrix}L&0\\0&0\end{bmatrix}V</script><h4 id="分解步骤"><a href="#分解步骤" class="headerlink" title="分解步骤"></a>分解步骤</h4><p>矩阵分为列向量，对列向量施密特正交化，根据正交化公式列出QR矩阵即可，Q是正交向量，R是系数。</p>
+<h3 id="谱分解"><a href="#谱分解" class="headerlink" title="谱分解"></a>谱分解</h3><p><strong>单纯矩阵定义：</strong>特征值几何重数等于代数重数</p>
+<p><strong>概念：</strong>$A=\sum_{i=1}^n\lambda_iA_i,\lambda_i是特征值，A_i满足幂等性，分离性（A_iA_j=0，i\ne j），可加性（和为单位矩阵）,A是单纯矩阵$</p>
+<p><strong>正规矩阵定义：</strong>$AA^H=A^HA$</p>
+<p><strong>引理：</strong>如果A正规，A，B酉相似，B正规</p>
+<p><strong>Schur定理：</strong>$A=URU^H$,U为酉矩阵，R为三角矩阵且主对角线上为A的特征值。</p>
+<p><strong>引理：</strong>A如果正规且为三角矩阵，那么A为对角矩阵。</p>
+<p><strong>定理：</strong>A如果为正规矩阵，那么A酉相似于对角矩阵。</p>
+<p><strong>分解步骤：</strong>求出特征向量矩阵，按列分块，求出逆矩阵按行分块，用列向量对应相乘行向量即可得到每个Ai</p>
+<h3 id="最大秩分解（满秩分解）"><a href="#最大秩分解（满秩分解）" class="headerlink" title="最大秩分解（满秩分解）"></a>最大秩分解（满秩分解）</h3><p><strong>概念：</strong>A=BD，BD分别为列满秩行满秩</p>
+<p><strong>分解步骤：</strong>将A化为行标准型A’，找出A‘中的对应单位列向量对用的列，A中的对应列就是B，A’的非零行就是D</p>
+<h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><p><strong>定理1：</strong>$rank(A)=rank(A^HA)=rank(AA^H),A^HA,AA^H特征值非负，非零特征值相同$</p>
+<p><strong>定义：</strong>$设A\in C_r^{m*n},A^HA的特征值为\lambda_i,则称\sigma_i=\sqrt{\lambda_i}为A的正奇异值$</p>
+<p><strong>定义：</strong>若存在酉矩阵U，V使得A=UBV，则称A，B酉等价。</p>
+<p>-&gt;<strong>定理：</strong>如果A，B酉等价那么A，B有相同的正奇异值</p>
+<p><strong>分解概念：</strong></p>
+<script type="math/tex; mode=display">
+A=U\begin{bmatrix}D&0\\0&0\end{bmatrix}V^H,D为A的正奇异值组成的对角矩阵</script><p><strong>分解步骤：</strong>$先求出AA^H的特征值，特征向量，同时将特征向量正交单位化变成矩阵V，\\计算U_1=AV_1\sum^{-1},其中，\sum为非零奇异值组成的对角矩阵，V_1为非零特征值对应的特征向量，U_2是当U_1不是方阵时补充的矩阵，\\将U_1补充为正交矩阵。最后A=U\begin{bmatrix}\sum&amp;0\\0&amp;0\end{bmatrix}V^H$</p>
+<h2 id="圆盘定理，Rayleigh商"><a href="#圆盘定理，Rayleigh商" class="headerlink" title="圆盘定理，Rayleigh商"></a>圆盘定理，Rayleigh商</h2><h3 id="圆盘定理"><a href="#圆盘定理" class="headerlink" title="圆盘定理"></a>圆盘定理</h3><p><strong>定理：</strong>k个圆盘形成一个连通区域G，和余下的n-k个圆盘不相交，则该区域有k个特征值</p>
+<p>实矩阵的特征值如果是负数一定是成对出现，</p>
+<p>行对角占优,列对角占优。</p>
+<p><strong>定理：</strong>如果A行对角占优或者列对角占优那么</p>
+<ul>
+<li>A可逆</li>
+<li>A若为hermite且所有主对角都为正数那么A的特征值都为正数,如果都为负数，那么特征值也都是负数。</li>
+</ul>
+<h3 id="Rayleigh商"><a href="#Rayleigh商" class="headerlink" title="Rayleigh商"></a>Rayleigh商</h3><p><strong>注意：Rayleigh商定理定义的前提都是Hermite矩阵</strong></p>
+<p><strong>定义：</strong>$A为厄密特矩阵，R(x)=\frac{x^HAx}{x^Hx},x\ne0$</p>
+<p><strong>定理1：</strong>$\lambda_n\le R(x)\le \lambda_1,分别为最大最小特征值$</p>
+<p><strong>定理2：</strong>如果x在A的部分特征向量的生成空间内，那么最大最小rayleigh商就是这些特征向量对应特征值的最大最小值。</p>
+<p><strong>定理3：</strong>A，B为厄密特矩阵，$\lambda_k(A)+\lambda_n(B)\le \lambda_k(A+B)\le \lambda_k(A)+\lambda_1(B)$</p>
+<h2 id="矩阵分析"><a href="#矩阵分析" class="headerlink" title="矩阵分析"></a>矩阵分析</h2><h3 id="收敛矩阵"><a href="#收敛矩阵" class="headerlink" title="收敛矩阵"></a>收敛矩阵</h3><p><strong>定义：</strong>$\lim_{k\to\infty}A^k=0$</p>
+<p><strong>定理：</strong>A收敛充要条件是A谱半径小于1</p>
+<h3 id="矩阵函数"><a href="#矩阵函数" class="headerlink" title="矩阵函数"></a>矩阵函数</h3><p><strong>常用矩阵函数：</strong></p>
+<script type="math/tex; mode=display">
+(E-A)^{-1}=\sum_{k=0}^\infty A^k,r(A)\lt1 \\
+ln(E+A)=\sum_{k=0}^\infty \frac{(-1)^k}{k+1}A^{k+1},r(A)\lt1 \\
+e^A=\sum_{k=0}^\infty \frac{1}{k!}A^k,\forall A\in C^{n*n} \\
+sinA=\sum_{k=0}^\infty \frac{(-1)^k}{(2k+1)!}A^{2k+1},\forall A\in C^{n*n}\\
+cosA=\sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}A^{2k},\forall A\in C^{n*n}</script><p><strong>矩阵函数计算：</strong></p>
+<p>先将A矩阵进行JORDAN分解，接着进行根据矩阵函数公式进行计算。</p>
+<h2 id="值域和核空间结论"><a href="#值域和核空间结论" class="headerlink" title="值域和核空间结论"></a>值域和核空间结论</h2><h3 id="值域"><a href="#值域" class="headerlink" title="值域"></a>值域</h3><p><strong>定义：</strong>$A=(\alpha_1,\alpha_2,\cdots,\alpha_n)\in C_r^{m*n},R(A)=L(\alpha_1,\alpha_2,\cdots,\alpha_n),dimR(A)=r$</p>
+<p>$R(A)=\{y|y=Ax,\forall x\in C^n\}=\{y|y=\sum_{i=1}^nx_i\alpha_i,\forall x_i\in C^n\}$</p>
+<p><strong>推论1：</strong>$R(AB)\subset R(A)$</p>
+<p>$R(A)=\{y|y=Ax,\forall x\in C^n\},R(AB)=\{y|y=ABx=A\tilde x,\forall \tilde x\in C^n\}$</p>
+<p><strong>推论2：</strong></p>
+<p>$如果rank(AB)=rank(A),也即dim(AB)=dim(A),那么R(AB)=R(A)$</p>
+<p><strong>推论3：</strong></p>
+<p>$A\in C^{m<em>n},B\in C^{m</em>p},if \ R(A)=R(B)，那么B=AX,X\in C^{n*p}$</p>
+<h3 id="核空间"><a href="#核空间" class="headerlink" title="核空间"></a>核空间</h3><h2 id="广义逆矩阵"><a href="#广义逆矩阵" class="headerlink" title="广义逆矩阵"></a>广义逆矩阵</h2><h3 id="单边逆矩阵"><a href="#单边逆矩阵" class="headerlink" title="单边逆矩阵"></a>单边逆矩阵</h3><p><strong>概念：</strong>$如果GA=E_n，把G叫左逆矩阵A_L^-，AG=E_m，G叫做右逆矩阵A_R^-$</p>
+<ul>
+<li>$A左可逆\leftrightarrow A列满秩\leftrightarrow N(A)={0}$</li>
+<li>$A右可逆\leftrightarrow A行满秩\leftrightarrow R(A)=C^m$</li>
+</ul>
+<h3 id="广义逆矩阵-1"><a href="#广义逆矩阵-1" class="headerlink" title="广义逆矩阵"></a>广义逆矩阵</h3><p><strong>定义：</strong>$AGb=b\leftrightarrow AGA=A$</p>
+<p>$A\{1\}=\{G|AGA=A,\forall G\in C^{n*m}\}$</p>
+<p><strong>性质：</strong></p>
+<ul>
+<li>$(A^T)^-=(A^-)^T,(A^H)^-=(A^-)^H$</li>
+<li>$AA^-,A^-A都是幂等矩阵，rank(A)=rank(AA^-)=rank(A^-A)\le rank(A^-)$</li>
+<li>$(\lambda A)^-=\lambda^-A^-,if\ \lambda=0,\lambda^-=0,else\ \lambda^-=1/\lambda$</li>
+<li>$R(A)=R(AA^-),N(A)=N(A^-A)$</li>
+</ul>
+<p><strong>推论：</strong>$rank(A)=m或n,充要条件分别是A<em>A^-=E_mA^-</em>A=E_n$</p>
+<h3 id="自反广义逆"><a href="#自反广义逆" class="headerlink" title="自反广义逆"></a>自反广义逆</h3><p><strong>定义：</strong>$AGA=A,GAG=G同时成立,记为A_r^-，任何矩阵都有$</p>
+<p>$记作A\{1,2\}={A的所有自反广义逆矩阵的集合}$</p>
+<p><strong>定理：</strong>$如果X，Y均为A的自反广义逆，那么Z=XAY也是A的自反广义逆。$</p>
+<p><strong>定理：</strong>$A^-是自反广义逆充要条件是rank(A)=rank(A^-)$</p>
+<h3 id="M-P广义逆"><a href="#M-P广义逆" class="headerlink" title="M-P广义逆"></a>M-P广义逆</h3><p><strong>定义：</strong>$AGA=A,GAG=G，(GA)^H=GA,(AG)^H=AG,G就是MP广义逆，G=A+$</p>
+<p><strong>定理：</strong>$A=BD为满秩分解，G=A^+=D^H(DD^H)^{-1}(B^HB)^{-1}B^H$,G唯一</p>
+<p><strong>引理：</strong></p>
+<p>$如果A行满秩，则A^+=A^H(AA^H)^{-1}$</p>
+<p>$如果A列满秩，则A^+=(A^HA)^{-1}A^H$</p>
+<p><strong>性质：</strong></p>
+<ul>
+<li>$(A^+)^+=A$</li>
+<li>$(A^T)^+=(A^+)^T,(A^H)^+=(A^+)^H$</li>
+<li>$A^+=(A^HA)^+A^H=A^H(AA^H)^+$</li>
+<li>$R(A^+)=R(A^H)$</li>
+<li>$R(A)=R(A^H)&lt;=&gt;AA^+=A^+A$</li>
+<li>一般没有$(AB)^+=B^+A^+$</li>
+</ul>
+<p><strong>计算A+以及求不相容方程Ax=b的最小二乘解最佳逼近解：</strong></p>
+<p>判断是否相容：$AA^+=b相容$</p>
+<p>最小二乘解通解：$x=A^+b+(E-A^+Au),\forall u\in C^n$</p>
+<p>最佳逼近解：$x=A^+b$</p>
+<p><strong>相容方程的通解和唯一极小范数解</strong></p>
+<p>通解：$x=A^+b+(E-A^+Au),\forall u\in C^n$</p>
+<p>唯一极小范数解：$x=A^+b$</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/" title="一些矩阵结论知识记忆">http://example.com/2023/12/22/数学/矩阵理论简记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F/" rel="prev" title="图片格式">
+      <i class="fa fa-chevron-left"></i> 图片格式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">线性代数基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E4%BB%A5%E5%8F%8A%E7%BA%BF%E6%80%A7%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.</span> <span class="nav-text">线性空间以及线性子空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%BB%B4%E6%95%B0%E5%88%86%E8%A7%A3%E5%AE%9A%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">空间维数分解定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%B0%8F%E7%A9%BA%E9%97%B4%E9%85%89%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.</span> <span class="nav-text">欧氏空间酉空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E7%9F%A9%E9%98%B5"><span class="nav-number">1.4.</span> <span class="nav-text">初等矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E4%B8%8E%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">向量与矩阵范数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">向量范数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">矩阵范数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">矩阵分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QR%E5%88%86%E8%A7%A3"><span class="nav-number">3.1.</span> <span class="nav-text">QR分解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#n%E9%98%B6%E5%8F%AF%E9%80%86%E7%9F%A9%E9%98%B5%E7%9A%84%E5%88%86%E8%A7%A3"><span class="nav-number">3.1.1.</span> <span class="nav-text">n阶可逆矩阵的分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E6%BB%A1%E7%A7%A9%E7%9F%A9%E9%98%B5%E7%9A%84QR%E5%88%86%E8%A7%A3"><span class="nav-number">3.1.2.</span> <span class="nav-text">行列满秩矩阵的QR分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E6%84%8F%E7%9F%A9%E9%98%B5QR%E5%88%86%E8%A7%A3"><span class="nav-number">3.1.3.</span> <span class="nav-text">任意矩阵QR分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E8%A7%A3%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.4.</span> <span class="nav-text">分解步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%B1%E5%88%86%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">谱分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%A7%A9%E5%88%86%E8%A7%A3%EF%BC%88%E6%BB%A1%E7%A7%A9%E5%88%86%E8%A7%A3%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">最大秩分解（满秩分解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3"><span class="nav-number">3.4.</span> <span class="nav-text">奇异值分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%86%E7%9B%98%E5%AE%9A%E7%90%86%EF%BC%8CRayleigh%E5%95%86"><span class="nav-number">4.</span> <span class="nav-text">圆盘定理，Rayleigh商</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%86%E7%9B%98%E5%AE%9A%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">圆盘定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rayleigh%E5%95%86"><span class="nav-number">4.2.</span> <span class="nav-text">Rayleigh商</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">矩阵分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E6%95%9B%E7%9F%A9%E9%98%B5"><span class="nav-number">5.1.</span> <span class="nav-text">收敛矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">矩阵函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E5%9F%9F%E5%92%8C%E6%A0%B8%E7%A9%BA%E9%97%B4%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">值域和核空间结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%BC%E5%9F%9F"><span class="nav-number">6.1.</span> <span class="nav-text">值域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="nav-number">6.2.</span> <span class="nav-text">核空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">7.</span> <span class="nav-text">广义逆矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%BE%B9%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">7.1.</span> <span class="nav-text">单边逆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E9%80%86%E7%9F%A9%E9%98%B5-1"><span class="nav-number">7.2.</span> <span class="nav-text">广义逆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8F%8D%E5%B9%BF%E4%B9%89%E9%80%86"><span class="nav-number">7.3.</span> <span class="nav-text">自反广义逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-P%E5%B9%BF%E4%B9%89%E9%80%86"><span class="nav-number">7.4.</span> <span class="nav-text">M-P广义逆</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">236k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:35</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

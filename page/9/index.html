@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -212,7 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/10/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/" class="post-title-link" itemprop="url">接口</a>
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">命令行参数</a>
         </h2>
 
         <div class="post-meta">
@@ -224,14 +224,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-10 22:45:25" itemprop="dateCreated datePublished" datetime="2021-11-10T22:45:25+08:00">2021-11-10</time>
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-11 00:14:05" itemprop="dateModified" datetime="2021-11-11T00:14:05+08:00">2021-11-11</time>
+                <time title="修改时间：2023-09-05 18:15:46" itemprop="dateModified" datetime="2023-09-05T18:15:46+08:00">2023-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +239,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -249,7 +249,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>582</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -268,25 +268,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>接口中常量定义时，可以不写public static final，缺省有。接口中方法定义 时，可以不写public abstract，缺省有。接口只定义不变的内容（常量和抽象方法）</p>
-<p>一个类可以实现多个接口（implements），接口不能new一个对象，但是是引用数据类型，并且可用于声明引用变量类型。接口可以继承另一个接口（extends），而且支持多继承。一个类实现一个接口，必须实现之中所有方法，并且方法只能是 public的</p>
-<p><strong>定义方法：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">public</span>] <span class="class"><span class="keyword">interface</span> 接口 [<span class="keyword">extends</span> 父接口列表 ]</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">static</span>] [<span class="keyword">final</span>] 数据类型 成员变量=常量值;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">abstract</span>] 返回值类型 成员方法[(参数列表)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>接口声明的引用类型变量只能调用接口中定义过的方法。</strong>比如下面的ar和vol，只能调用相应的area方法和volume方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClosedFigure fig = <span class="keyword">new</span> Ellipse(point,<span class="number">10</span>,<span class="number">20</span>);</span><br><span class="line"><span class="comment">//父类对象fig引用椭圆子类实例</span></span><br><span class="line">Area ar = fig; <span class="comment">//Area接口对象ar引用实现Area接口的</span></span><br><span class="line">ClosedFigure类的Ellipse子类实例</span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">Cylinder cylinder = <span class="keyword">new</span> Cylinder(fig,<span class="number">10</span>); <span class="comment">//椭圆柱</span></span><br><span class="line">ar = cylinder; <span class="comment">//ar引用实现Area接口的Cylinder类的实例</span></span><br><span class="line">Volume vol = cylinder; <span class="comment">//Volume接口对象vol引用实现Volume接口的Cylinder类的实例</span></span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">vol.volume()</span><br></pre></td></tr></table></figure>
-<p><img src="\imazges\Java\第四章\1.jpg" style="zoom:67%;"></p>
-<h1 id="内部类和内部接口"><a href="#内部类和内部接口" class="headerlink" title="内部类和内部接口"></a>内部类和内部接口</h1><ul>
-<li>内嵌类型不能与外层类型同名。</li>
-<li>内部类中可以声明成员变量和成员方法。</li>
-<li>内部类可以继承父类或实现接口。</li>
-<li>可以声明内部类为抽象类，该抽象类必 须被其他内部类继承；内部接口必须被 其他内部类实现。</li>
-<li>使用点运算符“ . ”引用内嵌类型： 外层类型.内嵌类型</li>
-<li>内嵌类型具有类中成员的4种访问控制权限。当内 部类可被访问时，才能考虑内部类中成员的访问控 制权限</li>
-<li>内嵌类型与其外层类型彼此信任，能访问对方的所 有成员。</li>
-<li>在实例内部类中，使用以下格式引用或调用外部类当前实例的成员变量或实例 成员方法</li>
-<li>内部接口总是静态的。内部类可声明是静态的或实 例的，静态内部类能够声明静态成员，但不能引用 外部类的实例成员；实例内部类不能声明静态成员</li>
-</ul>
-<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h2 id="泛型声明"><a href="#泛型声明" class="headerlink" title="泛型声明"></a>泛型声明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] <span class="class"><span class="keyword">class</span> 类&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br><span class="line"><span class="class">[修饰符] <span class="title">class</span> 类&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br></pre></td></tr></table></figure>
+          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>每个C语言程序都必须有一个称为main()的函数，作为程序启动的起点。当执行程序时，命令行参数（command-line  argument）（由shell逐一解析）通过两个入参提供给main()函数。第一个参数int  argc，表示命令行参数的个数。第二个参数char *argv[]，是一个指向命令行参数的指针数组，每一参数又都是以空字符（null）  结尾的字符串。第一个字符串，亦即argv[0]指向的，（通常）是该程序的名称。argv中的指针列表以NULL指针结尾（即argv[argc]为NULL）。</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,argc);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(argv[<span class="number">3</span>]);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">D:\Vsc\test&gt;apple.exe a b c d<span class="comment">//在命令行中输入</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line">apple.exe<span class="comment">//一般指向的第一个参数为程序名称</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理命令行参数"><a href="#处理命令行参数" class="headerlink" title="处理命令行参数"></a>处理命令行参数</h3><p>实际上就是对字符串的处理</p>
+<p>见书：p267</p>
 
       
     </div>
@@ -308,7 +295,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/08/Java/%E7%AC%AC%E4%B8%89%E7%AB%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -322,7 +309,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/08/Java/%E7%AC%AC%E4%B8%89%E7%AB%A0/" class="post-title-link" itemprop="url">类</a>
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" class="post-title-link" itemprop="url">动态内存分配</a>
         </h2>
 
         <div class="post-meta">
@@ -334,14 +321,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-08 19:41:16" itemprop="dateCreated datePublished" datetime="2021-11-08T19:41:16+08:00">2021-11-08</time>
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-10 22:51:20" itemprop="dateModified" datetime="2021-11-10T22:51:20+08:00">2021-11-10</time>
+                <time title="修改时间：2023-09-05 18:15:00" itemprop="dateModified" datetime="2023-09-05T18:15:00+08:00">2023-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -349,7 +336,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -359,7 +346,423 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.2k</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="malloc和free函数"><a href="#malloc和free函数" class="headerlink" title="malloc和free函数"></a>malloc和free函数</h3><h4 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h4><p>当声明数组时，我们通常定义一个足够大的宏，使其尽量容纳多的元素，但是这样造成内存浪费，使用动态内存分配可以避免这种内存浪费。</p>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *pointer)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>调用malloc函数时，malloc从内存池提取一块可用内存，向程序返回一个指向这块内存的指针。这块内存并没有初始化。malloc参数就是所需要的字节数，并且分配的内存是连续的。如果内存池是空的或者内存池可用内存无法满足要求那么就会返回NULL指针。</p>
+<p>当一块以前分配的内存不使用时，使用free函数把他归还给内存池。</p>
+<h3 id="calloc和realloc函数"><a href="#calloc和realloc函数" class="headerlink" title="calloc和realloc函数"></a>calloc和realloc函数</h3><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> num_elements, <span class="keyword">size_t</span> element_size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> new_size)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>calloc函数也用于内存分配，与malloc区别就是返回时指针可以初始化为0。并且参数是所需元素的数量和每个元素的字节数。</p>
+<p>realloc函数用于修改一个已经分配的内存块的大小。若用于扩大内存块，那么这块内存保留，新增加的内存添加到原本的后面。若用于缩小，该内存块尾部一部分被拿掉，剩余保留。若原先的内存块无法修改，realloc将重新分配一块内存，将原先那块内存内容复制到分配的内存块上。</p>
+<h3 id="使用动态内存分配"><a href="#使用动态内存分配" class="headerlink" title="使用动态内存分配"></a>使用动态内存分配</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> *pi;</span><br><span class="line">   pi = <span class="built_in">malloc</span>(<span class="number">100</span>);<span class="comment">//更好的是pi = malloc(25 * sizeof(int));方便移植</span></span><br><span class="line">   <span class="keyword">if</span>(pi == <span class="literal">NULL</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Out of memory!\n&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">   &#125;<span class="comment">//检查是否分配成功，避免指向NULL指针</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">25</span>; i++)&#123;</span><br><span class="line">      pi[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,pi[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态内存分配常见错误"><a href="#动态内存分配常见错误" class="headerlink" title="动态内存分配常见错误"></a>动态内存分配常见错误</h3><ul>
+<li>对NULL指针间接访问</li>
+<li>对分配的内存越界操作</li>
+<li>释放并非动态分配的内存</li>
+<li>释放一块动态分配内存的一部分（解决方法：realloc函数可以有效缩小一块动态分配的内存，有效释放他尾部的部分内存）</li>
+<li>一块动态内存被释放后继续使用</li>
+</ul>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>分配内存但在使用完后不释放会引起内存泄漏，内存泄漏会一点点榨干内存。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数指针与回调函数（转换表）</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:06" itemprop="dateModified" datetime="2023-09-05T18:15:06+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><h3 id="概念区分"><a href="#概念区分" class="headerlink" title="概念区分"></a>概念区分</h3><table>
+<thead>
+<tr>
+<th>声明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int f;</code></td>
+<td>一个整型变量</td>
+</tr>
+<tr>
+<td><code>int *f;</code></td>
+<td>一个指向整型的指针</td>
+</tr>
+<tr>
+<td><code>int f();</code></td>
+<td>一个返回值为整型函数</td>
+</tr>
+<tr>
+<td><code>int *f();</code></td>
+<td>一个返回值为指向整型指针的函数，可以把int*连在一起看</td>
+</tr>
+<tr>
+<td><code>int (*f)();</code></td>
+<td>一个指向函数的指针即函数指针</td>
+</tr>
+<tr>
+<td><code>int *(*f)();</code></td>
+<td>一个指向 返回值为指向整型的指针的函数 的指针</td>
+</tr>
+<tr>
+<td><code>int f[];</code></td>
+<td>一个整型数组</td>
+</tr>
+<tr>
+<td><code>int *f[];</code></td>
+<td>一个存放指向整形的指针的数组</td>
+</tr>
+<tr>
+<td><code>int f()[];</code></td>
+<td><strong>非法</strong>，是一个返回值为数组的函数，但是函数只能返回标量值而不能返回数组</td>
+</tr>
+<tr>
+<td><code>int f[]();</code></td>
+<td><strong>非法</strong>，像是一个元素类型为返回值为整型的函数的数组，但是数组要求元素长度相同</td>
+</tr>
+<tr>
+<td><code>int (*f[])();</code></td>
+<td>一个元素为指向返回值为整型的函数的指针的数组</td>
+</tr>
+<tr>
+<td><code>int *(*f[])();</code></td>
+<td>一个元素为指向返回值为指向整型指针的函数的指针的数组</td>
+</tr>
+</tbody></table>
+<h3 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法"></a>声明方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*pf)(<span class="keyword">int</span>) = &amp;f;<span class="comment">//符号&amp;可加可不加，因为函数名被使用时总是由编译器把它转换为函数指针</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line">ans = f(<span class="number">25</span>);</span><br><span class="line">ans = (*pf)(<span class="number">25</span>);</span><br><span class="line">ans = pf(<span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p><strong>例子：在单链表中查找一个值</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">int</span> <span class="keyword">const</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;value == value)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了改善兼容性与便利性，能查找不同元素类型的链表如字符串或者数组而不只是整形，即能对任何类型的值进行比较。</p>
+<p><strong>修改一：</strong></p>
+<p>使用函数指针，编写一个比较两数大小的函数，将此函数指针作为参数传递给查找函数。</p>
+<p><strong>修改二：</strong></p>
+<p>向比较函数传递指针而不是值本身。</p>
+<hr>
+<p>使用这种技巧的函数被称为回调函数，因为用户把一个函数的指针作为参数传递给其他函数，后者将回调用户的函数。</p>
+<p>方便了不同时刻执行不同类型的工作。</p>
+<p><strong>修改后的查找函数：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *</span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(Node *node, <span class="keyword">void</span> <span class="keyword">const</span> *value,<span class="keyword">int</span> (*compare)(<span class="keyword">void</span> <span class="keyword">const</span> *,<span class="keyword">void</span> <span class="keyword">const</span> *))</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(compare(&amp;node-&gt;value ,value) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        node = node-&gt;link;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用例子（整型）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_int</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> *a,<span class="keyword">void</span> <span class="keyword">const</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*(<span class="keyword">int</span> *)a == *(<span class="keyword">int</span>*)b)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,compare_int);</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">...</span><br><span class="line">desired_node = search_list(root,&amp;desired_value,<span class="built_in">strcmp</span>);<span class="comment">//使用自带的字符串比较函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h2><p>假设要实现一个小型计算器，可以使用switch如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(oper)&#123;</span><br><span class="line">    <span class="keyword">case</span> ADD:</span><br><span class="line">        result = add(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SUB:</span><br><span class="line">        result = sub(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MUL:</span><br><span class="line">        result = mul(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DIV:</span><br><span class="line">        result = div(op1,op2);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了使用switch语句，操作符的代码必须是整数。如果他们是从零开始的整数，我们就可以使用<strong>转换表</strong>完成相同的任务。<strong>转换表</strong>就是一个<strong>函数指针数组</strong>。</p>
+<p>转换表声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sub</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">mul</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">div</span><span class="params">(<span class="keyword">double</span>,<span class="keyword">double</span>)</span></span>;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//其他运算函数声明</span></span><br><span class="line"><span class="keyword">double</span> (*oper_func[])(<span class="keyword">double</span>,<span class="keyword">double</span>) = &#123;add,sub,mul,div...&#125;;<span class="comment">//声明函数指针数组</span></span><br><span class="line"></span><br><span class="line">result = oper_func[oper](op1,op2);<span class="comment">//使用转换表</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%8D%E8%B0%88getchar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%86%8D%E8%B0%88getchar/" class="post-title-link" itemprop="url">getchar的几个例子</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:16:23" itemprop="dateModified" datetime="2023-09-05T18:16:23+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((c=getchar())!=<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%c,%d&quot;</span>,c, n);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>输入:<br> ssss回车<br> 得到:<br> s,0s,0s,0s,0<br> ,0 光标处(等待输入)<br> 其实循环执行了五次，前四次输出s，第五次输出的是回车，所以才会出现：输出ssss后下一行的光标出（等待输入）</li>
+<li>如果我们输入：<br> ksssa<br> 输出：<br> k,0s,0s,0s,0</li>
+</ol>
+<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,c);</span><br><span class="line">    getchar();</span><br><span class="line">    c=getchar();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,c);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>输入:<br> ssss回车<br> 得到:<br> ssss<br> 光标处(等待输入)<br> 其实循环执行了五次，前四次输出s，第五次输出的是回车，所以才会出现：输出ssss后下一行的光标出（等待输入）</p>
+</li>
+<li><p>如果我们输入：<br>ksssa回车<br>输出：<br>ksss光标处(等待输入)</p>
+<p>说明:程序已经跳出while循环,但是由于我们用getchar();吃掉了回车,后面第7句c&#x3D;getchar();需要你输入一个字符(因为ksssa回车后面并没有新的字符)，所以程序仍然没有结束.</p>
+<p>如果注释掉getchar();</p>
+<p>输入：ksssa回车</p>
+<p>输出：</p>
+<p>ksss</p>
+<p>光标处(程序结束) </p>
+<p>最后一个回车就被c &#x3D; getchar()读取了</p>
+</li>
+</ol>
+<h3 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.输入:<br>1234回车<br>得到：<br>Fine.Fine.Fine.Fine.Fine.光标处(等待输入)</p>
+<p>说明：ch依次被赋值1234回车，注意回车刷新缓冲区的同时也被赋值给ch，这个五个字符均不是‘#’故运行了五次，仍为跳出循环。</p>
+<p>2.输入：<br>1234#回车<br>得到：<br>Fine.Fine.Fine.Fine.光标处（程序结束）</p>
+<p>说明：ch依次被赋值1234#回车，循环执行到#时候跳出，故循环只执行4次。</p>
+<h3 id="例子4"><a href="#例子4" class="headerlink" title="例子4"></a>例子4</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        getchar();<span class="comment">//吃掉回车</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此方法只适合单个输入：</p>
+<p>1.输入：1回车<br>得到： Fine.光标处(等待输入)</p>
+<p>2.输入： 123回车<br>得到： Fine.Fine.光标处(等待输入)</p>
+<p>说明：实际上ch只接收了1和3 的值，2和回车都被getchar()这个语句吃掉了</p>
+<h3 id="例子5"><a href="#例子5" class="headerlink" title="例子5"></a>例子5</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>  ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Fine.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完美解决问题</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/C%E5%92%8CC++/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" class="post-title-link" itemprop="url">字节对齐</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-05 18:15:52" itemprop="dateModified" datetime="2023-09-05T18:15:52+08:00">2023-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -378,169 +781,129 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h1><p>类相当于是对象的模板，可以认为对象就是实例。</p>
-<p>也可以像下面这样理解？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">类 对象;<span class="comment">//这里的相当于对象</span></span><br><span class="line">对象 = <span class="keyword">new</span> 类的构造方法([参数列表]);<span class="comment">//分配了内存空间以后才是一个实例</span></span><br></pre></td></tr></table></figure>
-<p><strong>类（class）</strong>是既包括数据又包括作用于数据的一组操作的 封装体。类可以看成是一类相似对象的模板！类具有封装性、 继承性、多态性和抽象性。</p>
-<p><strong>对象（object）</strong>是类的具体<strong>实例（instance）</strong>。Java中， 万事万物皆对象！！！Java中通过引用操作对象！引用就 是指向对象的内存中地址！！</p>
-<h1 id="类的变量和方法"><a href="#类的变量和方法" class="headerlink" title="类的变量和方法"></a>类的变量和方法</h1><h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><p>在类中，用static声明的成员变量为静态成员变量，它为该类的公用变量、属于类，被 该类的所有实例共享，在类被载入时被显示初始化；对于该类的所有对象来说，static成员变量只有一份；可以使用 “对象.类属性”来调用，不过，一般都是用”类名.类属性”；static变量置于方法区中）。<strong>局部变量</strong>使用前必须要<strong>先赋值</strong>、而<strong>实例变量</strong>则有<strong>缺省初值</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> age = <span class="number">22</span>;<span class="comment">//类变量</span></span><br><span class="line">    String name = <span class="string">&quot;张三&quot;</span>;<span class="comment">//实例变量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;<span class="comment">//局部变量</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>局部变量：</strong></p>
-<ul>
-<li>局部变量声明在方法、构造方法或者语句块中；</li>
-<li>局部变量在方法、构造方法、或者语句块被执行的时候创建，当它们执行完成后，变量将会被销毁；</li>
-<li><strong>访问修饰符不能用于局部变量；</strong></li>
-<li>局部变量只在声明它的方法、构造方法或者语句块中可见；</li>
-<li>局部变量是在栈上分配的。</li>
-<li>局部变量没有默认值，所以局部变量被声明后，必须经过初始化，才可以使用。</li>
+          <h3 id="字节对齐概念"><a href="#字节对齐概念" class="headerlink" title="字节对齐概念"></a>字节对齐概念</h3><p>许多计算机系统对基本数据类型合法地址做出了一些限制，要求某种类型对象的地址必须是某个值K(通常是2，4或8)的倍数。这种对齐限制简化了形成处理器和存储器系统之间的接口的硬件设计。对齐跟数据在内存中的位置有关。如果一个变量的内存地址正好位于它长度的整数倍，他就被称做自然对齐。比如在32位cpu下，假设一个整型变量的地址为0x00000004，那它就是自然对齐的。</p>
+<h3 id="为什么要字节对齐"><a href="#为什么要字节对齐" class="headerlink" title="为什么要字节对齐"></a>为什么要字节对齐</h3><p>字节对齐主要是为了提高内存的访问效率，比如intel 32位cpu，每个总线周期都是<em>从偶地址开始读取</em>32位的内存数据，如果数据存放地址不是从偶数开始，则可能出现需要两个总线周期才能读取到想要的数据，因此需要在内存中存放数据时进行对齐。</p>
+<p>各个硬件平台对存储空间的处理上有很大的不同，一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐。比如sparc系统，如果取未对齐的数据会发生错误，举个例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch[<span class="number">8</span>];</span><br><span class="line"><span class="keyword">char</span> *p = &amp;ch[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> i = *(<span class="keyword">int</span> *)p;</span><br></pre></td></tr></table></figure>
+
+<p>运行时会报segment error，而在x86上就不会出现错误，只是效率下降。</p>
+<h3 id="不同种类的对齐概念"><a href="#不同种类的对齐概念" class="headerlink" title="不同种类的对齐概念"></a>不同种类的对齐概念</h3><ol>
+<li><strong>数据类型自身的对齐值</strong>：对于char型数据，其自身对齐值为1，对于short型为2，对于int,float,double类型，其自身对齐值为4，单位字节。</li>
+<li><strong>结构体或者类的自身对齐值</strong>是其成员中自身对齐值最大的那个值。</li>
+<li><strong>指定对齐值</strong>：是指使用#pragma pack (value)时的指定对齐值value。</li>
+<li>数据成员、结构体和类的<strong>有效对齐值</strong>：自身对齐值和指定对齐值中小的那个值。</li>
+</ol>
+<h3 id="不同数据类型对齐原则"><a href="#不同数据类型对齐原则" class="headerlink" title="不同数据类型对齐原则"></a>不同数据类型对齐原则</h3><p>内存对齐主要遵循下面两个原则:</p>
+<ol>
+<li><ul>
+<li>结构体成员变量的起始地址能够被其成员变量<strong>有效对齐值</strong>整除。</li>
+<li>结构体总体大小能够被<strong>结构体有效对齐值</strong>整除，如不能则在后面补充字节。</li>
 </ul>
-<p><strong>实例变量：</strong></p>
-<ul>
-<li>实例变量声明在一个类中，但在方法、构造方法和语句块之外；</li>
-<li>当一个对象被实例化之后，每个实例变量的值就跟着确定；</li>
-<li>实例变量在对象创建的时候创建，在对象被销毁的时候销毁；</li>
-<li>实例变量的值应该至少被一个方法、构造方法或者语句块引用，使得外部能够通过这些方式获取实例变量信息；</li>
-<li>实例变量可以声明在使用前或者使用后；</li>
-<li>访问修饰符可以修饰实例变量；</li>
-<li>实例变量对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见；</li>
-<li>实例变量具有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。变量的值可以在声明时指定，也可以在构造方法中指定；实例变量可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName。</li>
-</ul>
-<p><strong>类变量(静态变量)：</strong></p>
-<ul>
-<li>类变量也称为静态变量，在类中以static关键字声明，但必须在方法构造方法和语句块之外。</li>
-<li>无论一个类创建了多少个对象，<strong>类只拥有类变量的一份拷贝。</strong></li>
-<li>静态变量除了被声明为常量外很少使用。常量是指声明为public/private，final和static类型的变量。常量初始化后不可改变。</li>
-<li>静态变量储存在静态存储区。经常被声明为常量，很少单独使用static声明变量。</li>
-<li>静态变量在程序开始时创建，在程序结束时销毁。</li>
-<li>与实例变量具有相似的可见性。但为了对类的使用者可见，大多数静态变量声明为public类型。</li>
-<li>默认值和实例变量相似。数值型变量默认值是0，布尔型默认值是false，引用类型默认值是null。变量的值可以在声明的时候指定，也可以在构造方法中指定。此外，静态变量还可以在静态语句块中初始化。</li>
-<li>静态变量可以通过：<em>ClassName.VariableName</em>的方式访问。</li>
-<li>类变量被声明为public static final类型时，类变量名称一般建议使用大写字母。如果静态变量不是public和final类型，其命名方式与实例变量以及局部变量的命名方式一致。</li>
-</ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>定义格式：<code>[修饰符] 方法返回值类型 方法名(形参列表) &#123; // n条语句 &#125;</code></p>
-<h1 id="类的封装性"><a href="#类的封装性" class="headerlink" title="类的封装性"></a>类的封装性</h1><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>构造方法，又称为<strong>构造器Constructor</strong>，用于构造该类的实例。<strong>返回值类型</strong>为该类本身。</p>
-<p>如果我们没有定义构造器，系统自动会定义一个无参的构造器，如果已定义则编译器不会添加；构造器的方法名必须和类名一致。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明及调用构造方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDate</span> </span></span><br><span class="line"><span class="class"></span>&#123; 	<span class="function"><span class="keyword">public</span> <span class="title">MyDate</span><span class="params">(<span class="keyword">int</span> y, <span class="keyword">int</span> m, <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        year = y;</span><br><span class="line">        month = m;</span><br><span class="line">        day = d;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">MyDate d = <span class="keyword">new</span> MyDate(<span class="number">2009</span>,<span class="number">7</span>,<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyDate</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h2><p>方法的<strong>重载</strong>overload。方法的重载是指一个类中可以定义有相同的名字， 但参数不同的多个方法。调用时，会根据不同的参数列表选择对应的方法。</p>
-<p><strong>重载</strong>：同一个类，同一个方法名，不同的参数列表（类型、个数、顺序不同）</p>
-<ul>
-<li><p>只有返回值不同不构成方法的重载。 </p>
+<p>即结构体每一个数据类型都要对齐</p>
 </li>
-<li><p>只有形参的名称不同，不构成方法的重载。</p>
+<li><p>标准数据类型，它的地址只要是它的长度的整数倍就行</p>
 </li>
-<li><p>构造方法与普通方法一样也可以重载。</p>
+<li><p>数组 ：按照基本数据类型对齐，第一个对齐了后面的自然也就对齐了。</p>
 </li>
-</ul>
-<h2 id="对象的引用和运算"><a href="#对象的引用和运算" class="headerlink" title="对象的引用和运算"></a>对象的引用和运算</h2><h3 id="this引用"><a href="#this引用" class="headerlink" title="this引用"></a>this引用</h3><ul>
-<li>指代对象本身</li>
-<li>访问本类的成员变量和成员方法</li>
-<li>调用<strong>本类重载的构造方法</strong></li>
-<li>普通方法中，this总是指向调用该方法的对象；</li>
-<li>构造方法中，this总是指向正要初始化的对象；</li>
-<li>this<strong>不能用于static</strong>方法；</li>
-<li>可以在一个构造方法中通过this调用其它构造方法，且<strong>必须是构造方法中的第一条语句</strong>。</li>
-<li>this只能用在方法中，其的本质是“<strong>调用该方法的创建好的对象的地址</strong>”。由于在 构造方法调用时，对象已经创建。因此，在构造方法中也可以使用this代表“当前 对象”。</li>
-</ul>
-<h3 id="instanceof运算"><a href="#instanceof运算" class="headerlink" title="instanceof运算"></a>instanceof运算</h3><p>instanceof 运算符 用于：判断 该运算符前面引用类型变量指向的对象是否是后面类，或者其子类、接口实现类创建的对象。如果是则返回true，否则返回false</p>
-<h2 id="隐藏-封装"><a href="#隐藏-封装" class="headerlink" title="隐藏/封装"></a>隐藏/封装</h2><p><strong>类的访问权限：</strong>public和缺省</p>
-<p><strong>类中成员的访问权限：</strong></p>
-<div class="table-container">
+<li><p>联合 ：按其包含的长度最大的数据类型对齐。</p>
+</li>
+<li><p>在一个struct中包含另一个struct，内部struct应该以它的最大数据成员大小的整数倍开始存储。如 struct A 中包含 struct B, struct B 中包含数据成员 char, int, double，则 struct B 应该以sizeof(double)&#x3D;8的整数倍为起始地址。</p>
+</li>
+</ol>
+<p>其实这里有点不严谨，编译器在编译的时候是可以指定对齐大小的，实际使用的有效对齐其实是取指定大小和自身大小的最小值，一般默认的对齐大小是4，这个模数是可以改变的，可以用预编译命令：</p>
+<p><code>#pragma pack(n)</code></p>
+<p>取消自定义字节对齐方式</p>
+<p><code>#pragma pack()</code></p>
+<h3 id="不同系统的数据模型"><a href="#不同系统的数据模型" class="headerlink" title="不同系统的数据模型"></a>不同系统的数据模型</h3><p>本机模型（LLP64）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>        : <span class="number">1</span>  Byte </span><br><span class="line"><span class="keyword">char</span>        : <span class="number">1</span>  Byte</span><br><span class="line"><span class="keyword">short</span> 	    : <span class="number">2</span>  Bytes </span><br><span class="line"><span class="keyword">int</span>   	    : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span>        : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>   : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">float</span>       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">double</span>      : <span class="number">8</span>  Bytes</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> : <span class="number">12</span> Bytes</span><br><span class="line"><span class="keyword">void</span>*       : <span class="number">4</span>  Bytes </span><br><span class="line"><span class="keyword">char</span>*       : <span class="number">4</span>  Bytes</span><br><span class="line"><span class="keyword">int</span>*        : <span class="number">4</span>  Bytes</span><br><span class="line">StructNull  : <span class="number">0</span>  Byte</span><br><span class="line">StructNull* : <span class="number">4</span>  Bytes</span><br></pre></td></tr></table></figure>
+
+<p>其他模型</p>
 <table>
 <thead>
 <tr>
-<th>权限修饰符</th>
-<th>同一类</th>
-<th>同一包</th>
-<th>不同包的子类</th>
-<th>所有类</th>
+<th>Data Type</th>
+<th>ILP32</th>
+<th>ILP64</th>
+<th>LP64</th>
+<th>LLP64</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td>public(公有)</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
+<tbody><tr>
+<td>char</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
 </tr>
 <tr>
-<td>protected(受保护的)</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td></td>
+<td>short</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
+<td>16</td>
 </tr>
 <tr>
-<td>缺省</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td></td>
+<td>int</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>32</td>
 </tr>
 <tr>
-<td>private(私有)</td>
-<td>√</td>
-<td></td>
-<td></td>
+<td>long</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>32</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><strong>静态成员变量：</strong>在类中，用static声明的成员变量为静态成员变量，或叫做类属 性、类变量。它为该类的公用变量，属于类，被该类的所有实例共享（只此一 份），在类被载入时被显式初始化。可以使用“对象.类属性”来调用，不过一般 都使用“类名.类属性”。static变量置于方法区</p>
-<p><strong>静态方法：</strong></p>
-<ul>
-<li><p>静态方法不需要通过它所属的类的任何实例就可以被调用，因此在静态方法中不能使用 this 关键字，也不能直接访问所属类的实例变量和实例方法，但是可以直接访问所属类的静态变量和静态方法。另外，和 this  关键字一样，super 关键字也与类的特定实例相关，所以在静态方法中也不能使用 super 关键字。父类中是静态方法，</p>
-</li>
-<li><p>子类中不能覆盖为非静态方法；在符合覆盖规则的前提下， 在父子类中，父类中的静态方法可以被子类中的静态方法覆盖，但无多态</p>
-</li>
-<li>父子类中，静态方法只能被静态方法覆盖，父子类中，非静态方法只能被非静态方法覆盖</li>
-</ul>
-<p><strong>静态初始化块 static {}：</strong>如果希望加载后，对整个类进行某些初始化操作，可 以使用static初始化，</p>
-<ul>
-<li>是在类初始化时执行，不是在创建对象时执行。</li>
-<li>静态初始化块中不能访问非static成员变量。</li>
-<li>执行顺序：上溯到Object类，先执行Object的静态初始化块，再向下执行子 类的静态初始化块，直到我们的类的静态初始化块为止。</li>
-</ul>
-<h1 id="类的继承性"><a href="#类的继承性" class="headerlink" title="类的继承性"></a>类的继承性</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>基于一个已存在的类，创建一个新的类。已存在的类即父类，新的类即子类，继承就是子类继承并拥有父类的属性和方法，同时，子类还有拥有父类所不具有的属性和方法。</p>
-<p>父类，也称为基类、超类（superclass）；子类，也称为派生类。</p>
-<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><ul>
-<li>子类继承父类的成员变量</li>
-<li>子类继承父类除构造方法以外的成员方法</li>
-<li>子类不能继承父类的构造方法</li>
-<li>子类可以增加成员，可以重定义从父类继承来的 成员，但不能删除它们。</li>
-</ul>
-<h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Object</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Object</span><span class="params">()</span> <span class="comment">//构造方法</span></span></span><br><span class="line"><span class="function">    <span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> <span class="comment">//描述对象</span></span></span><br><span class="line"><span class="function">    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span><span class="comment">//比较对象相等</span></span></span><br><span class="line"><span class="function">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>Java中的类都是Object的子类</p>
-<h2 id="子类对父类成员的访问权限"><a href="#子类对父类成员的访问权限" class="headerlink" title="子类对父类成员的访问权限"></a>子类对父类成员的访问权限</h2><ul>
-<li>子类不能访问父类的私有成员（private）</li>
-<li>子类能够访问父类的公有成员（public）和保护成员（protected）。</li>
-<li>子类对父类的缺省权限成员的访问控制，以包为界分两种情况，可以访问当前包中成员</li>
-</ul>
-<h2 id="子类的构造方法"><a href="#子类的构造方法" class="headerlink" title="子类的构造方法"></a>子类的构造方法</h2><p>使用super()调用父类构造方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span>([参数列表])</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, MyDate birthday, String spec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(name, birthday); <span class="comment">//调用父类同参数的构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.speciality = spec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>默认执行super()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> <span class="comment">//Java提供的默认构造方法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(); <span class="comment">//调用父类构造方法Person()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="super引用"><a href="#super引用" class="headerlink" title="super引用"></a>super引用</h2><ul>
-<li>调用父类的构造方法。<code>super([参数列表])</code></li>
-<li>引用父类同名成员。<code>super.成员变量</code>，<code>super.成员方法([参数列表])</code></li>
-<li>super是直接父类对象的引用。可以通过super来访问父类中被子类覆盖的方 法或属性。</li>
-</ul>
-<h1 id="类的抽象性"><a href="#类的抽象性" class="headerlink" title="类的抽象性"></a>类的抽象性</h1><ul>
-<li>有抽象方法的类只能定义成抽象类。</li>
-<li>抽象类不能实例化，即不能用new来实例化抽象类。</li>
-<li>抽象类只能用来继承。</li>
-<li>抽象类可以包含属性、方法、构造方法（抽象类除了抽象方法，也可以定义普通方法、 构造方法和普通属性）。但是构造方法不能用来new实例，只能用来被子类调用。</li>
-<li>抽象方法只有方法的声明，没有方法体（即{}和里面的代码），其必须被子类实现 （这也是抽象方法的设计初衷，提供规范，要求各子类实现规范）</li>
-<li>抽象类用于设计和实现的分离，但是这种分离不够彻底。</li>
-<li>一个抽象类可以继承另一个抽象类</li>
-<li>有抽象方法的类一定是抽象类，但是抽象类中不一定都是抽象方法，也可以全部都是具体方法</li>
-</ul>
-<p><strong>特点：</strong></p>
-<ul>
-<li>构造方法、静态成员方法不能被声明为抽象方法。</li>
-<li>一个非抽象类必须实现从父类继承来的所有抽象方法</li>
-<li>不能创建抽象类的实例。</li>
-</ul>
+<tr>
+<td>long long</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>32</td>
+<td>64</td>
+<td>64</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<p>绝大部分64位的Unix，linux都是使用的LP64模型；32位Linux系统是ILP32模型；64位的Windows使用的是LLP64(long long and point 64)模型。32单片机使用的是ILP32</p>
+<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p>​        首先看A结构体，默认4字节对齐，假设地址从0x0000开始，那么a成员变量地址范围就是0x0000-0x0003，a成员变量自身对齐值等于默认对齐值，故有效对齐值为4。0x0000可以被4整除。b成员变量自身对齐值为1，默认对齐值为4，故有效对齐值为1，0x0004可以被1整除。c成员变量自身对齐值为2，默认对齐值为4，所以有效对齐值为2，要能被2整除，起始地址只能是0x0006，所以c成员变量占据地址为0x0006-0x0007。再来看结构体A的自身对齐值，为成员变量自身对齐值最大值4，而默认对齐值或者指定对齐值为4，取两者最小值为4。总占用地址8为4的倍数，满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来分析B结构体，b成员变量起始地址为0x0000，自身对齐值为1，比自身对齐值或者默认对齐值小，所以有效对齐值为1，所以占据地址0x0000。a成员变量自身对齐值为4，默认对齐值为4，则取最小值有效对齐值为4，则a成员变量起始地址要为4的倍数，所以a成员变量地址为0x0004，所以a成员变量地址为0x0004-0x0007。c成员变量自身对齐值为2，小于默认对齐值4，则有效对齐值为2，起始地址为0x0008能被2整除，则占据地址为0x0008-0x0009。这样总占据地址量为10不满足能被结构体有效对齐值4整除，所以取12，所以c成员变量地址范围为0x0008-0x000B。则总占据地址为12个字节。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        再来看C结构体，C成员结构体指定对齐值为2字节，b成员变量自身对齐值为1字节小于指定对齐值2，有效对齐值为1，C成员变量起始地址为0x0000。a成员变量自身对齐值为4大于指定对齐值2，所以取有效对齐值为2。所以不能取0x0001作为a成员变量起始地址，0x0002可以整除2，所以a成员变量起始地址为0x0002，占据地址为0x0002-0x0005。C成员变量自身对齐值等于指定对齐值，所以有效对齐值为2。所以0x0006可以为c成员变量起始地址。C占据地址为0x0006-0x0007。总占据地址为8字节。C结构体有效对齐值为成员变量最大自身对齐值和指定对齐值中最小的，所以为2。而8为2的倍数，所以满足。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (2)<span class="comment">//指定2字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		最后看一下D结构体，假如在64位系统中，就占用64个字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">long</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align地址对齐方式"><a href="#align地址对齐方式" class="headerlink" title="align地址对齐方式"></a>align地址对齐方式</h3><p>__attribute__((align(n))), 如果n大于此结构体中最大基本数据类型size,那么依据最大基本数据类型size对齐;否则，依据n进行对齐.</p>
+<p><strong>这种方法不能指定内存对齐小于默认对齐，也就是说它只能调大不能调小。而且比较坑的是调小的时候是没任何提示（包括警告和错误）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> b;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">    <span class="keyword">char</span> d;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>我们来分析一下上面两个结构体，A是8字节对齐，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，总共就是8字节，即sizeof( A ) &#x3D; 8，刚好占的空间大小是8的整数倍1倍</p>
+<p>B也是8字节对齐，同理，由于成员最大类型是4字节，小于给定的8字节对齐，所以所有成员就按照最大基本数据类型对齐，a四字节，b四字节，c四字节，d四字节，总的就是16字节了，刚好占的空间大小是8的整数倍2倍。</p>
+<p>将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必须是2的幂次方)即这个地址值一定是m的整数倍。并且其占用的空间，即大小,也是m的整数倍，以保证别的变量在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐（即地址值也是m的整数倍）。 __attribute__((aligned(m)))可以作用于一个单独的变量，数组，结构体。</p>
+<p>也就是说attribute关键字是用于整个结构体变量或者其他变量的对齐方式。</p>
+<h3 id="align和pack区别"><a href="#align和pack区别" class="headerlink" title="align和pack区别"></a>align和pack区别</h3><p>前者告诉编译器结构体或类内部的成员变量相对于第一个变量的地址的偏移量的对齐方式，缺省情况下，编译器按照自然边界对齐，当变量所需的自然对齐边界比n大时，按照n对齐，否则按照自然边界对齐；后者告诉编译器一个结构体或者类或者联合或者一个类型的变量(对象)分配地址空间时的地址对齐方式。也就是说如果将__attribute__((aligned(m)))作用于一个类型，那么该类型的变量在分配地址空间时，其存放的地址一定按照m字节对齐(m必 须是2的幂次方)。并且其占用的空间，即大小,也是m的整数倍，以保证在申请连续存储空间的时候，每一个元素的地址也是按照m字节对齐。  <strong>attribute</strong>((aligned(m)))也可以作用于一个单独的变量。举例说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f1;</span><br><span class="line">	<span class="keyword">char</span> f2;</span><br><span class="line">	<span class="keyword">char</span> f3;</span><br><span class="line">	<span class="keyword">int</span> f4;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> f5;</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">1024</span>))) ts;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Struct size is: %d, aligned on 1024\n&quot;</span>,<span class="keyword">sizeof</span>(ts));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f1 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f2 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f2));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f3 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f3));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f4 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f4));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Allocate f5 on address: 0x%x\n&quot;</span>,&amp;(((ts*)<span class="number">0</span>)-&gt;f5));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">Struct size is: <span class="number">1024</span>, aligned on <span class="number">1024</span></span><br><span class="line">Allocate f1 on address: <span class="number">0x0</span></span><br><span class="line">Allocate f2 on address: <span class="number">0x4</span></span><br><span class="line">Allocate f3 on address: <span class="number">0x5</span></span><br><span class="line">Allocate f4 on address: <span class="number">0x8</span></span><br><span class="line">Allocate f5 on address: <span class="number">0xc</span></span><br></pre></td></tr></table></figure>
+
+<p>绿色部分表明了attribute((aligned(1024))) 的作用.</p>
+<p>红色部分说明#pragma pack(4)只对大小大于4的成员变量的地址偏移起作用</p>
+<p>紫色部分说明对于大小大于4的成员变量，其地址偏移按照4字节对齐</p>
+<p>当align作用于结构体定义时会改变结构体的大小。结构体最终大小为aligned指定大小的整数倍</p>
+<p>总结：</p>
+<p><code>#pragma pack(n)</code>：针对的是结构体内每一个成员相对第一个成员的偏移地址对齐。</p>
+<p><code>__attribute__((aligned (n)))</code>：针对的是整个结构体在整个内存地址空间分配时的对齐。</p>
 
       
     </div>
@@ -562,7 +925,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/FPGA/parameter/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/attribute%E5%85%B3%E9%94%AE%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -576,7 +939,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/07/FPGA/parameter/" class="post-title-link" itemprop="url">parameter,defparame,`define,localparam四者区别</a>
+            <a href="/2023/06/18/C%E5%92%8CC++/attribute%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">attribute关键字</a>
         </h2>
 
         <div class="post-meta">
@@ -588,14 +951,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-07 17:02:40" itemprop="dateCreated datePublished" datetime="2021-11-07T17:02:40+08:00">2021-11-07</time>
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:48" itemprop="dateModified" datetime="2021-12-15T21:40:48+08:00">2021-12-15</time>
+                <time title="修改时间：2023-09-05 18:16:53" itemprop="dateModified" datetime="2023-09-05T18:16:53+08:00">2023-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -603,7 +966,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
                 </span>
             </span>
 
@@ -632,22 +995,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">define</span>:    作用 -&gt; 常用于定义常量可以跨模块、跨文件;</span></span><br><span class="line">            范围 -&gt; 整个工程;</span><br><span class="line"></span><br><span class="line"><span class="keyword">parameter</span>:  作用 -&gt; 常用于模块间参数传递;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义;</span><br><span class="line"></span><br><span class="line"><span class="keyword">localparam</span>: 作用 -&gt; 常用于状态机的参数定义;</span><br><span class="line">            范围 -&gt; 本<span class="keyword">module</span>内有效的定义，不可用于参数传递;</span><br><span class="line">			<span class="keyword">localparam</span> cannot be used <span class="keyword">within</span> the <span class="keyword">module</span> port <span class="keyword">parameter</span> list.</span><br></pre></td></tr></table></figure>
-<h2 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter"></a>Parameter</h2><p>可以放在模块头上也可以放在模块的内部，他可以通过defparameter的方式或者模块实例化的时候进行重写。</p>
-<p><strong>Example：</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line">#(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"> item;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> (port_list );</span><br><span class="line"> <span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>, DEPTH=<span class="number">4</span><span class="comment">//可以被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>一旦有模块参数被写在模块头部，则出现在模块内部的模块参数被视为本地参数，不能被重写。</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> fifo</span><br><span class="line"> #(<span class="keyword">parameter</span> MSB=<span class="number">3</span>, LSB=<span class="number">0</span>)<span class="comment">//可以被重写</span></span><br><span class="line"> (port_list );</span><br><span class="line"><span class="keyword">parameter</span> DEPTH=<span class="number">4</span>; <span class="comment">//不能被重写</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>在上层模块对参数重写的方式如下:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>)F1<span class="variable">.MSB</span>=<span class="number">4</span>;F1<span class="variable">.LSB</span>=<span class="number">2</span>;fifo F1;</span><br><span class="line"><span class="number">2</span>) fifo <span class="variable">#(4,2) F1(port_list)</span>;</span><br><span class="line"><span class="number">3</span>) fifo <span class="variable">#(.LSB(2), .MSB(4)) fifo(port_list)</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="defparam修改参数"><a href="#defparam修改参数" class="headerlink" title="defparam修改参数"></a>defparam修改参数</h2><p>当一个模块引用另外一个模块时，高层模块可以改变低层模块用parameter定义的参数值。例子代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Width</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">defparam</span>    U_D1<span class="variable">.Polarity</span> = <span class="number">0</span>;<span class="comment">//使得U_D1的Width = 4， Polarity = 0；</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">defparam</span>    U_D2<span class="variable">.Width</span> = <span class="number">5</span>;<span class="comment">//使得U_D2的Width = 5，Polarity 不变，即为1；</span></span><br><span class="line">    Decode U_D1();</span><br><span class="line">    Decode U_D2(); </span><br><span class="line"><span class="keyword">endmodule</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<p>也可以模块实例化的时候进行修改，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Top(...);<span class="comment">//这是一个顶层模块</span></span><br><span class="line">    Decode <span class="variable">#(4,0) U_D1()</span>; <span class="comment">//使得Width = 4， Polarity = 0；</span></span><br><span class="line">    Decode <span class="variable">#(5) U_D2()</span>; <span class="comment">//使得 Width = 5，Polarity 不变，即为1；</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> Decode(A,F);    <span class="comment">//这是一个子模块</span></span><br><span class="line">    <span class="keyword">parameter</span> Width = <span class="number">1</span>, Polarity = <span class="number">1</span>;</span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h2 id="define"><a href="#define" class="headerlink" title="`define"></a>`define</h2><p><strong>概念：</strong>可以跨模块的定义，写在模块名称上面，在整个设计工程都有效。一旦define指令被编译，其在整个编译过程中都有效。例如，通<br>过另一个文件中的define指令，定义的常量可以被其他文件调用,直到遇到undef；</p>
-<p><strong>举例：</strong>定义 define UART_CNT 10’d1024.使用UART_CNT</p>
-<h2 id="localparam："><a href="#localparam：" class="headerlink" title="localparam："></a>localparam：</h2><p><strong>概念：</strong>本module内有效的定义，不可用于参数传递；localparamcannot be used within the module port parameter list.一般情况下，状态机的参数都是用localparam的。</p>
+          <p>__attribute__ 可以设置函数属性（Function Attribute ）、变量属性（Variable Attribute ）和类型属性（Type Attribute ）。关键字__attribute__ 也可以对结构体（struct ）或共用体（union ）进行属性设置。大致有六个参数值可以被设定，即：aligned, packed, transparent_union, unused, deprecated 和 may_alias 。</p>
+<h4 id="aligned-对齐"><a href="#aligned-对齐" class="headerlink" title="aligned(对齐)"></a>aligned(对齐)</h4><p>指定对象的对齐方式（以字节为单位），如果aligned后没有数值，则默认使用最大最有益的对齐方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">3</span>];</span><br><span class="line">&#125;__attribute__((aligned(<span class="number">8</span>)));</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> <span class="keyword">int32_t</span> __attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">8</span>;(非紧凑模式)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在GCC下：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch; </span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125; __attribute__((packed))<span class="comment">//取消结构在编译过程中的优化对齐，按照实际占用字节数进行对齐。</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">sizeof</span>(my) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当aligned作用于变量时，其作用是告诉编译器为变量分配内存的时候，要分配在指定对齐的内存上.作用于变量之上不会改变变量的大小。   例如：int a <strong>attribute</strong>((aligned(16)));该变量a的内存起始地址为16的倍数。</p>
+<h4 id="packed（是否紧凑"><a href="#packed（是否紧凑" class="headerlink" title="packed（是否紧凑)"></a>packed（是否紧凑)</h4><h4 id="at（绝对定位）"><a href="#at（绝对定位）" class="headerlink" title="at（绝对定位）"></a>at（绝对定位）</h4><ul>
+<li>定位到flash，一般用于固化的信息，如出厂设置的参数，上位机配置的参数，ID卡的ID号，flash标记等等。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u16 gFlashDefValue[<span class="number">512</span>] __attribute__((at(<span class="number">0x0800F000</span>))) = &#123;<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>,<span class="number">0x1111</span>&#125;;</span><br><span class="line"><span class="comment">//定位在flash中，其他flash补充为0</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> u16 <span class="title">gflashdata__attribute__</span><span class="params">((at(<span class="number">0x0800F000</span>)))</span> </span>= <span class="number">0xFFFF</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定位到RAM中，一般用于数据量比较大的缓存，如串口的接收缓存，再就是某个位置的特定变量</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u8 USART2_RX_BUF[USART2_REC_LEN] __attribute__((at(<span class="number">0x20001000</span>)));</span><br><span class="line"><span class="comment">//接收缓冲，最大USART_REC_LEN个字节，起始地址为0x20001000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>1)、绝对定位不能在函数中定义，局部变量是定义在栈区的，栈区由MDK自动分配、释放，不能定义为绝对地址，只能放在函数外定义。</p>
+<p>2)、定义的长度不能超过栈或Flash的大小，否则，造成栈、Flash溢出。</p>
+<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><p>提到section，就得说RO RI ZI了，在ARM编译器编译之后，代码被划分为不同的段，RO Section(ReadOnly)中存放代码段和常量，RW Section(ReadWrite)中存放可读写静态变量和全局变量，ZI Section(ZeroInit)是存放在RW段中初始化为0的变量。</p>
+<hr>
+<p>于是本文的大体意思就清晰了，__attribute__((section(&quot;section_name&quot;)))，其作用是将作用的函数或数据放入指定为&quot;section_name&quot;对应的段中。</p>
 
       
     </div>
@@ -669,7 +1041,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/%E4%BF%A1%E5%8F%B7/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E9%A2%91%E5%9F%9F%E7%9B%B8%E4%B9%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/16/Csharp/%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -683,7 +1055,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/07/%E4%BF%A1%E5%8F%B7/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E9%A2%91%E5%9F%9F%E7%9B%B8%E4%B9%98/" class="post-title-link" itemprop="url">时域卷积频域相乘</a>
+            <a href="/2023/03/16/Csharp/%E4%B8%80/" class="post-title-link" itemprop="url">基础学习一</a>
         </h2>
 
         <div class="post-meta">
@@ -695,14 +1067,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-07 15:33:57" itemprop="dateCreated datePublished" datetime="2021-11-07T15:33:57+08:00">2021-11-07</time>
+              <time title="创建时间：2023-03-16 00:10:10" itemprop="dateCreated datePublished" datetime="2023-03-16T00:10:10+08:00">2023-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-26 09:59:49" itemprop="dateModified" datetime="2022-08-26T09:59:49+08:00">2022-08-26</time>
+                <time title="修改时间：2023-04-11 15:56:07" itemprop="dateModified" datetime="2023-04-11T15:56:07+08:00">2023-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -710,7 +1082,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
+                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C#学习</span></a>
                 </span>
             </span>
 
@@ -720,7 +1092,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>472</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -739,16 +1111,177 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>傅里叶级数（时域卷积频域相乘）</p>
-<p>​    一般教科书都是选择理论证明，但是如何直观去理解呢。我们知道一个信号可以傅里叶变换分解后然后变成很多个不同频率正弦信号。</p>
+          <h2 id="C-程序结构"><a href="#C-程序结构" class="headerlink" title="C#程序结构"></a>C#程序结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Hello World&quot;);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个C#程序包含以下部分：</p>
+<ul>
+<li><strong>使用using关键字包含命名空间，一个程序一般有多个using语句。</strong>相当于System是一个系统命名空间，可以使用其中的类和方法。类比一下java的package，但是还是有去别的。</li>
+<li><strong>命名空间声明。</strong>使用namespace关键字定义一个命名空间。</li>
+<li><strong>一个class。</strong>class声明类包含了程序使用的数据和方法声明。类一般包含多个方法。方法定义了类的行为。只有一个  Main 方法。</li>
+<li><strong>Class方法。</strong></li>
+<li><strong>Class属性</strong>。</li>
+<li><strong>一个Main方法。</strong></li>
+<li><strong>语句&amp;表达式</strong></li>
+</ul>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>直接来看一个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">using System;//包含系统包</span><br><span class="line">namespace RectangleApplication//定义命名空间</span><br><span class="line">&#123;</span><br><span class="line">    class Rectangle//定义矩形类</span><br><span class="line">    &#123;</span><br><span class="line">        // 成员变量</span><br><span class="line">        double length;</span><br><span class="line">        double width;</span><br><span class="line">        public void Acceptdetails()//定义获取成员变量值的函数</span><br><span class="line">        &#123;</span><br><span class="line">            length = 4.5;    </span><br><span class="line">            width = 3.5;</span><br><span class="line">        &#125;</span><br><span class="line">        public double GetArea()//定义计算面积的函数</span><br><span class="line">        &#123;</span><br><span class="line">            return length * width;</span><br><span class="line">        &#125;</span><br><span class="line">        public void Display()//定义显示函数</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Length: &#123;0&#125;&quot;, length);</span><br><span class="line">            Console.WriteLine(&quot;Width: &#123;0&#125;&quot;, width);</span><br><span class="line">            Console.WriteLine(&quot;Area: &#123;0&#125;&quot;, GetArea());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    class ExecuteRectangle//定义主函数类</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)//Main方法，程序入口</span><br><span class="line">        &#123;</span><br><span class="line">            Rectangle r = new Rectangle();//实例化矩形类，r为标识符，避免和C#关键字重复，如果非要用加一个@</span><br><span class="line">            r.Acceptdetails();//调用类的方法</span><br><span class="line">            r.Display();</span><br><span class="line">            Console.ReadLine();//等待输入退出程序</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="C-封装"><a href="#C-封装" class="headerlink" title="C#封装"></a>C#封装</h2><ul>
+<li><strong>public</strong>：所有对象都可以访问；</li>
+<li><strong>private</strong>：对象本身在对象内部可以访问；</li>
+<li><strong>protected</strong>：只有该类对象及其子类对象可以访问</li>
+<li><strong>internal</strong>：同一个程序集的对象可以访问；</li>
+<li><strong>protected</strong> <strong>internal</strong>：访问限于当前程序集或派生自包含类的类型。</li>
+</ul>
+<img src="\images\Csharp\一\1.png" style="zoom:120%;">
+
+<h2 id="C-方法"><a href="#C-方法" class="headerlink" title="C#方法"></a>C#方法</h2>
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/06/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%BD%B1%E5%83%8F%E6%98%BE%E7%A4%BA/" class="post-title-link" itemprop="url">dicom影像显示</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-06 18:08:44" itemprop="dateCreated datePublished" datetime="2023-03-06T18:08:44+08:00">2023-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-08 19:43:12" itemprop="dateModified" datetime="2023-03-08T19:43:12+08:00">2023-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="位图显示方法"><a href="#位图显示方法" class="headerlink" title="位图显示方法"></a>位图显示方法</h2><p>Windows位图有两种：<strong>DDB</strong>以及<strong>DIB</strong>。</p>
+<p><strong>DDB</strong>中不包含调色板，通过硬件设备来显示图像，位图在内存中的位置和结构由硬件的驱动程序来管理,类似于MFC205中的Cbitmap类。由于不包含有调色板，图像的显示由硬件设备直接来实现，所以这种显示方式的速度非常快，与此同时，因为它的显示是依赖于设备的，所以在不同设备之间是不能够实现文件的兼容应用，从而决定了DDB的应用范围非常有限。</p>
+<p><strong>DIB</strong>设备无关位图却克服了DDB的确定，它不再依赖于硬件设备，是一种外部图像格式，从而完全能够实现不同设备之间的文件兼容应用。由于DIB位图中包含了一个调色板，而图像中的像素值表示了对应于该调色板的查找值，虽然相对于DDB位图多了一项查找过程，但是，DIB位图实现了不同设备之间的兼容显示，当需要显示图像的时候，只需要通过像素值找到调色板中对应的颜色进行显示，而不在关心硬件设备是否支持图像显示，从而实现了独立于硬件设备，所以目前大多数应用的图像基本都属于DIB类型。Windows中所有的图像生成都是由图形设备接口GDI来管理的，GDI是通过应用高层的绘图函数来实现生成的图像的，正由于这种生成方式，所以无论何种硬件设备都能够生成同样的图形，因此GDI构成了Windows系统的核心部件。</p>
+<h2 id="DICOM显示流程"><a href="#DICOM显示流程" class="headerlink" title="DICOM显示流程"></a>DICOM显示流程</h2><p>不同的操作系统中字节数据的排列顺序是不同的，一般主要有两种排列方式，即Big Endian和Little Endian。前者表示系统中的字节数据采用正常的顺序进行排列，而后者恰恰相反，采用高低字节调换的方式进行数据排列。通常情况下，在UNIX系统中采用正常顺序的Big Endian排列方式，而Windows中则采用髙低字节调换的Little Endian排列方式。</p>
+<p>数据解析流程：</p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+
+
+<p>DICOM-BMP显示流程：</p>
+<div id="flowchart-1" class="flow-chart"></div>
+
+<h2 id="图像标注"><a href="#图像标注" class="headerlink" title="图像标注"></a>图像标注</h2><p>做为医学图像显示系统，对图像中重点关注区域的加以标注是不可或缺的，可以辅助医生对其感兴趣区域进行锁定和定性分析。同时标记对医学教学也是非常有帮助的。本文中设计的对DICOM文件中图像的热点关注区域进行标注，并对所标注的轨迹坐标等信息进行读取和保存。对影像图像进行标记，针对影像图像可能涉及到很多部位，及不同的病状，本设计采用画线、圆形、矩形三种标记方式对其进行标记定位。</p>
+<p>主要实现方法是通过调用Windows系统下的CClientDC类，以鼠标左键按下为坐标起点，以鼠标左键弹起为坐标终点，这样就能够画出标记线。</p>
+<h2 id="图像的旋转和放大"><a href="#图像的旋转和放大" class="headerlink" title="图像的旋转和放大"></a>图像的旋转和放大</h2><p><strong>图像旋转</strong>就是以空间的某一点为原点，然后改变旋转角度，但是每一点的相对位置关系是不变的。从数学方法上来描述，图像的旋转就是建立一幅图像与其变换后的图像中所有像素点之间映射关系的函数:(x,y)=(X(u,v),Y(u,v)),(x,y)表示输入的图像素点的坐标，(u,v)表示输出的图像素点的坐标。x,y,u,v表示了输入图像与输出图像所有点的几何对应关系。图像的旋转计算方法为:假设在X-Y坐标体系中，将点(x,y)旋转角度θ，得到点(u,v)。</p>
+<p>计算公式为：</p>
 <script type="math/tex; mode=display">
-f(t)=\frac {a_0} {2} +\sum_{n=1}^{+\infty}a_ncos(n\omega_0 t)+b_nsin(n\omega_0 t)\\
-a_0 =\frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)dt \ \ \ \ \ 
-a_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)cos(n\omega_0t)dt\ \ \ \ \
-b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script><p>我们将两个信号去卷积，正弦信号卷积分配，不同频率的正弦信号卷积后为0（“正交”）.</p>
-<p>那么就是相同频率的正弦信号相卷积，频率不变，辐值相乘。</p>
-<p>而频域就是不同频率分量的相对大小，因此这在频域上就表现为相乘。</p>
-<p>​    从知乎上看到的，写的很好，分享一下</p>
+[u,v] = 
+[x,y]
+\begin{bmatrix}
+cos\theta & -sin\theta \\ sin\theta & sin\theta
+\end{bmatrix}</script><p><strong>图像放大</strong>可以更好的帮助医生诊断，其最简单的方法就是将像素放大，变换的公式为：</p>
+<script type="math/tex; mode=display">
+u = r_x * x
+\\v = r_y * y</script><p>其中<code>r_x</code>为X方向的放大比例，7；为y方向的放大比例，然后将变换后的像素排列在的阵列中，但是这样的放大只是像素坐标的间隔变大。所以这样的放大以后会产生马赛克，为了解决这一问题，通常采用插值法来实现像素的平稳过度。</p>
+<p><img src="\images\毕设\dicom标准\6.jpg" style="zoom:50%;"></p>
+<p>图中的四个边角为放大后原像素的位置，而它们之间的像素需要插值来显示，具体算法如下：</p>
+<script type="math/tex; mode=display">
+g(u,v_1) = g(u_1,v_1)+\frac{u-u_1} {u_2-u_1}[g(u_2,v_1)-g(u_1,v_1)]\\
+g(u,v_2) = g(u_1,v_2)+\frac{u-u_1} {u_2-u_1}[g(u_2,v_2)-g(u_1,v_2)]\\
+g(u,v) = g(u,v_1)+\frac{v-v_1} {v_2-v_1}[g(u,v_2)-g(u,v_1)]</script><p>由于是通过线性插值的方法得到的放大图像，所以效果明显优于直接放大法，但是即使采用了插值旳方法，所得到的信息毕竟不是真实的信息，所以只能作为医学诊断辅助，不是绝对严格的医学测量。</p>
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
+op=>operation: 读取数据
+cond=>condition: Big Endian?
+op2=>operation: 数据处理
+op3=>operation: 字节交换
+e=>end: 结束
+st->op->cond->op2->e
+cond(yes)->op2
+cond(no)->op3
+op3->op2</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 开始
+e=>end: 结束
+op1=>operation: 打开文件
+op2=>operation: 提取传输输入法
+op3=>operation: 数据解析
+op4=>operation: 获取图像数据信息
+op5=>operation: 数据解析
+op6=>operation: 调用相应解压模块
+op7=>operation: 获取图像数据
+op8=>operation: 图像数据转换为8位数据
+op9=>operation: DIB显示
+cond1=>condition: DICOM？
+cond2=>condition: 图像是否为压缩数据？
+st->op1->cond1(yes)->op2->op3->op4->op5->cond2(no)->op7->op8->op9->e
+cond1(no)->e
+cond2(yes)->op6->op7</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script></p>
 
       
     </div>
@@ -770,7 +1303,7 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -784,7 +1317,101 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/07/FPGA/Testbench%E6%96%87%E4%BB%B6%E8%AF%BB%E6%B3%95%E5%92%8C%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">Testbench文件编写方法</a>
+            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">dicom图像灰度理解</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-05 21:17:39 / 修改时间：21:52:00" itemprop="dateCreated datePublished" datetime="2023-03-05T21:17:39+08:00">2023-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图像灰阶"><a href="#图像灰阶" class="headerlink" title="图像灰阶"></a>图像灰阶</h2><p>​        所谓灰阶，是将最亮与最暗之间的亮度变化，区分为若干份。以便于进行信号输入相对应的屏幕亮度管控。每张数字影像都是由许多点所组合而成的,这些点又称为像素(pixels)，通常每一个像素可以呈现出许多不同的颜色，它是由红、绿、蓝（RGB）三个子像素组成的。每一个子像素，其背后的光源都可以显现出不同的亮度级别。而灰阶代表了由最暗到最亮之间不同亮度的层次级别。这中间层级越多，所能够呈现的画面效果也就越细腻。以8bit panel为例，能表现2的8次方，等于256个亮度层次，我们就称之为256灰阶。LCD屏幕上每个像素，均由不同亮度层次的红、绿、蓝组合起来，最终形成不同的色彩点。也就是说，屏幕上每一个点的色彩变化，其实都是由构成这个点的三个RGB子像素的灰阶变化所带来的。</p>
+<h2 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h2><p>​        我们生活中通过三原色深浅组成不同的颜色，前端开发中常用RGB来指定色彩，R、G、B 都是 0-255， 比如 （255,255,255） 表示白色，用16进制表示255就是ff, 所以255,255,255 可以表示为 ffffff,  在css样式表中写为 #ffffff。</p>
+<h2 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h2><p>​        图片我们都知道是由多个像素组成的，是图像的最小单元，如果这个单元里只有一个bit大小，也就是只有0和1两个值，由这种像素组成的图像称二值图像，显然它可以表示一个黑白图。这个单位里也可以存一个16位二进制数，24位…, 可以想象存储的越大，一个像素能表达的颜色就越丰富，整体图像呈现就越精细，当然图片占用的空间也就越大。</p>
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p>​        1位图像（即二值图像）只能表示黑白，那二位图像就可以表示4种颜色（00,01,10,11，VGA），依次类推，4位（16色，VGA），8位（256色），16位（增强色），24位和32位（真彩色）等。</p>
+<p>这其中8位RGB指的是3位元是R，3位元是G，2位元是B，故有8位RGB有256种颜色。其他以此类推。</p>
+<p><strong>色彩图像</strong>：以RGB图像为例，RGB图像每一个像素的颜色值（由RGB三原色表示）直接存放在图像矩阵中，由于每一像素的颜色需由R、G、B三个分量来表示，M、N分别表示图像的行列数，<strong>三个</strong>M x N的二维矩阵分别表示各个像素的R、G、B三个颜色分量，假设我们在绘图的时候只取第一个矩阵，那么绘制出来的就是红色分量的图片。<br> <strong>灰度图像</strong>：每个像素只有一个采样颜色，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。</p>
+<h2 id="灰度级"><a href="#灰度级" class="headerlink" title="灰度级"></a>灰度级</h2><p>​        灰度级表明图像中不同灰度的最大数量。灰度级越大，图像的亮度范围越大。二值图像一个像素只能存0和1，它的灰度级就为2，8位图一个像素表示0-255共256个灰度值，所有它的灰度级为256， 那么存储一张512*512,256级灰度的图片需要的空间就为</p>
+<script type="math/tex; mode=display">
+512*512*8 = 2097152\ bit ≈ 1.7\ Mb</script><h2 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h2><p>​        图像的灰度化是让像素点矩阵中的每一个像素点都满足关系：R=G=B，此时的这个值叫做灰度值。如RGB(100,100,100)就代表灰度值为100,RGB(50,50,50)代表灰度值为50。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/05/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/dicom%E7%AA%97%E4%BD%8D%E7%AA%97%E5%AE%BD/" class="post-title-link" itemprop="url">dicom窗位和窗宽</a>
         </h2>
 
         <div class="post-meta">
@@ -796,14 +1423,14 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-07 15:22:45" itemprop="dateCreated datePublished" datetime="2021-11-07T15:22:45+08:00">2021-11-07</time>
+              <time title="创建时间：2023-03-05 20:27:05" itemprop="dateCreated datePublished" datetime="2023-03-05T20:27:05+08:00">2023-03-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:55" itemprop="dateModified" datetime="2021-12-15T21:40:55+08:00">2021-12-15</time>
+                <time title="修改时间：2023-03-06 16:37:20" itemprop="dateModified" datetime="2023-03-06T16:37:20+08:00">2023-03-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -811,7 +1438,7 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+                  <a href="/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">毕业设计</span></a>
                 </span>
             </span>
 
@@ -821,7 +1448,7 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -840,585 +1467,34 @@ b_n = \frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)sin(n\omega_0t)dt</script>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>转载：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46423500/article/details/113264878">https://blog.csdn.net/weixin_46423500/article/details/113264878</a></p>
-<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>testbench文件基本结构：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 仿真单位/仿真精度</span></span><br><span class="line"><span class="keyword">module</span> test_bench();</span><br><span class="line"><span class="comment">//通常 testbench没有输入与输出端口</span></span><br><span class="line">信号或变量定义声明</span><br><span class="line">使用<span class="keyword">initial</span>或<span class="keyword">always</span>语句产生激励波形</span><br><span class="line">例化设计模块</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3 id="声明仿真精度和仿真单位"><a href="#声明仿真精度和仿真单位" class="headerlink" title="声明仿真精度和仿真单位"></a>声明仿真精度和仿真单位</h3><p>/#(延时时间)，#(10ns)代表延时10ns</p>
-<p>仿真精度就是说最低的延时精度，比如说<code>`timescale 1ns/1ns</code>，延时精度只能达到1ns</p>
-<p>如果想要延时10.001ns，就要把仿真精度改成1ps(1ns = 1000ps)。</p>
-<h3 id="定义模块名"><a href="#定义模块名" class="headerlink" title="定义模块名"></a>定义模块名</h3><p><code>module flow_led_tb();</code></p>
-<p>模块名的命名方式一般在被测模块名后面加上“ _ tb”，或者在被测模块名前面加上“tb_”，表示为哪个模块提供激励测试文件，通常激励文件不需要定义输入和输出端口。</p>
-<h3 id="信号或常量定义"><a href="#信号或常量定义" class="headerlink" title="信号或常量定义"></a>信号或常量定义</h3><p><strong>常量：</strong></p>
-<p> 代码中定义的常量有时需要频繁的修改，为了方便修改，可以把常量定义成参数的形式，定义参数的关键字为parameter，代码如下：</p>
-<p><code>parameter T = 20;</code></p>
-<p><strong>变量：</strong></p>
-<p>Verilog代码中，常用声明信号或变量的关键字为reg和wire，在initial语句或者always语句中使用的变量定义成reg类型，在assign语句或者用于连接被例化模块名的信号定义成wire类型，声明方法如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"><span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br></pre></td></tr></table></figure>
-<p><strong>使用initial或always语句产生激励波形：</strong><br> 产生时钟激励。代码表示每10ns（假设仿真单位是1ns），sys_clk的电平状态翻转一次，由于一个完整的时钟周期包括一个高电平和一个低电平，因此sys_clk的时钟周期为20ns，占空比为50%。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> #<span class="number">10</span> sys_clk = ~sys_clk;</span><br></pre></td></tr></table></figure>
-<p>如果要生成其它占空比时钟的话，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> <span class="keyword">begin</span></span><br><span class="line">#<span class="number">6</span> sys_clk = <span class="number">0</span>; #<span class="number">4</span> sys_clk = <span class="number">1</span>; <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>需要注意的是，在always语句中设置了sys_clk的时钟周期，并没有设置初始值，因此sys_clk需要在initial语句中进行初始化。代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"> sys_clk = <span class="number">1&#x27;b0</span>; <span class="comment">// 时钟初始值</span></span><br><span class="line">sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位初始值</span></span><br><span class="line"> #<span class="number">20</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="例化设计模块"><a href="#例化设计模块" class="headerlink" title="例化设计模块"></a>例化设计模块</h3><p>例化的设计模块是指被测模块，例化被测模块的目的是把被测模块和激励模块实例化起来，并且把被测模块的端口与激励模块的端口进行相应的连接，使得激励可以输入到被测模块。如果被测模块是由多个模块组成的，激励模块中只需要例化多个模块的顶层模块，代码如下：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flow_led u0_flow_led (</span><br><span class="line"> <span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line"> <span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line"> <span class="variable">.led</span> (led )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="完整文件"><a href="#完整文件" class="headerlink" title="完整文件"></a>完整文件</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns // 定义仿真时间单位1ns和仿真时间精度为1ns</span></span><br><span class="line"> <span class="keyword">module</span> flow_led_tb(); <span class="comment">// 测试模块</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//parameter define</span></span><br><span class="line"><span class="keyword">parameter</span> T = <span class="number">20</span>; <span class="comment">// 时钟周期为20ns</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> sys_clk; <span class="comment">// 时钟信号</span></span><br><span class="line"> <span class="keyword">reg</span> sys_rst_n; <span class="comment">// 复位信号</span></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] led;</span><br><span class="line"><span class="comment">//给输入信号初始值</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">	sys_clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	sys_rst_n = <span class="number">1&#x27;b0</span>; <span class="comment">// 复位</span></span><br><span class="line">	<span class="variable">#(T+1)</span> sys_rst_n = <span class="number">1&#x27;b1</span>; <span class="comment">// 在第21ns的时候复位信号信号拉高</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//50Mhz的时钟，周期则为1/50Mhz=20ns,所以每10ns，电平取反一次</span></span><br><span class="line"><span class="keyword">always</span> <span class="variable">#(T/2)</span> sys_clk = ~sys_clk;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化flow_led模块</span></span><br><span class="line">flow_led u0_flow_led (</span><br><span class="line">	<span class="variable">.sys_clk</span> (sys_clk ),</span><br><span class="line">	<span class="variable">.sys_rst_n</span> (sys_rst_n),</span><br><span class="line">	<span class="variable">.led</span> (led )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/05/Java/%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="post-title-link" itemprop="url">第二章</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-05 21:35:49" itemprop="dateCreated datePublished" datetime="2021-11-05T21:35:49+08:00">2021-11-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-19 23:16:32" itemprop="dateModified" datetime="2021-11-19T23:16:32+08:00">2021-11-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="语言成分"><a href="#语言成分" class="headerlink" title="语言成分"></a>语言成分</h1><h2 id="关键字和标识符"><a href="#关键字和标识符" class="headerlink" title="关键字和标识符"></a>关键字和标识符</h2><p><strong>关键字</strong>略。</p>
-<p><strong>标识符命名规则</strong>：</p>
-<ol>
-<li>标识符必须以字母、下划线_ 、美元符$开头。</li>
-<li>标识符其它部分可以是字母、下划线“_”、美元符“$”和数字的任意组合。</li>
-<li>Java 标识符大小写敏感，且长度无限制。</li>
-<li>不可以是Java的关键字。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">合法的标识符：</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> _123 = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> $12aa = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> 变量<span class="number">1</span> = <span class="number">55</span>;</span><br><span class="line">不合法的标识符：</span><br><span class="line"><span class="keyword">int</span> 1a = <span class="number">3</span>; <span class="comment">//不能用数字开头</span></span><br><span class="line"><span class="keyword">int</span> a# = <span class="number">3</span>; <span class="comment">//不能包含#这样的特殊字符</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">int</span> = <span class="number">3</span>; <span class="comment">//不能使用关键字</span></span><br></pre></td></tr></table></figure>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><img src="\images\Java\第二章\1.jpg" style="zoom:67%;"></p>
-<p><strong>注意：</strong><code>float f = 1.1;</code>是错误的，因为float类型要加上f或F后缀，不加默认就是double型。</p>
-<h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><p><strong>数组(Array),类(class),接口(interface)。</strong></p>
-<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>,<span class="keyword">short</span>,<span class="keyword">char</span>—&gt; <span class="keyword">int</span> —&gt; <span class="keyword">long</span>—&gt; <span class="keyword">float</span> —&gt; <span class="keyword">double</span> </span><br><span class="line"><span class="comment">//容量从高到低。</span></span><br></pre></td></tr></table></figure>
-<p><strong>转换规则：</strong></p>
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>普通显示器能显示的最大灰度值是8bit (256位，即0~255)， 而医学图像的最大灰度值通常不低于12bit，所以普通的显示器就难以直接显示医学图像的全部灰度信息。</p>
+<h2 id="CT值定义"><a href="#CT值定义" class="headerlink" title="CT值定义"></a>CT值定义</h2><p>是测定人体某一局部组织或器官密度大小的一种计量单位，通常称亨氏单位（hounsfield unit ，HU）空气为-1000，致密骨为+1000。</p>
+<p><strong>CT 值</strong>是CT 图像中各组织与X 线衰减系数相当的对应值。无论是矩阵图像或矩阵数字都是CT 值的代表，而CT 值又是从人体组织、器官的μ值换算而来的。 CT 值不是绝对不变的数值，它不仅与人体内在因素如呼吸、血流等有关，而且与X 线管电压、CT 装置、室内温度等外界因素有关。</p>
+<p>人体常见组织CT值：</p>
+<p><img src="\images\毕设\dicom标准\5.jpg" style="zoom:80%;"></p>
+<h2 id="窗位窗宽调节"><a href="#窗位窗宽调节" class="headerlink" title="窗位窗宽调节"></a>窗位窗宽调节</h2><p><strong><em>定义</em>：</strong> 在不影响视觉效果的前提下，将高精度医学图像的较大范围内的灰度值<strong>逐段映射</strong>为普通显示器可以显示的0~255范围内的灰度，通过不断调节窗宽窗位将所有的高精度医学图像信息逐段显示出来，这个过程称为窗宽窗位调节。</p>
 <ul>
-<li>不能对boolean类型进行类型转换。</li>
-<li>不能把对象类型转换成不相关类的对象。</li>
-<li>在把容量大的类型转换为容量小的类型时必须使用强制类型转换。</li>
-<li>转换过程中可能导致溢出或损失精度，如<code>int i =128;   byte b = (byte)i;</code>，byte类型最大127，此时b为-128.</li>
-<li>浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入</li>
+<li><p><strong>窗宽：</strong>window width (ww) 图像数据的显示范围，是CT图像上显示的CT值范围。</p>
+<p>在此CT值范围内的组织和病变均以不同的模拟灰度显示。而CT值高于此范围的组织和病变，无论高出程度有多少，均以白影显示，不再有灰度差异；反之，低于此范围的组织结构，不论低的程度有多少，均以黑影显示，也无灰度差别。增大窗宽，则图像所示CT值范围加大，显示具有不同密度的组织结构增多，但各结构之间的灰度差别减少。减小窗宽，则显示的组织结构减少，然而各结构之间的灰度差别增加。如观察脑质的窗宽常为-15～+85H，即密度在-15～+85H范围内的各种结构如脑质和脑脊液间隙均以不同灰度显示。而高于+85H的组织结构如骨质几颅内钙化，其间虽有密度差，但均以白影显示，无灰度差别；而低于-15H组织结构如皮下脂肪及乳突内气体均以黑影显示，其间也无灰度差别。</p>
+</li>
+<li><p><strong>窗位：</strong>window level (wl) 图像数据显示的中心值，即CT值范围的中心值。</p>
+<p>窗位是窗的中心位置，同样的窗宽，由于窗位不同，其所包括CT值范围的CT值也有差异。例如窗宽同为100H，当窗位为0H时，其CT值范围为-50～+50H；如窗位为+35H时，则CT值范围为-15～+85H。通常，欲观察某以组织结构及发生的病变，应以该组织的CT值为窗位。例如脑质CT值约为+35H，则观察脑组织及其病变时，选择窗位以+35H为妥。</p>
+</li>
 </ul>
-<h2 id="变量和常量"><a href="#变量和常量" class="headerlink" title="变量和常量"></a>变量和常量</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Java是一种强类型语言，每个变量都必须声明其类型。</p>
-<p><strong>变量类型划分：</strong></p>
-<ol>
-<li><strong>局部</strong>变量：方法或语句块内部定义的变量。生命周期是 从声明位置开始到”}”为止。在使用前必须先声明和初始化（赋初值）</li>
-<li><strong>实例</strong>变量：<strong>方法外部</strong>、<strong>类的内部</strong>定义的变 量。从属于对象，生命周期伴随对象始终。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初 始化值是16位的0，布尔型默认是false）</li>
-<li><strong>静态</strong>变量：使用static定义。 从属于类，生命周期伴随类始终，从类加载到卸载。如果不自行初始化，他会自动初始化成该类型的默认初始值（数值型变量初始化成0或0.0，字符型变量的初始化值是16位的0，布尔型默认是false）</li>
-</ol>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>定义：<code>public static final double PI = 3.14;</code></p>
-<p>其值无法改变，只能被初始化一次。常量的命名通常使用全大写，如果单词较多则使用下划线进行分隔。</p>
-<h2 id="一些运算符"><a href="#一些运算符" class="headerlink" title="一些运算符"></a>一些运算符</h2><p><strong>&lt;&lt;：</strong>左移运算符（丢弃最高位，0补最低位）</p>
-<p><strong>>&gt;：</strong>右移运算符（符号位不变，左边补上符号位）</p>
-<p><strong>>&gt;&gt;：</strong>无符号移位运算符（无符号右移、忽略符号位扩展、0补最高位。无符号右移中的符号位也跟着变，<strong>无符号的意思是将符号位当作数字位看待</strong>。）</p>
-<p>右移一位相当于除2取商。左移 一位相当于乘2。</p>
-<h1 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h1><p>略</p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组为引用数据类型。相当于有一个指针值着吧。</p>
-<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p><strong>定义方法</strong>:<code>int x[] = new int[5];</code>或者<code>int x[]; x = new int[5];</code>或者<code>int x[] = &#123;1, 2, 3, 4, 5&#125;;</code></p>
-<p><img src="\images\Java\第二章\2.jpg" style="zoom:67%;"></p>
-<p><strong>for语句遍历：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (类型 变量 : 数组)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> value : fib)<span class="comment">//类似py迭代器</span></span><br><span class="line"><span class="comment">//vaue获得fib数组每个元素，</span></span><br><span class="line"><span class="comment">//相当于fib[i]</span></span><br><span class="line">	System.out.print(<span class="string">&quot; &quot;</span>+value);</span><br></pre></td></tr></table></figure>
-<p>关于<strong>引用数据类型</strong>这一说：</p>
-<p><img src="\images\Java\第二章\3.jpg" style="zoom:50%;"></p>
-<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p><strong>定义方法：</strong><code>int mat[][] = new int[3][4];或者int mat[][] = &#123; &#123;1,2,3&#125;,&#123;4,5,6&#125; &#125;</code></p>
-<p><img src="\images\Java\第二章\4.jpg" style="zoom:50%;"></p>
-<p><img src="\images\Java\第二章\5.jpg" style="zoom:50%;"></p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基本定义方法</span></span><br><span class="line">[修饰符…] 返回值类型 方法名([参数列表])</span><br><span class="line">&#123;</span><br><span class="line">	语句序列;</span><br><span class="line">	[<span class="keyword">return</span> [返回值]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p><img src="\images\Java\第二章\6.jpg" style="zoom:50%;"></p>
-<p><strong>引用模型：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String s1 = <span class="string">&quot;abcdef&quot;</span>;</span><br><span class="line">        String s2 = s1;</span><br><span class="line">        String s3 = <span class="keyword">new</span> String(s1);</span><br><span class="line">        System.out.println(s1 == s2);</span><br><span class="line">        System.out.println(s2.equals(s1));</span><br><span class="line">        System.out.println(s1 == s3);</span><br><span class="line">        System.out.println(s3.equals(s1));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#输出</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/05/Java/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="post-title-link" itemprop="url">第一章</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-11-05 20:50:31 / 修改时间：21:38:08" itemprop="dateCreated datePublished" datetime="2021-11-05T20:50:31+08:00">2021-11-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h2><ul>
-<li>包规则</li>
-</ul>
-<ol>
-<li><p>package就是类的命名空间，用来唯一标识这个类，防止类的重名，比如你和我都有一个Hello类，将我们的代码合并，如果我们使用了package进行打包，我们的类属于不同的包，这时就避免了这种错误。实质就是将字节码文件（.class）分类存放。包其实就是文件夹。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> zhangsan;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> lisi;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一般情况，一个公司、组织、社团中所定义的包的名字，就是他们官网的域名（倒过来），因为域名一定是全球唯一的，不可能有俩个一样的域名。例如，<a target="_blank" rel="noopener" href="http://commons.apache.org/">http://commons.apache.org/</a> 这官网下的代码中的包，都是 <code>package org.apache.commons;</code> 开头的。</p>
-</li>
-<li><p>类加上包名之后，编译的时候要带上包名，用<code>java com.briup.test.Hello</code>在命令行运行，</p>
-</li>
-</ol>
-<ul>
-<li>运行规则</li>
-</ul>
-<ol>
-<li><p>如果运行的Hello类，没有指定包，Hello类一定对应的是Hello.class。那么当运行java Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有Hello.class这个文件，如果有那么就加载到内存，然后运行，如果没有那么就报错</p>
-</li>
-<li><p>如果运行的Hello类，指定了包，例如是package com.briup.test; Hello类一定对应的是com/briup/test/Hello.class（固定要求）。那么当运行java com.briup.test.Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有com/briup/test/Hello.class这个文件，如果有那么就加载到内存，然后运行，如果没有那么就报错。<br>注意，这个时候JVM从CLASSPATH的路径中，会先找com这个文件夹，然后依次找下去。因为如果有包存在的时候，这个包就是这个类不可分割的一部分。</p>
-<p>这个情况下，CLASSPATH中就要配置com文件夹所在的路径。</p>
-</li>
-<li><p>如果运行的Hello类，被打包到一个jar中，比如是me.jar。</p>
-<p>当运行java Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有me.jar，如果有那么就从me.jar中将Hello.class载到内存，然后运行，如果没有那么就报错。（这是Hello没指定包的情况）<br>当运行java com.briup.test.Hello的时候，JVM会从CLASSPATH中指定的路径中查找，是否有me.jar，如果有那么就从me.jar中将com/briup/test/Hello.class加载到内存，然后运行，如果没有那么就报错。（这是Hello指定包的情况）</p>
-</li>
-</ol>
-<ul>
-<li>访问规则</li>
-</ul>
-<ol>
-<li>如果类不是public的，则在不同包中的其它类无法访问它</li>
-</ol>
-<h2 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h2><p>规则：</p>
-<ol>
-<li><p>使用<code>xxx.*</code>可以调用包下的所有结构，但是该包的子包的结构仍需import调用 例：<code>xxx.yyy.ABC</code></p>
-</li>
-<li><p>如果源文件中，使用了不同包下的同名的类，则必须至少有一个类需要以全名的方式显示。最好都加上包名进行区分。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xxx.yyy.aaa.ABC;</span><br><span class="line"></span><br><span class="line">ABC a=<span class="keyword">new</span> ABC();</span><br><span class="line"></span><br><span class="line">xxx.yyy.zzz.ABC a1=<span class="keyword">new</span> xxx.yyy.zzz.ABC();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>import static :导入指定类或接口中的静态结构：属性和方法。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/FPGA/Basics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/25/FPGA/Basics/" class="post-title-link" itemprop="url">Basic</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-25 17:57:52" itemprop="dateCreated datePublished" datetime="2021-09-25T17:57:52+08:00">2021-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-15 21:40:42" itemprop="dateModified" datetime="2021-12-15T21:40:42+08:00">2021-12-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>136</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Wire"><a href="#Wire" class="headerlink" title="Wire"></a>Wire</h2><p>wire是单向的。从source流向sinks(接收器)。连续赋值时(continuous assignment)(assign left = right)，right被驱动给left。之所以叫他continuous是因为sinks一直随着souce改变。不是一次性赋值。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/24/numpy/%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/24/numpy/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">索引</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-24 10:24:53 / 修改时间：11:12:01" itemprop="dateCreated datePublished" datetime="2021-09-24T10:24:53+08:00">2021-09-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>676</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">rand = np.random.RandomState(<span class="number">42</span>)</span><br><span class="line">x = rand.randint(<span class="number">100</span>, size=<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">ind = [<span class="number">3</span>,<span class="number">7</span>,<span class="number">4</span>]</span><br><span class="line"><span class="built_in">print</span>(x[ind])</span><br><span class="line">ind = np.array([[<span class="number">3</span>, <span class="number">7</span>],[<span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"><span class="built_in">print</span>(x[ind])</span><br><span class="line">X = np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line">row = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">col = np.array([<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(X[row,col])<span class="comment">#一一对应</span></span><br><span class="line"><span class="comment">#在索引中，索引值的配对遵循广播的规则。因此当我们将一个</span></span><br><span class="line"><span class="comment">#列向量和一个行向量组合在一个索引中时，会得到一个二维的结果：</span></span><br><span class="line"><span class="comment">#print(row[:,np.newaxis]),维度变成3*1</span></span><br><span class="line"><span class="built_in">print</span>(X[row[:,np.newaxis], col])</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[<span class="number">51</span> <span class="number">92</span> <span class="number">14</span> <span class="number">71</span> <span class="number">60</span> <span class="number">20</span> <span class="number">82</span> <span class="number">86</span> <span class="number">74</span> <span class="number">74</span>]</span><br><span class="line">[<span class="number">71</span> <span class="number">86</span> <span class="number">60</span>]</span><br><span class="line">[[<span class="number">71</span> <span class="number">86</span>]</span><br><span class="line"> [<span class="number">60</span> <span class="number">20</span>]]</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]</span><br><span class="line">[ <span class="number">2</span>  <span class="number">5</span> <span class="number">11</span>]</span><br><span class="line">[[ <span class="number">2</span>  <span class="number">1</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">5</span>  <span class="number">7</span>]</span><br><span class="line"> [<span class="number">10</span>  <span class="number">9</span> <span class="number">11</span>]]</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#组合索引</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line"><span class="built_in">print</span>(X[<span class="number">2</span>, [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(X[<span class="number">1</span>:, [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]</span><br><span class="line">[<span class="number">10</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line">[[ <span class="number">6</span>  <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [<span class="number">10</span>  <span class="number">8</span>  <span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/%E4%BF%A1%E5%8F%B7/%E9%A2%91%E7%8E%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/18/%E4%BF%A1%E5%8F%B7/%E9%A2%91%E7%8E%87/" class="post-title-link" itemprop="url">频率</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-18 23:58:34" itemprop="dateCreated datePublished" datetime="2021-09-18T23:58:34+08:00">2021-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-05 23:27:34" itemprop="dateModified" datetime="2023-03-05T23:27:34+08:00">2023-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于模拟频率，模拟角频率，数字角频率"><a href="#关于模拟频率，模拟角频率，数字角频率" class="headerlink" title="关于模拟频率，模拟角频率，数字角频率"></a>关于模拟频率，模拟角频率，数字角频率</h2><script type="math/tex; mode=display">
-f = \frac 1T = \frac {1\rm次} {\rm需要的时间(单位秒)}(Hz) \ \ \ \ \ \ \ \  \ \ \ \ \ \  \Omega = 2\pi f(rad/s)</script><p>$f$公式分式的上部是1次，下部是需要的时间，意思是变化1次需要的时间，所以$f$除下来就是1秒内变化的次数，而角频率$\Omega$则是将1次替换成了2$\pi$，意思就是一周需要多少时间，除下来就是一秒内走的弧度。</p>
-<p>实际上在圆周运动或者交流电的变化中，这里的2$\pi$也就相当于一次变化。</p>
-<p>在信号与系统中一般用$\omega$表示模拟角频率，而在数字信号处理中一般用$\Omega$表示模拟角频率，使用$\omega$表示数字角频率。</p>
-<p>再来看一个例子：比如风扇1秒钟转10次，则其(模拟)频率$f$=10Hz，Hz=1/s；也即信号在一秒钟内重复的次数。便于理解，假设一个点在单位圆上运动，如图1所示，点在圆上一秒钟转10圈，则该点的运动频率为10Hz.</p>
-<p><img src="/images/信号/频率/1.png" style="zoom:67%;"></p>
-<p>而模拟角频率$\omega$，是以弧度来表示转的圈数，一圈是2$\pi$弧度，则该点的运动频率也可表示为2$\pi$10rad/s，由此可以看出，$\omega$ = 2<em>*$\pi$</em>*$f$。注意模拟角频率的单位是rad/s.</p>
-<p>数字频率是对模拟频率的采样，数字频率代表的是两个采样点之间的间隔。还是以一点在圆上运动为例，1秒钟转动10圈，从该点运动开始，<strong>以1秒钟采样100次进行采样</strong>，可以得到，每次采样都可得到该点在圆上的位置，该点在圆上的位置如图2所示，采样点之间存在间隔，要以弧度$\omega$表示这种间隔，$\omega$ = 2$\pi$10/100(将1秒替换成100Hz，也就是100次),可得到$\omega$ = 0.2$\pi$ rad</p>
-<p><img src="/images/信号/频率/2.png" style="zoom:67%;"></p>
-<p>由此得到数字频率,$\omega$对应着采样的密集程度，所以叫做数字频率：</p>
+<p>拿 ww: 500 wl: 200 举例说明。它表示将窗宽是500，窗位200的灰度映射到8bit来显示，即将灰度范围是 -50 ~ 450 的像素映射到 0 ~ 255。</p>
+<p><img src="\images\毕设\dicom标准\4.jpg" style="zoom:80%;"></p>
+<p>设窗宽为w, 窗位为c，要映射的区间宽度为g (0~255的宽度是256)，那么对于图像中灰度大于<code>c + w/2</code> 的全部设置为255，  小于 <code>c -w/2</code> 的全部设置为0； 也就是大于450的全部映射为255，而小于-50的全部映射为0； 在-50 ~ 450 范围的则采用线性映射函数<code>y = ax + b</code> 进行映射，其中 <code>a = g/w , b = (w/2-c)g/w</code>。具体计算公式如下：</p>
 <script type="math/tex; mode=display">
-\omega = \Omega * T_s =  \frac {\Omega} {f_s} = \frac {2\pi * \Omega} {\omega_s} = \frac {2\pi * f} {f_s}
-\ \ \ \ \ \  \rm数字角频率 = 模拟角频率 * 采样周期</script><p>由公式可以看出，数字频率是模拟频率对采样频率的归一化处理,只不过这里的一是一周（一圈）也就是$2\pi$。</p>
-<p>有奈奎斯特采样定律得知$\omega_s ≥ 2\Omega$,因此$\omega ≤ \pi$。</p>
-<p>模拟信号周期T的话意思就是进行一次需要多长时间，或者是进行一周($2\pi$)要多长时间.</p>
-<p>数字信号周期N的话意思就是经过$2\pi$需要多少点</p>
-<p>并且数字频率和数字周期满足下列关系：</p>
-<script type="math/tex; mode=display">
-N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a href="#另一种理解" class="headerlink" title="另一种理解"></a>另一种理解</h2><p>加入我们从最简单的正弦函数$sin(\Omega t)$出发，每一个信号都可以由正弦余弦组成，那么只需要看正弦函数的数字转换规律，比如数字周期，数字频率等。</p>
-<h2 id="一个实例"><a href="#一个实例" class="headerlink" title="一个实例"></a>一个实例</h2><p><img src="/images/信号/频率/3.jpg" style="zoom:40%;"></p>
+f(x) =
+\left \{ 
+\begin{array}{c}
+0\ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x < c-\frac{w}{2} \\ 
+\frac{g}{w}*x+(\frac{w}{2}-c)*\frac{g}{w}\ \ ,c-\frac{w}{2}≤ x < c+\frac{w}{2}\\ 
+255\  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,x≥c+\frac{w}{2}
+\end{array}
+\right.</script><p>上述只是线性转换的一种，也有博客或者书本中将256 取值为255。如果窗宽非常大，比如25500 压缩到0~255就是100:1, 这样的损失可能会很大，这时候可以考虑使用非线性转换，常用算法有log和gamma。</p>
+<h2 id="窗宽窗位选择"><a href="#窗宽窗位选择" class="headerlink" title="窗宽窗位选择"></a>窗宽窗位选择</h2><p>在医院领域，不同组织使用不同窗宽窗位,能较充分反映解剖内容和病灶影像表现，比如头颅,脑组织的窗宽设定为80Hu~100Hu,窗位为30 Hu~40 Hu。</p>
+<p>DICOM中，Hu = pixel * slope + intercept 其中pixel是像素值（DICOM是灰度图像，像素值即灰度值），slope是斜率，intercept是截距。</p>
 
       
     </div>
@@ -1439,7 +1515,7 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1507,14 +1583,14 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1571,12 +1647,12 @@ N = \frac {2\pi * k} {\omega}(k为正整数)</script><h2 id="另一种理解"><a
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">236k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
