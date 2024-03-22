@@ -198,6 +198,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/18/Java/%E7%AC%AC%E5%9B%9B%E7%AB%A0/" class="post-title-link" itemprop="url">接口</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-29 20:04:07" itemprop="dateModified" datetime="2024-02-29T20:04:07+08:00">2024-02-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="接口">接口</h1>
+<p>接口中常量定义时，可以不写public static final，缺省有。接口中方法定义
+时，可以不写public
+abstract，缺省有。接口只定义不变的内容（常量和抽象方法）</p>
+<p>一个类可以实现多个接口（implements），接口不能new一个对象，但是是引用数据类型，并且可用于声明引用变量类型。接口可以继承另一个接口（extends），而且支持多继承。一个类实现一个接口，必须实现之中所有方法，并且方法只能是
+public的</p>
+<p><strong>定义方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">public</span>] <span class="class"><span class="keyword">interface</span> 接口 [<span class="keyword">extends</span> 父接口列表 ]</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">static</span>] [<span class="keyword">final</span>] 数据类型 成员变量=常量值;</span><br><span class="line">    [<span class="keyword">public</span>] [<span class="keyword">abstract</span>] 返回值类型 成员方法[(参数列表)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>接口声明的引用类型变量只能调用接口中定义过的方法。</strong>比如下面的ar和vol，只能调用相应的area方法和volume方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClosedFigure fig = <span class="keyword">new</span> Ellipse(point,<span class="number">10</span>,<span class="number">20</span>);</span><br><span class="line"><span class="comment">//父类对象fig引用椭圆子类实例</span></span><br><span class="line">Area ar = fig; <span class="comment">//Area接口对象ar引用实现Area接口的</span></span><br><span class="line">ClosedFigure类的Ellipse子类实例</span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">Cylinder cylinder = <span class="keyword">new</span> Cylinder(fig,<span class="number">10</span>); <span class="comment">//椭圆柱</span></span><br><span class="line">ar = cylinder; <span class="comment">//ar引用实现Area接口的Cylinder类的实例</span></span><br><span class="line">Volume vol = cylinder; <span class="comment">//Volume接口对象vol引用实现Volume接口的Cylinder类的实例</span></span><br><span class="line">ar.area() <span class="comment">//运行时多态</span></span><br><span class="line">vol.volume()</span><br></pre></td></tr></table></figure>
+<p><img src="\imazges\Java\第四章\1.jpg" style="zoom:67%;"></p>
+<h1 id="内部类和内部接口">内部类和内部接口</h1>
+<ul>
+<li>内嵌类型不能与外层类型同名。</li>
+<li>内部类中可以声明成员变量和成员方法。</li>
+<li>内部类可以继承父类或实现接口。</li>
+<li>可以声明内部类为抽象类，该抽象类必
+须被其他内部类继承；内部接口必须被 其他内部类实现。</li>
+<li>使用点运算符“ . ”引用内嵌类型： 外层类型.内嵌类型</li>
+<li>内嵌类型具有类中成员的4种访问控制权限。当内部类可被访问时，才能考虑内部类中成员的访问控制权限</li>
+<li>内嵌类型与其外层类型彼此信任，能访问对方的所有成员。</li>
+<li>在实例内部类中，使用以下格式引用或调用外部类当前实例的成员变量或实例成员方法</li>
+<li>内部接口总是静态的。内部类可声明是静态的或实例的，静态内部类能够声明静态成员，但不能引用外部类的实例成员；实例内部类不能声明静态成员</li>
+</ul>
+<h1 id="泛型">泛型</h1>
+<h2 id="泛型声明">泛型声明</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[修饰符] <span class="class"><span class="keyword">class</span> 类&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt; [<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br><span class="line"><span class="class">[修饰符] <span class="title">class</span> 类&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父类] [<span class="keyword">implements</span> 接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] <span class="title">interface</span> 接口&lt;类型参数列表&gt;[<span class="keyword">extends</span> 父接口列表]</span></span><br><span class="line"><span class="class">[<span class="title">public</span>] [<span class="title">static</span>] &lt;类型参数列表&gt; 返回值类型 方法([参数列表]) [<span class="title">throws</span> 异常类列表]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/Java/%E7%AC%AC%E4%BA%94%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1730,116 +1848,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/C%E5%92%8CC++/%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/18/C%E5%92%8CC++/%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">结构体和指针</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-18 20:54:36" itemprop="dateCreated datePublished" datetime="2023-06-18T20:54:36+08:00">2023-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-05 18:15:19" itemprop="dateModified" datetime="2023-09-05T18:15:19+08:00">2023-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>889</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="结构体和指针"><a href="#结构体和指针" class="headerlink" title="结构体和指针"></a>结构体和指针</h2><h3 id="指针引用"><a href="#指针引用" class="headerlink" title="指针引用"></a>指针引用</h3><p><strong>例子：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">short</span> b[<span class="number">2</span>];</span><br><span class="line">&#125;Ex2;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">EX</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">3</span>];</span><br><span class="line">    Ex2 c;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">EX</span> *<span class="title">d</span>;</span></span><br><span class="line">&#125;Ex;</span><br><span class="line">Ex x = &#123;<span class="number">10</span>,<span class="string">&quot;Hi&quot;</span>,&#123;<span class="number">5</span>,&#123;<span class="number">-1</span>,<span class="number">25</span>&#125;&#125;,<span class="number">0</span>&#125;;</span><br><span class="line">Ex *px = &amp;x;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>*px+1是非法的，C语言并没有定义结构和整型值之间的加法运算。*(px+1)也是非法的，如果x是数组中的一个元素则是指向数组中的下一个结构，但是这里x是一个标量，所以是非法的。</p>
-</li>
-<li><p>对比分析*px和px-&gt;a。结构的第一个成员是a，a的地址和结构体的地址是一样的。这样px看上去指向整个结构，同时指向结构的第一个成员。但是两者类型不一样，px被声明为指向结构的指针，所以*px指向的是整个结构体，而不是第一个成员。</p>
-</li>
-<li><p>px-&gt;c.a表示c结构体中的a成员。*px-&gt;c.b表示b数组第一个元素。</p>
-</li>
-</ul>
-<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><p>创建如下结构体：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">float</span> c;</span><br><span class="line">    <span class="keyword">float</span> d;</span><br><span class="line">&#125;Transcation;</span><br></pre></td></tr></table></figure>
-
-<p><strong>方法一：</strong>若要创建修改其中d的值的函数，可以直接传递结构体。但是结构体先被拷贝作为参数传递给函数修改，然后一份修改后的结构体拷贝从函数返回，所以结构体被复制了两次效率较低。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//是一个返回结构体的函数</span></span><br><span class="line"><span class="function">Transaction</span></span><br><span class="line"><span class="function"><span class="title">compute</span><span class="params">(Transcation trans)</span></span>&#123;</span><br><span class="line">    trans.d = trans.b * trans*c;</span><br><span class="line">    <span class="keyword">return</span> trans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//引用方法</span></span><br><span class="line">c_trans = compute(c_trans);</span><br></pre></td></tr></table></figure>
-
-<p><strong>方法二：</strong>传递指针</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> </span></span><br><span class="line"><span class="function"><span class="title">compute</span><span class="params">(<span class="keyword">register</span> Transcation *trans)</span></span>&#123;</span><br><span class="line">    trans-&gt;d = trans-&gt;b * trans-&gt;c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用方法</span></span><br><span class="line">compute(c_trans);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1911,7 +1919,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1975,12 +1983,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">283k</span>
+    <span title="站点总字数">284k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:17</span>
+    <span title="站点阅读时长">4:18</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

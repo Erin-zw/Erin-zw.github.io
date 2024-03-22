@@ -198,6 +198,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">维度的理解</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-15 19:50:35 / 修改时间：20:17:25" itemprop="dateCreated datePublished" datetime="2023-12-15T19:50:35+08:00">2023-12-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>898</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="torch-clamp-input-min-max-out-None-→-Tensor"><a href="#torch-clamp-input-min-max-out-None-→-Tensor" class="headerlink" title="torch.clamp(input, min, max, out=None) → Tensor"></a>torch.clamp(input, min, max, out=None) → Tensor</h2><p>将输入<code>input</code>张量每个元素的夹紧到区间 [min,max][min,max]，并返回结果到一个新张量。</p>
+<p>大于的变成max，小于的变成min。</p>
+<h2 id="transforms-ToTensor"><a href="#transforms-ToTensor" class="headerlink" title="transforms.ToTensor()"></a>transforms.ToTensor()</h2><p>Converts a PIL Image or numpy.ndarray (H x W x C) in the range<br>[0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0]<br>if the PIL Image belongs to one of the modes (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1)<br>or if the numpy.ndarray has dtype = np.uint8</p>
+<p>In the other cases, tensors are returned without scaling.</p>
+<h2 id="transform-Normalize"><a href="#transform-Normalize" class="headerlink" title="transform.Normalize()"></a>transform.Normalize()</h2><p>image=(image-mean)/std</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform.ToTensor(),</span><br><span class="line">transform.Normalize((<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>),(<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
+<p>ToTensor()能够把灰度范围从0-255变换到0-1之间，而后面的transform.Normalize()则把0-1变换到(-1,1)。</p>
+<p>其中mean和std分别通过(0.5,0.5,0.5)和(0.5,0.5,0.5)进行指定。原来的0-1最小值0则变成(0-0.5)/0.5=-1，而最大值1则变成(1-0.5)/0.5=1.</p>
+<h2 id="torchvision-transforms-ToPILImage"><a href="#torchvision-transforms-ToPILImage" class="headerlink" title="torchvision.transforms.ToPILImage()"></a>torchvision.transforms.ToPILImage()</h2><p>将Numpy的ndarray或者Tensor转化成PILImage类型【在数据类型上，两者都有明确的要求】</p>
+<p>ndarray的数据类型要求dtype=uint8, range[0, 255] and shape H x W x C<br>Tensor 的shape为 C x H x W 要求是FloatTensor的，不允许DoubleTensor或者其他类型</p>
+<p>to a PIL.Image of range [0, 255]</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1087,109 +1183,6 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/27/SDAI/%E5%AE%89%E8%A3%85stable%20diffusion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/27/SDAI/%E5%AE%89%E8%A3%85stable%20diffusion/" class="post-title-link" itemprop="url">安装stable diffusion</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-27 19:10:55" itemprop="dateCreated datePublished" datetime="2023-11-27T19:10:55+08:00">2023-11-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-29 19:21:31" itemprop="dateModified" datetime="2023-11-29T19:21:31+08:00">2023-11-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SDAI/" itemprop="url" rel="index"><span itemprop="name">SDAI</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>446</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="部署sd">部署SD</h2>
-<p>新建文件夹SDAI，右键<code>git bash here</code>，命令行输入<code>git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui</code></p>
-<p>确保有git和python</p>
-<h2 id="安装模型">安装模型</h2>
-<ul>
-<li><p>去https://rentry.org/sdmodels选择下载模型。</p></li>
-<li><p>下载1.5版本SD，进入https://huggingface.co/runwayml/stable-diffusion-v1-5，v1-5-pruned.safetensors</p></li>
-<li><p>下载anything3.0版本，https://huggingface.co/Linaqruf/anything-v3.0，anything-v3-full.safetensors</p></li>
-<li><p>将下载好的模型放入SDAI文件夹下的stable-diffusion-webui文件夹下的models文件夹下的Stable-diffusion文件夹</p></li>
-</ul>
-<h2 id="开启sd">开启SD</h2>
-<p>打开SDAI-diffusion-webui下的webui-user.bat文件</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1261,7 +1254,7 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1325,12 +1318,12 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">283k</span>
+    <span title="站点总字数">284k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:17</span>
+    <span title="站点阅读时长">4:18</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
