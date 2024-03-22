@@ -22,16 +22,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="详细文章可以看 https:&#x2F;&#x2F;bbs.huaweicloud.com&#x2F;blogs&#x2F;289319">
+  <meta name="description" content="图片格式  详细文章可以看 https:&#x2F;&#x2F;bbs.huaweicloud.com&#x2F;blogs&#x2F;289319 图像模式 opencv的imread函数读出的图象格式和显示的图像格式是BGR格式 matplot库读出的图像格式和显示的图像格式都是RGB格式 同时PIL库中，又把图像分为很多模式，大致分为九种：1，L，P，RGB，RGBA，CMYK，YCbCr，I， F 常见的有以下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片格式">
 <meta property="og:url" content="http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="详细文章可以看 https:&#x2F;&#x2F;bbs.huaweicloud.com&#x2F;blogs&#x2F;289319">
+<meta property="og:description" content="图片格式  详细文章可以看 https:&#x2F;&#x2F;bbs.huaweicloud.com&#x2F;blogs&#x2F;289319 图像模式 opencv的imread函数读出的图象格式和显示的图像格式是BGR格式 matplot库读出的图像格式和显示的图像格式都是RGB格式 同时PIL库中，又把图像分为很多模式，大致分为九种：1，L，P，RGB，RGBA，CMYK，YCbCr，I， F 常见的有以下">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/深度学习/图像格式/1.png">
+<meta property="og:image" content="http://example.com/images/深度学习/图像格式/2.png">
+<meta property="og:image" content="http://example.com/images/深度学习/图像格式/3.png">
 <meta property="article:published_time" content="2023-12-15T12:10:55.872Z">
-<meta property="article:modified_time" content="2023-12-15T12:11:53.374Z">
+<meta property="article:modified_time" content="2024-01-06T08:39:40.669Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/深度学习/图像格式/1.png">
@@ -227,10 +229,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-12-15 20:10:55 / 修改时间：20:11:53" itemprop="dateCreated datePublished" datetime="2023-12-15T20:10:55+08:00">2023-12-15</time>
+              <time title="创建时间：2023-12-15 20:10:55" itemprop="dateCreated datePublished" datetime="2023-12-15T20:10:55+08:00">2023-12-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-06 16:39:40" itemprop="dateModified" datetime="2024-01-06T16:39:40+08:00">2024-01-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -254,14 +262,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>47</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -273,9 +281,58 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/深度学习/图像格式/1.png" style="zoom:67%;"></p>
+        <h2 id="图片格式">图片格式</h2>
+<p><img src="/images/深度学习/图像格式/1.png" style="zoom:67%;"></p>
 <p>详细文章可以看</p>
-<p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/289319">https://bbs.huaweicloud.com/blogs/289319</a></p>
+<p>https://bbs.huaweicloud.com/blogs/289319</p>
+<h2 id="图像模式">图像模式</h2>
+<p>opencv的imread函数读出的图象格式和显示的图像格式是BGR格式</p>
+<p>matplot库读出的图像格式和显示的图像格式都是RGB格式</p>
+<p>同时PIL库中，又把图像分为很多模式，大致分为九种：1，L，P，RGB，RGBA，CMYK，<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=YCbCr&amp;spm=1001.2101.3001.7020">YCbCr</a>，I，
+F</p>
+<p>常见的有以下四种：</p>
+<ul>
+<li>1:二值图像（1bit，但是每一个像素使用8bit进行表示）</li>
+<li>L:灰度图（8bit）（R=G=B），这个模式就是我们常说的灰度图。（0，0，0）~（255，255，255）代表256个灰度值。</li>
+<li>P:调色板模式（8bit），所谓调色板模式就是图像每一个像素点位置代表的含义是一个索引值index，索引表是PIL自带的，映射到索引表中对应的颜色，索引表长度是256*3，因为颜色是RGB模式3位，能表达256种颜色。利用较少位数表达多种颜色。</li>
+<li>RGB：真彩模式，24bit（3*8）</li>
+</ul>
+<h2 id="不同库中的函数图像格式模式要求">不同库中的函数图像格式模式要求</h2>
+<h2 id="打开函数">打开函数</h2>
+<p><strong>注意：打开后的图片形状都是H*W*C</strong></p>
+<h3 id="pil库的image.open函数">PIL库的Image.open函数</h3>
+<p>我们先来看两个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jpg = Image.<span class="built_in">open</span>(os.path.join(os.path.join(<span class="string">&#x27;VOCdevkit&#x27;</span>, <span class="string">&quot;VOC2007/JPEGImages&quot;</span>), name + <span class="string">&quot;.jpg&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(jpg.mode)<span class="comment">#显示为RGB模式</span></span><br><span class="line">label = Image.<span class="built_in">open</span>(os.path.join(os.path.join(<span class="string">&#x27;VOCdevkit&#x27;</span>, <span class="string">&quot;VOC2007/SegmentationClass&quot;</span>), name + <span class="string">&quot;.png&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(label.mode)<span class="comment">#显示为P模式</span></span><br></pre></td></tr></table></figure>
+<p>最后输出发现一个是RGB模式，一个是P模式。</p>
+<p>也即是说open函数打开的格式和你图像存储的格式有关系，因为在这里我们使用的VOC公开数据集的label是P模式存储的。</p>
+<p>那么打开图像的格式是什么呢，我们会发现打开的图像格式是PIL格式文件。但是PIL格式之间亦有差距。</p>
+<p>我们打印__class__会发现，jpg的格式是PIL.JpegImagePlugin.JpegImageFilelabel，label的格式是PIL.PngImagePlugin.PngImageFile</p>
+<p>但是我们可以通过一行代码<code>label   = Image.fromarray(np.array(label))</code>把label的格式变成PIL.Image.Image</p>
+<p>但是好像PIL库的resize函数也可以将这两格式变成PIL.Image.Image格式。</p>
+<h3 id="opencv库的imread函数">opencv库的imread函数</h3>
+<p>我们使用代码输出可以发现打开以后图片是BGR格式的&lt;class
+'numpy.ndarray'&gt;，也就是一个BGR格式存储的np数组。</p>
+<h2 id="不同库的显示函数">不同库的显示函数</h2>
+<h3 id="pil库">PIL库</h3>
+<p>image.show()即可，会调用系统自带的图片软件显示图片，对图片格式没有要求。</p>
+<h3 id="plt库">plt库</h3>
+<p>例如在这里我们在上面使用PIL库的open函数打开了VOC数据集的一张图片和标签，我们知道图像模式是P模式。</p>
+<p>所以当我们输入以下代码时会产生色彩不一样的图片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(np.array(label))</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习/图像格式/2.png" style="zoom:67%;"></p>
+<p>为了正确显示我们就需要将P模式转换成RGB模式，输入下面的代码就可以正确显示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(np.array(label))</span><br></pre></td></tr></table></figure>
+<p><img src="/images/深度学习/图像格式/3.png" style="zoom:67%;"></p>
+<p>这里也可以不是一个数组，可以是PIL对象，二维三维数都行.</p>
+<h3 id="opencv库">opencv库</h3>
+<p>imshow函数的读入顺序是BGR，::-1表示反序，我们将Image.open打开的PIL图像先转换成RGB图像，再将RGB反序为BGR即可使用cv库的显示函数进行显示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">label_o = np.array(label.convert(<span class="string">&#x27;RGB&#x27;</span>))[:,:,::-<span class="number">1</span>]</span><br><span class="line">cv2.imshow(<span class="string">&#x27;label&#x27;</span>, label_o)</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">label_o = cv2.cvtColor(np.array(label.convert(<span class="string">&#x27;RGB&#x27;</span>)), cv2.COLOR_RGB2BGR)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;label&#x27;</span>, label_o)</span><br></pre></td></tr></table></figure>
+<p>cv2.imread()读取的是图像的真实数据。Image.open()函数只是保持了图像被读取的状态，但是图像的真实数据并未被读取，因此如果对需要操作图像每个元素，如输出某个像素的RGB值等，需要执行对象的load()方法读取数据</p>
+<h3 id="灰度图像">灰度图像</h3>
+<p>同时对于L模式的灰度图像来说，plt有两种显示方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(np.array(label.convert(<span class="string">&#x27;RGB&#x27;</span>)))//转成RGB</span><br><span class="line">plt.imshow(np.array(label), camp = <span class="string">&#x27;gray&#x27;</span>)//设置灰度显示</span><br></pre></td></tr></table></figure>
+<p>cv2可以直接显示，这个不清楚原因，但是也可以转换再显示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(&#x27;new_label&#x27;,np.array(new_label))</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -424,6 +481,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">图片格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">图像模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E5%BA%93%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E6%A8%A1%E5%BC%8F%E8%A6%81%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">不同库中的函数图像格式模式要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">打开函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pil%E5%BA%93%E7%9A%84image.open%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">PIL库的Image.open函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opencv%E5%BA%93%E7%9A%84imread%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">opencv库的imread函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E5%BA%93%E7%9A%84%E6%98%BE%E7%A4%BA%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">不同库的显示函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pil%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">PIL库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plt%E5%BA%93"><span class="nav-number">5.2.</span> <span class="nav-text">plt库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opencv%E5%BA%93"><span class="nav-number">5.3.</span> <span class="nav-text">opencv库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E5%BA%A6%E5%9B%BE%E5%83%8F"><span class="nav-number">5.4.</span> <span class="nav-text">灰度图像</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -439,14 +497,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -494,7 +552,7 @@
 <div class="copyright">
   
   &copy; 2021-07 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -503,12 +561,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">236k</span>
+    <span title="站点总字数">283k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:35</span>
+    <span title="站点阅读时长">4:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

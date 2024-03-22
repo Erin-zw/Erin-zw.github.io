@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/RNN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -212,7 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/RNN/" class="post-title-link" itemprop="url">RNN</a>
+            <a href="/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/" class="post-title-link" itemprop="url">FCN</a>
         </h2>
 
         <div class="post-meta">
@@ -225,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-09 17:06:59 / 修改时间：17:45:01" itemprop="dateCreated datePublished" datetime="2023-10-09T17:06:59+08:00">2023-10-09</time>
+              <time title="创建时间：2023-12-14 19:33:33 / 修改时间：20:00:09" itemprop="dateCreated datePublished" datetime="2023-12-14T19:33:33+08:00">2023-12-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,519 +243,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理流程">原理流程</h2>
-<p>这篇文章我们从后向前分析：</p>
-<p>以下是训练过程：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = d2l.TimeMachine(batch_size=<span class="number">1024</span>, num_steps=<span class="number">32</span>)<span class="comment">#数据集</span></span><br><span class="line">rnn = RNNScratch(num_inputs=<span class="built_in">len</span>(data.vocab), num_hiddens=<span class="number">32</span>)<span class="comment">#rnn模型</span></span><br><span class="line">model = RNNLMScratch(rnn, vocab_size=<span class="built_in">len</span>(data.vocab), lr=<span class="number">1</span>)<span class="comment">#语言模型</span></span><br><span class="line">trainer = d2l.Trainer(max_epochs=<span class="number">100</span>, gradient_clip_val=<span class="number">1</span>, num_gpus=<span class="number">1</span>)<span class="comment">#训练器</span></span><br><span class="line">trainer.fit(model, data)<span class="comment">#训练</span></span><br></pre></td></tr></table></figure>
-<p><strong>1.</strong>在训练过程中，我们首先调用了
-d2l.TimeMachine数据集，这个数据集是我们自建的，简要建立过程如下：每一个X代表了一个字母。输入表的行数就是num_steps，列数就是数据集大小。并且数据集还将出现的字母和空格还有未知编成了一个vocab表以便索引和编码，所以实际上X是不同的数字，范围从0-27.</p>
-<table>
-<tr>
-<td colspan="3">
-输入
-</td>
-<td colspan="3">
-输出
-</td>
-</tr>
-<tr>
-<th>
-x[0]
-</th>
-<th>
-x[1]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[1]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-</tr>
-<tr>
-<th>
-x[1]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[4]
-</th>
-</tr>
-<tr>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[4]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[4]
-</th>
-<th>
-x[5]
-</th>
-</tr>
-<tr>
-<td colspan="6">
-....
-</td>
-</tr>
-</table>
-<p><strong>2.</strong>紧接着初始化了rnn模型，初始化参数为输入数和隐藏单元数量。</p>
-<p>RNN的前向传播函数如下所示，在for循环中生成了隐藏层的输出并用state临时保存，再存入outputs以便后续使用。outputs形状为n*b*h</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inputs, state=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> state <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># Initial state with shape: (batch_size, num_hiddens)</span></span><br><span class="line">        state = torch.zeros((inputs.shape[<span class="number">1</span>], self.num_hiddens),</span><br><span class="line">                          device=inputs.device)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        state, = state</span><br><span class="line">    outputs = []</span><br><span class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> inputs:  <span class="comment"># Shape of inputs: (num_steps, batch_size, num_inputs)</span></span><br><span class="line">        state = torch.tanh(torch.matmul(X, self.W_xh) +</span><br><span class="line">                         torch.matmul(state, self.W_hh) + self.b_h)</span><br><span class="line">        outputs.append(state)</span><br><span class="line">    <span class="keyword">return</span> outputs, state</span><br></pre></td></tr></table></figure>
-<p><img src="\images\深度学习\RNN\1.png" style="zoom:67%;"></p>
-<p><img src="\images\深度学习\RNN\2.png" style="zoom:67%;"></p>
-<p>这个时候再来看我们的模型就会很清晰了，实际上模型图上的每一个隐藏单元组（图中的方框），是同一个隐藏单元组，只不过图示为了清晰表示隐藏单元的循环继承性画成这样。</p>
-<p><strong>3.</strong>然后初始化了语言模型，语言模型传入了rnn模型，vocab表长度，训练步长的超参数。</p>
-<p><strong>4.</strong>然后我们直接看trainer.fit，这个函数会先调用RNNLMScratch模型的train_step函数，然后train_step函数会调用交叉熵损失函数，交叉熵损失函数有两个参数，一个为预测输出，来自RNNLMScratch模型的前向传播函数，如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, X, state=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_rnn-scratch`&quot;&quot;&quot;</span></span><br><span class="line">    embs = self.one_hot(X)</span><br><span class="line">    rnn_outputs, _ = self.rnn(embs, state)</span><br><span class="line">    <span class="keyword">return</span> self.output_layer(rnn_outputs)</span><br></pre></td></tr></table></figure>
-<p>他先将输入进行独热编码，并且独热编码长度为vocab的长度，也就是每一个vocab中的元素可用一个类似于分类器输出的编码来表示。进行独热编码后，X形状变成num_steps*batch_size*vocab_size(X在one_hot函数我们将它转置以便rnn的前向传播函数方便),然后再将编码后的X送入rnn的前向传播函数，最后再将rnn输出保存的不同时间步的隐藏单元状态输入给输出函数output_layer即可。输出函数如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_layer</span>(<span class="params">self, rnn_outputs</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Defined in :numref:`sec_rnn-scratch`&quot;&quot;&quot;</span></span><br><span class="line">    outputs = [d2l.matmul(H, self.W_hq) + self.b_q <span class="keyword">for</span> H <span class="keyword">in</span> rnn_outputs]</span><br><span class="line">    <span class="keyword">return</span> d2l.stack(outputs, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>我们可以看到，outputs为一个张量的列表，列表中每一个元素形状为batch_size*vocab_size，列表长度为num_steps，我们用stack函数在dim1上进行连结，最终输出形状为batch_size*num_steps*vocab_size。这就是损失函数第一个参数预测输出的来源。</p>
-<p>损失函数第二个参数就是实际输出，实际输出形状我们知道是batch_size*num_steps，然后我们就可以利用交叉熵损失函数，进行一个损失计算。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">序列模型</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-05 18:27:01" itemprop="dateCreated datePublished" datetime="2023-10-05T18:27:01+08:00">2023-10-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-09 17:11:08" itemprop="dateModified" datetime="2023-10-09T17:11:08+08:00">2023-10-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理">原理</h2>
-<p><span class="math display">\[
-x_t～P(x_t|x_{t-1},x_{t-2},...,x_{t-\tau})
-\]</span></p>
-<p><span class="math inline">\(x_t\)</span>处的值只与他前面<span class="math inline">\(\tau\)</span>个输入有关。</p>
-<h2 id="训练">训练</h2>
-<p>选取1000个时间步，使用正弦函数和一些可加性噪声来生成序列数据。</p>
-<p>示例代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span>(<span class="params">d2l.DataModule</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, batch_size=<span class="number">16</span>, T=<span class="number">1000</span>, num_train=<span class="number">600</span>, tau=<span class="number">4</span></span>):</span></span><br><span class="line">        self.save_hyperparameters()</span><br><span class="line">        self.time = torch.arange(<span class="number">1</span>, T + <span class="number">1</span>, dtype=torch.float32)</span><br><span class="line">        self.x = torch.sin(<span class="number">0.01</span> * self.time) + torch.randn(T) * <span class="number">0.2</span></span><br><span class="line"></span><br><span class="line">data = Data()</span><br><span class="line">d2l.plot(data.time, data.x, <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, xlim=[<span class="number">1</span>, <span class="number">1000</span>], figsize=(<span class="number">6</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<p>数据集加载器，特征选取<span class="math inline">\(\tau\)</span>个作为输入，标签选择第<span class="math inline">\(\tau+1\)</span>个值。此处选择4个为一组训练其后的数据。所以实际上数据集只有996个。</p>
-<p>并且我们也规定了训练集数据只有600个。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@d2l.add_to_class(<span class="params">Data</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_dataloader</span>(<span class="params">self, train</span>):</span></span><br><span class="line">    features = [self.x[i : self.T-self.tau+i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.tau)]</span><br><span class="line">    self.features = torch.stack(features, <span class="number">1</span>)</span><br><span class="line">    self.labels = self.x[self.tau:].reshape((-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    i = <span class="built_in">slice</span>(<span class="number">0</span>, self.num_train) <span class="keyword">if</span> train <span class="keyword">else</span> <span class="built_in">slice</span>(self.num_train, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">return</span> self.get_tensorloader([self.features, self.labels], train, i)</span><br></pre></td></tr></table></figure>
-<p>数据集表格：</p>
-<table>
-<tr>
-<td colspan="4">
-输入
-</td>
-<td>
-输出
-</td>
-</tr>
-<tr>
-<th>
-x[0]
-</th>
-<th>
-x[1]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[3(tau-1)]
-</th>
-<th>
-x[4]
-</th>
-</tr>
-<tr>
-<th>
-x[1]
-</th>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[4]
-</th>
-<th>
-x[5]
-</th>
-</tr>
-<tr>
-<th>
-x[2]
-</th>
-<th>
-x[3]
-</th>
-<th>
-x[4]
-</th>
-<th>
-x[5]
-</th>
-<th>
-x[6]
-</th>
-</tr>
-<tr>
-<td colspan="5">
-....
-</td>
-</tr>
-<tr>
-<th>
-x[995]
-</th>
-<th>
-x[996]
-</th>
-<th>
-x[997]
-</th>
-<th>
-x[998]
-</th>
-<th>
-x[999]
-</th>
-</tr>
-</table>
-<p>此处我们选择线性模型用来训练模型，训练完成后检测模型在预测中的表现拟合的非常好。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onestep_preds = model(data.features).detach().numpy()</span><br><span class="line">d2l.plot(data.time[data.tau:], [data.labels, onestep_preds], <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;x&#x27;</span>,</span><br><span class="line">         legend=[<span class="string">&#x27;labels&#x27;</span>, <span class="string">&#x27;1-step preds&#x27;</span>], figsize=(<span class="number">6</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<p>但是此处我们的预测相当于已知所有输入再喂给模型，模型当然可以很好的拟合。但是序列模型是需要预测的，也就是说根据训练集实际上我们只能拟合到x[605]处的值。后面的需要一步一步进行预测拟合。
-<span class="math display">\[
-\begin{split}\begin{aligned}
-\hat{x}_{605} &amp;= f(x_{601}, x_{602}, x_{603}, x_{604}), \\
-\hat{x}_{606} &amp;= f(x_{602}, x_{603}, x_{604}, \hat{x}_{605}), \\
-\hat{x}_{607} &amp;= f(x_{603}, x_{604}, \hat{x}_{605},
-\hat{x}_{606}),\\
-\hat{x}_{608} &amp;= f(x_{604}, \hat{x}_{605}, \hat{x}_{606},
-\hat{x}_{607}),\\
-\hat{x}_{609} &amp;= f(\hat{x}_{605}, \hat{x}_{606}, \hat{x}_{607},
-\hat{x}_{608}),\\
-&amp;\vdots\end{aligned}\end{split}
-\]</span>
-代码实现后我们发现经过几步之后，预测很快就会衰减到一个常数。这归因于错误的累积。也就是说每一步的误差都会累积从而导致后续出现比较大的误差。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/NW%E6%A0%B8%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">N-W核回归</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-04 14:16:38" itemprop="dateCreated datePublished" datetime="2023-10-04T14:16:38+08:00">2023-10-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-05 18:26:59" itemprop="dateModified" datetime="2023-10-05T18:26:59+08:00">2023-10-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理">原理</h2>
-<p><img src="\images\深度学习\attention\1.png" style="zoom:67%;"></p>
-<p><img src="\images\深度学习\attention\2.png" style="zoom:67%;"></p>
-<p>在这里，对于key，value，query可以这么理解，key相当于非自主提示，例如咖啡杯是红的十分显眼，他的key对应的value非常大，value相当于是不同key不同非自主提示所对应的一个输入值，而query在这里充当了一个自主提示的作用，和key键值通过某种映射产生不同的权值。因为我们知道注意力汇聚的公式如下：α相当于就是一种映射规则。
-<span class="math display">\[
-f(\mathbf{q}) = \sum_i \mathbf{v}_i \frac{\alpha(\mathbf{q},
-\mathbf{k}_i)}{\sum_j \alpha(\mathbf{q}, \mathbf{k}_j)}.
-\]</span> 正是因为有这样的query将注意力机制和全连接层进行了区分。</p>
-<p>经过学习，我们知道α是核函数： <span class="math display">\[
-\begin{split}\begin{aligned}
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2}
-\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;} \\
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = 1 \textrm{ if } \|\mathbf{q} -
-\mathbf{k}\| \leq 1 &amp;&amp; \textrm{Boxcar;} \\
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \mathop{\mathrm{max}}\left(0, 1 -
-\|\mathbf{q} - \mathbf{k}\|\right) &amp;&amp; \textrm{Epanechikov.}
-\end{aligned}\end{split}
-\]</span> 常见核函数图像：</p>
-<p><img src="\images\深度学习\attention\3.png" style="zoom:67%;"></p>
-<p><img src="\images\深度学习\attention\4.png" style="zoom:67%;"></p>
-<p>内核函数理解为query和key之间的距离，这些距离是内核函数的输入，并且内核函数在query=key也即输入为0达到最大值，这很正常，因为query等于key就说明这个key所对应value占比重很大。故也就可以用注意力汇聚实现N-W核回归。</p>
-<p>“The attention weight is assigned according to the similarity (or
-distance) between query and key”很好地解释了。</p>
-<p>也就是说我们要拟合一个函数，可以将x_val，y_val作为一个已知数据，x_val是键值key，我们再定义x_train作为query（x_val和x_train范围一致，分布不同），而根据函数再给予y_train一定的扰动作为噪音，这样我们将x_train*attention_weight就可以得到我们的注意力汇集输出y_hat，我们再将y_hat与y_val放在同一图像进行对比即可观察拟合情况。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * torch.sin(x) + x</span><br><span class="line">n = <span class="number">40</span></span><br><span class="line">x_train, _ = torch.sort(torch.rand(n) * <span class="number">5</span>)</span><br><span class="line">y_train = f(x_train) + torch.randn(n)</span><br><span class="line">x_val = torch.arange(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0.1</span>)</span><br><span class="line">y_val = f(x_val)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nadaraya_watson</span>(<span class="params">x_train, y_train, x_val, kernel</span>):</span></span><br><span class="line">    dists = x_train.reshape((-<span class="number">1</span>, <span class="number">1</span>)) - x_val.reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">    <span class="comment"># Each column/row corresponds to each query/key</span></span><br><span class="line">    k = kernel(dists).<span class="built_in">type</span>(torch.float32)</span><br><span class="line">    <span class="comment"># Normalization over keys for each query</span></span><br><span class="line">    attention_w = k / k.<span class="built_in">sum</span>(<span class="number">0</span>)</span><br><span class="line">    y_hat = y_train@attention_w</span><br><span class="line">    <span class="keyword">return</span> y_hat, attention_w</span><br><span class="line"><span class="comment">#我们要展示的对比</span></span><br><span class="line">ax.plot(x_val, y_hat)</span><br><span class="line">ax.plot(x_val, y_val, <span class="string">&#x27;m--&#x27;</span>)</span><br><span class="line">ax.plot(x_train, y_train, <span class="string">&#x27;o&#x27;</span>, alpha=<span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
-<p>我们再进行观察，例如上侧的高斯核函数，我们知道实际上的高斯函数是这样的：
-<span class="math display">\[
-\begin{split}\begin{aligned}
-\alpha(\mathbf{q}, \mathbf{k}) &amp; = \exp\left(-\frac{1}{2\sigma^2}
-\|\mathbf{q} - \mathbf{k}\|^2 \right) &amp;&amp; \textrm{Gaussian;}\\
-\end{aligned}\end{split}
-\]</span> 我们知道随着<span class="math inline">\(\sigma\)</span>的增大，高斯函数会变窄，也就是说我们可以通过调节<span class="math inline">\(\sigma\)</span>的值就可以调整高斯核函数的形状，也就可以改变注意力矩阵权重，从而通过调整对函数达到理想的拟合。</p>
-<p>关于注意力机制没学RNN还是有难度，先学RNN去了（</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/reshape%E9%80%BB%E8%BE%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/reshape%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">reshape逻辑</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-03 21:06:39" itemprop="dateCreated datePublished" datetime="2023-10-03T21:06:39+08:00">2023-10-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-27 17:44:13" itemprop="dateModified" datetime="2023-10-27T17:44:13+08:00">2023-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>361</span>
+              <span>526</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -774,11 +262,8 @@ distance) between query and key”很好地解释了。</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">attention_weights = torch.eye(<span class="number">4</span>).reshape((<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>]])</span><br><span class="line">tensor([[[[<span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">0.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">1.</span>]]]])</span><br></pre></td></tr></table></figure>
-<p>优先选取行，取完一行再取下一行。</p>
-<p><span class="math inline">\(\text{positional encoding}*{(i, 2j)} =
-\sin(i / 10000^{2j / d})\)</span> 和 <span class="math inline">\(\text{positional encoding}*{(i, 2j+1)} = \cos(i /
-10000^{2j / d})\)</span></p>
+          <p>y一般的分类网络就是，输入图像，网络输出数一般是类别数量，损失函数对y_hat和y真实进行交叉熵损失计算，损失函数的计算先对y_hat进行softmax归一化成概率，然后相当于真实标签y选择第几个输出作为真实分类标签。这个时候被选择出的输出进行-log计算，就是损失，一般输出的损失量形状是（batch_size，)</p>
+<p>然后fcn就是输入图像，然后特征提取，接着上采样，使用自己创建的双线性插值的转置卷积的卷积核，也就是说利用转置卷积实现了双线性插值的功能，但是转置卷积的卷积核需要特定设计。需要注意的是一开始的卷积核是经过设计的，这是一个初始化，后续是网络自己学习卷积核参数。fcn输出形状是(batch_size,num_classes,h,w),输出通道就是类别数量，而标签的形状是(batch_size,h,w)，所以交叉熵损失函数先对每一个通道的输出进行softmax归一化计算变成概率，再通过标签二维位置的标号选择输出对应的概率再进行损失函数计算。最后损失函数输出形状是(batch_size,h,w),所以对后两个维度进行平均将形状变成（batch_size，)。需要注意的是CrossEntropyLoss函数已经自带了softmax操作。</p>
 
       
     </div>
@@ -800,7 +285,7 @@ distance) between query and key”很好地解释了。</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -814,349 +299,7 @@ distance) between query and key”很好地解释了。</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%88%9D%E6%AD%A5/" class="post-title-link" itemprop="url">分类网络原理初步</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-01 17:14:25" itemprop="dateCreated datePublished" datetime="2023-10-01T17:14:25+08:00">2023-10-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-28 17:12:27" itemprop="dateModified" datetime="2023-10-28T17:12:27+08:00">2023-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>763</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="lenet">Lenet</h2>
-<p><img src="/images/深度学习/class/4.png" style="zoom:67%;"></p>
-<h2 id="alexnet">Alexnet</h2>
-<p><img src="/images/深度学习/class/5.png" style="zoom:67%;"></p>
-<h2 id="vgg">VGG</h2>
-<p><img src="/images/深度学习/class/1.png" style="zoom:67%;"></p>
-<h2 id="nin">NiN</h2>
-<p>LeNet、AlexNet和VGG都有一个共同的设计模式：通过一系列的卷积层与汇聚层来提取空间结构特征；然后通过全连接层对特征的表征进行处理。
-AlexNet和VGG对LeNet的改进主要在于如何扩大和加深这两个模块。
-或者，可以想象在这个过程的早期使用全连接层。然而，如果使用了全连接层，可能会完全放弃表征的空间结构。
-<em>网络中的网络</em>（<em>NiN</em>）提供了一个非常简单的解决方案：在每个像素的通道上分别使用多层感知机</p>
-<p><img src="/images/深度学习/class/6.png" style="zoom:67%;"></p>
-<h2 id="googlenet">Googlenet</h2>
-<p><img src="/images/深度学习/class/7.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/class/8.png" style="zoom:67%;"></p>
-<h2 id="resnet">Resnet</h2>
-<p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
-<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
-<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
-<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
-<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
-<p>同时在输出的Relu激活端，由于shortcut的X，信息冗余度提高，可以有效防止激活函数丢失有效信息。</p>
-<p>1×1卷积让输入输出形状相同。</p>
-<p><img src="/images/深度学习/class/3.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/class/2.png" style="zoom:67%;"></p>
-<h2 id="vit">ViT</h2>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Resnet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/30/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/Resnet/" class="post-title-link" itemprop="url">Resnet</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-30 09:36:32" itemprop="dateCreated datePublished" datetime="2023-09-30T09:36:32+08:00">2023-09-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-01 14:01:28" itemprop="dateModified" datetime="2023-10-01T14:01:28+08:00">2023-10-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>468</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="resnet在干什么">Resnet在干什么</h2>
-<p>在He的文章中已经说过，梯度爆炸和梯度消失已经很大程度上被批量规范化给解决了，而深度网络在训练集上的训练错误比浅层网络还大，说明不是出现了过拟合。而是因为深度网络存在退化问题，也就是说</p>
-<p>看了很多博客，现在我的理解就是Resnet给了深度网络试错的能力，从而有效防止了深层网络的退化问题。</p>
-<p>退化，按照大部分博客理解就是非线性的激活函数的存在，会造成很多不可逆的信息损失。网络加深到一定程度，过多的信息损失就会造成网络的退化。</p>
-<p>所谓试错，可以这么理解，深层网络可以看成一个浅层网络加上后面的层，这个浅层网络本身已经是一个较优解但还够优，所以我们加上残差块，而残差块H(X)=F(X)+X,在训练中，如果网络训练中发现出现了退化，网络会倾向于把F(X)训练为0，也就是H(X)=X也即恒等映射。而如果残差块把较优解更优了，那么F(X)就不用被训练为0，相当于提供了试错。同时H(X)=F(X)+X也有效防止了梯度消失，反向传播加了1梯度。</p>
-<p>也有人理解成相当于给了神经网络自己选择自己网络结构的一种机会通过shortcut这种连接。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E4%BA%92%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">二维互相关预算</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-24 20:34:56" itemprop="dateCreated datePublished" datetime="2023-09-24T20:34:56+08:00">2023-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-30 10:26:55" itemprop="dateModified" datetime="2023-09-30T10:26:55+08:00">2023-09-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>987</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像卷积">图像卷积</h2>
-<p>在深度学习中，卷积一般是二维互相关运算。</p>
-<p><img src="/images/深度学习/二维互相关/1.png" style="zoom:67%;"></p>
-<h2 id="参数">参数</h2>
-<h3 id="填充和步幅">填充和步幅</h3>
-<p>我们使用一个pytorch附带的函数作为例子：
-<code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
-<p>下面是一个padding=1（实际上行列填充为2），垂直stride为3，水平stride为2的卷积运算。</p>
-<p>代码为：<code>torch.nn.Conv2d(1, 1, 2, (2,3), 1)</code></p>
-<p><img src="/images/深度学习/二维互相关/2.png" style="zoom:67%;"></p>
-<p>输出形状计算公式： <span class="math display">\[
-\frac{n_h-k_h+p_h+s_h}{s_h}×\frac{n_w-k_w+p_w+s_w}{s_w}
-\\=
-\frac{3-2+2+2}{2}×\frac{3-2+2+3}{3}
-\\=
-2.5×2
-\\=
-2×2
-\]</span>
-一般来讲在pytorch中，如果遇到输出形状有小数，舍去为整数（不是四舍五入）。</p>
-<p>如果padding参数为(1,0)这样的元组，代表在第一个维度也即行上添加了两行0元素，第二个维度也即列上没有填充。</p>
-<h3 id="多输入多输出">多输入多输出</h3>
-<p>我们使用一个pytorch附带的函数作为例子：
-<code>torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)</code></p>
-<p>in_channels代表输入通道数，类似灰白图像一个通道，RGB图像三个通道。</p>
-<p>out_channels代表输出通道数，通俗来讲就是卷积核的个数。</p>
-<p>且多输入和多输出通道卷积要求输入通道数等于每个卷积核通道数。</p>
-<p>也就是说在这个函数中，你只需要设置好in_channels参数确定好输入通道数，kernel_size卷积核每个通道尺寸，框架会自动设置每个卷积核通道个数。</p>
-<p>总结来说就是：</p>
-<ul>
-<li>输出通道数=卷积核个数=out_channels参数</li>
-<li>输入通道数=每个卷积核的通道数=in_channels参数</li>
-</ul>
-<p>下面看一个例子：
-<img src="/images/深度学习/二维互相关/3.png" style="zoom:67%;"></p>
-<p>实际上在这里，in_channels=3，out_channels=2，kernel_size=1,卷积核通道数自动设置为3.</p>
-<p>并且这边也是一个1*1卷积，实际上是对图像不同通道的同一位置像素的一个权重线性和，类似于全连接。使用1*1卷积可以关注到每个输入通道之间的关系，更容易捕捉到特征。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/23/%E4%BF%A1%E5%8F%B7/%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">卷积</a>
+            <a href="/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">转置卷积和卷积</a>
         </h2>
 
         <div class="post-meta">
@@ -1169,111 +312,8 @@ AlexNet和VGG对LeNet的改进主要在于如何扩大和加深这两个模块�
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-09-23 19:57:08 / 修改时间：20:21:09" itemprop="dateCreated datePublished" datetime="2023-09-23T19:57:08+08:00">2023-09-23</time>
+              <time title="创建时间：2023-12-12 19:49:01 / 修改时间：21:26:10" itemprop="dateCreated datePublished" datetime="2023-12-12T19:49:01+08:00">2023-12-12</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E5%8F%B7/" itemprop="url" rel="index"><span itemprop="name">信号</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>398</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>拿一维卷积举个例子：</p>
-<p><span class="math display">\[
-假设x(t)为输入,h(t)为系统响应\\
-x(t)*h(t)=\int{x(a)h(t-a)}\\
-\delta(t)*h(t)=h(t)\\
-\delta(t-k\Delta)*h(t)=h(t-k\Delta)\\
-x(t)= \sum_{k=-\infty}^{\infty}{x(k\Delta)\delta(t-k\Delta)\Delta}
-\\当x(t)输入，输入x(t)是这些冲击信号的叠加，每一个\delta(t-k\Delta)都是\delta(t)的平移，并且会对h(t)进行响应，
-\\那么输出也是这些冲激信号对于系统响应的叠加，即：\\
-y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
-\]</span>
-所以也就可以看成是输入在每一个点的值是一个系数或者权重，这些系数分别乘上系统响应再求和就是输入了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B1%82%E5%92%8C%E5%B9%B3%E5%9D%87%E7%BB%B4%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B1%82%E5%92%8C%E5%B9%B3%E5%9D%87%E7%BB%B4%E5%BA%A6/" class="post-title-link" itemprop="url">pytorch中dim=0，1求mean，sum，max</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-23 16:09:49" itemprop="dateCreated datePublished" datetime="2023-09-23T16:09:49+08:00">2023-09-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-24 15:53:47" itemprop="dateModified" datetime="2023-11-24T15:53:47+08:00">2023-11-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1290,7 +330,7 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>777</span>
+              <span>968</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1309,136 +349,830 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="结论">结论</h2>
-<p>dim=（1，2，3）也就是说把这三个维度求平均，保留dim=0维度不变。故求平均后其他维度变成1，dim=0仍是2.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">X = torch.arange(<span class="number">24</span>,dtype = <span class="built_in">float</span>).reshape((<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(X)</span><br><span class="line">mean = X.mean(dim=(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), keepdim=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(mean,mean.shape)</span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">tensor([[[[ <span class="number">0.</span>,  <span class="number">1.</span>],</span><br><span class="line">          [ <span class="number">2.</span>,  <span class="number">3.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">4.</span>,  <span class="number">5.</span>],</span><br><span class="line">          [ <span class="number">6.</span>,  <span class="number">7.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">          [<span class="number">10.</span>, <span class="number">11.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">12.</span>, <span class="number">13.</span>],</span><br><span class="line">          [<span class="number">14.</span>, <span class="number">15.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">16.</span>, <span class="number">17.</span>],</span><br><span class="line">          [<span class="number">18.</span>, <span class="number">19.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">20.</span>, <span class="number">21.</span>],</span><br><span class="line">          [<span class="number">22.</span>, <span class="number">23.</span>]]]], dtype=torch.float64)</span><br><span class="line">tensor([[[[ <span class="number">5.5000</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">17.5000</span>]]]], dtype=torch.float64) torch.Size([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<p>下面看dim=（0，2，3）的输出，也就是说保留通道数不变，其他维度求平均变为1.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[[ <span class="number">0.</span>,  <span class="number">1.</span>],</span><br><span class="line">          [ <span class="number">2.</span>,  <span class="number">3.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">4.</span>,  <span class="number">5.</span>],</span><br><span class="line">          [ <span class="number">6.</span>,  <span class="number">7.</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">          [<span class="number">10.</span>, <span class="number">11.</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">12.</span>, <span class="number">13.</span>],</span><br><span class="line">          [<span class="number">14.</span>, <span class="number">15.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">16.</span>, <span class="number">17.</span>],</span><br><span class="line">          [<span class="number">18.</span>, <span class="number">19.</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">20.</span>, <span class="number">21.</span>],</span><br><span class="line">          [<span class="number">22.</span>, <span class="number">23.</span>]]]], dtype=torch.float64)</span><br><span class="line">tensor([[[[ <span class="number">7.5000</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">11.5000</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">15.5000</span>]]]], dtype=torch.float64) torch.Size([<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" class="post-title-link" itemprop="url">相机标定</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-09-23 14:16:14 / 修改时间：15:01:00" itemprop="dateCreated datePublished" datetime="2023-09-23T14:16:14+08:00">2023-09-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="相机标定"><a href="#相机标定" class="headerlink" title="相机标定"></a>相机标定</h2><p>相机标定就是求解相机的内参数以及畸变参数的过程。</p>
-<h2 id="标定板信息"><a href="#标定板信息" class="headerlink" title="标定板信息"></a>标定板信息</h2><h3 id="来源一"><a href="#来源一" class="headerlink" title="来源一"></a>来源一</h3><ul>
-<li>5*9棋盘格</li>
-<li>华为荣耀20拍摄后降低分辨率</li>
-<li>分辨率：1000*750 72dpi</li>
-<li>11张</li>
-</ul>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\1.png" alt></p>
-<h3 id="来源2"><a href="#来源2" class="headerlink" title="来源2"></a>来源2</h3><ul>
-<li>5*7棋盘格</li>
-<li>网上资源</li>
-<li>分辨率：640*480</li>
-<li>11张</li>
-</ul>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\2.png" alt></p>
-<h2 id="标定步骤"><a href="#标定步骤" class="headerlink" title="标定步骤"></a>标定步骤</h2><p>张正友标定：</p>
-<ol>
-<li>打印一张棋盘方格图并贴在一个平面上</li>
-<li>从不同角度拍摄若干张模板图像</li>
-<li>检测出图像中的特征点</li>
-<li>由检测到的特征点计算出每幅图像中的平面投影矩阵H</li>
-<li>确定出摄像机的参数</li>
+          <h2 id="转置卷积简介">转置卷积简介</h2>
+<p>就结论而言，卷积操作是多对一，而转置卷积操作是一对多，如下图所示，每一个“对”而言，都需要维护一个权值。</p>
+<p>这些权值就是需要学习参数的一部分</p>
+<p><img src="/images/深度学习/转置卷积/1.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/转置卷积/2.png" style="zoom:67%;"></p>
+<h2 id="卷积的另一种理解">卷积的另一种理解</h2>
+<p>将卷积核3*3矩阵进行重排列得到一个4*16矩阵。</p>
+<p><img src="/images/深度学习/转置卷积/3.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/转置卷积/4.png" style="zoom:67%;"></p>
+<p>接着将输入矩阵重排列为一个列向量，16*1.</p>
+<p><img src="/images/深度学习/转置卷积/5.png" style="zoom:67%;"></p>
+<p>使用矩阵乘法得到4*1列向量</p>
+<p><img src="/images/深度学习/转置卷积/6.png" style="zoom:67%;"></p>
+<p>重排列得到卷积输出。</p>
+<p><img src="/images/深度学习/转置卷积/7.png" style="zoom:67%;"></p>
+<p>实际上整个过程不难理解，我们先看4*16矩阵的第一行，再看被展开的输入列向量会发现其实就是用补0的方式跳过了不应该被卷积的部分，再看第二行其实就是补零然后整体右移一个单位。至于第三行就是卷积核与原矩阵卷积时重新换行，所以直接右移三个单位。第四行右移一个单位。这些平移量和步长和padding有关。</p>
+<p>关键点就在于这个卷积矩阵，从输入16(4*4)到输出4(2*2)因为这个卷积矩阵尺寸正是4
+× 16（输入形状*输出形状）的，这个操作我们叫做下采样。如果你有一个16 ×
+4的矩阵，你就可以从4(2*2)到16(4*4)了，这就是一个上采样的操作。</p>
+<p>表现为数学形式就是y=Cx,而我们要通过y得到x的形状，既可以表现成x=C^Ty,这样得到的形状就是原本的x的形状。</p>
+<h2 id="转置卷积的理解">转置卷积的理解</h2>
+<p>我们想要从4(2 × 2 2 ×2)到16(4 × 4 4 ×4)，因此我们使用了一个16 × 4 16
+×4的矩阵，但是还有一件事情需要注意，我们是想要维护一个1到9的映射关系。</p>
+<p><img src="/images/深度学习/转置卷积/8.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/转置卷积/9.png" style="zoom:67%;"></p>
+<h2 id="转置卷积的其他理解">转置卷积的其他理解</h2>
+<h3 id="section">1</h3>
+<p><img src="/images/深度学习/转置卷积/10.png" style="zoom:67%;"></p>
+<h3 id="section-1">2</h3>
+<p><img src="/images/深度学习/转置卷积/11.png" style="zoom:67%;"></p>
+<p><img src="/images/深度学习/转置卷积/12.png" style="zoom:67%;"></p>
+<p>转置输出尺寸公式：实际上就是卷积公式的反解</p>
+<p><img src="/images/深度学习/转置卷积/13.png" style="zoom:67%;"></p>
+<p>https://blog.csdn.net/tsyccnh/article/details/87357447这篇文章更加细节解释了转置卷积的一个过程。</p>
+<h2 id="转置卷积与-upsampling-的区别">转置卷积与 UpSampling 的区别</h2>
+<p>转置卷积 和 UpSampling 都可以把小的 Input 变成大的
+Output，那么两者有什么区别呢？哪个更好呢？</p>
+<ol type="1">
+<li>UpSampling 可以看作是 Pooling 的反向操作，就是采用 Nearest Neighbor
+interpolation 来进行放大、Resize，说白了就是复制行和列的数据来扩充
+feature map 的大小，并不通过学习。</li>
+<li>转置卷积（反卷积）就是卷积，想要把小的 Input 变成大的
+Output，做法是通过对输入隔行补 0、pading
+等方式，实现输出尺寸增大。转置卷积里面的 filter
+都是可以学出来的，本质上是一种 Learnable Upsampling。</li>
 </ol>
-<h2 id="标定程序"><a href="#标定程序" class="headerlink" title="标定程序"></a>标定程序</h2><p>python+opencv</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置寻找亚像素角点的参数，采用的停止准则是最大循环次数30和最大误差容限0.001</span></span><br><span class="line">criteria = (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, <span class="number">30</span>, <span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取标定板角点的位置</span></span><br><span class="line">objp = np.zeros((<span class="number">4</span> * <span class="number">6</span>, <span class="number">3</span>), np.float32)  <span class="comment">#格子数为5行7列，内角点为4*6的棋盘格图片</span></span><br><span class="line">objp[:, :<span class="number">2</span>] = np.mgrid[<span class="number">0</span>:<span class="number">4</span>, <span class="number">0</span>:<span class="number">6</span>].T.reshape(-<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># 将世界坐标系建在标定板上，所有点的Z坐标全部为0，所以只需要赋值x和y</span></span><br><span class="line">objp=objp*<span class="number">54067.2</span><span class="comment">#标定板尺寸（mm）</span></span><br><span class="line">obj_points = []  <span class="comment"># 存储3D点</span></span><br><span class="line">img_points = []  <span class="comment"># 存储2D点</span></span><br><span class="line"></span><br><span class="line">images = glob.glob(<span class="string">&quot;./image2/*.bmp&quot;</span>)<span class="comment">#glob.glob(&quot;./image1/*.jpg&quot;)，两种图像来源</span></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> images:</span><br><span class="line">    img = cv2.imread(fname)</span><br><span class="line">    <span class="comment">#图像灰度化</span></span><br><span class="line">    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    size = gray.shape[::-<span class="number">1</span>]</span><br><span class="line">    ret, corners = cv2.findChessboardCorners(gray, (<span class="number">4</span>, <span class="number">6</span>), <span class="literal">None</span>)  <span class="comment">#提取角点:第一个参数为图片，第二个为图片横纵角点的个数。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        obj_points.append(objp)</span><br><span class="line"></span><br><span class="line">        corners2 = cv2.cornerSubPix(gray, corners, (<span class="number">4</span>, <span class="number">6</span>), (-<span class="number">1</span>, -<span class="number">1</span>), criteria)  <span class="comment"># 在原角点的基础上寻找亚像素角点</span></span><br><span class="line">        <span class="comment"># 找寻亚像素角点：cornerSubPix(gray, corners, (winsize, winsize), (-1, -1), criteria)</span></span><br><span class="line">        <span class="comment"># winsize为搜索窗口边长的一半。</span></span><br><span class="line">        <span class="comment"># zeroZone：搜索区域中间的dead region边长的一半，有时用于避免自相关矩阵的奇异性。如果值设为(-1,-1)则表示没有这个区域。</span></span><br><span class="line">        <span class="comment"># criteria：角点精准化迭代过程的终止条件。也就是当迭代次数超过criteria.maxCount，或者角点位置变化小于criteria.epsilon时，停止迭代过程。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> [corners2]:</span><br><span class="line">            img_points.append(corners2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img_points.append(corners)</span><br><span class="line"></span><br><span class="line">        cv2.drawChessboardCorners(img, (<span class="number">4</span>, <span class="number">8</span>), corners, ret)  <span class="comment"># 记住，OpenCV的绘制函数一般无返回值</span></span><br><span class="line">        <span class="comment"># 可以使用该函数把角点画出来：drawChessboardCorners(image, (w, h), corners, ret);其中corners和ret为第一个函数的输出值。</span></span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;exp1.jpg&#x27;</span>, img)</span><br><span class="line">        <span class="comment">#cv2.imshow(&#x27;img&#x27;, img)#显示</span></span><br><span class="line">        <span class="comment">#cv2.waitKey(0) # 直到你按下任意一个键，才被关掉</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(img_points))</span><br><span class="line">cv2.destroyAllWindows()<span class="comment">#关闭窗口</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标定</span></span><br><span class="line">ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, size, <span class="literal">None</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(&quot;ret:&quot;, ret)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;mtx:\n&quot;</span>, mtx)  <span class="comment"># 内参数矩阵</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dist:\n&quot;</span>, dist)  <span class="comment"># 畸变系数</span></span><br><span class="line"><span class="comment"># print(&quot;rvecs:\n&quot;, rvecs)  # 旋转向量  # 外参数</span></span><br><span class="line"><span class="comment"># print(&quot;tvecs:\n&quot;, tvecs)  # 平移向量  # 外参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 畸变校正</span></span><br><span class="line">img = cv2.imread(images[<span class="number">4</span>])</span><br><span class="line"><span class="built_in">print</span>(images[<span class="number">4</span>])<span class="comment">#显示图像标号</span></span><br><span class="line">h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w, h), <span class="number">1</span>, (w, h))  <span class="comment">#显示更大范围的图片（正常重映射之后会删掉一部分图像）</span></span><br><span class="line"><span class="built_in">print</span>(newcameramtx)</span><br><span class="line"></span><br><span class="line">dst = cv2.undistort(img, mtx, dist, <span class="literal">None</span>, newcameramtx)</span><br><span class="line">x, y, w, h = roi</span><br><span class="line">dst1 = dst[y:y + h, x:x + w]</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;calibresult21.jpg&#x27;</span>, dst1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;大小为:&quot;</span>, dst1.shape)</span><br></pre></td></tr></table></figure>
-<h2 id="标定结果"><a href="#标定结果" class="headerlink" title="标定结果"></a>标定结果</h2><h3 id="来源一-1"><a href="#来源一-1" class="headerlink" title="来源一"></a>来源一</h3><p>角点提取示例：</p>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\3.jpg" alt></p>
-<p>实验结果：由于拍摄原因，只有两幅图像提取到了角点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line">mtx:</span><br><span class="line"> [[<span class="number">772.33456757</span>   <span class="number">0.</span>         <span class="number">499.11508102</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">774.71620422</span> <span class="number">375.35716407</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">dist:</span><br><span class="line"> [[<span class="number">-0.0447481</span>   <span class="number">0.78142203</span> <span class="number">-0.00301882</span> <span class="number">-0.00143604</span> <span class="number">-0.47591894</span>]]</span><br><span class="line">rvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[<span class="number">-0.53970125</span>],</span><br><span class="line">       [ <span class="number">0.51089422</span>],</span><br><span class="line">       [ <span class="number">1.47738494</span>]]), <span class="built_in">array</span>([[<span class="number">-0.78755033</span>],</span><br><span class="line">       [ <span class="number">0.2294393</span> ],</span><br><span class="line">       [ <span class="number">0.76333426</span>]]))</span><br><span class="line">tvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[ <span class="number">180689.44762485</span>],</span><br><span class="line">       [<span class="number">-123221.83525376</span>],</span><br><span class="line">       [ <span class="number">695606.21543874</span>]]), <span class="built_in">array</span>([[ <span class="number">106556.55379235</span>],</span><br><span class="line">       [<span class="number">-200041.99902293</span>],</span><br><span class="line">       [ <span class="number">664613.21661527</span>]]))</span><br><span class="line">./image1\<span class="number">1.</span>jpg</span><br><span class="line">新内参: [[<span class="number">823.13186717</span>   <span class="number">0.</span>         <span class="number">498.19172434</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">792.99482281</span> <span class="number">373.85746749</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">大小为: (<span class="number">683</span>, <span class="number">948</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p>原始图像：</p>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\5.jpg" alt></p>
-<p>矫正图像：</p>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\4.jpg" alt></p>
-<h3 id="来源二"><a href="#来源二" class="headerlink" title="来源二"></a>来源二</h3><p>角点提取示例：</p>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\7.jpg" alt></p>
-<p>实验结果：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span></span><br><span class="line">mtx:</span><br><span class="line"> [[<span class="number">1.47657156e+03</span> <span class="number">0.00000000e+00</span> <span class="number">3.19407867e+02</span>]</span><br><span class="line"> [<span class="number">0.00000000e+00</span> <span class="number">1.47571880e+03</span> <span class="number">2.39106138e+02</span>]</span><br><span class="line"> [<span class="number">0.00000000e+00</span> <span class="number">0.00000000e+00</span> <span class="number">1.00000000e+00</span>]]</span><br><span class="line">dist:</span><br><span class="line"> [[<span class="number">-9.34384061e-02</span>  <span class="number">5.75390963e+00</span> <span class="number">-6.41426583e-03</span> <span class="number">-3.27672153e-03</span></span><br><span class="line">  <span class="number">-2.66866291e+02</span>]]</span><br><span class="line">rvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[<span class="number">-0.08799559</span>],</span><br><span class="line">       [<span class="number">-0.88170326</span>],</span><br><span class="line">       [ <span class="number">1.29580617</span>]]), <span class="built_in">array</span>([[<span class="number">0.1834219</span> ],</span><br><span class="line">       [<span class="number">0.42279384</span>],</span><br><span class="line">       [<span class="number">0.02486376</span>]]), <span class="built_in">array</span>([[ <span class="number">0.28946309</span>],</span><br><span class="line">       [<span class="number">-0.18903552</span>],</span><br><span class="line">       [ <span class="number">1.48907145</span>]]), <span class="built_in">array</span>([[<span class="number">-0.36543641</span>],</span><br><span class="line">       [ <span class="number">0.39064732</span>],</span><br><span class="line">       [ <span class="number">1.42808332</span>]]), <span class="built_in">array</span>([[<span class="number">0.9038573</span> ],</span><br><span class="line">       [<span class="number">0.47195595</span>],</span><br><span class="line">       [<span class="number">1.20506172</span>]]), <span class="built_in">array</span>([[<span class="number">0.75213025</span>],</span><br><span class="line">       [<span class="number">0.02148614</span>],</span><br><span class="line">       [<span class="number">1.30797047</span>]]), <span class="built_in">array</span>([[ <span class="number">0.68084924</span>],</span><br><span class="line">       [<span class="number">-0.33114167</span>],</span><br><span class="line">       [ <span class="number">1.27814694</span>]]), <span class="built_in">array</span>([[ <span class="number">0.73722158</span>],</span><br><span class="line">       [<span class="number">-0.43175619</span>],</span><br><span class="line">       [ <span class="number">1.27016329</span>]]), <span class="built_in">array</span>([[ <span class="number">0.35793518</span>],</span><br><span class="line">       [<span class="number">-0.52540922</span>],</span><br><span class="line">       [ <span class="number">1.47462841</span>]]), <span class="built_in">array</span>([[<span class="number">-0.46024137</span>],</span><br><span class="line">       [ <span class="number">0.73646189</span>],</span><br><span class="line">       [ <span class="number">1.45107485</span>]]), <span class="built_in">array</span>([[<span class="number">0.19934207</span>],</span><br><span class="line">       [<span class="number">0.07550088</span>],</span><br><span class="line">       [<span class="number">0.04785288</span>]]))</span><br><span class="line">tvecs:</span><br><span class="line"> (<span class="built_in">array</span>([[ <span class="number">117178.11244024</span>],</span><br><span class="line">       [<span class="number">-169298.96318086</span>],</span><br><span class="line">       [<span class="number">1634531.87581801</span>]]), <span class="built_in">array</span>([[<span class="number">-125791.46167628</span>],</span><br><span class="line">       [<span class="number">-130425.54445762</span>],</span><br><span class="line">       [<span class="number">1601513.39083069</span>]]), <span class="built_in">array</span>([[ <span class="number">146967.41250744</span>],</span><br><span class="line">       [ <span class="number">-92131.26444114</span>],</span><br><span class="line">       [<span class="number">1550781.85059322</span>]]), <span class="built_in">array</span>([[ <span class="number">180599.75075754</span>],</span><br><span class="line">       [ <span class="number">-56931.78664268</span>],</span><br><span class="line">       [<span class="number">1594295.08070419</span>]]), <span class="built_in">array</span>([[ <span class="number">115054.05240954</span>],</span><br><span class="line">       [ <span class="number">-85918.66203658</span>],</span><br><span class="line">       [<span class="number">1437113.294089</span>  ]]), <span class="built_in">array</span>([[ <span class="number">131788.41636345</span>],</span><br><span class="line">       [ <span class="number">-28288.35142592</span>],</span><br><span class="line">       [<span class="number">1474974.90788968</span>]]), <span class="built_in">array</span>([[ <span class="number">184198.80307728</span>],</span><br><span class="line">       [<span class="number">-126939.3224669</span> ],</span><br><span class="line">       [<span class="number">1566139.13731238</span>]]), <span class="built_in">array</span>([[ <span class="number">137107.29188499</span>],</span><br><span class="line">       [<span class="number">-138085.63750253</span>],</span><br><span class="line">       [<span class="number">1601409.89521068</span>]]), <span class="built_in">array</span>([[ <span class="number">164687.28220985</span>],</span><br><span class="line">       [  <span class="number">-3465.19075199</span>],</span><br><span class="line">       [<span class="number">1549941.49743267</span>]]), <span class="built_in">array</span>([[ <span class="number">186975.37895912</span>],</span><br><span class="line">       [<span class="number">-157304.83806326</span>],</span><br><span class="line">       [<span class="number">1574201.48451643</span>]]), <span class="built_in">array</span>([[ <span class="number">-74573.34064078</span>],</span><br><span class="line">       [<span class="number">-143365.14315542</span>],</span><br><span class="line">       [<span class="number">1612495.00455488</span>]]))</span><br><span class="line">./image2\chess1.bmp</span><br><span class="line">新内参: [[<span class="number">652.55497857</span>   <span class="number">0.</span>         <span class="number">484.42146612</span>]</span><br><span class="line"> [  <span class="number">0.</span>         <span class="number">661.75203353</span> <span class="number">366.64532688</span>]</span><br><span class="line"> [  <span class="number">0.</span>           <span class="number">0.</span>           <span class="number">1.</span>        ]]</span><br><span class="line">大小为: (<span class="number">215</span>, <span class="number">282</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p>原始图像：</p>
-<p><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\8.bmp" alt></p>
-<p>矫正图像：<br><img src="/2023/09/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/blog-erin\source\images\计算机视觉\相机标定\6.jpg" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">递归算法</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-06 18:16:30 / 修改时间：18:51:10" itemprop="dateCreated datePublished" datetime="2023-12-06T18:16:30+08:00">2023-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>686</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="递归">递归</h2>
+<p>递归简单来说就是在运行过程中不断调用自己，直到碰到终止条件，返回结果的过程。</p>
+<p>递归可以看作两个过程，分别是递和归。递就是原问题把要计算的结果传给子问题；归则是子问题求出结果后，把结果层层返回原问题的过程。</p>
+<h2 id="使用场合">使用场合</h2>
+<p>1.大问题可以拆分为若干小问题
+<strong>2.原问题与子问题除数据规模不同，求解思路完全相同</strong>
+3.存在递归终止条件
+4.<strong>当不满足终止条件时，要如何缩小函数值并让其进入下一层循环中</strong></p>
+<h3 id="示例1求阶乘">示例1：求阶乘</h3>
+<ol type="1">
+<li>N！可以拆分为（N-1）！*N</li>
+<li>（N-1）！与N！只有数字规模不同，求解思路相同</li>
+<li>当N=1时，结果为1，递归终止</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Factorial</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> num;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> num*Factorial(num-<span class="number">1</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="顺序打印输入一个整数时按顺序依次打印每一位的值">2：顺序打印：输入一个整数时，按顺序依次打印每一位的值</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PrintNumber</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num&gt;<span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            PrintNumber(num/<span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(num%<span class="number">10</span>+<span class="string">&quot;,&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="斐波那契数列">3：斐波那契数列</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num==<span class="number">1</span>||num==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Fibonacci(num-<span class="number">1</span>)+Fibonacci(num-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>递归式：f(n)=f(n-1)+f(n-2)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-06 18:16:12" itemprop="dateCreated datePublished" datetime="2023-12-06T18:16:12+08:00">2023-12-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-06 18:15:51" itemprop="dateCreated datePublished" datetime="2023-12-06T18:15:51+08:00">2023-12-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/01/%E5%8A%9B%E6%89%A3/150_7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/01/%E5%8A%9B%E6%89%A3/150_7/" class="post-title-link" itemprop="url">6/150</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-01 19:19:16" itemprop="dateCreated datePublished" datetime="2023-12-01T19:19:16+08:00">2023-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-02 21:40:35" itemprop="dateModified" datetime="2024-03-02T21:40:35+08:00">2024-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>707</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="买卖股票的最佳时机">121:买卖股票的最佳时机</h2>
+<p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素
+<code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
+<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在
+<strong>未来的某一个不同的日子</strong>
+卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回
+<code>0</code> 。</p>
+<h2 id="方法1暴力">方法1：暴力</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> tmax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ti = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;n; j++)&#123;</span><br><span class="line">                ti = prices[j]-prices[i];</span><br><span class="line">                <span class="keyword">if</span>(ti&gt;tmax)&#123;</span><br><span class="line">                    tmax = ti;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tmax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="方法2一次遍历">方法2：一次遍历</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> inf = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">int</span> minprice = inf, maxprofit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price: prices) &#123;</span><br><span class="line">            maxprofit = <span class="built_in">max</span>(maxprofit, price - minprice);</span><br><span class="line">            minprice = <span class="built_in">min</span>(price, minprice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxprofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/30/%E5%8A%9B%E6%89%A3/150_6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/30/%E5%8A%9B%E6%89%A3/150_6/" class="post-title-link" itemprop="url">6/150</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-30 17:44:34" itemprop="dateCreated datePublished" datetime="2023-11-30T17:44:34+08:00">2023-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-01 19:19:23" itemprop="dateModified" datetime="2023-12-01T19:19:23+08:00">2023-12-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>651</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="轮转数组">轮转数组</h2>
+<p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转
+<code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
+<h2 id="方法1额外数组">方法1：额外数组</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">newArr</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            newArr[(i + k) % n] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        nums.<span class="built_in">assign</span>(newArr.<span class="built_in">begin</span>(), newArr.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="方法2翻转">方法2：翻转</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(nums[start], nums[end]);</span><br><span class="line">            start += <span class="number">1</span>;</span><br><span class="line">            end -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k %= nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">reverse</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">reverse</span>(nums, <span class="number">0</span>, k - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">reverse</span>(nums, k, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/30/py/%E5%B0%8F%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/30/py/%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">小知识</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-30 16:13:04 / 修改时间：16:17:24" itemprop="dateCreated datePublished" datetime="2023-11-30T16:13:04+08:00">2023-11-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>194</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函数返回">函数返回</h2>
+<p>我们知道如果一个函数返回多个参数，那么会是以元组形式返回的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#假设我们有一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">some_function</span>()</span></span><br><span class="line"><span class="function">	<span class="title">return</span> <span class="title">a</span>,<span class="title">b</span></span></span><br><span class="line"><span class="function"><span class="title">l</span> = []</span></span><br><span class="line"><span class="function"><span class="title">l</span> += <span class="title">some_function</span>()#+=运算符会逐个相加可迭代对象，列表会变成[<span class="title">a</span>,<span class="title">b</span>]</span></span><br><span class="line"><span class="function"><span class="title">l</span>.<span class="title">append</span>(<span class="params">some_function(<span class="params"></span>)</span>)#<span class="title">append</span>会直接把(<span class="params">a,b</span>)元组添加进列表变成一个元组列表,列表变成[(<span class="params">a,b</span>)]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/29/%E5%8A%9B%E6%89%A3/150_5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/29/%E5%8A%9B%E6%89%A3/150_5/" class="post-title-link" itemprop="url">5/150</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-29 15:08:20 / 修改时间：17:09:58" itemprop="dateCreated datePublished" datetime="2023-11-29T15:08:20+08:00">2023-11-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="多数元素">多数元素</h2>
+<p>给定一个大小为 <code>n</code> 的数组 <code>nums</code>
+，返回其中的多数元素。多数元素是指在数组中出现次数 <strong>大于</strong>
+<code>⌊ n/2 ⌋</code> 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<h3 id="方法1hash-map">方法1：hash map</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; counts;</span><br><span class="line">        <span class="keyword">int</span> majority = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num: nums) &#123;</span><br><span class="line">            ++counts[num];</span><br><span class="line">            <span class="keyword">if</span> (counts[num] &gt; cnt) &#123;</span><br><span class="line">                majority = num;</span><br><span class="line">                cnt = counts[num];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> majority;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="方法2排序">方法2：排序</h3>
+<p>如果将数组 nums
+中的所有元素按照单调递增或单调递减的顺序排序，那么下标为<span class="math inline">\([\frac{n} {2}]\)</span>的元素一定是众数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> nums[nums.<span class="built_in">size</span>() / <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="方法3随机化">方法3：随机化</h3>
+<p>时间复杂度：理论上最坏情况下的时间复杂度为<span class="math inline">\(O(\infty)\)</span>，因为如果我们的运气很差，这个算法会一直找不到众数，随机挑选无穷多次，所以最坏时间复杂度是没有上限的。然而，运行的期望时间是线性的。为了更简单地分析，先说服你自己：由于众数占据
+超过
+数组一半的位置，期望的随机次数会小于众数占据数组恰好一半的情况。因此，我们可以计算随机的期望次数（下标为
+<code>prob</code> 为原问题，<code>mod</code>
+为众数恰好占据数组一半数目的问题）：E_prob&lt;=E_mod=sum(i*1/2^i),from
+i=0 to ∞=2</p>
+<p>期望次数小于两次。期望的随机次数是常数。每一次随机后，我们需要
+O(n)的时间判断这个数是否为众数，因此期望的时间复杂度为 O(n)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> candidate = nums[<span class="built_in">rand</span>() % nums.<span class="built_in">size</span>()];</span><br><span class="line">            <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num : nums)</span><br><span class="line">                <span class="keyword">if</span> (num == candidate)</span><br><span class="line">                    ++count;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; nums.<span class="built_in">size</span>() / <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> candidate;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="方法4分治">方法4：分治</h3>
+<p>如果数 a 是数组 nums 的众数，如果我们将 nums 分成两部分，那么 a
+必定是至少一部分的众数。</p>
+<p>我们可以使用反证法来证明这个结论。假设 a
+既不是左半部分的众数，也不是右半部分的众数，那么 a 出现的次数少于 l / 2
++ r / 2 次，其中 l 和 r 分别是左半部分和右半部分的长度。由于 l / 2 + r /
+2 &lt;= (l + r) / 2，说明 a 也不是数组 nums
+的众数，因此出现了矛盾。所以这个结论是正确的。</p>
+<p>这样以来，我们就可以使用分治法解决这个问题：将数组分成左右两部分，分别求出左半部分的众数
+a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count_in_range</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt;= hi; ++i)</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == target)</span><br><span class="line">                ++count;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majority_element_rec</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lo == hi)</span><br><span class="line">            <span class="keyword">return</span> nums[lo];</span><br><span class="line">        <span class="keyword">int</span> mid = (lo + hi) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> left_majority = <span class="built_in">majority_element_rec</span>(nums, lo, mid);</span><br><span class="line">        <span class="keyword">int</span> right_majority = <span class="built_in">majority_element_rec</span>(nums, mid + <span class="number">1</span>, hi);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">count_in_range</span>(nums, left_majority, lo, hi) &gt; (hi - lo + <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> left_majority;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">count_in_range</span>(nums, right_majority, lo, hi) &gt; (hi - lo + <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> right_majority;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">majority_element_rec</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="方法5boyer-moore-投票算法">方法5：Boyer-Moore 投票算法</h3>
+<p><strong>思路</strong></p>
+<p>如果我们把众数记为 +1+1+1，把其他数记为
+−1-1−1，将它们全部加起来，显然和大于
+<code>0</code>，从结果本身我们可以看出众数比其他数多。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> candidate = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (num == candidate)</span><br><span class="line">                ++count;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (--count &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                candidate = num;</span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>如果候选人不是maj 则 maj,会和其他非候选人一起反对
+会反对候选人,所以候选人一定会下台(maj==0时发生换届选举)</li>
+<li>如果候选人是maj , 则maj 会支持自己，其他候选人会反对，同样因为maj
+票数超过一半，所以maj 一定会成功当选</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/27/SDAI/%E5%AE%89%E8%A3%85stable%20diffusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/27/SDAI/%E5%AE%89%E8%A3%85stable%20diffusion/" class="post-title-link" itemprop="url">安装stable diffusion</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-27 19:10:55" itemprop="dateCreated datePublished" datetime="2023-11-27T19:10:55+08:00">2023-11-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-29 19:21:31" itemprop="dateModified" datetime="2023-11-29T19:21:31+08:00">2023-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDAI/" itemprop="url" rel="index"><span itemprop="name">SDAI</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>446</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="部署sd">部署SD</h2>
+<p>新建文件夹SDAI，右键<code>git bash here</code>，命令行输入<code>git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui</code></p>
+<p>确保有git和python</p>
+<h2 id="安装模型">安装模型</h2>
+<ul>
+<li><p>去https://rentry.org/sdmodels选择下载模型。</p></li>
+<li><p>下载1.5版本SD，进入https://huggingface.co/runwayml/stable-diffusion-v1-5，v1-5-pruned.safetensors</p></li>
+<li><p>下载anything3.0版本，https://huggingface.co/Linaqruf/anything-v3.0，anything-v3-full.safetensors</p></li>
+<li><p>将下载好的模型放入SDAI文件夹下的stable-diffusion-webui文件夹下的models文件夹下的Stable-diffusion文件夹</p></li>
+</ul>
+<h2 id="开启sd">开启SD</h2>
+<p>打开SDAI-diffusion-webui下的webui-user.bat文件</p>
 
       
     </div>
@@ -1459,7 +1193,7 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1527,14 +1261,14 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1582,7 +1316,7 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
 <div class="copyright">
   
   &copy; 2021-07 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1591,12 +1325,12 @@ y(t)=\sum_{k=-\infty}^{\infty}{x(k\Delta)h(t-k\Delta)\Delta}
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">236k</span>
+    <span title="站点总字数">283k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:35</span>
+    <span title="站点阅读时长">4:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

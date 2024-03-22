@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前向diffusion过程 向一张图片添加高斯噪声，直到图片变成纯高斯噪声。总共包含T个时间布。   最左侧\(x_0\)代表了真实图片的分布，最右侧\(x_T\)代表了纯高斯噪声分布。 \(q(x_t|x_{t-1})\)代表以\(x_{t-1}\)作为均值的高斯分布，\(x_t\)服从此分布。 前向扩散可以理解为一个马尔科夫链，t时刻至于t-1时刻有关。 具体的噪声添加公式： \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="diffusion">
+<meta property="og:url" content="http://example.com/2024/03/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/diffusion%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="前向diffusion过程 向一张图片添加高斯噪声，直到图片变成纯高斯噪声。总共包含T个时间布。   最左侧\(x_0\)代表了真实图片的分布，最右侧\(x_T\)代表了纯高斯噪声分布。 \(q(x_t|x_{t-1})\)代表以\(x_{t-1}\)作为均值的高斯分布，\(x_t\)服从此分布。 前向扩散可以理解为一个马尔科夫链，t时刻至于t-1时刻有关。 具体的噪声添加公式： \">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/深度学习/diffusion/1.png">
+<meta property="og:image" content="http://example.com/深度学习/diffusion/1.png">
+<meta property="og:image" content="http://example.com/images/深度学习/diffusion/2.png">
+<meta property="og:image" content="http://example.com/深度学习/diffusion/2.png">
+<meta property="og:image" content="http://example.com/images/深度学习/diffusion/3.png">
+<meta property="og:image" content="file:///C:/Users/erin/AppData/Roaming/Tencent/Users/2320109962/QQ/WinTemp/RichOle/M1W8H$X%60UJQB2KCP%7B@Z0TZ6.png">
+<meta property="og:image" content="http://example.com/images/深度学习/diffusion/4.png">
+<meta property="og:image" content="http://example.com/深度学习/diffusion/4.png">
+<meta property="article:published_time" content="2024-03-05T07:05:16.656Z">
+<meta property="article:modified_time" content="2024-03-05T09:57:39.459Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/深度学习/diffusion/1.png">
+
+<link rel="canonical" href="http://example.com/2024/03/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/diffusion%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>diffusion | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/diffusion%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          diffusion
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-05 15:05:16 / 修改时间：17:57:39" itemprop="dateCreated datePublished" datetime="2024-03-05T15:05:16+08:00">2024-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前向diffusion过程">前向diffusion过程</h2>
+<p>向一张图片添加高斯噪声，直到图片变成纯高斯噪声。总共包含T个时间布。</p>
+<p><img src="\images\深度学习\diffusion\1.png" style="zoom:67%;"></p>
+<p><img src="/深度学习/diffusion/1.png" alt="1" style="zoom:67%;"></p>
+<p>最左侧<span class="math inline">\(x_0\)</span>代表了真实图片的分布，最右侧<span class="math inline">\(x_T\)</span>代表了纯高斯噪声分布。</p>
+<p><span class="math inline">\(q(x_t|x_{t-1})\)</span>代表以<span class="math inline">\(x_{t-1}\)</span>作为均值的高斯分布，<span class="math inline">\(x_t\)</span>服从此分布。</p>
+<p>前向扩散可以理解为一个马尔科夫链，t时刻至于t-1时刻有关。</p>
+<p>具体的噪声添加公式： <span class="math display">\[
+q(x_t|x_{t-1}):=N(x_t;\sqrt{1-\beta _t}x_{t-1},\beta_tI)
+\\公式表明每一个时间步的x_t服从以\sqrt{1-\beta
+_t}x_{t-1}为均值，\beta_t为方差的高斯分布。
+\\其中\beta_t是一个超参数，在glide的code中，\beta_t由线性插值得到，T=1000,\beta_1=0.0001,\beta_1000=0.02。
+\]</span> 补充两个特性：</p>
+<p><strong>1.重参数：</strong></p>
+<p>如果我们要从某个分布中随机采样(高斯分布)一个样本，这个过程是无法反传梯度的。而这个通过高斯噪声采样得到<span class="math inline">\(x_t\)</span>的过程在diffusion中到处都是，因此我们需要通过重参数技巧来使得他可微。</p>
+<p>例如一个高斯分布<span class="math inline">\(x-N(\mu,\sigma^2)\)</span>,这里x具有随机性，x对于两个参数是不可导的。但是形式改写一下:<span class="math inline">\(x=\mu+\sigma\epsilon\)</span>,此时x任然是随机的，但是随机性被转移到了<span class="math inline">\(\epsilon\)</span>上，采样过程梯度可导了。</p>
+<p>也就是说t时刻可表示为<span class="math inline">\(x_t=\sqrt{1-\beta_t}x_{t-1}+\sqrt{\beta_t}z,z-N(0,1)\)</span></p>
+<p><strong>2.任意时刻的<span class="math inline">\(x_t\)</span>可以由<span class="math inline">\(x_0\)</span>和<span class="math inline">\(\beta\)</span>表示</strong></p>
+<p>能够通过<span class="math inline">\(x_0,\beta\)</span>快速得到<span class="math inline">\(x_t\)</span>对于扩散模型的训练和推理很重要。</p>
+<p>首先假设<span class="math inline">\(\alpha_t=1-\beta_t,\overline\alpha_t=\prod_{i=1}^{t}\alpha_i\)</span>,对<span class="math inline">\(x_t\)</span>进行展开： <span class="math display">\[
+\begin{flalign}
+x_t=&amp;\sqrt{\alpha_t}x_{t-1}+ \sqrt{1-\alpha_t}z_1,\ \ where\ \
+z_1,z_2,...-N(0,1)
+\\=&amp;\sqrt{\alpha_t}(\sqrt{\alpha_{t-1}}x_{t-2}+
+\sqrt{1-\alpha_{t-1}}z_2)+ \sqrt{1-\alpha_t}z_1
+\\=&amp;\sqrt{\alpha_t\alpha_{t-1}}x_{t-2}+(\sqrt{\alpha_t(1-\alpha_{t-1})}z_2+\sqrt{1-\alpha_t}z_1)
+\\=&amp;\sqrt{\alpha_t\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_t\alpha_{t-1}}\overline
+z_2\ \ where \ \ \overline z_2-N(0,1)
+\\=&amp;...
+\\=&amp;\sqrt{\overline\alpha_t}x_{0}+
+\sqrt{1-\overline\alpha_t}\overline z_t
+\end{flalign}
+\]</span> 独立高斯分布可加性： <span class="math display">\[
+\sqrt{\alpha_t(1-\alpha_{t-1})}z_2-N(0,\alpha_t(1-\alpha_{t-1}))
+\\\sqrt{1-\alpha_t}z_1-N(0,1-\alpha_t)
+\\\sqrt{\alpha_t(1-\alpha_{t-1})}z_2+\sqrt{1-\alpha_t}z_1-N(0,\alpha_t(1-\alpha_{t-1})+1-\alpha_t)-N(0,1-\alpha_t\alpha_{t-1})
+\]</span> 从而我们可以推出任意时刻的<span class="math inline">\(x_t\)</span>分布满足<span class="math inline">\(q(x_t|x_0):=N(x_t;\sqrt{\overline\alpha_t}x_0,1-\overline\alpha_t)\)</span></p>
+<p>当t非常大的时候，我们可以看出均值趋向于0，方差趋近于1。分布近似于高斯分布。</p>
+<p>由原图得到了一副纯高斯噪声图。</p>
+<h2 id="反向diffusion过程">反向diffusion过程</h2>
+<p><img src="\images\深度学习\diffusion\2.png" style="zoom:67%;"></p>
+<p><img src="/深度学习/diffusion/2.png" alt="2" style="zoom:67%;"></p>
+<p>如果说前向过程(forward)是加噪的过程，那么逆向过程(reverse)就是diffusion的去噪推断过程。如果我们能够逐步得到逆转后的分布
+，就可以从完全的标准高斯分布还原出原图分布.</p>
+<p>反向扩散过程<span class="math inline">\(q(x_{t-1}|x_t)\)</span>是前向扩散的后验概率分布。我们无法得知这个分布，但是如果我们知道了<span class="math inline">\(x_0\)</span>,就可以通过贝叶斯公式得到以下公式：
+<span class="math display">\[
+\begin{flalign}
+&amp;q(x_{t-1}|x_t,x_0)
+\\=&amp;\frac{q(x_t,x_{t-1},x_0)}{q(x_t,x_0)}
+\\=&amp;\frac{q(x_t|x_{t-1},x_0)q(x_{t-1}|x_0)q(x_0)}{q(x_t|x_0)q(x_0)}
+\\=&amp;\frac{q(x_t|x_{t-1},x_0)q(x_{t-1}|x_0)}{q(x_t|x_0)}
+\end{flalign}
+\]</span>
+公式将逆向过程全部变成了前向过程，经过计算可以得到分布的均值和方差如下：
+<span class="math display">\[
+\sigma^2_t =
+\frac{(1-\alpha_t)(1-\overline\alpha_{t-1})}{1-\overline\alpha_t}
+\\\mu_t=\frac{\sqrt\alpha_t(1-\overline\alpha_{t-1})}{1-\overline\alpha_{t}}x_t+\frac{\sqrt{\overline\alpha_{t-1}}\beta_t}{1-\overline\alpha_{t}}x_0
+\]</span>
+可以看得出来方差是一个常数，每一个时间的方差是可以提前算出来的。</p>
+<p>对于均值，我们在推断的时候是不知道<span class="math inline">\(x_0\)</span>的,那么模型就要预测。但是根据<span class="math inline">\(x_t,t\)</span>直接预测<span class="math inline">\(x_0\)</span>拟合难度太高，所以我们把第二个特性的代入替换掉<span class="math inline">\(x_0\)</span>。 <span class="math display">\[
+x_0=\frac{1}{\sqrt{\overline
+\alpha_t}}(x_t-\sqrt{1-\overline\alpha_t}\overline z_t)代入，\\
+\mu_t=\frac{1}{\sqrt{\alpha_t}}(x_t-\frac{\beta_t}{\sqrt{1-\overline\alpha_t}}\overline
+z_t)\\
+其中高斯分布\overline
+z_t为模型所需要预测的噪声，可以看作z_{\theta}(x_t,t)\\
+\mu_t=\frac{1}{\sqrt{\alpha_t}}(x_t-\frac{\beta_t}{\sqrt{1-\overline\alpha_t}}z_{\theta}(x_t,t))\\
+此时的\mu_t已经变成了我们构造的概率分布p(x_{t-1}|x_t)的均值
+\]</span>
+从而我们最后可以发现后验概率分布的均值只和模型在前向过程中t时刻加入的噪声和t时刻的分布<span class="math inline">\(x_t\)</span>有关系。深度学习模型要预测的就是前向时间步t时刻加入的高斯噪声。</p>
+<h2 id="训练过程">训练过程</h2>
+<p><img src="\images\深度学习\diffusion\3.png" style="zoom:67%;"></p>
+<p><img src="file:///C:\Users\erin\AppData\Roaming\Tencent\Users\2320109962\QQ\WinTemp\RichOle\M1W8H$X`UJQB2KCP{@Z0TZ6.png" alt="img" style="zoom:67%;"></p>
+<p>首先每个迭代就是从数据集中取真实图像<span class="math inline">\(x_0\)</span>，并从均匀分布中采样一个时间步t,</p>
+<p>然后从标准高斯分布中采样得到噪声<span class="math inline">\(\epsilon\)</span>,并根据公式计算得到<span class="math inline">\(x_t\)</span>。</p>
+<p>接着将<span class="math inline">\(x_t\)</span>和t输入到模型让其输出去拟合预测噪声<span class="math inline">\(\epsilon\)</span>，并通过梯度下降更新模型，一直循环直到模型收敛。</p>
+<p>而采用的深度学习模型是类似 UNet 的结构</p>
+<h2 id="推理过程">推理过程</h2>
+<p><img src="\images\深度学习\diffusion\4.png" style="zoom:67%;"></p>
+<p><img src="/深度学习/diffusion/4.png" alt="4" style="zoom:67%;"></p>
+<p>一开始先生成一个从标准高斯分布生成噪声，然后每个时间步
+t，将上一步生成的图片<span class="math inline">\(x_t\)</span>输入模型模型预测出噪声。接着从标准高斯分布中采样一个噪声，根据重参数化技巧，后验概率的均值和方差公式，计算得到<span class="math inline">\(x_{t-1}\)</span>，直到时间步 1 为止。</p>
+<h2 id="改进">改进</h2>
+<p>步数以及关于超参数<span class="math inline">\(\beta_t\)</span>的改进</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/03/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/diffusion%E5%8E%9F%E7%90%86/" title="diffusion">http://example.com/2024/03/05/深度学习基础/diffusion原理/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/02/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8C%85/%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C%E5%BA%93eniops/" rel="prev" title="张量操作函数">
+      <i class="fa fa-chevron-left"></i> 张量操作函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/05/%E7%AE%97%E6%B3%95/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="next" title="列表">
+      列表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E5%90%91diffusion%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">前向diffusion过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91diffusion%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">反向diffusion过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">推理过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B"><span class="nav-number">5.</span> <span class="nav-text">改进</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">283k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:17</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -9,255 +9,271 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>来者犹可追</description>
-    <pubDate>Sat, 23 Dec 2023 08:05:14 GMT</pubDate>
+    <pubDate>Fri, 22 Mar 2024 02:07:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>一些矩阵结论知识记忆</title>
-      <link>http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/</link>
-      <guid>http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/</guid>
-      <pubDate>Fri, 22 Dec 2023 07:15:48 GMT</pubDate>
+      <title>axial attention</title>
+      <link>http://example.com/2024/03/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/axial_attention/</link>
+      <guid>http://example.com/2024/03/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/axial_attention/</guid>
+      <pubDate>Fri, 22 Mar 2024 02:05:28 GMT</pubDate>
       
         
         
-      <description>&lt;h2 id=&quot;线性代数基础&quot;&gt;&lt;a href=&quot;#线性代数基础&quot; class=&quot;headerlink&quot; title=&quot;线性代数基础&quot;&gt;&lt;/a&gt;线性代数基础&lt;/h2&gt;&lt;h3 id=&quot;线性空间以及线性子空间&quot;&gt;&lt;a href=&quot;#线性空间以及线性子空间&quot; class=&quot;header</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="线性代数基础"><a href="#线性代数基础" class="headerlink" title="线性代数基础"></a>线性代数基础</h2><h3 id="线性空间以及线性子空间"><a href="#线性空间以及线性子空间" class="headerlink" title="线性空间以及线性子空间"></a>线性空间以及线性子空间</h3><p>满足数乘</p><h3 id="空间维数分解定理"><a href="#空间维数分解定理" class="headerlink" title="空间维数分解定理"></a>空间维数分解定理</h3><p><strong>定理：</strong>$设V_1，V_2是线性空间V的子空间，则dim(V_1+V_2)=dim(V_1)+dim(V_2)-dim(V_1\cap V_2)$</p><h3 id="欧氏空间酉空间"><a href="#欧氏空间酉空间" class="headerlink" title="欧氏空间酉空间"></a>欧氏空间酉空间</h3><p><strong>内积空间：</strong></p><p>两个概念：</p><ul><li>$V(P),P上的线性空间$</li><li>$(\cdot,\cdot),内积，特殊的二元函数$</li></ul><p>内积空间V，V为P（R，C）上的内积空间。</p><p>内积可以理解为V空间的二元函数映射到P上。符号表述为$\forall \alpha,\beta \in V,f(\alpha,\beta)=k\in P$</p><p>内积要满足三个性质：</p><ul><li><strong>双线性</strong>：$\begin{cases}f(x,a_1y_1+a_2y_2)=a_1f(x,y_1)+a_2f(x,y_2) \\ f(a_1x_1+a_2x_2,y)=\overline a_1f(x_1,y)+\overline a_2f(x_2,y)\end{cases},a_i\in P$</li><li><strong>正定性</strong>:$f(x,x)\ge0,当且仅当x=0取等$</li><li><strong>对称性</strong>：$f(x,y)=\overline{f(y,x)}$</li></ul><p>欧氏空间酉空间都要满足以上三个性质</p><p><strong>长度：</strong>$设V是欧氏(酉)空间，\forall \alpha \in V,\alpha的长度定义为||\alpha||=\sqrt{(\alpha,\alpha)}$</p><p>满足以下性质：</p><ul><li>$||\alpha||\ge0当且仅当\alpha=0取等$</li><li>$||k\alpha||=|k|\cdot||\alpha||$</li><li>$||\alpha+\beta||\le||\alpha||+||\beta||$</li><li>$|(\alpha,\beta)|\le||\alpha||\cdot||\beta||$</li></ul><h3 id="初等矩阵"><a href="#初等矩阵" class="headerlink" title="初等矩阵"></a>初等矩阵</h3><p><strong>定义</strong>：$u,v\in C^n,\sigma \in C,E(u,v,\sigma)=E-\sigma uv^H$</p><p>几个结论：</p><ul><li>特征向量,不想写</li><li><strong>特征值</strong>：$\lambda=\{1,1,\cdots,1,1-\sigma v^Hu\}$</li><li>行列式：$det = 1-\sigma v^Hu$</li><li>逆矩阵：${E(u,v,\sigma)}^{-1}=E(u,v,\frac{\sigma}{\sigma v^Hu-1},1-\sigma v^Hu\ne0)$</li></ul><h2 id="向量与矩阵范数"><a href="#向量与矩阵范数" class="headerlink" title="向量与矩阵范数"></a>向量与矩阵范数</h2><h3 id="向量范数"><a href="#向量范数" class="headerlink" title="向量范数"></a>向量范数</h3><ul><li>满足<strong>正定性，齐次性，三角不等式。</strong></li></ul><h3 id="矩阵范数"><a href="#矩阵范数" class="headerlink" title="矩阵范数"></a>矩阵范数</h3><ul><li>满足<strong>正定性，齐次性，三角不等式。</strong></li><li>m1,m2范数<strong>自相容</strong>，但是m无穷范数<strong>不自相容</strong></li><li><strong>m2范数</strong>的结论：$||A||_F^2=||A||_{m2}^2=\sum_{j=1}^n||a_j||_2^2=tr(A^HA)=\sum_{i=1}^n\lambda_i(A^HA),同时m2范数具有酉不变性$</li><li><strong>与向量范数的相容性</strong>：m1范数，m2范数分别和向量1，2范数相容</li><li>算子范数$||A||_a$自相容，且与向量范数$||x||_a$相容，同时算子范数$||A||_a$也是所有和向量范数$||x||_a$相容的矩阵范数中最小的</li><li>$||E||_a=1$</li><li>自相容的矩阵范数一定有与其相容的向量范数</li><li>特殊的算子范数：$||A||_1=max_j\sum_{i=1}^n|a_{ij}|,||A||_{\infty}=max_i\sum_{j=1}^n|a_{ij}|$</li><li>谱范数：$||A||_2=\sqrt{r(A^HA)},r(A)=max_i|\lambda_i|叫做谱半径$，具有酉不变性，$||A||_2^2\le||A||_1||A||_{\infty}$</li></ul><h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><h3 id="QR分解"><a href="#QR分解" class="headerlink" title="QR分解"></a>QR分解</h3><h4 id="n阶可逆矩阵的分解"><a href="#n阶可逆矩阵的分解" class="headerlink" title="n阶可逆矩阵的分解"></a>n阶可逆矩阵的分解</h4><p><strong>概念：</strong>A=UR或A=LU，U是n阶酉矩阵，R，L是n阶正线上（下）三角复矩阵。</p><p><strong>推论：</strong>A为Hermite（实对称）正定矩阵，则存在唯一正线上三角矩阵R使$A=R^HR(R^TR)$</p><h4 id="行列满秩矩阵的QR分解"><a href="#行列满秩矩阵的QR分解" class="headerlink" title="行列满秩矩阵的QR分解"></a>行列满秩矩阵的QR分解</h4><p>概念：</p><p>一种分解：</p><script type="math/tex; mode=display">A=U\begin{bmatrix}R\\0\end{bmatrix},A=\begin{bmatrix}L&0\end{bmatrix}U</script><p>另一种：</p><p>A=UR，A=LU，U此时是m*n阶。</p><h4 id="任意矩阵QR分解"><a href="#任意矩阵QR分解" class="headerlink" title="任意矩阵QR分解"></a>任意矩阵QR分解</h4><script type="math/tex; mode=display">A=U\begin{bmatrix}L&0\\0&0\end{bmatrix}V</script><h4 id="分解步骤"><a href="#分解步骤" class="headerlink" title="分解步骤"></a>分解步骤</h4><p>矩阵分为列向量，对列向量施密特正交化，根据正交化公式列出QR矩阵即可，Q是正交向量，R是系数。</p><h3 id="谱分解"><a href="#谱分解" class="headerlink" title="谱分解"></a>谱分解</h3><p><strong>单纯矩阵定义：</strong>特征值几何重数等于代数重数</p><p><strong>概念：</strong>$A=\sum_{i=1}^n\lambda_iA_i,\lambda_i是特征值，A_i满足幂等性，分离性（A_iA_j=0，i\ne j），可加性（和为单位矩阵）,A是单纯矩阵$</p><p><strong>正规矩阵定义：</strong>$AA^H=A^HA$</p><p><strong>引理：</strong>如果A正规，A，B酉相似，B正规</p><p><strong>Schur定理：</strong>$A=URU^H$,U为酉矩阵，R为三角矩阵且主对角线上为A的特征值。</p><p><strong>引理：</strong>A如果正规且为三角矩阵，那么A为对角矩阵。</p><p><strong>定理：</strong>A如果为正规矩阵，那么A酉相似于对角矩阵。</p><p><strong>分解步骤：</strong>求出特征向量矩阵，按列分块，求出逆矩阵按行分块，用列向量对应相乘行向量即可得到每个Ai</p><h3 id="最大秩分解（满秩分解）"><a href="#最大秩分解（满秩分解）" class="headerlink" title="最大秩分解（满秩分解）"></a>最大秩分解（满秩分解）</h3><p><strong>概念：</strong>A=BD，BD分别为列满秩行满秩</p><p><strong>分解步骤：</strong>将A化为行标准型A’，找出A‘中的对应单位列向量对用的列，A中的对应列就是B，A’的非零行就是D</p><h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><p><strong>定理1：</strong>$rank(A)=rank(A^HA)=rank(AA^H),A^HA,AA^H特征值非负，非零特征值相同$</p><p><strong>定义：</strong>$设A\in C_r^{m*n},A^HA的特征值为\lambda_i,则称\sigma_i=\sqrt{\lambda_i}为A的正奇异值$</p><p><strong>定义：</strong>若存在酉矩阵U，V使得A=UBV，则称A，B酉等价。</p><p>-&gt;<strong>定理：</strong>如果A，B酉等价那么A，B有相同的正奇异值</p><p><strong>分解概念：</strong></p><script type="math/tex; mode=display">A=U\begin{bmatrix}D&0\\0&0\end{bmatrix}V^H,D为A的正奇异值组成的对角矩阵</script><p><strong>分解步骤：</strong>$先求出AA^H的特征值，特征向量，同时将特征向量正交单位化变成矩阵V，\\计算U_1=AV_1\sum^{-1},其中，\sum为非零奇异值组成的对角矩阵，V_1为非零特征值对应的特征向量，U_2是当U_1不是方阵时补充的矩阵，\\将U_1补充为正交矩阵。最后A=U\begin{bmatrix}\sum&amp;0\\0&amp;0\end{bmatrix}V^H$</p><h2 id="圆盘定理，Rayleigh商"><a href="#圆盘定理，Rayleigh商" class="headerlink" title="圆盘定理，Rayleigh商"></a>圆盘定理，Rayleigh商</h2><h3 id="圆盘定理"><a href="#圆盘定理" class="headerlink" title="圆盘定理"></a>圆盘定理</h3><p><strong>定理：</strong>k个圆盘形成一个连通区域G，和余下的n-k个圆盘不相交，则该区域有k个特征值</p><p>实矩阵的特征值如果是负数一定是成对出现，</p><p>行对角占优,列对角占优。</p><p><strong>定理：</strong>如果A行对角占优或者列对角占优那么</p><ul><li>A可逆</li><li>A若为hermite且所有主对角都为正数那么A的特征值都为正数,如果都为负数，那么特征值也都是负数。</li></ul><h3 id="Rayleigh商"><a href="#Rayleigh商" class="headerlink" title="Rayleigh商"></a>Rayleigh商</h3><p><strong>注意：Rayleigh商定理定义的前提都是Hermite矩阵</strong></p><p><strong>定义：</strong>$A为厄密特矩阵，R(x)=\frac{x^HAx}{x^Hx},x\ne0$</p><p><strong>定理1：</strong>$\lambda_n\le R(x)\le \lambda_1,分别为最大最小特征值$</p><p><strong>定理2：</strong>如果x在A的部分特征向量的生成空间内，那么最大最小rayleigh商就是这些特征向量对应特征值的最大最小值。</p><p><strong>定理3：</strong>A，B为厄密特矩阵，$\lambda_k(A)+\lambda_n(B)\le \lambda_k(A+B)\le \lambda_k(A)+\lambda_1(B)$</p><h2 id="矩阵分析"><a href="#矩阵分析" class="headerlink" title="矩阵分析"></a>矩阵分析</h2><h3 id="收敛矩阵"><a href="#收敛矩阵" class="headerlink" title="收敛矩阵"></a>收敛矩阵</h3><p><strong>定义：</strong>$\lim_{k\to\infty}A^k=0$</p><p><strong>定理：</strong>A收敛充要条件是A谱半径小于1</p><h3 id="矩阵函数"><a href="#矩阵函数" class="headerlink" title="矩阵函数"></a>矩阵函数</h3><p><strong>常用矩阵函数：</strong></p><script type="math/tex; mode=display">(E-A)^{-1}=\sum_{k=0}^\infty A^k,r(A)\lt1 \\ln(E+A)=\sum_{k=0}^\infty \frac{(-1)^k}{k+1}A^{k+1},r(A)\lt1 \\e^A=\sum_{k=0}^\infty \frac{1}{k!}A^k,\forall A\in C^{n*n} \\sinA=\sum_{k=0}^\infty \frac{(-1)^k}{(2k+1)!}A^{2k+1},\forall A\in C^{n*n}\\cosA=\sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}A^{2k},\forall A\in C^{n*n}</script><p><strong>矩阵函数计算：</strong></p><p>先将A矩阵进行JORDAN分解，接着进行根据矩阵函数公式进行计算。</p><h2 id="值域和核空间结论"><a href="#值域和核空间结论" class="headerlink" title="值域和核空间结论"></a>值域和核空间结论</h2><h3 id="值域"><a href="#值域" class="headerlink" title="值域"></a>值域</h3><p><strong>定义：</strong>$A=(\alpha_1,\alpha_2,\cdots,\alpha_n)\in C_r^{m*n},R(A)=L(\alpha_1,\alpha_2,\cdots,\alpha_n),dimR(A)=r$</p><p>$R(A)=\{y|y=Ax,\forall x\in C^n\}=\{y|y=\sum_{i=1}^nx_i\alpha_i,\forall x_i\in C^n\}$</p><p><strong>推论1：</strong>$R(AB)\subset R(A)$</p><p>$R(A)=\{y|y=Ax,\forall x\in C^n\},R(AB)=\{y|y=ABx=A\tilde x,\forall \tilde x\in C^n\}$</p><p><strong>推论2：</strong></p><p>$如果rank(AB)=rank(A),也即dim(AB)=dim(A),那么R(AB)=R(A)$</p><p><strong>推论3：</strong></p><p>$A\in C^{m<em>n},B\in C^{m</em>p},if \ R(A)=R(B)，那么B=AX,X\in C^{n*p}$</p><h3 id="核空间"><a href="#核空间" class="headerlink" title="核空间"></a>核空间</h3><h2 id="广义逆矩阵"><a href="#广义逆矩阵" class="headerlink" title="广义逆矩阵"></a>广义逆矩阵</h2><h3 id="单边逆矩阵"><a href="#单边逆矩阵" class="headerlink" title="单边逆矩阵"></a>单边逆矩阵</h3><p><strong>概念：</strong>$如果GA=E_n，把G叫左逆矩阵A_L^-，AG=E_m，G叫做右逆矩阵A_R^-$</p><ul><li>$A左可逆\leftrightarrow A列满秩\leftrightarrow N(A)={0}$</li><li>$A右可逆\leftrightarrow A行满秩\leftrightarrow R(A)=C^m$</li></ul><h3 id="广义逆矩阵-1"><a href="#广义逆矩阵-1" class="headerlink" title="广义逆矩阵"></a>广义逆矩阵</h3><p><strong>定义：</strong>$AGb=b\leftrightarrow AGA=A$</p><p>$A\{1\}=\{G|AGA=A,\forall G\in C^{n*m}\}$</p><p><strong>性质：</strong></p><ul><li>$(A^T)^-=(A^-)^T,(A^H)^-=(A^-)^H$</li><li>$AA^-,A^-A都是幂等矩阵，rank(A)=rank(AA^-)=rank(A^-A)\le rank(A^-)$</li><li>$(\lambda A)^-=\lambda^-A^-,if\ \lambda=0,\lambda^-=0,else\ \lambda^-=1/\lambda$</li><li>$R(A)=R(AA^-),N(A)=N(A^-A)$</li></ul><p><strong>推论：</strong>$rank(A)=m或n,充要条件分别是A<em>A^-=E_mA^-</em>A=E_n$</p><h3 id="自反广义逆"><a href="#自反广义逆" class="headerlink" title="自反广义逆"></a>自反广义逆</h3><p><strong>定义：</strong>$AGA=A,GAG=G同时成立,记为A_r^-，任何矩阵都有$</p><p>$记作A\{1,2\}={A的所有自反广义逆矩阵的集合}$</p><p><strong>定理：</strong>$如果X，Y均为A的自反广义逆，那么Z=XAY也是A的自反广义逆。$</p><p><strong>定理：</strong>$A^-是自反广义逆充要条件是rank(A)=rank(A^-)$</p><h3 id="M-P广义逆"><a href="#M-P广义逆" class="headerlink" title="M-P广义逆"></a>M-P广义逆</h3><p><strong>定义：</strong>$AGA=A,GAG=G，(GA)^H=GA,(AG)^H=AG,G就是MP广义逆，G=A+$</p><p><strong>定理：</strong>$A=BD为满秩分解，G=A^+=D^H(DD^H)^{-1}(B^HB)^{-1}B^H$,G唯一</p><p><strong>引理：</strong></p><p>$如果A行满秩，则A^+=A^H(AA^H)^{-1}$</p><p>$如果A列满秩，则A^+=(A^HA)^{-1}A^H$</p><p><strong>性质：</strong></p><ul><li>$(A^+)^+=A$</li><li>$(A^T)^+=(A^+)^T,(A^H)^+=(A^+)^H$</li><li>$A^+=(A^HA)^+A^H=A^H(AA^H)^+$</li><li>$R(A^+)=R(A^H)$</li><li>$R(A)=R(A^H)&lt;=&gt;AA^+=A^+A$</li><li>一般没有$(AB)^+=B^+A^+$</li></ul><p><strong>计算A+以及求不相容方程Ax=b的最小二乘解最佳逼近解：</strong></p><p>判断是否相容：$AA^+=b相容$</p><p>最小二乘解通解：$x=A^+b+(E-A^+Au),\forall u\in C^n$</p><p>最佳逼近解：$x=A^+b$</p><p><strong>相容方程的通解和唯一极小范数解</strong></p><p>通解：$x=A^+b+(E-A^+Au),\forall u\in C^n$</p><p>唯一极小范数解：$x=A^+b$</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%95%B0%E5%AD%A6/">数学</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/22/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%AE%80%E8%AE%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>图片格式</title>
-      <link>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F/</link>
-      <guid>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F/</guid>
-      <pubDate>Fri, 15 Dec 2023 12:10:55 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;/images/深度学习/图像格式/1.png&quot; style=&quot;zoom:67%;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;详细文章可以看&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://bbs.huaweicloud.com/blogs/289319&quot;&gt;https://bb</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p><img src="/images/深度学习/图像格式/1.png" style="zoom:67%;"></p><p>详细文章可以看</p><p><a href="https://bbs.huaweicloud.com/blogs/289319">https://bbs.huaweicloud.com/blogs/289319</a></p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>维度的理解</title>
-      <link>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</link>
-      <guid>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</guid>
-      <pubDate>Fri, 15 Dec 2023 11:50:35 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;torch-clamp-input-min-max-out-None-→-Tensor&quot;&gt;&lt;a href=&quot;#torch-clamp-input-min-max-out-None-→-Tensor&quot; class=&quot;headerlink&quot; title=&quot;torch.</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="torch-clamp-input-min-max-out-None-→-Tensor"><a href="#torch-clamp-input-min-max-out-None-→-Tensor" class="headerlink" title="torch.clamp(input, min, max, out=None) → Tensor"></a>torch.clamp(input, min, max, out=None) → Tensor</h2><p>将输入<code>input</code>张量每个元素的夹紧到区间 [min,max][min,max]，并返回结果到一个新张量。</p><p>大于的变成max，小于的变成min。</p><h2 id="transforms-ToTensor"><a href="#transforms-ToTensor" class="headerlink" title="transforms.ToTensor()"></a>transforms.ToTensor()</h2><p>Converts a PIL Image or numpy.ndarray (H x W x C) in the range<br>[0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0]<br>if the PIL Image belongs to one of the modes (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1)<br>or if the numpy.ndarray has dtype = np.uint8</p><p>In the other cases, tensors are returned without scaling.</p><h2 id="transform-Normalize"><a href="#transform-Normalize" class="headerlink" title="transform.Normalize()"></a>transform.Normalize()</h2><p>image=(image-mean)/std</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform.ToTensor(),</span><br><span class="line">transform.Normalize((<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>),(<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>))</span><br></pre></td></tr></table></figure><p>ToTensor()能够把灰度范围从0-255变换到0-1之间，而后面的transform.Normalize()则把0-1变换到(-1,1)。</p><p>其中mean和std分别通过(0.5,0.5,0.5)和(0.5,0.5,0.5)进行指定。原来的0-1最小值0则变成(0-0.5)/0.5=-1，而最大值1则变成(1-0.5)/0.5=1.</p><h2 id="torchvision-transforms-ToPILImage"><a href="#torchvision-transforms-ToPILImage" class="headerlink" title="torchvision.transforms.ToPILImage()"></a>torchvision.transforms.ToPILImage()</h2><p>将Numpy的ndarray或者Tensor转化成PILImage类型【在数据类型上，两者都有明确的要求】</p><p>ndarray的数据类型要求dtype=uint8, range[0, 255] and shape H x W x C<br>Tensor 的shape为 C x H x W 要求是FloatTensor的，不允许DoubleTensor或者其他类型</p><p>to a PIL.Image of range [0, 255]</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>FCN</title>
-      <link>http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/</link>
-      <guid>http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/</guid>
-      <pubDate>Thu, 14 Dec 2023 11:33:33 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;y一般的分类网络就是，输入图像，网络输出数一般是类别数量，损失函数对y_hat和y真实进行交叉熵损失计算，损失函数的计算先对y_hat进行softmax归一化成概率，然后相当于真实标签y选择第几个输出作为真实分类标签。这个时候被选择出的输出进行-log计算，就是损失，一般输</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>y一般的分类网络就是，输入图像，网络输出数一般是类别数量，损失函数对y_hat和y真实进行交叉熵损失计算，损失函数的计算先对y_hat进行softmax归一化成概率，然后相当于真实标签y选择第几个输出作为真实分类标签。这个时候被选择出的输出进行-log计算，就是损失，一般输出的损失量形状是（batch_size，)</p><p>然后fcn就是输入图像，然后特征提取，接着上采样，使用自己创建的双线性插值的转置卷积的卷积核，也就是说利用转置卷积实现了双线性插值的功能，但是转置卷积的卷积核需要特定设计。需要注意的是一开始的卷积核是经过设计的，这是一个初始化，后续是网络自己学习卷积核参数。fcn输出形状是(batch_size,num_classes,h,w),输出通道就是类别数量，而标签的形状是(batch_size,h,w)，所以交叉熵损失函数先对每一个通道的输出进行softmax归一化计算变成概率，再通过标签二维位置的标号选择输出对应的概率再进行损失函数计算。最后损失函数输出形状是(batch_size,h,w),所以对后两个维度进行平均将形状变成（batch_size，)。需要注意的是CrossEntropyLoss函数已经自带了softmax操作。</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>对单纯正规的一些理解</title>
-      <link>http://example.com/2023/12/13/%E6%95%B0%E5%AD%A6/%E5%AF%B9%E5%8D%95%E7%BA%AF%E6%AD%A3%E8%A7%84%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</link>
-      <guid>http://example.com/2023/12/13/%E6%95%B0%E5%AD%A6/%E5%AF%B9%E5%8D%95%E7%BA%AF%E6%AD%A3%E8%A7%84%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</guid>
-      <pubDate>Wed, 13 Dec 2023 02:53:05 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;实际上相当于是，实对称矩阵一定可以正交相似对角化，对应于正规矩阵一定可以酉相似对角化，而hermite矩阵是正规矩阵，所以，在复数域上Hermite矩阵一定是可以相似对角化。&lt;/p&gt;
-&lt;p&gt;所以实际上schur定理缩小到实数域上是相似于一个正线上三角，如果A是对称矩阵那么就</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>实际上相当于是，实对称矩阵一定可以正交相似对角化，对应于正规矩阵一定可以酉相似对角化，而hermite矩阵是正规矩阵，所以，在复数域上Hermite矩阵一定是可以相似对角化。</p><p>所以实际上schur定理缩小到实数域上是相似于一个正线上三角，如果A是对称矩阵那么就相似于对角阵，也即是引理如果一个矩阵是对称矩阵和三角矩阵那么一定是对角矩阵。</p><p><strong>所以实际上复数域上的正规矩阵才对应的是实数域上的对称矩阵，而正交矩阵对应于酉矩阵。</strong></p><p>所以实对称矩阵和正规矩阵一定可以正交（酉）对角化，但是能对角化的不一定是这两种矩阵，也可以是单纯矩阵，而单纯矩阵是一个实数域和复数域共有的定义，代数重数等于几何重数。一般的单纯矩阵可以对角化但是如果不是这两种矩阵那么对角化的左右的矩阵就不是正交或者酉矩阵了，这里要区别正交对角化酉对角化和对角化的区别。</p><p>从而我们可以得出正规矩阵和是对称矩阵是一种特殊的单纯矩阵。</p><p>所以很多定理就要求矩阵是正规矩阵而不是一般矩阵，例如schur不等式的取等条件，只有当矩阵是正规矩阵时，矩阵才酉相似于对角矩阵，才能取等。</p>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%95%B0%E5%AD%A6/">数学</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/13/%E6%95%B0%E5%AD%A6/%E5%AF%B9%E5%8D%95%E7%BA%AF%E6%AD%A3%E8%A7%84%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>转置卷积和卷积</title>
-      <link>http://example.com/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/</link>
-      <guid>http://example.com/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/</guid>
-      <pubDate>Tue, 12 Dec 2023 11:49:01 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;转置卷积简介&quot;&gt;转置卷积简介&lt;/h2&gt;
-&lt;p&gt;就结论而言，卷积操作是多对一，而转置卷积操作是一对多，如下图所示，每一个“对”而言，都需要维护一个权值。&lt;/p&gt;
-&lt;p&gt;这些权值就是需要学习参数的一部分&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/深度学习</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="转置卷积简介">转置卷积简介</h2><p>就结论而言，卷积操作是多对一，而转置卷积操作是一对多，如下图所示，每一个“对”而言，都需要维护一个权值。</p><p>这些权值就是需要学习参数的一部分</p><p><img src="/images/深度学习/转置卷积/1.png" style="zoom:67%;"></p><p><img src="/images/深度学习/转置卷积/2.png" style="zoom:67%;"></p><h2 id="卷积的另一种理解">卷积的另一种理解</h2><p>将卷积核3*3矩阵进行重排列得到一个4*16矩阵。</p><p><img src="/images/深度学习/转置卷积/3.png" style="zoom:67%;"></p><p><img src="/images/深度学习/转置卷积/4.png" style="zoom:67%;"></p><p>接着将输入矩阵重排列为一个列向量，16*1.</p><p><img src="/images/深度学习/转置卷积/5.png" style="zoom:67%;"></p><p>使用矩阵乘法得到4*1列向量</p><p><img src="/images/深度学习/转置卷积/6.png" style="zoom:67%;"></p><p>重排列得到卷积输出。</p><p><img src="/images/深度学习/转置卷积/7.png" style="zoom:67%;"></p><p>实际上整个过程不难理解，我们先看4*16矩阵的第一行，再看被展开的输入列向量会发现其实就是用补0的方式跳过了不应该被卷积的部分，再看第二行其实就是补零然后整体右移一个单位。至于第三行就是卷积核与原矩阵卷积时重新换行，所以直接右移三个单位。第四行右移一个单位。这些平移量和步长和padding有关。</p><p>关键点就在于这个卷积矩阵，从输入16(4*4)到输出4(2*2)因为这个卷积矩阵尺寸正是4× 16（输入形状*输出形状）的，这个操作我们叫做下采样。如果你有一个16 ×4的矩阵，你就可以从4(2*2)到16(4*4)了，这就是一个上采样的操作。</p><p>表现为数学形式就是y=Cx,而我们要通过y得到x的形状，既可以表现成x=C^Ty,这样得到的形状就是原本的x的形状。</p><h2 id="转置卷积的理解">转置卷积的理解</h2><p>我们想要从4(2 × 2 2 ×2)到16(4 × 4 4 ×4)，因此我们使用了一个16 × 4 16×4的矩阵，但是还有一件事情需要注意，我们是想要维护一个1到9的映射关系。</p><p><img src="/images/深度学习/转置卷积/8.png" style="zoom:67%;"></p><p><img src="/images/深度学习/转置卷积/9.png" style="zoom:67%;"></p><h2 id="转置卷积的其他理解">转置卷积的其他理解</h2><h3 id="section">1</h3><p><img src="/images/深度学习/转置卷积/10.png" style="zoom:67%;"></p><h3 id="section-1">2</h3><p><img src="/images/深度学习/转置卷积/11.png" style="zoom:67%;"></p><p><img src="/images/深度学习/转置卷积/12.png" style="zoom:67%;"></p><p>转置输出尺寸公式：实际上就是卷积公式的反解</p><p><img src="/images/深度学习/转置卷积/13.png" style="zoom:67%;"></p><p>https://blog.csdn.net/tsyccnh/article/details/87357447这篇文章更加细节解释了转置卷积的一个过程。</p><h2 id="转置卷积与-upsampling-的区别">转置卷积与 UpSampling 的区别</h2><p>转置卷积 和 UpSampling 都可以把小的 Input 变成大的Output，那么两者有什么区别呢？哪个更好呢？</p><ol type="1"><li>UpSampling 可以看作是 Pooling 的反向操作，就是采用 Nearest Neighborinterpolation 来进行放大、Resize，说白了就是复制行和列的数据来扩充feature map 的大小，并不通过学习。</li><li>转置卷积（反卷积）就是卷积，想要把小的 Input 变成大的Output，做法是通过对输入隔行补 0、pading等方式，实现输出尺寸增大。转置卷积里面的 filter都是可以学出来的，本质上是一种 Learnable Upsampling。</li></ol>]]></content:encoded>
-      
-      
-      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</category>
-      
-      
-      
-      <comments>http://example.com/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>递归算法</title>
-      <link>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/</link>
-      <guid>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/</guid>
-      <pubDate>Wed, 06 Dec 2023 10:16:30 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;递归&quot;&gt;递归&lt;/h2&gt;
-&lt;p&gt;递归简单来说就是在运行过程中不断调用自己，直到碰到终止条件，返回结果的过程。&lt;/p&gt;
-&lt;p&gt;递归可以看作两个过程，分别是递和归。递就是原问题把要计算的结果传给子问题；归则是子问题求出结果后，把结果层层返回原问题的过程。&lt;/p&gt;
+      <description>&lt;h2 id=&quot;axial-attention-in-multidimensional-transformers&quot;&gt;AXIAL
+ATTENTION IN MULTIDIMENSIONAL TRANSFORMERS&lt;/h2&gt;
 </description>
         
       
       
       
-      <content:encoded><![CDATA[<h2 id="递归">递归</h2><p>递归简单来说就是在运行过程中不断调用自己，直到碰到终止条件，返回结果的过程。</p><p>递归可以看作两个过程，分别是递和归。递就是原问题把要计算的结果传给子问题；归则是子问题求出结果后，把结果层层返回原问题的过程。</p><h2 id="使用场合">使用场合</h2><p>1.大问题可以拆分为若干小问题<strong>2.原问题与子问题除数据规模不同，求解思路完全相同</strong>3.存在递归终止条件4.<strong>当不满足终止条件时，要如何缩小函数值并让其进入下一层循环中</strong></p><h3 id="示例1求阶乘">示例1：求阶乘</h3><ol type="1"><li>N！可以拆分为（N-1）！*N</li><li>（N-1）！与N！只有数字规模不同，求解思路相同</li><li>当N=1时，结果为1，递归终止</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Factorial</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> num;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> num*Factorial(num-<span class="number">1</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><h3 id="顺序打印输入一个整数时按顺序依次打印每一位的值">2：顺序打印：输入一个整数时，按顺序依次打印每一位的值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PrintNumber</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num&gt;<span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            PrintNumber(num/<span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(num%<span class="number">10</span>+<span class="string">&quot;,&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="斐波那契数列">3：斐波那契数列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num==<span class="number">1</span>||num==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Fibonacci(num-<span class="number">1</span>)+Fibonacci(num-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>递归式：f(n)=f(n-1)+f(n-2)</p>]]></content:encoded>
+      <content:encoded><![CDATA[<h2 id="axial-attention-in-multidimensional-transformers">AXIALATTENTION IN MULTIDIMENSIONAL TRANSFORMERS</h2>]]></content:encoded>
       
       
-      <category domain="http://example.com/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/">深度学习论文</category>
       
       
       
-      <comments>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/#disqus_thread</comments>
+      <comments>http://example.com/2024/03/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/axial_attention/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>MedTrans</title>
+      <link>http://example.com/2024/03/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/MedTrans/</link>
+      <guid>http://example.com/2024/03/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/MedTrans/</guid>
+      <pubDate>Thu, 21 Mar 2024 11:28:43 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;medical-transformer-gated-axial-attention-for-medical-image-segmentation&quot;&gt;Medical
+Transformer: Gated Axial-Attention for Medical Im</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="medical-transformer-gated-axial-attention-for-medical-image-segmentation">MedicalTransformer: Gated Axial-Attention for Medical Image Segmentation</h2><h3 id="概述">概述</h3><p>​ 卷积结构存在内在的inductivebiases（归纳偏差），缺乏对图像远程依赖关系的理解。同时对于数据集规要求较高。</p><p>​作者提出门控轴向注意力机制，并且提出一种叫做Local-Global（LoGo）的训练策略高效训练模型。在三个数据集上达到了更好的效果相比卷积模型和其他注意力模型。</p><p>​作者认为虽然Deeplab，SETR这些网络提高了表现，但是还未被探索完全，因为编码解码器仍然是以卷积结构作为主要模块。</p><p>​同时trans结构需要大规模数据集，但是对于医学图像难以做到，并且较少的图像会导致训练位置编码变得困难。所以提出门控的注意力控制位置编码进入qkv的信息量。由于是可学习的，所以可以适用于基本上所有规模的数据集。根据数据集大小，这些门会学习是否图片的数量可以学习到正确的位置编码。根据判断学习到的位置编码是否有用，这些门参数会收敛到0或者一个highvalue。</p><p>​提出一种局部全局（LoGo）训练策略，使用浅全局分支和对医学图像的补丁进行操作的深层局部分支。不仅关注整张图片同时还关注局部细节。</p><p><strong>总结：</strong></p><ul><li>提出了一种门控位置敏感的轴向注意机制，即使在较小的数据集上也能很好地工作</li><li>引入LoGo训练方法</li><li>提出Med-Trans</li><li>提高了表现</li></ul><h3 id="实现细节">实现细节</h3><p>模型结构：<img src="/images/深度学习论文/MedT/1.png" style="zoom:67%;"></p><p><img src="/../../../Wechat Cahes/WeChat Files/wxid_wfmw4p48qcvj22/FileStorage/Temp/18cd503efe60c48a081d5a1ff765a79.png" alt="18cd503efe60c48a081d5a1ff765a79" style="zoom: 67%;"></p><p><strong>轴向注意力：</strong></p><p>将特征图分为两个维度（长宽轴）进行注意力计算。具有更高的计算效率。</p><p>所谓的轴向注意力就是对于位置编码分别对qkv进行学习，然后进行相加。具体看公式：<span class="math display">\[y=\sum softmax(qk+qr_q+kr_k)(v+r_v)\]</span> <strong>门控轴向注意力：</strong></p><p>作者认为，对于小规模数据集的实验（医学图像分割中常见的情况），位置偏差很难学习，因此在编码远程交互时并不总是准确的。在学习的相对位置编码不够准确的情况下，将它们添加到各自的键、查询和值张量中将导致性能下降。因此提出门控轴向注意力，也就是加入了门控制位置信息量的输入。公式：<span class="math display">\[y=\sum softmax(qk+G_qqr_q+G_kkr_k)(G_{v_1}v+G_{v_2}r_v)\]</span> <strong>LoGo训练策略：</strong></p><p>为了提高对图像的整体理解，作者建议在网络中使用两个分支，即作用于图像原始分辨率的全局分支和作用于图像补丁的局部分支。</p><p>全局分支中，减少了门控轴向变压器层的数量，因为观察到所提出的变压器模型的前几个块足以模拟长范围依赖性。在本地分支中，创建16 个大小为 I/4 × I/4 的图像块，其中 I是原始图像的尺寸。在本地分支中，每个补丁通过网络进行前馈，并根据输出特征图的位置对其进行重新采样以获得输出特征图。然后将两个分支的输出特征图相加并通过1 × 1 卷积层以生成输出分割掩模。</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/">深度学习论文</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/MedT/MedTrans/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>异位词</title>
+      <link>http://example.com/2024/03/20/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%BC%82%E4%BD%8D%E8%AF%8D/</link>
+      <guid>http://example.com/2024/03/20/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%BC%82%E4%BD%8D%E8%AF%8D/</guid>
+      <pubDate>Wed, 20 Mar 2024 03:24:53 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;给定两个字符串 &lt;code&gt;s&lt;/code&gt; 和 &lt;code&gt;p&lt;/code&gt;，找到 &lt;code&gt;s&lt;/code&gt;
+中所有 &lt;code&gt;p&lt;/code&gt; 的 &lt;strong&gt;异位词&lt;/strong&gt;
+的子串，返回这些子串的起始索引。不考虑答案输出的顺序。&lt;/p&gt;
+&lt;p</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>给定两个字符串 <code>s</code> 和 <code>p</code>，找到 <code>s</code>中所有 <code>p</code> 的 <strong>异位词</strong>的子串，返回这些子串的起始索引。不考虑答案输出的顺序。</p><p><strong>异位词</strong>指由相同字母重排列形成的字符串（包括相同的字符串）。</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;cbaebabacd&quot;, p = &quot;abc&quot;</span><br><span class="line">输出: [0,6]</span><br><span class="line">解释:</span><br><span class="line">起始索引等于 0 的子串是 &quot;cba&quot;, 它是 &quot;abc&quot; 的异位词。</span><br><span class="line">起始索引等于 6 的子串是 &quot;bac&quot;, 它是 &quot;abc&quot; 的异位词。</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abab&quot;, p = &quot;ab&quot;</span><br><span class="line">输出: [0,1,2]</span><br><span class="line">解释:</span><br><span class="line">起始索引等于 0 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的异位词。</span><br><span class="line">起始索引等于 1 的子串是 &quot;ba&quot;, 它是 &quot;ab&quot; 的异位词。</span><br><span class="line">起始索引等于 2 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的异位词。</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/hot-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">hot/滑动窗口</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/20/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%BC%82%E4%BD%8D%E8%AF%8D/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>无重复子串</title>
+      <link>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/</link>
+      <guid>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/</guid>
+      <pubDate>Tue, 19 Mar 2024 12:37:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;给定一个字符串 &lt;code&gt;s&lt;/code&gt; ，请你找出其中不含有重复字符的
+&lt;strong&gt;最长子串&lt;/strong&gt; 的长度。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例 1:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的<strong>最长子串</strong> 的长度。</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure><p><strong>示例 3:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure><p>子串中字符一定是连续的</p><p>思路：</p><p>我们先定义一个窗口，i指向左边界，rk指向右边界，我们先从i=0找到不重复最大子串的右边界rk。我们使用变量记录长度并且把子串内容存入哈希集合中。此时我们将i右移一位，把窗口最左侧内容移初出哈希集合。我们的rk也继续右移找到最大不重复子串，因为rk只会变大。</p><p>实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> rk = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> L = s.length();</span><br><span class="line">        Set&lt;Character&gt; occ = <span class="keyword">new</span> HashSet&lt;Character&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=<span class="number">0</span>)&#123;</span><br><span class="line">                occ.remove(s.charAt(i-<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(rk+<span class="number">1</span>&lt;L&amp;&amp;!occ.contains(s.charAt(rk+<span class="number">1</span>)))&#123;</span><br><span class="line">                occ.add(s.charAt(rk + <span class="number">1</span>));</span><br><span class="line">                rk++;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = Math.max(ans,rk-i+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/hot-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">hot/滑动窗口</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>接雨水</title>
+      <link>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <guid>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <pubDate>Tue, 19 Mar 2024 12:09:53 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;给定 &lt;code&gt;n&lt;/code&gt; 个非负整数表示每个宽度为 &lt;code&gt;1&lt;/code&gt;
+的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td clas</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code>的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出：6</span><br><span class="line">解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 </span><br></pre></td></tr></table></figure><p><strong>思路：</strong></p><p><img src="/images/力扣/双指针/1.png" style="zoom:67%;"></p><p><img src="/../../images/力扣/双指针/1.png" alt="1" style="zoom: 33%;"></p><p>每个点都有一个leftmax和一个rightmax，两者之间最小的代表了木桶最短的板，用最小的一个减去这个点的值可以得到这个点的水量。</p><p>我们比较朴素的思路是使用两个数组记录每一个点的leftmax数组和rightmax数组，最后进行累加计算。</p><p>实际上可以使用双指针，两个指针left，right来跟踪记录更新leftmax，rightmax值。随着指针移动，更新水量。之所以能这样跟踪，因为我们知道leftmax随着下标增加递增，rightmax随着下标减小递增。</p><p>代码实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = height.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> lm = height[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> rm = height[height.length-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> sm = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            lm = Math.max(lm,height[left]);</span><br><span class="line">            rm = Math.max(rm,height[right]);</span><br><span class="line">            <span class="keyword">if</span>(lm&lt;rm)&#123;</span><br><span class="line">                sm += lm-height[left];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                sm += rm-height[right];</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">        <span class="keyword">return</span> sm;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>也可以使用单调栈解决这个问题</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/hot-%E5%8F%8C%E6%8C%87%E9%92%88/">hot/双指针</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/19/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E6%8E%A5%E9%9B%A8%E6%B0%B4/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>匿名内部类以及衍生操作</title>
+      <link>http://example.com/2024/03/19/Java/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB/</link>
+      <guid>http://example.com/2024/03/19/Java/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB/</guid>
+      <pubDate>Tue, 19 Mar 2024 01:52:12 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;匿名内部类&quot;&gt;匿名内部类&lt;/h2&gt;
+&lt;p&gt;正常情况下，要创建一个抽象类的实例对象，只能对其进行继承，先实现未实现的方法，然后创建子类对象。&lt;/p&gt;
+&lt;p&gt;而我们可以在方法中使用匿名内部类，将其中的抽象方法实现，并直接创建实例对象：&lt;/p&gt;
+&lt;figure c</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="匿名内部类">匿名内部类</h2><p>正常情况下，要创建一个抽象类的实例对象，只能对其进行继承，先实现未实现的方法，然后创建子类对象。</p><p>而我们可以在方法中使用匿名内部类，将其中的抽象方法实现，并直接创建实例对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student student = <span class="keyword">new</span> Student() &#123;</span><br><span class="line">    <span class="keyword">int</span> a;   <span class="comment">//因为本质上就相当于是子类，所以说子类定义一些子类的属性完全没问题</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;我是匿名内部类的实现!&quot;</span>);   <span class="comment">//直接使用父类中的name变量</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">    student.test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>同样的，接口也可以通过这种匿名内部类的形式，直接创建一个匿名的接口实现类：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Study study = <span class="keyword">new</span> Study() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是学习方法！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    study.study();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>并不是说只有抽象类和接口才可以像这样创建匿名内部类，普通的类也可以，只不过意义不大，一般情况下只是为了进行一些额外的初始化工作而已。</p><h2 id="lambda表达式">Lambda表达式</h2><p>特别的，<strong>如果一个接口中有且只有一个待实现的抽象方法</strong>，那么我们可以将匿名内部类简写为Lambda表达式：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Study study = () -&gt; System.out.println(<span class="string">&quot;我是学习方法！&quot;</span>);   <span class="comment">//是不是感觉非常简洁！</span></span><br><span class="line">  study.study();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>格式：</p><ul><li>标准格式为：<code>([参数类型 参数名称,]...) ‐&gt; &#123; 代码语句，包括返回值 &#125;</code></li><li>和匿名内部类不同，Lambda仅支持接口，不支持抽象类</li><li>接口内部必须有且仅有一个抽象方法（可以有多个方法，但是必须保证其他方法有默认实现，必须留一个抽象方法出来）</li></ul><p>注意，如果方法体中只有一个返回语句，可以直接省去花括号和<code>return</code>关键字，如果参数只有一个，那么可以省去小括号：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Study study = (a) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;今天学会了&quot;</span>+a;   <span class="comment">//这种情况是可以简化的</span></span><br><span class="line">&#125;;</span><br><span class="line">Study study = a -&gt; <span class="string">&quot;今天学会了&quot;</span>+a;</span><br></pre></td></tr></table></figure><p>如果一个方法的参数需要的是一个接口的实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    test(a -&gt; <span class="string">&quot;今天学会了&quot;</span>+a);   <span class="comment">//参数直接写成lambda表达式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Study study)</span></span>&#123;</span><br><span class="line">    study.study(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="方法引用">方法引用</h2><p>方法引用就是将一个已实现的方法，直接作为接口中抽象方法的实现（当然前提是方法定义得一样才行）</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Study</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;   <span class="comment">//待实现的求和方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Study study = (a, b) -&gt; a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Integer类中默认提供了求两个<span class="keyword">int</span>值之和的方法：</span><br><span class="line"><span class="comment">//Integer类中就已经有对应的实现了</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Study study = (a, b) -&gt; Integer.sum(a, b);   <span class="comment">//直接使用Integer为我们通过好的求和方法</span></span><br><span class="line">    System.out.println(study.sum(<span class="number">10</span>, <span class="number">20</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Study study = Integer::sum;    <span class="comment">//使用双冒号来进行方法引用，静态方法使用 类名::方法名 的形式</span></span><br><span class="line">    System.out.println(study.sum(<span class="number">10</span>, <span class="number">20</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>方法引用其实本质上就相当于将其他方法的实现，直接作为接口中抽象方法的实现。任何方法都可以通过方法引用作为实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Study</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">study</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Main main = <span class="keyword">new</span> Main();</span><br><span class="line">    Study study = main::lbwnb;   <span class="comment">//成员方法因为需要具体对象使用，所以说只能使用 对象::方法名 的形式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">lbwnb</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;卡布奇诺今犹在，不见当年倒茶人。&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="双括号初始化">双括号初始化</h2><p>示例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;() &#123;&#123;</span><br><span class="line">    put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;吴仙杰&quot;</span>);</span><br><span class="line">    put(<span class="string">&quot;englishName&quot;</span>, <span class="string">&quot;Jason Wu&quot;</span>);</span><br><span class="line">&#125;&#125;;</span><br></pre></td></tr></table></figure><p>解释：</p><p>第一个括号是<strong>匿名内部类</strong>，第二个括号是<strong>实例初始化块</strong>。</p><p><strong>实例初始化块：</strong> 实例初始化块（instance initializerblock）是 Java中一种特殊的代码块，它用于在创建对象时执行初始化操作。实例初始化块使用一对花括号<code>&#123;&#125;</code> 包围，在类中定义，但没有使用 <code>static</code>修饰符。</p><p>实例初始化块在对象创建时执行，每次创建对象时都会执行一次。它在构造函数之前执行，因此可以用来对所有对象共享的初始化操作，而不用在每个构造函数中都重复编写。实例初始化块在构造函数之前执行，这意味着它可以用来初始化对象的实例变量，在构造函数中可以直接使用这些实例变量。</p><p>总结下关于静态初始化块、实例初始化块和构造函数三者的比较：</p><ul><li>执行顺序：静态初始化块 → 实例初始化块 → 构造函数</li><li>执行阶段：静态初始化块在类初始化阶段执行。实例初始化块和构造函数在对象实例化阶段执行</li><li>执行次数：不论实例化多少个对象，静态初始化块都只执行一次。实例化几个对象，就执行几次实例初始化块和构造函数</li></ul><p>实际相当于：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wuxianjiezh.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 局部类</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">LocalClass</span> <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">String</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">            <span class="comment">// 实例初始化块</span></span><br><span class="line">            &#123;</span><br><span class="line">                put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;吴仙杰&quot;</span>);</span><br><span class="line">                put(<span class="string">&quot;englishName&quot;</span>, <span class="string">&quot;Jason Wu&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> LocalClass();</span><br><span class="line"></span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="函数式接口">函数式接口</h2><p>举例一个：<strong>Consumer消费型函数式接口：</strong>这个接口专门用于消费某个对象的。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(T t)</span></span>;    <span class="comment">//这个方法就是用于消费的，没有返回值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Consumer&lt;T&gt; <span class="title">andThen</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; after)</span> </span>&#123;   <span class="comment">//这个方法便于我们连续使用此消费接口</span></span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; &#123; accept(t); after.accept(t); &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>用例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//专门消费Student对象的Consumer</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Consumer&lt;Student&gt; STUDENT_CONSUMER = student -&gt; System.out.println(student+<span class="string">&quot; 真好吃！&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student student = <span class="keyword">new</span> Student();</span><br><span class="line">    STUDENT_CONSUMER.accept(student);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用<code>andThen</code>方法继续调用：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student student = <span class="keyword">new</span> Student();</span><br><span class="line">    STUDENT_CONSUMER   <span class="comment">//我们可以提前将消费之后的操作以同样的方式预定好</span></span><br><span class="line">            .andThen(stu -&gt; System.out.println(<span class="string">&quot;我是吃完之后的操作！&quot;</span>)) </span><br><span class="line">            .andThen(stu -&gt; System.out.println(<span class="string">&quot;好了好了，吃饱了！&quot;</span>))</span><br><span class="line">            .accept(student);   <span class="comment">//预定好之后，再执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这一部分代码实现逻辑：</p><p>c1.andThen（after2）.accept(student),</p><p>变成{c1.accept(student),after2.accept(student)}</p><p>c1.accept(student):=c.andThen(after1).accept(student)</p><p>变成{c.accept(student),after1.accept(student)}</p><p>最后变成实现流程为：</p><p>c.accept(student)</p><p>after1.accept(student)</p><p>after2.accept(student)</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/java/">java</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/19/Java/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title></title>
-      <link>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
-      <guid>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
-      <pubDate>Wed, 06 Dec 2023 10:16:12 GMT</pubDate>
+      <link>http://example.com/2024/03/15/%E4%BD%9C%E4%B8%9A/%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2/</link>
+      <guid>http://example.com/2024/03/15/%E4%BD%9C%E4%B8%9A/%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2/</guid>
+      <pubDate>Fri, 15 Mar 2024 01:37:21 GMT</pubDate>
       
         
         
-      <description>
+      <description>&lt;h2 align=&quot;center&quot;&gt;
+专题文献检索
+&lt;/h2&gt;
+&lt;h3 id=&quot;专题检索&quot;&gt;1 专题检索&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;研究方向：&lt;/strong&gt;医学图像分割&lt;/p&gt;
+&lt;center&gt;
+表 1 检索要素
+&lt;/center&gt;
+&lt;table&gt;
 </description>
         
       
       
       
-      <content:encoded><![CDATA[]]></content:encoded>
+      <content:encoded><![CDATA[<h2 align="center">专题文献检索</h2><h3 id="专题检索">1 专题检索</h3><p><strong>研究方向：</strong>医学图像分割</p><center>表 1 检索要素</center><table><colgroup><col style="width: 9%"><col style="width: 57%"><col style="width: 32%"></colgroup><thead><tr class="header"><th>检索要素</th><th>检索要素1</th><th>检索要素2</th></tr></thead><tbody><tr class="odd"><td>中文相关词</td><td>医学图像；医学影像</td><td>分割;语义分割</td></tr><tr class="even"><td>外文相关词</td><td>medical imaging;medical image;medical images;doctored image;medicineimage;medical imagings;</td><td>segmentation;semantic segmentation</td></tr></tbody></table><center>表 2 检索式及检索结果</center><table><colgroup><col style="width: 11%"><col style="width: 64%"><col style="width: 10%"><col style="width: 12%"></colgroup><thead><tr class="header"><th>数据库名称</th><th>检索式</th><th>命中记录数</th><th>检索效果评价</th></tr></thead><tbody><tr class="odd"><td>知网</td><td>(医学图像 + 医学影像) * (分割 + 语义分割)</td><td>7304</td><td>检索效果较好</td></tr><tr class="even"><td>WOS核心合集</td><td>("medical image" or "medical imaging" or "medical images" or"medical imagings" or "medicine image" or "doctored image") and("segmentation" or "semantic segmentation")</td><td>14333</td><td>相关度高</td></tr><tr class="odd"><td>EV</td><td>("medical image" or "medical imaging" or "medical images" or"medical imagings" or "medicine image" or "doctored image") and("segmentation" or "semantic segmentation")</td><td>36991</td><td>全面较杂</td></tr><tr class="even"><td>IEL</td><td>("medical image" OR "medical imaging" OR "medical images" OR"medical imagings" OR "medicine image" OR "doctored image") AND("segmentation" OR "semantic segmentation")</td><td>11376</td><td>精炼全面</td></tr></tbody></table><h3 id="筛选文献">2 筛选文献</h3><p><strong>筛选文献依据：</strong>首先由于是深度学习领域，知识更新迭代较快，我们选择2022年以后的文献，同时勾选开放获取，高被引论文。但是我们不想看综述，所以排除综述。</p><p>[1]HUANG Y, YANG H, SUN K, 等. InterFormer: Real-time InteractiveImage Segmentation[M/OL]. arXiv, 2023[2024-03-05].http://arxiv.org/abs/2304.02942.</p><p>[2]Butoi V I, Ortiz J J G, Ma T, et al. Universeg: Universal medicalimage segmentation[C]//Proceedings of the IEEE/CVF InternationalConference on Computer Vision. 2023: 21438-21451.</p><p>[3]Wu J, Fu R, Fang H, et al. Medsegdiff: Medical image segmentationwith diffusion probabilistic model[C]//Medical Imaging with DeepLearning. PMLR, 2024: 1623-1639.</p><p>[4]Wu J, Fu R, Fang H, et al. Medical sam adapter: Adapting segmentanything model for medical image segmentation[J]. arXiv preprintarXiv:2304.12620, 2023.</p><p>[5]Zhang K, Liu D. Customized segment anything model for medicalimage segmentation[J]. arXiv preprint arXiv:2304.13785, 2023.</p><p>[6]He S, Bao R, Li J, et al. Accuracy of segment-anything model (sam)in medical image segmentation tasks[J]. arXiv preprint arXiv:2304.09324,2023.</p><p>[7]Zhang Y, Zhou T, Wang S, et al. Input augmentation with sam:Boosting medical image segmentation with segmentation foundationmodel[C]//International Conference on Medical Image Computing andComputer-Assisted Intervention. Cham: Springer Nature Switzerland, 2023:129-139.</p><p>[8]Xu G, Zhang X, He X, et al. Levit-unet: Make faster encoders withtransformer for medical image segmentation[C]//Chinese Conference onPattern Recognition and Computer Vision (PRCV). Singapore: SpringerNature Singapore, 2023: 42-53.</p><p>[9]Xu G, Zhang X, He X, et al. Levit-unet: Make faster encoders withtransformer for medical image segmentation[C]//Chinese Conference onPattern Recognition and Computer Vision (PRCV). Singapore: SpringerNature Singapore, 2023: 42-53.</p><p>[10]You C, Dai W, Min Y, et al. Rethinking semi-supervised medicalimage segmentation: A variance-reduction perspective[J]. Advances inNeural Information Processing Systems, 2024, 36.</p><p>[11]Zhang Y, Jiao R. How segment anything model (SAM) boost medicalimage segmentation?[J]. arXiv preprint arXiv:2305.03678, 2023.</p><p>[12]Zhang H, Zhong X, Li G, et al. BCU-Net: Bridging ConvNeXt andU-Net for medical image segmentation[J]. Computers in Biology andMedicine, 2023, 159: 106960.</p><p>[13]Ulrich C, Isensee F, Wald T, et al. Multitalent: A multi-datasetapproach to medical image segmentation[C]//International Conference onMedical Image Computing and Computer-Assisted Intervention. Cham:Springer Nature Switzerland, 2023: 648-658.</p><p>[14]Heidari M, Kazerouni A, Soltany M, et al. Hiformer: Hierarchicalmulti-scale representations using transformers for medical imagesegmentation[C]//Proceedings of the IEEE/CVF winter conference onapplications of computer vision. 2023: 6202-6212.</p><p>[15]Li Z, Li Y, Li Q, et al. Lvit: language meets vision transformerin medical image segmentation[J]. IEEE transactions on medical imaging,2023.</p><p>[16]Wang Y, Xiao B, Bi X, et al. Mcf: Mutual correction framework forsemi-supervised medical image segmentation[C]//Proceedings of theIEEE/CVF conference on computer vision and pattern recognition. 2023:15651-15660.</p><p>[17]Yin Y, Han Z, Jian M, et al. AMSUnet: A neural network usingatrous multi-scale convolution for medical image segmentation[J].Computers in Biology and Medicine, 2023, 162: 107120.</p><p>[18]Wang G, Luo X, Gu R, et al. PyMIC: A deep learning toolkit forannotation-efficient medical image segmentation[J]. Computer Methods andPrograms in Biomedicine, 2023, 231: 107398.</p><p>[19]Shen T, Xu H. Medical image segmentation based on Transformer andHarDNet structures[J]. IEEE Access, 2023, 11: 16621-16630.</p><p>[20]Zhang S, Zhang J, Tian B, et al. Multi-modal contrastive mutuallearning and pseudo-label re-learning for semi-supervised medical imagesegmentation[J]. Medical Image Analysis, 2023, 83: 102656.</p><h3 id="创建定题跟踪">3 创建定题跟踪</h3><p>定题跟踪服务是根据用户特定研究课题的需要，在该课题研究的整个过程中，定期或不定期地连续为用户提供文献信息的全程文献检索服务，并及时反馈最新检索结果，便于用户随时跟踪自己教学或研究课题或本行业的最新发展动态。</p><p><strong>流程：</strong></p><ol type="1"><li><p>首先我们根据检索式检索需要的文献，然后点击创建跟踪服务<img src="file:///D:\QQ%20Cahes\2320109962\Image\C2C\TUL_9CU%5DJH98D03XDSF%5DX_R.png" alt="img"></p></li><li><p>输入名称，勾选发送电子邮件服务</p><p><img src="file:///D:\QQ Cahes\2320109962\Image\C2C\[QNF5TUHHVZA]SB[2SW~~ZM.png" alt="img" style="zoom: 50%;"></p></li><li><p>成功创建跟踪</p><p><img src="/2024/03/15/%E4%BD%9C%E4%B8%9A/%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2/IDM下载\Documents\1.png" alt="1" style="zoom:50%;"></p></li><li><p>管理跟踪服务</p></li></ol><p><img src="/2024/03/15/%E4%BD%9C%E4%B8%9A/%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2/IDM下载\Documents\2.png" alt="2" style="zoom:50%;"></p>]]></content:encoded>
       
       
       
       
-      <comments>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</link>
-      <guid>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</guid>
-      <pubDate>Wed, 06 Dec 2023 10:15:51 GMT</pubDate>
-      
-        
-        
-      <description>
-</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[]]></content:encoded>
-      
-      
-      
-      
-      <comments>http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/#disqus_thread</comments>
+      <comments>http://example.com/2024/03/15/%E4%BD%9C%E4%B8%9A/%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>6/150</title>
-      <link>http://example.com/2023/12/01/C%E5%92%8CC++/%E5%8A%9B%E6%89%A3/150_7/</link>
-      <guid>http://example.com/2023/12/01/C%E5%92%8CC++/%E5%8A%9B%E6%89%A3/150_7/</guid>
-      <pubDate>Fri, 01 Dec 2023 11:19:16 GMT</pubDate>
+      <title>三数和为0</title>
+      <link>http://example.com/2024/03/13/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E4%B8%89%E5%85%83%E5%92%8C/</link>
+      <guid>http://example.com/2024/03/13/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E4%B8%89%E5%85%83%E5%92%8C/</guid>
+      <pubDate>Wed, 13 Mar 2024 03:09:49 GMT</pubDate>
       
         
         
-      <description>&lt;h2 id=&quot;买卖股票的最佳时机&quot;&gt;121:买卖股票的最佳时机&lt;/h2&gt;
-&lt;p&gt;给定一个数组 &lt;code&gt;prices&lt;/code&gt; ，它的第 &lt;code&gt;i&lt;/code&gt; 个元素
-&lt;code&gt;prices[i]&lt;/code&gt; 表示一支给定股票第 &lt;code&gt;i&lt;/code</description>
+      <description>&lt;p&gt;-4，-1，-1，0，1，2&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</description>
         
       
       
       
-      <content:encoded><![CDATA[<h2 id="买卖股票的最佳时机">121:买卖股票的最佳时机</h2><p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素<code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p><p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在<strong>未来的某一个不同的日子</strong>卖出该股票。设计一个算法来计算你所能获取的最大利润。</p><p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回<code>0</code> 。</p><h2 id="方法1暴力">方法1：暴力</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> tmax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ti = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;n; j++)&#123;</span><br><span class="line">                ti = prices[j]-prices[i];</span><br><span class="line">                <span class="keyword">if</span>(ti&gt;tmax)&#123;</span><br><span class="line">                    tmax = ti;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tmax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="方法2一次遍历">方法2：一次遍历</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> inf = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">int</span> minprice = inf, maxprofit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price: prices) &#123;</span><br><span class="line">            maxprofit = <span class="built_in">max</span>(maxprofit, price - minprice);</span><br><span class="line">            minprice = <span class="built_in">min</span>(price, minprice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxprofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      <content:encoded><![CDATA[<p>-4，-1，-1，0，1，2</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">        Arrys.sort(nums);</span><br><span class="line">        int left = 0,right = nums.length-1;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; ep = new new ArrayList&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">            if(i == 0)&#123;left = 1;&#125;</span><br><span class="line">            if(i == nums.length-1)&#123;right = nums.length-2;&#125;</span><br><span class="line">            while(left&lt;right)&#123;</span><br><span class="line">                if(nums[i]+nums[left]+nums[right]&lt;0)&#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;else(nums[i]+nums[left]+nums[right]&gt;0)&#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    List&lt;Integer&gt; ap = new ArrayList&lt;&gt;();</span><br><span class="line">                    ap.add(nums[left]);</span><br><span class="line">                    ap.add(nums[i]);</span><br><span class="line">                    ap.add(nums[right]);</span><br><span class="line">                    ep.add(ap);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ep;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/hot-%E5%8F%8C%E6%8C%87%E9%92%88/">hot/双指针</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/13/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E4%B8%89%E5%85%83%E5%92%8C/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>盛最多的水</title>
+      <link>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E7%9B%9B%E6%9C%80%E5%A4%9A%E7%9A%84%E6%B0%B4/</link>
+      <guid>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E7%9B%9B%E6%9C%80%E5%A4%9A%E7%9A%84%E6%B0%B4/</guid>
+      <pubDate>Tue, 12 Mar 2024 12:57:36 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;给定一个长度为 &lt;code&gt;n&lt;/code&gt; 的整数数组 &lt;code&gt;height&lt;/code&gt; 。有
+&lt;code&gt;n&lt;/code&gt; 条垂线，第 &lt;code&gt;i&lt;/code&gt; 条线的两个端点是
+&lt;code&gt;(i, 0)&lt;/code&gt; 和 &lt;code&gt;(i, height</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>给定一个长度为 <code>n</code> 的整数数组 <code>height</code> 。有<code>n</code> 条垂线，第 <code>i</code> 条线的两个端点是<code>(i, 0)</code> 和 <code>(i, height[i])</code> 。</p><p>找出其中的两条线，使得它们与 <code>x</code>轴共同构成的容器可以容纳最多的水。</p><p>返回容器可以储存的最大水量。</p><p><strong>说明：</strong>你不能倾斜容器。</p><p>输入：2,5,4,8,3</p><p>输出：10</p><h2 id="思路">思路：</h2><p>木桶效应，取决最短的板，也就是我们两个指针一个最左一个最右，我们移动短的（低的）那一个指针，假如我们移动一下，如果被移动的指针指向了一个更低的值那我们是赚了，因为一开始的下标差大，同时高度值也一样。如果指向了一个更高的值，那下标差会变小，我们只需要进行比较就行，总之稳赚不亏。为什么移动更低的，因为低的决定了装水的量。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>,right=height.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[left]&lt;height[right])&#123;</span><br><span class="line">                max = Math.max(max,(right-left)*Math.min(height[left],height[right]));</span><br><span class="line">                left++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                max = Math.max(max,(right-left)*Math.min(height[left],height[right]));</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>双指针每个指针移动要有依据</p>]]></content:encoded>
+      
+      
+      <category domain="http://example.com/categories/hot-%E5%8F%8C%E6%8C%87%E9%92%88/">hot/双指针</category>
+      
+      
+      
+      <comments>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E7%9B%9B%E6%9C%80%E5%A4%9A%E7%9A%84%E6%B0%B4/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>常用函数</title>
+      <link>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <guid>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <pubDate>Tue, 12 Mar 2024 12:35:42 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;交换数组中两个数字&quot;&gt;交换数组中两个数字&lt;/h2&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span cl</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="交换数组中两个数字">交换数组中两个数字</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = nums[left];</span><br><span class="line">    nums[left] = nums[right];</span><br><span class="line">    nums[right] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="逆转数组">逆转数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = nums.length-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="number">0</span>；</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">tmp = nums[left];</span><br><span class="line">        nums[left] = nums[right];</span><br><span class="line">        nums[right] = tmp;</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/%E5%8A%9B%E6%89%A3/">力扣</category>
       
       
       
-      <comments>http://example.com/2023/12/01/C%E5%92%8CC++/%E5%8A%9B%E6%89%A3/150_7/#disqus_thread</comments>
+      <comments>http://example.com/2024/03/12/%E5%8A%9B%E6%89%A3/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/#disqus_thread</comments>
       
     </item>
     
