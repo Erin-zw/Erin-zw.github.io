@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="-4，-1，-1，0，1，2 12345678910111213141516171819202122232425class Solution &amp;#123;    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &amp;#123;        Arrys.sort(nums);        int left &#x3D; 0,right">
+  <meta name="description" content="给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i !&#x3D; j、i !&#x3D; k 且 j !&#x3D; k ，同时还满足 nums[i] + nums[j] + nums[k] &#x3D;&#x3D; 0 。请 你返回所有和为 0 且不重复的三元组。 注意：答案中不可以包含重复的三元组。 示例 1： 12345678输入：nums &#x3D; [-1,0,1,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三数和为0">
 <meta property="og:url" content="http://example.com/2024/03/13/%E5%8A%9B%E6%89%A3/%E5%8F%8C%E6%8C%87%E9%92%88/%E4%B8%89%E5%85%83%E5%92%8C/index.html">
 <meta property="og:site_name" content="Erin枫">
-<meta property="og:description" content="-4，-1，-1，0，1，2 12345678910111213141516171819202122232425class Solution &amp;#123;    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &amp;#123;        Arrys.sort(nums);        int left &#x3D; 0,right">
+<meta property="og:description" content="给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i !&#x3D; j、i !&#x3D; k 且 j !&#x3D; k ，同时还满足 nums[i] + nums[j] + nums[k] &#x3D;&#x3D; 0 。请 你返回所有和为 0 且不重复的三元组。 注意：答案中不可以包含重复的三元组。 示例 1： 12345678输入：nums &#x3D; [-1,0,1,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-13T03:09:49.942Z">
-<meta property="article:modified_time" content="2024-03-13T03:45:09.882Z">
+<meta property="article:modified_time" content="2024-04-02T10:22:04.924Z">
 <meta property="article:author" content="Erin-zw">
 <meta name="twitter:card" content="summary">
 
@@ -225,10 +225,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-03-13 11:09:49 / 修改时间：11:45:09" itemprop="dateCreated datePublished" datetime="2024-03-13T11:09:49+08:00">2024-03-13</time>
+              <time title="创建时间：2024-03-13 11:09:49" itemprop="dateCreated datePublished" datetime="2024-03-13T11:09:49+08:00">2024-03-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-02 18:22:04" itemprop="dateModified" datetime="2024-04-02T18:22:04+08:00">2024-04-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,7 +258,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>665</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -271,8 +277,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>-4，-1，-1，0，1，2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">        Arrys.sort(nums);</span><br><span class="line">        int left = 0,right = nums.length-1;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; ep = new new ArrayList&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">            if(i == 0)&#123;left = 1;&#125;</span><br><span class="line">            if(i == nums.length-1)&#123;right = nums.length-2;&#125;</span><br><span class="line">            while(left&lt;right)&#123;</span><br><span class="line">                if(nums[i]+nums[left]+nums[right]&lt;0)&#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;else(nums[i]+nums[left]+nums[right]&gt;0)&#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    List&lt;Integer&gt; ap = new ArrayList&lt;&gt;();</span><br><span class="line">                    ap.add(nums[left]);</span><br><span class="line">                    ap.add(nums[i]);</span><br><span class="line">                    ap.add(nums[right]);</span><br><span class="line">                    ep.add(ap);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ep;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>给你一个整数数组 <code>nums</code> ，判断是否存在三元组
+<code>[nums[i], nums[j], nums[k]]</code> 满足
+<code>i != j</code>、<code>i != k</code> 且 <code>j != k</code>
+，同时还满足 <code>nums[i] + nums[j] + nums[k] == 0</code> 。请</p>
+<p>你返回所有和为 <code>0</code> 且不重复的三元组。</p>
+<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。</span><br><span class="line">nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。</span><br><span class="line">nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。</span><br><span class="line">不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。</span><br><span class="line">注意，输出的顺序和三元组的顺序并不重要。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,1]</span><br><span class="line">输出：[]</span><br><span class="line">解释：唯一可能的三元组和不为 0 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,0,0]</span><br><span class="line">输出：[[0,0,0]]</span><br><span class="line">解释：唯一可能的三元组和为 0 。</span><br></pre></td></tr></table></figure>
+<p>-4，-1，-1，0，1，2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; ans = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        <span class="comment">// 枚举 a</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> first = <span class="number">0</span>; first &lt; n; ++first) &#123;</span><br><span class="line">            <span class="comment">// 需要和上一次枚举的数不相同</span></span><br><span class="line">            <span class="keyword">if</span> (first &gt; <span class="number">0</span> &amp;&amp; nums[first] == nums[first - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// c 对应的指针初始指向数组的最右端</span></span><br><span class="line">            <span class="keyword">int</span> third = n - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> target = -nums[first];</span><br><span class="line">            <span class="comment">// 枚举 b</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> second = first + <span class="number">1</span>; second &lt; n; ++second) &#123;</span><br><span class="line">                <span class="comment">// 需要和上一次枚举的数不相同</span></span><br><span class="line">                <span class="keyword">if</span> (second &gt; first + <span class="number">1</span> &amp;&amp; nums[second] == nums[second - <span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 需要保证 b 的指针在 c 的指针的左侧</span></span><br><span class="line">                <span class="keyword">while</span> (second &lt; third &amp;&amp; nums[second] + nums[third] &gt; target) &#123;</span><br><span class="line">                    --third;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果指针重合，随着 b 后续的增加</span></span><br><span class="line">                <span class="comment">// 就不会有满足 a+b+c=0 并且 b&lt;c 的 c 了，可以退出循环</span></span><br><span class="line">                <span class="keyword">if</span> (second == third) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (nums[second] + nums[third] == target) &#123;</span><br><span class="line">                    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">                    list.add(nums[first]);</span><br><span class="line">                    list.add(nums[second]);</span><br><span class="line">                    list.add(nums[third]);</span><br><span class="line">                    ans.add(list);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大致思路就是，先排序，利用一个指针first遍历数组，转换成两数之和为-nums[first]，然后再利用双指针second和third根据已经排序的数组特性不断缩小指针范围找到需要的两数之和。</p>
 
     </div>
 
@@ -436,14 +455,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -500,12 +519,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">435k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:18</span>
+    <span title="站点阅读时长">6:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

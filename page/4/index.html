@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/18/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -212,7 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">维度的理解</a>
+            <a href="/2024/04/18/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">环形链表</a>
         </h2>
 
         <div class="post-meta">
@@ -225,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-15 19:50:35 / 修改时间：20:17:25" itemprop="dateCreated datePublished" datetime="2023-12-15T19:50:35+08:00">2023-12-15</time>
+              <time title="创建时间：2024-04-18 18:11:09 / 修改时间：18:20:22" itemprop="dateCreated datePublished" datetime="2024-04-18T18:11:09+08:00">2024-04-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                  <a href="/categories/hot-%E9%93%BE%E8%A1%A8/" itemprop="url" rel="index"><span itemprop="name">hot/链表</span></a>
                 </span>
             </span>
 
@@ -243,7 +243,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>898</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -262,17 +262,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="torch-clamp-input-min-max-out-None-→-Tensor"><a href="#torch-clamp-input-min-max-out-None-→-Tensor" class="headerlink" title="torch.clamp(input, min, max, out=None) → Tensor"></a>torch.clamp(input, min, max, out=None) → Tensor</h2><p>将输入<code>input</code>张量每个元素的夹紧到区间 [min,max][min,max]，并返回结果到一个新张量。</p>
-<p>大于的变成max，小于的变成min。</p>
-<h2 id="transforms-ToTensor"><a href="#transforms-ToTensor" class="headerlink" title="transforms.ToTensor()"></a>transforms.ToTensor()</h2><p>Converts a PIL Image or numpy.ndarray (H x W x C) in the range<br>[0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0]<br>if the PIL Image belongs to one of the modes (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1)<br>or if the numpy.ndarray has dtype = np.uint8</p>
-<p>In the other cases, tensors are returned without scaling.</p>
-<h2 id="transform-Normalize"><a href="#transform-Normalize" class="headerlink" title="transform.Normalize()"></a>transform.Normalize()</h2><p>image=(image-mean)/std</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform.ToTensor(),</span><br><span class="line">transform.Normalize((<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>),(<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
-<p>ToTensor()能够把灰度范围从0-255变换到0-1之间，而后面的transform.Normalize()则把0-1变换到(-1,1)。</p>
-<p>其中mean和std分别通过(0.5,0.5,0.5)和(0.5,0.5,0.5)进行指定。原来的0-1最小值0则变成(0-0.5)/0.5=-1，而最大值1则变成(1-0.5)/0.5=1.</p>
-<h2 id="torchvision-transforms-ToPILImage"><a href="#torchvision-transforms-ToPILImage" class="headerlink" title="torchvision.transforms.ToPILImage()"></a>torchvision.transforms.ToPILImage()</h2><p>将Numpy的ndarray或者Tensor转化成PILImage类型【在数据类型上，两者都有明确的要求】</p>
-<p>ndarray的数据类型要求dtype=uint8, range[0, 255] and shape H x W x C<br>Tensor 的shape为 C x H x W 要求是FloatTensor的，不允许DoubleTensor或者其他类型</p>
-<p>to a PIL.Image of range [0, 255]</p>
+          <p>给你一个链表的头节点 <code>head</code> ，判断链表中是否有环。</p>
+<p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code>
+指针再次到达，则链表中存在环。
+为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code>
+来表示链表尾连接到链表中的位置（索引从 0
+开始）。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>
+。仅仅是为了标识链表的实际情况。</p>
+<p><em>如果链表中存在环</em> ，则返回 <code>true</code> 。 否则，返回
+<code>false</code> 。</p>
+<h3 id="我思路hashset">我思路：hashset</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; s=<span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(head!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            s.add(head);</span><br><span class="line">            head=head.next;</span><br><span class="line">            <span class="keyword">if</span>(s.contains(head)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优化版：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; seen = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!seen.add(head)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快慢指针">快慢指针</h3>
+<p>两个指针一快一慢，类似龟兔赛跑，只有一快一慢才可能在一圈中相遇。判断条件是当fh到达null或者链表最后位置时不能执行.next.next时停止，此时也不会有环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fh = head.next;</span><br><span class="line">        <span class="keyword">while</span>(fh!=<span class="keyword">null</span>&amp;&amp;fh.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(fh == head) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            head = head.next;</span><br><span class="line">            fh = fh.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -294,7 +299,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%9B%B8%E5%AF%B9%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -308,7 +313,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/FCN/" class="post-title-link" itemprop="url">FCN</a>
+            <a href="/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%9B%B8%E5%AF%B9%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">相对位置编码</a>
         </h2>
 
         <div class="post-meta">
@@ -321,7 +326,758 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-14 19:33:33 / 修改时间：20:00:09" itemprop="dateCreated datePublished" datetime="2023-12-14T19:33:33+08:00">2023-12-14</time>
+              <time title="创建时间：2024-04-17 22:10:06 / 修改时间：22:10:28" itemprop="dateCreated datePublished" datetime="2024-04-17T22:10:06+08:00">2024-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">深度学习论文</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">类型注解</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-17 20:36:43 / 修改时间：20:58:53" itemprop="dateCreated datePublished" datetime="2024-04-17T20:36:43+08:00">2024-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>501</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="section">1</h3>
+<p>需要引入typing模块</p>
+<ul>
+<li><p><code>Optional[SomeClass]</code> 表示变量可能持有
+<code>SomeClass</code> 类型的实例，也可能为 <code>None</code>。</p></li>
+<li><p><code>Type[SomeClass]</code> 则表示变量应该是一个类型对象，即
+<code>SomeClass</code> 类本身，而不是 <code>SomeClass</code>
+的实例。通常用于需要传递或操作类而非其实例的场合。</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">norm_layer: <span class="type">Type</span>[nn.Module] = nn.LayerNorm,</span><br><span class="line"></span><br><span class="line">self.pos_embed: <span class="type">Optional</span>[nn.Parameter] = <span class="literal">None</span> </span><br></pre></td></tr></table></figure>
+<h3 id="section-1">2</h3>
+<p>在Python中，<code>Tuple[int, int]</code> 和
+<code>Tuple[int, ...]</code> 是两种不同类型的元组声明。</p>
+<ol type="1">
+<li><strong><code>Tuple[int, int]</code></strong>：
+这种类型注解表示一个固定长度为2的元组，其中每个元素都是整数类型。例如，<code>(3, 4)</code>
+符合这个类型，但是 <code>(3, 4, 5)</code>
+就不符合，因为它有三个元素而不是两个。</li>
+<li><strong><code>Tuple[int, ...]</code></strong>：
+这种类型注解表示一个可变长度的元组，其中每个元素也必须是整数类型，但元组的长度可以是任意的。这里的省略号
+<code>...</code>
+通常被称为“可变数量参数”。例如，<code>(3,)</code>、<code>(3, 4)</code>、<code>(3, 4, 5)</code>
+等都符合这个类型，只要它们的元素都是整数即可。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">sam结构</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-17 20:07:38" itemprop="dateCreated datePublished" datetime="2024-04-17T20:07:38+08:00">2024-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 15:41:47" itemprop="dateModified" datetime="2024-05-28T15:41:47+08:00">2024-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">深度学习论文</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="整体结构">整体结构</h3>
+<p><img src="/../../images/深度学习论文/SAM/1.png"></p>
+<h3 id="图像编码器">图像编码器</h3>
+<p>相较于普通的VIT添加了可选的<strong>相对位置编码</strong>/绝对位置编码和<strong>窗口局部注意力</strong>/全局注意力。</p>
+<p>图片嵌入选择的是卷积。</p>
+<h3 id="提示编码器">提示编码器</h3>
+<p>对三种类型提示进行分类Embedding和随机空间频率位置编码。最后返回稀疏嵌入和稠密嵌入</p>
+<p>点分类嵌入选用的是torch自带的nn.Embedding函数</p>
+<h3 id="掩膜解码器">掩膜解码器</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_masks</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    self,</span></span></span><br><span class="line"><span class="params"><span class="function">    image_embeddings: torch.Tensor, <span class="comment"># 1x(embed_dim=256 in vit-h)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    image_pe: torch.Tensor, <span class="comment"># 1x(embed_dim=256 in vit-h)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    sparse_prompt_embeddings: torch.Tensor, <span class="comment"># 1xNx(embed_dim)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    dense_prompt_embeddings: torch.Tensor, <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) -&gt; <span class="type">Tuple</span>[torch.Tensor, torch.Tensor]:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Predicts masks. See &#x27;forward&#x27; for more details.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Concatenate output tokens</span></span><br><span class="line">    output_tokens = torch.cat([self.iou_token.weight, self.mask_tokens.weight], dim=<span class="number">0</span>)  <span class="comment"># 5x256</span></span><br><span class="line">    output_tokens = output_tokens.unsqueeze(<span class="number">0</span>).expand(sparse_prompt_embeddings.size(<span class="number">0</span>), -<span class="number">1</span>, -<span class="number">1</span>)  <span class="comment"># 1xNx256</span></span><br><span class="line">    tokens = torch.cat((output_tokens, sparse_prompt_embeddings), dim=<span class="number">1</span>)    <span class="comment"># 1x(N+5)x256</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Expand per-image data in batch direction to be per-mask</span></span><br><span class="line">    src = torch.repeat_interleave(image_embeddings, tokens.shape[<span class="number">0</span>], dim=<span class="number">0</span>)     <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    src = src + dense_prompt_embeddings                                     <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    pos_src = torch.repeat_interleave(image_pe, tokens.shape[<span class="number">0</span>], dim=<span class="number">0</span>)     <span class="comment"># 1×(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    b, c, h, w = src.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run the transformer</span></span><br><span class="line">    hs, src = self.transformer(src, pos_src, tokens)      <span class="comment"># hs: 1x(num_mask_tokens)x(embed_dim), src: 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    iou_token_out = hs[:, <span class="number">0</span>, :]                             <span class="comment">#</span></span><br><span class="line">    mask_tokens_out = hs[:, <span class="number">1</span> : (<span class="number">1</span> + self.num_mask_tokens), :]          <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Upscale mask embeddings and predict masks using the mask tokens</span></span><br><span class="line">    src = src.transpose(<span class="number">1</span>, <span class="number">2</span>).view(b, c, h, w)                  <span class="comment"># Bx(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    upscaled_embedding = self.output_upscaling(src)             <span class="comment"># Bx(embed_dim//8)x(embed_H*4)x(embed_W*4)</span></span><br><span class="line">    hyper_in_list: <span class="type">List</span>[torch.Tensor] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.num_mask_tokens):</span><br><span class="line">        hyper_in_list.append(self.output_hypernetworks_mlps[i](mask_tokens_out[:, i, :]))</span><br><span class="line">    hyper_in = torch.stack(hyper_in_list, dim=<span class="number">1</span>)    <span class="comment"># Bx(num_mask_tokens)x(embed_dim//8)</span></span><br><span class="line">    b, c, h, w = upscaled_embedding.shape</span><br><span class="line">    masks = (hyper_in @ upscaled_embedding.view(b, c, h * w)).view(b, -<span class="number">1</span>, h, w)  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Generate mask quality predictions</span></span><br><span class="line">    iou_pred = self.iou_prediction_head(iou_token_out)  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> masks, iou_pred</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>输出tokens：由<code>iou_token</code>和<code>mask_tokens</code>组成，这些token在模型内部起到类似于模板或者指导信号的作用，用于引导模型生成具有特定含义（例如IoU分数或分割掩码）的输出。</li>
+<li>提示tokens：来自<code>sparse_prompt_embeddings</code>和<code>dense_prompt_embeddings</code>，它们分别代表了稀疏和密集形式的用户提供的提示信息，如点坐标、框坐标、文本描述等。这些提示被转化为embedding形式后参与到Transformer的计算中，帮助模型理解应该在哪里、如何生成目标对象的分割掩码。</li>
+</ol>
+<p><code>hyper_in</code> 是经过 MLP 处理后的张量，其维度为
+<code>Bxnum_mask_tokensx(embed_dim//8)</code>，表示对于每一批次的每一个输入图像，模型为每一个预测的掩码生成了一组权重系数（或者说决策参数）。这里的
+<code>num_mask_tokens</code> 表示模型可能为每个输入预测多个掩码。</p>
+<p><code>upscaled_embedding</code> 是经过上采样后的图像特征嵌入，维度为
+<code>Bx(embed_dim//8)x(embed_H)x(embed_W)</code>，意味着每个像素点都有一个降维后的特征向量表示。</p>
+<p>当进行矩阵乘法
+<code>hyper_in @ upscaled_embedding.view(b, c, h * w)</code>
+时，实际上是将 <code>hyper_in</code>
+中的掩码决策参数与每个像素点的特征向量进行点积运算。这样的操作允许模型根据不同掩码预测的需求，动态地调整每个像素点的预测概率，进而形成一个具体的二值掩码预测结果，每个掩码预测都对应着一个不同的背景/前景划分方案。</p>
+<h3 id="模型总体">模型总体</h3>
+<p>SAM模型输入传入batched_input，尺寸为B(batch)，是一个字典列表，</p>
+<p>包含batched_input: 输入图像列表,每个图像是一个字典,包含: # - 'image':
+输入图像,形状为 3xHxW, 已经转换为模型输入。 # - 'original_size':
+转换前的原始图像大小, 形状为 (H, W)。 # - 'point_coords':
+批量点提示,形状为 BxNx2, 已经转换为模型输入空间。 # - 'point_labels':
+批量点提示标签,形状为 BxN。 # - 'boxes': 批量框提示,形状为 Bx4,
+已经转换为模型输入空间。 # - 'mask_inputs': 批量掩码输入, 形状为
+Bx1xHxW。</p>
+<ul>
+<li>先进行图像预处理，插值到img_size并进行标准化接着堆叠成需要形状的张量。输入图像编码器获得图像嵌入。输出形状为（B，C，img_size//patch_size，img_size//patch_size）C经过一个neck层由embedded_size变成output_channels为prompt_embed_dim。</li>
+</ul>
+<p>最后精确形状为(B,prompt_embed_dim,image_embedding_size,image_embedding_size)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input_images = torch.stack([self.preprocess(x[&quot;image&quot;]) for x in batched_input], dim=0)     # BxCxHxW</span><br><span class="line">image_embeddings = self.image_encoder(input_images)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接着组合输入和图像的嵌入向量，先处理点框掩码提示，经过提示编码器分别获得稀疏和稠密提示嵌入向量。稀疏输出的形状为(B,N,prompt_embed_dim),稠密输出形状为(B,prompt_embed_dim,embed_H,embed_W)</li>
+<li>然后和图像嵌入向量一起送入掩码解码器获得低分辨率的mask和预测的IOU。接着把low_res_masks恢复成原始图像大小并和threshold概率进行比较输出掩码。最后合并成和输入同样格式的字典列表。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> image_record, curr_embedding <span class="keyword">in</span> <span class="built_in">zip</span>(batched_input, image_embeddings):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;point_coords&quot;</span> <span class="keyword">in</span> image_record:</span><br><span class="line">        points = (image_record[<span class="string">&quot;point_coords&quot;</span>], image_record[<span class="string">&quot;point_labels&quot;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        points = <span class="literal">None</span></span><br><span class="line">    sparse_embeddings, dense_embeddings = self.prompt_encoder(</span><br><span class="line">        points=points,</span><br><span class="line">        boxes=image_record.get(<span class="string">&quot;boxes&quot;</span>, <span class="literal">None</span>),</span><br><span class="line">        masks=image_record.get(<span class="string">&quot;mask_inputs&quot;</span>, <span class="literal">None</span>),</span><br><span class="line">    )</span><br><span class="line">    low_res_masks, iou_predictions = self.mask_decoder(</span><br><span class="line">        image_embeddings=curr_embedding.unsqueeze(<span class="number">0</span>),</span><br><span class="line">        image_pe=self.prompt_encoder.get_dense_pe(),</span><br><span class="line">        sparse_prompt_embeddings=sparse_embeddings,</span><br><span class="line">        dense_prompt_embeddings=dense_embeddings,</span><br><span class="line">        multimask_output=multimask_output,</span><br><span class="line">    )</span><br><span class="line">    masks = self.postprocess_masks(</span><br><span class="line">        low_res_masks,                                  <span class="comment"># 代表了低分辨率的掩码</span></span><br><span class="line">        input_size=image_record[<span class="string">&quot;image&quot;</span>].shape[-<span class="number">2</span>:],</span><br><span class="line">        original_size=image_record[<span class="string">&quot;original_size&quot;</span>],</span><br><span class="line">    )</span><br><span class="line">    masks = masks &gt; self.mask_threshold</span><br><span class="line">    outputs.append(</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;masks&quot;</span>: masks,</span><br><span class="line">            <span class="string">&quot;iou_predictions&quot;</span>: iou_predictions,</span><br><span class="line">            <span class="string">&quot;low_res_logits&quot;</span>: low_res_masks,</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/17/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">回文链表</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-17 17:56:28 / 修改时间：18:50:54" itemprop="dateCreated datePublished" datetime="2024-04-17T17:56:28+08:00">2024-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hot-%E9%93%BE%E8%A1%A8/" itemprop="url" rel="index"><span itemprop="name">hot/链表</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为</p>
+<p>回文链表</p>
+<p>。如果是，返回 <code>true</code> ；否则，返回 <code>false</code>
+。</p>
+<p>铸币思路：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; L = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(head!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            L.add(head.val);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.size()/<span class="number">2</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(L.get(i)!=L.get(L.size()-<span class="number">1</span>-i))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路二">思路二：</h3>
+<p>使用快慢指针找到链表中间元素，把链表后半部分进行翻转，然后前后两部分进行比较即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">        ListNode firstHalfEnd = endOfFirstHalf(head);</span><br><span class="line">        ListNode secondHalfStart = reverseList(firstHalfEnd.next);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断是否回文</span></span><br><span class="line">        ListNode p1 = head;</span><br><span class="line">        ListNode p2 = secondHalfStart;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1.val != p2.val) &#123;</span><br><span class="line">                result = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            p1 = p1.next;</span><br><span class="line">            p2 = p2.next;</span><br><span class="line">        &#125;        </span><br><span class="line"></span><br><span class="line">        <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">        firstHalfEnd.next = reverseList(secondHalfStart);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">        ListNode curr = head;</span><br><span class="line">        <span class="keyword">while</span> (curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">            ListNode nextTemp = curr.next;</span><br><span class="line">            curr.next = prev;</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = nextTemp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">endOfFirstHalf</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优化思路：slow指针在前进的时候同时对链表进行翻转，当快指针走完的时候，慢指针正好在链表的中间部分，此时进行比较即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode slow = head, fast = head, p = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            ListNode t = slow.next;</span><br><span class="line">            slow.next = p;</span><br><span class="line">            p = slow;</span><br><span class="line">            slow = t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//奇数个节点slow继续向前走一步</span></span><br><span class="line">        <span class="keyword">if</span> (fast != <span class="keyword">null</span>) slow = slow.next;</span><br><span class="line">        <span class="keyword">while</span> (slow != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slow.val != p.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/17/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">反转链表</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-17 17:23:12 / 修改时间：17:47:43" itemprop="dateCreated datePublished" datetime="2024-04-17T17:23:12+08:00">2024-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hot-%E9%93%BE%E8%A1%A8/" itemprop="url" rel="index"><span itemprop="name">hot/链表</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>840</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>给你单链表的头节点 <code>head</code>
+，请你反转链表，并返回反转后的链表。</p>
+<p>铸币思路：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        List&lt;ListNode&gt; L = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(head != <span class="keyword">null</span>)&#123;</span><br><span class="line">            L.add(head);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = L.size()-<span class="number">1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            L.get(i).next = L.get(i-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        L.get(<span class="number">0</span>).next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> L.get(L.size()-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="递归">递归</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode newHead = reverseList(head.next);</span><br><span class="line">        head.next.next = head;</span><br><span class="line">        head.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> newHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代">迭代</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">        ListNode curr = head;</span><br><span class="line">        <span class="keyword">while</span> (curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">            ListNode nextTemp = curr.next;</span><br><span class="line">            curr.next = prev;</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = nextTemp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/16/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/16/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">相交链表</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-16 11:05:29 / 修改时间：20:21:31" itemprop="dateCreated datePublished" datetime="2024-04-16T11:05:29+08:00">2024-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hot-%E9%93%BE%E8%A1%A8/" itemprop="url" rel="index"><span itemprop="name">hot/链表</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code>
+，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回
+<code>null</code> 。</p>
+<p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
+<p>题目数据 <strong>保证</strong> 整个链式结构中不存在环。</p>
+<p><strong>注意</strong>，函数返回结果后，链表必须
+<strong>保持其原始结构</strong> 。</p>
+<p><strong>自定义评测：</strong></p>
+<p><strong>评测系统</strong> 的输入如下（你设计的程序
+<strong>不适用</strong> 此输入）：</p>
+<ul>
+<li><code>intersectVal</code> -
+相交的起始节点的值。如果不存在相交节点，这一值为 <code>0</code></li>
+<li><code>listA</code> - 第一个链表</li>
+<li><code>listB</code> - 第二个链表</li>
+<li><code>skipA</code> - 在 <code>listA</code>
+中（从头节点开始）跳到交叉节点的节点数</li>
+<li><code>skipB</code> - 在 <code>listB</code>
+中（从头节点开始）跳到交叉节点的节点数</li>
+</ul>
+<p>评测系统将根据这些输入创建链式数据结构，并将两个头节点
+<code>headA</code> 和 <code>headB</code>
+传递给你的程序。如果程序能够正确返回相交节点，那么你的解决方案将被
+<strong>视作正确答案</strong></p>
+<h3 id="思路最拙劣的一集">思路：最拙劣的一集</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        List&lt;ListNode&gt; LA = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;ListNode&gt; LB = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        ListNode headAA = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode headBB = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        headAA.next = headA;</span><br><span class="line">        headBB.next = headB;</span><br><span class="line">        LA.add(headAA);</span><br><span class="line">        LB.add(headBB);</span><br><span class="line">        <span class="keyword">while</span>(headA != <span class="keyword">null</span>)&#123;</span><br><span class="line">            LA.add(headA);</span><br><span class="line">            headA = headA.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(headB != <span class="keyword">null</span>)&#123;</span><br><span class="line">            LB.add(headB);</span><br><span class="line">            headB = headB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> m = LA.size();</span><br><span class="line">        <span class="keyword">int</span> n = LB.size();</span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">1</span> || n == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(m == <span class="number">2</span> &amp;&amp; n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> LA.get(<span class="number">1</span>).val == LB.get(<span class="number">1</span>).val ? LA.get(<span class="number">1</span>) : <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(LA.get(i).next == LB.get(j).next)&#123;</span><br><span class="line">                    <span class="keyword">return</span> LA.get(i).next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路二">思路二：</h3>
+<p><img src="/../../images/力扣/链表/1.png" style="zoom:50%;"></p>
+<p>根据题目意思 如果两个链表相交，那么相交点之后的长度是相同的</p>
+<p>我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。
+为此，我们必须消除两个链表的长度差</p>
+<ul>
+<li><p>指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历</p></li>
+<li><p>如果 pA 到了末尾，则 pA = headB 继续遍历</p></li>
+<li><p>如果 pB 到了末尾，则 pB = headA 继续遍历</p></li>
+<li><p>比较长的链表指针指向较短链表head时，长度差就消除了</p></li>
+<li><p>如此，只需要将最短链表遍历两次即可找到位置</p></li>
+</ul>
+<p>假设A长度A，B长度为B，A长一点，走完A长，B停留在A-B处，距离末端为A-(A-B)=B，此时A在B起点，也距离末端为B</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (headA == <span class="keyword">null</span> || headB == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">            pA = pA == <span class="keyword">null</span> ? headB : pA.next;</span><br><span class="line">            pB = pB == <span class="keyword">null</span> ? headA : pB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路三">思路三：</h3>
+<p>判断两个链表是否相交，可以使用哈希集合存储链表节点。</p>
+<p>首先遍历链表headA，并将链表headA
+中的每个节点加入哈希集合中。然后遍历链表headB，对于遍历到的每个节点，判断该节点是否在哈希集合中：</p>
+<p>如果当前节点不在哈希集合中，则继续遍历下一个节点；</p>
+<p>如果当前节点在哈希集合中，则后面的节点都在哈希集合中，即从当前节点开始的所有节点都在两个链表的相交部分，因此在链表
+headB
+中遍历到的第一个在哈希集合中的节点就是两个链表相交的节点，返回该节点。</p>
+<p>如果链表headB 中的所有节点都不在哈希集合中，则两个链表不相交，返回
+null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; visited = <span class="keyword">new</span> HashSet&lt;ListNode&gt;();</span><br><span class="line">        ListNode temp = headA;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            visited.add(temp);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = headB;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited.contains(temp)) &#123;</span><br><span class="line">                <span class="keyword">return</span> temp;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/LoRA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/LoRA/" class="post-title-link" itemprop="url">LoRA</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-16 09:43:06 / 修改时间：11:05:02" itemprop="dateCreated datePublished" datetime="2024-04-16T09:43:06+08:00">2024-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>来源：https://juejin.cn/post/7280436307914407976</p>
+<p>神经网络的更新过程：<span class="math inline">\(W&#39;=W-\eta
+dW_1-\eta dW_2-...-\eta W_{10}\)</span></p>
+<p>改写：<span class="math inline">\(W&#39;=W+R\)</span></p>
+<p>首先明细一个概念，一个训练充分的矩阵通常是满秩的或满足基本秩的，即没有一列是多余的，在微调模型时，我们会选取一个底模，该底模就是基本满秩的。而更新矩阵R秩的情况是如何的呢？</p>
+<p>我们假定R矩阵是一个低秩矩阵，低秩矩阵有许多重复的列，因此可以分解为两个更小的矩阵。假如W的形状为m×n，我们把矩阵R分解为AB（其中A形状为m×r，B形状为r×N），r通常会选取一个远小于m、n的值，如图所示：</p>
+<p><img src="/深度学习/LoRA/1.jpg" style="zoom:67%;"></p>
+<p>将低秩矩阵分解为两个矩阵几点好处，首先是参数量明显减少。假设R矩阵的形状为100×100，那么R的参数量为10000。当我们选取秩为10时，此时矩阵A的形状为100×10，矩阵B的形状为10×100，此时参数量为2000，比R矩阵少了80%。</p>
+<p>而且由于R是低秩矩阵，所以在训练充分的情况下，A和B矩阵可以达到R的效果。这里的矩阵AB就是我们常说的LoRA模型。</p>
+<p>在引入LoRA后，我们的预测需要将x分别输入W和AB，此时预测的计算为：<span class="math inline">\(pred = Wx+ABx\)</span></p>
+<p><strong>测试代码：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os  </span><br><span class="line"><span class="keyword">import</span> torch  </span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> optim, nn  </span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image  </span><br><span class="line"><span class="keyword">from</span> torch.utils <span class="keyword">import</span> data  </span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> models  </span><br><span class="line"><span class="keyword">from</span> torchvision.transforms <span class="keyword">import</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="comment">#数据变换</span></span><br><span class="line">transform = transforms.Compose([  </span><br><span class="line">    transforms.Resize(<span class="number">256</span>),  </span><br><span class="line">    transforms.CenterCrop(<span class="number">224</span>),  </span><br><span class="line">    transforms.ToTensor(),  </span><br><span class="line">    transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>]),  </span><br><span class="line">])  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#LoRA数据集</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoraDataset</span>(<span class="params">data.Dataset</span>):</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data_path=<span class="string">&quot;datas&quot;</span></span>):</span>  </span><br><span class="line">        categories = models.VGG19_Weights.IMAGENET1K_V1.value.meta[<span class="string">&quot;categories&quot;</span>]  </span><br><span class="line">        self.files = []  </span><br><span class="line">        self.labels = []</span><br><span class="line">        self.categories = categories  </span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> os.listdir(data_path):  </span><br><span class="line">            dirname = os.path.join(data_path, <span class="built_in">dir</span>)  </span><br><span class="line">            <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(dirname):  </span><br><span class="line">                self.files.append(os.path.join(dirname, file))  </span><br><span class="line">                self.labels.append(categories.index(<span class="built_in">dir</span>))  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, item</span>):</span>  </span><br><span class="line">        image = Image.<span class="built_in">open</span>(self.files[item]).convert(<span class="string">&quot;RGB&quot;</span>)  </span><br><span class="line">        label = torch.zeros(<span class="number">1000</span>, dtype=torch.float64)  </span><br><span class="line">        label[self.labels[item]] = <span class="number">1.</span>  </span><br><span class="line">        <span class="keyword">return</span> transform(image), label  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.files)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.categories</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#LoRA模型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lora</span>(<span class="params">nn.Module</span>):</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, m, n, rank=<span class="number">10</span></span>):</span>  </span><br><span class="line">        <span class="built_in">super</span>().__init__()  </span><br><span class="line">        self.m = m  </span><br><span class="line">        self.A = nn.Parameter(torch.randn(m, rank))  </span><br><span class="line">        self.B = nn.Parameter(torch.zeros(rank, n))  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inputs</span>):</span>  </span><br><span class="line">        inputs = inputs.view(-<span class="number">1</span>, self.m)  </span><br><span class="line">        <span class="keyword">return</span> torch.mm(torch.mm(inputs, self.A), self.B)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置超参数进行训练</span></span><br><span class="line"><span class="comment"># 加载底模和lora  </span></span><br><span class="line">vgg19 = models.vgg19(models.VGG19_Weights.IMAGENET1K_V1)  </span><br><span class="line"><span class="keyword">for</span> params <span class="keyword">in</span> vgg19.parameters():  </span><br><span class="line">    params.requires_grad = <span class="literal">False</span>  </span><br><span class="line">vgg19.<span class="built_in">eval</span>()  </span><br><span class="line">lora = Lora(<span class="number">224</span> * <span class="number">224</span> * <span class="number">3</span>, <span class="number">1000</span>)  </span><br><span class="line"><span class="comment"># 加载数据  </span></span><br><span class="line">lora_loader = data.DataLoader(LoraDataset(), batch_size=<span class="number">1</span>, shuffle=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 加载优化器  </span></span><br><span class="line">optimizer = optim.Adam(lora.parameters(), lr=<span class="number">0.001</span>)  <span class="comment">#lr=0.001</span></span><br><span class="line"><span class="comment"># 定义损失  </span></span><br><span class="line">loss_fn = nn.CrossEntropyLoss()  </span><br><span class="line"><span class="comment"># 训练  </span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>): <span class="comment">#epochs=10 </span></span><br><span class="line">    <span class="keyword">for</span> image, label <span class="keyword">in</span> lora_loader:  </span><br><span class="line">        <span class="comment"># 正向传播  </span></span><br><span class="line">        pred = vgg19(image) + lora(image)  </span><br><span class="line">        loss = loss_fn(pred, label)  </span><br><span class="line">        <span class="comment"># 反向传播  </span></span><br><span class="line">        loss.backward()  </span><br><span class="line">        <span class="comment"># 更新参数  </span></span><br><span class="line">        optimizer.step()  </span><br><span class="line">        optimizer.zero_grad()  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;loss: <span class="subst">&#123;loss.item()&#125;</span>&quot;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 测试  </span></span><br><span class="line"><span class="keyword">for</span> image, _ <span class="keyword">in</span> lora_loader:  </span><br><span class="line">    pred = vgg19(image) + lora(image)  </span><br><span class="line">    idx = torch.argmax(pred, dim=<span class="number">1</span>).item()  </span><br><span class="line">    category = models.VGG19_Weights.IMAGENET1K_V1.value.meta[<span class="string">&quot;categories&quot;</span>][idx]  </span><br><span class="line">    <span class="built_in">print</span>(category)</span><br><span class="line">torch.save(lora.state_dict(), <span class="string">&#x27;lora.pth&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">日志配置信息</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-15 22:01:09 / 修改时间：22:09:12" itemprop="dateCreated datePublished" datetime="2024-04-15T22:01:09+08:00">2024-04-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -358,8 +1114,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>y一般的分类网络就是，输入图像，网络输出数一般是类别数量，损失函数对y_hat和y真实进行交叉熵损失计算，损失函数的计算先对y_hat进行softmax归一化成概率，然后相当于真实标签y选择第几个输出作为真实分类标签。这个时候被选择出的输出进行-log计算，就是损失，一般输出的损失量形状是（batch_size，)</p>
-<p>然后fcn就是输入图像，然后特征提取，接着上采样，使用自己创建的双线性插值的转置卷积的卷积核，也就是说利用转置卷积实现了双线性插值的功能，但是转置卷积的卷积核需要特定设计。需要注意的是一开始的卷积核是经过设计的，这是一个初始化，后续是网络自己学习卷积核参数。fcn输出形状是(batch_size,num_classes,h,w),输出通道就是类别数量，而标签的形状是(batch_size,h,w)，所以交叉熵损失函数先对每一个通道的输出进行softmax归一化计算变成概率，再通过标签二维位置的标号选择输出对应的概率再进行损失函数计算。最后损失函数输出形状是(batch_size,h,w),所以对后两个维度进行平均将形状变成（batch_size，)。需要注意的是CrossEntropyLoss函数已经自带了softmax操作。</p>
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">os.makedirs(os.path.join(snapshot_path, <span class="string">&#x27;test&#x27;</span>), exist_ok=<span class="literal">True</span>)</span><br><span class="line">test_save_path = os.path.join(snapshot_path, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">log_filename = <span class="string">f&#x27;<span class="subst">&#123;snapshot_path&#125;</span>&#x27;</span> + <span class="string">&#x27;/log_&#x27;</span> + <span class="string">f&#x27;<span class="subst">&#123;args.model_name&#125;</span>&#x27;</span> + <span class="string">&#x27;.txt&#x27;</span></span><br><span class="line">logging.basicConfig(filename=log_filename, level=logging.INFO,</span><br><span class="line">                    <span class="built_in">format</span>=<span class="string">&#x27;[%(asctime)s.%(msecs)03d] %(message)s&#x27;</span>, datefmt=<span class="string">&#x27;%H:%M:%S&#x27;</span>)<span class="comment">#基本设置</span></span><br><span class="line">logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))<span class="comment">#方便在终端显示日志信息</span></span><br><span class="line">logging.info(<span class="built_in">str</span>(args))<span class="comment"># 记录参数信息到日志</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -381,7 +1136,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DropPath%E6%AD%A3%E5%88%99%E5%8C%96%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -395,7 +1150,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">转置卷积和卷积</a>
+            <a href="/2024/04/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DropPath%E6%AD%A3%E5%88%99%E5%8C%96%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">DropPath正则化</a>
         </h2>
 
         <div class="post-meta">
@@ -408,7 +1163,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-12 19:49:01 / 修改时间：21:26:10" itemprop="dateCreated datePublished" datetime="2023-12-12T19:49:01+08:00">2023-12-12</time>
+              <time title="创建时间：2024-04-15 21:41:29 / 修改时间：21:42:07" itemprop="dateCreated datePublished" datetime="2024-04-15T21:41:29+08:00">2024-04-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,232 +1181,6 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>968</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="转置卷积简介">转置卷积简介</h2>
-<p>就结论而言，卷积操作是多对一，而转置卷积操作是一对多，如下图所示，每一个“对”而言，都需要维护一个权值。</p>
-<p>这些权值就是需要学习参数的一部分</p>
-<p><img src="/images/深度学习/转置卷积/1.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/转置卷积/2.png" style="zoom:67%;"></p>
-<h2 id="卷积的另一种理解">卷积的另一种理解</h2>
-<p>将卷积核3*3矩阵进行重排列得到一个4*16矩阵。</p>
-<p><img src="/images/深度学习/转置卷积/3.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/转置卷积/4.png" style="zoom:67%;"></p>
-<p>接着将输入矩阵重排列为一个列向量，16*1.</p>
-<p><img src="/images/深度学习/转置卷积/5.png" style="zoom:67%;"></p>
-<p>使用矩阵乘法得到4*1列向量</p>
-<p><img src="/images/深度学习/转置卷积/6.png" style="zoom:67%;"></p>
-<p>重排列得到卷积输出。</p>
-<p><img src="/images/深度学习/转置卷积/7.png" style="zoom:67%;"></p>
-<p>实际上整个过程不难理解，我们先看4*16矩阵的第一行，再看被展开的输入列向量会发现其实就是用补0的方式跳过了不应该被卷积的部分，再看第二行其实就是补零然后整体右移一个单位。至于第三行就是卷积核与原矩阵卷积时重新换行，所以直接右移三个单位。第四行右移一个单位。这些平移量和步长和padding有关。</p>
-<p>关键点就在于这个卷积矩阵，从输入16(4*4)到输出4(2*2)因为这个卷积矩阵尺寸正是4
-× 16（输入形状*输出形状）的，这个操作我们叫做下采样。如果你有一个16 ×
-4的矩阵，你就可以从4(2*2)到16(4*4)了，这就是一个上采样的操作。</p>
-<p>表现为数学形式就是y=Cx,而我们要通过y得到x的形状，既可以表现成x=C^Ty,这样得到的形状就是原本的x的形状。</p>
-<h2 id="转置卷积的理解">转置卷积的理解</h2>
-<p>我们想要从4(2 × 2 2 ×2)到16(4 × 4 4 ×4)，因此我们使用了一个16 × 4 16
-×4的矩阵，但是还有一件事情需要注意，我们是想要维护一个1到9的映射关系。</p>
-<p><img src="/images/深度学习/转置卷积/8.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/转置卷积/9.png" style="zoom:67%;"></p>
-<h2 id="转置卷积的其他理解">转置卷积的其他理解</h2>
-<h3 id="section">1</h3>
-<p><img src="/images/深度学习/转置卷积/10.png" style="zoom:67%;"></p>
-<h3 id="section-1">2</h3>
-<p><img src="/images/深度学习/转置卷积/11.png" style="zoom:67%;"></p>
-<p><img src="/images/深度学习/转置卷积/12.png" style="zoom:67%;"></p>
-<p>转置输出尺寸公式：实际上就是卷积公式的反解</p>
-<p><img src="/images/深度学习/转置卷积/13.png" style="zoom:67%;"></p>
-<p>https://blog.csdn.net/tsyccnh/article/details/87357447这篇文章更加细节解释了转置卷积的一个过程。</p>
-<h2 id="转置卷积与-upsampling-的区别">转置卷积与 UpSampling 的区别</h2>
-<p>转置卷积 和 UpSampling 都可以把小的 Input 变成大的
-Output，那么两者有什么区别呢？哪个更好呢？</p>
-<ol type="1">
-<li>UpSampling 可以看作是 Pooling 的反向操作，就是采用 Nearest Neighbor
-interpolation 来进行放大、Resize，说白了就是复制行和列的数据来扩充
-feature map 的大小，并不通过学习。</li>
-<li>转置卷积（反卷积）就是卷积，想要把小的 Input 变成大的
-Output，做法是通过对输入隔行补 0、pading
-等方式，实现输出尺寸增大。转置卷积里面的 filter
-都是可以学出来的，本质上是一种 Learnable Upsampling。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">递归算法</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-06 18:16:30 / 修改时间：18:51:10" itemprop="dateCreated datePublished" datetime="2023-12-06T18:16:30+08:00">2023-12-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>686</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="递归">递归</h2>
-<p>递归简单来说就是在运行过程中不断调用自己，直到碰到终止条件，返回结果的过程。</p>
-<p>递归可以看作两个过程，分别是递和归。递就是原问题把要计算的结果传给子问题；归则是子问题求出结果后，把结果层层返回原问题的过程。</p>
-<h2 id="使用场合">使用场合</h2>
-<p>1.大问题可以拆分为若干小问题
-<strong>2.原问题与子问题除数据规模不同，求解思路完全相同</strong>
-3.存在递归终止条件
-4.<strong>当不满足终止条件时，要如何缩小函数值并让其进入下一层循环中</strong></p>
-<h3 id="示例1求阶乘">示例1：求阶乘</h3>
-<ol type="1">
-<li>N！可以拆分为（N-1）！*N</li>
-<li>（N-1）！与N！只有数字规模不同，求解思路相同</li>
-<li>当N=1时，结果为1，递归终止</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Factorial</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> num;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> num*Factorial(num-<span class="number">1</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="顺序打印输入一个整数时按顺序依次打印每一位的值">2：顺序打印：输入一个整数时，按顺序依次打印每一位的值</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PrintNumber</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num&gt;<span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            PrintNumber(num/<span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(num%<span class="number">10</span>+<span class="string">&quot;,&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="斐波那契数列">3：斐波那契数列</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num==<span class="number">1</span>||num==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Fibonacci(num-<span class="number">1</span>)+Fibonacci(num-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>递归式：f(n)=f(n-1)+f(n-2)</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 18:16:12" itemprop="dateCreated datePublished" datetime="2023-12-06T18:16:12+08:00">2023-12-06</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
               <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
@@ -672,500 +1201,6 @@ Output，做法是通过对输入隔行补 0、pading
 
       
           
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 18:15:51" itemprop="dateCreated datePublished" datetime="2023-12-06T18:15:51+08:00">2023-12-06</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/01/%E5%8A%9B%E6%89%A3/150_7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/01/%E5%8A%9B%E6%89%A3/150_7/" class="post-title-link" itemprop="url">6/150</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-01 19:19:16" itemprop="dateCreated datePublished" datetime="2023-12-01T19:19:16+08:00">2023-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-02 21:40:35" itemprop="dateModified" datetime="2024-03-02T21:40:35+08:00">2024-03-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>707</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="买卖股票的最佳时机">121:买卖股票的最佳时机</h2>
-<p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素
-<code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
-<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在
-<strong>未来的某一个不同的日子</strong>
-卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
-<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回
-<code>0</code> 。</p>
-<h2 id="方法1暴力">方法1：暴力</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> tmax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ti = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;n; j++)&#123;</span><br><span class="line">                ti = prices[j]-prices[i];</span><br><span class="line">                <span class="keyword">if</span>(ti&gt;tmax)&#123;</span><br><span class="line">                    tmax = ti;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tmax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="方法2一次遍历">方法2：一次遍历</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> inf = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">int</span> minprice = inf, maxprofit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price: prices) &#123;</span><br><span class="line">            maxprofit = <span class="built_in">max</span>(maxprofit, price - minprice);</span><br><span class="line">            minprice = <span class="built_in">min</span>(price, minprice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxprofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/30/%E5%8A%9B%E6%89%A3/150_6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/30/%E5%8A%9B%E6%89%A3/150_6/" class="post-title-link" itemprop="url">6/150</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-30 17:44:34" itemprop="dateCreated datePublished" datetime="2023-11-30T17:44:34+08:00">2023-11-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-01 19:19:23" itemprop="dateModified" datetime="2023-12-01T19:19:23+08:00">2023-12-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>651</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="轮转数组">轮转数组</h2>
-<p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转
-<code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
-<h2 id="方法1额外数组">方法1：额外数组</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">newArr</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            newArr[(i + k) % n] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        nums.<span class="built_in">assign</span>(newArr.<span class="built_in">begin</span>(), newArr.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="方法2翻转">方法2：翻转</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(nums[start], nums[end]);</span><br><span class="line">            start += <span class="number">1</span>;</span><br><span class="line">            end -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k %= nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">reverse</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">reverse</span>(nums, <span class="number">0</span>, k - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">reverse</span>(nums, k, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/30/py/%E5%B0%8F%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/30/py/%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">小知识</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-11-30 16:13:04 / 修改时间：16:17:24" itemprop="dateCreated datePublished" datetime="2023-11-30T16:13:04+08:00">2023-11-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>194</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="函数返回">函数返回</h2>
-<p>我们知道如果一个函数返回多个参数，那么会是以元组形式返回的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#假设我们有一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">some_function</span>()</span></span><br><span class="line"><span class="function">	<span class="title">return</span> <span class="title">a</span>,<span class="title">b</span></span></span><br><span class="line"><span class="function"><span class="title">l</span> = []</span></span><br><span class="line"><span class="function"><span class="title">l</span> += <span class="title">some_function</span>()#+=运算符会逐个相加可迭代对象，列表会变成[<span class="title">a</span>,<span class="title">b</span>]</span></span><br><span class="line"><span class="function"><span class="title">l</span>.<span class="title">append</span>(<span class="params">some_function(<span class="params"></span>)</span>)#<span class="title">append</span>会直接把(<span class="params">a,b</span>)元组添加进列表变成一个元组列表,列表变成[(<span class="params">a,b</span>)]</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/29/%E5%8A%9B%E6%89%A3/150_5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Erin-zw">
-      <meta itemprop="description" content="来者犹可追">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Erin枫">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/29/%E5%8A%9B%E6%89%A3/150_5/" class="post-title-link" itemprop="url">5/150</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-11-29 15:08:20 / 修改时间：17:09:58" itemprop="dateCreated datePublished" datetime="2023-11-29T15:08:20+08:00">2023-11-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%9B%E6%89%A3/" itemprop="url" rel="index"><span itemprop="name">力扣</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多数元素">多数元素</h2>
-<p>给定一个大小为 <code>n</code> 的数组 <code>nums</code>
-，返回其中的多数元素。多数元素是指在数组中出现次数 <strong>大于</strong>
-<code>⌊ n/2 ⌋</code> 的元素。</p>
-<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
-<h3 id="方法1hash-map">方法1：hash map</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; counts;</span><br><span class="line">        <span class="keyword">int</span> majority = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num: nums) &#123;</span><br><span class="line">            ++counts[num];</span><br><span class="line">            <span class="keyword">if</span> (counts[num] &gt; cnt) &#123;</span><br><span class="line">                majority = num;</span><br><span class="line">                cnt = counts[num];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> majority;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="方法2排序">方法2：排序</h3>
-<p>如果将数组 nums
-中的所有元素按照单调递增或单调递减的顺序排序，那么下标为<span class="math inline">\([\frac{n} {2}]\)</span>的元素一定是众数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> nums[nums.<span class="built_in">size</span>() / <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="方法3随机化">方法3：随机化</h3>
-<p>时间复杂度：理论上最坏情况下的时间复杂度为<span class="math inline">\(O(\infty)\)</span>，因为如果我们的运气很差，这个算法会一直找不到众数，随机挑选无穷多次，所以最坏时间复杂度是没有上限的。然而，运行的期望时间是线性的。为了更简单地分析，先说服你自己：由于众数占据
-超过
-数组一半的位置，期望的随机次数会小于众数占据数组恰好一半的情况。因此，我们可以计算随机的期望次数（下标为
-<code>prob</code> 为原问题，<code>mod</code>
-为众数恰好占据数组一半数目的问题）：E_prob&lt;=E_mod=sum(i*1/2^i),from
-i=0 to ∞=2</p>
-<p>期望次数小于两次。期望的随机次数是常数。每一次随机后，我们需要
-O(n)的时间判断这个数是否为众数，因此期望的时间复杂度为 O(n)。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> candidate = nums[<span class="built_in">rand</span>() % nums.<span class="built_in">size</span>()];</span><br><span class="line">            <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num : nums)</span><br><span class="line">                <span class="keyword">if</span> (num == candidate)</span><br><span class="line">                    ++count;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; nums.<span class="built_in">size</span>() / <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> candidate;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="方法4分治">方法4：分治</h3>
-<p>如果数 a 是数组 nums 的众数，如果我们将 nums 分成两部分，那么 a
-必定是至少一部分的众数。</p>
-<p>我们可以使用反证法来证明这个结论。假设 a
-既不是左半部分的众数，也不是右半部分的众数，那么 a 出现的次数少于 l / 2
-+ r / 2 次，其中 l 和 r 分别是左半部分和右半部分的长度。由于 l / 2 + r /
-2 &lt;= (l + r) / 2，说明 a 也不是数组 nums
-的众数，因此出现了矛盾。所以这个结论是正确的。</p>
-<p>这样以来，我们就可以使用分治法解决这个问题：将数组分成左右两部分，分别求出左半部分的众数
-a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count_in_range</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt;= hi; ++i)</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == target)</span><br><span class="line">                ++count;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majority_element_rec</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lo == hi)</span><br><span class="line">            <span class="keyword">return</span> nums[lo];</span><br><span class="line">        <span class="keyword">int</span> mid = (lo + hi) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> left_majority = <span class="built_in">majority_element_rec</span>(nums, lo, mid);</span><br><span class="line">        <span class="keyword">int</span> right_majority = <span class="built_in">majority_element_rec</span>(nums, mid + <span class="number">1</span>, hi);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">count_in_range</span>(nums, left_majority, lo, hi) &gt; (hi - lo + <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> left_majority;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">count_in_range</span>(nums, right_majority, lo, hi) &gt; (hi - lo + <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> right_majority;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">majority_element_rec</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="方法5boyer-moore-投票算法">方法5：Boyer-Moore 投票算法</h3>
-<p><strong>思路</strong></p>
-<p>如果我们把众数记为 +1+1+1，把其他数记为
-−1-1−1，将它们全部加起来，显然和大于
-<code>0</code>，从结果本身我们可以看出众数比其他数多。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> candidate = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (num == candidate)</span><br><span class="line">                ++count;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (--count &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                candidate = num;</span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ol type="1">
-<li>如果候选人不是maj 则 maj,会和其他非候选人一起反对
-会反对候选人,所以候选人一定会下台(maj==0时发生换届选举)</li>
-<li>如果候选人是maj , 则maj 会支持自己，其他候选人会反对，同样因为maj
-票数超过一半，所以maj 一定会成功当选</li>
-</ol>
 
       
     </div>
@@ -1186,7 +1221,7 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1254,14 +1289,14 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1318,12 +1353,12 @@ a1 以及右半部分的众数 a2，随后在 a1 和 a2 中选出正确的众数
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">435k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:18</span>
+    <span title="站点阅读时长">6:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

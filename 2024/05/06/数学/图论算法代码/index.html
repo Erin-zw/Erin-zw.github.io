@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Dijkstra最短路径算法 算法原理  初始化：将起点到所有其他顶点的距离设置为无穷大，起点到自身的距离设置为0。 选择：从未确定最短路径的顶点中选择距离起点最近的顶点。 更新：更新该顶点相邻顶点的距离，如果通过该顶点可以得到更短的距离，则更新距离。 重复：重复第2步和第3步，直到所有顶点都确定了最短路径。  代码实现 12345678910111213141516171819">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论算法代码">
+<meta property="og:url" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="Dijkstra最短路径算法 算法原理  初始化：将起点到所有其他顶点的距离设置为无穷大，起点到自身的距离设置为0。 选择：从未确定最短路径的顶点中选择距离起点最近的顶点。 更新：更新该顶点相邻顶点的距离，如果通过该顶点可以得到更短的距离，则更新距离。 重复：重复第2步和第3步，直到所有顶点都确定了最短路径。  代码实现 12345678910111213141516171819">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/1.png">
+<meta property="og:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/2.png">
+<meta property="og:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/3.png">
+<meta property="og:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/4.png">
+<meta property="og:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/5.png">
+<meta property="article:published_time" content="2024-05-06T07:22:31.836Z">
+<meta property="article:modified_time" content="2024-05-06T08:26:15.822Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy/图论/代码/1.png">
+
+<link rel="canonical" href="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图论算法代码 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图论算法代码
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-06 15:22:31 / 修改时间：16:26:15" itemprop="dateCreated datePublished" datetime="2024-05-06T15:22:31+08:00">2024-05-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="dijkstra最短路径算法">Dijkstra最短路径算法</h2>
+<h3 id="算法原理">算法原理</h3>
+<ol type="1">
+<li>初始化：将起点到所有其他顶点的距离设置为无穷大，起点到自身的距离设置为0。</li>
+<li>选择：从未确定最短路径的顶点中选择距离起点最近的顶点。</li>
+<li>更新：更新该顶点相邻顶点的距离，如果通过该顶点可以得到更短的距离，则更新距离。</li>
+<li>重复：重复第2步和第3步，直到所有顶点都确定了最短路径。</li>
+</ol>
+<h3 id="代码实现">代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#无穷大设置</span></span><br><span class="line">MAX = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算字典中values中最小值所在的所有键值对</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_min_value_pairs</span>(<span class="params">dic</span>):</span></span><br><span class="line">    min_value = <span class="built_in">min</span>(dic.values())</span><br><span class="line">    <span class="comment"># 下面这条语句可以找到代表min_value的多个key</span></span><br><span class="line">    keys =  [k <span class="keyword">for</span> k, v <span class="keyword">in</span> dic.items() <span class="keyword">if</span> v == min_value]</span><br><span class="line">    <span class="comment"># 返回所有的最小值的键值对</span></span><br><span class="line">    <span class="keyword">return</span> [(k, dic[k]) <span class="keyword">for</span> k <span class="keyword">in</span> keys]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Dijkstra</span>(<span class="params">start, end, graph</span>):</span></span><br><span class="line">    nodes_num = <span class="built_in">len</span>(graph)</span><br><span class="line">    S = &#123;&#125; <span class="comment"># 已计算出起点到定点最短路径的定点集合</span></span><br><span class="line">    U = &#123;&#125; <span class="comment"># 未计算出起点到定点最短路径的定点集合</span></span><br><span class="line">    <span class="comment"># 键值对 4:8 表示起点到定点4的最短距离为8</span></span><br><span class="line">    <span class="comment"># 初始化 S 和 U</span></span><br><span class="line">    S[start] = <span class="number">0</span> <span class="comment"># 起点到自己的最短距离为 0 </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(nodes_num):</span><br><span class="line">        U[i] = graph[start][i]</span><br><span class="line">    <span class="comment"># 开始计算</span></span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(U) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># 在 U 中寻找到起点距离最短的节点，将其插入 S 中，并在 U 中移除</span></span><br><span class="line">        min_dis_node, min_dis = get_min_value_pairs(U)[<span class="number">0</span>]</span><br><span class="line">        S[min_dis_node] = min_dis</span><br><span class="line">        U.pop(min_dis_node)</span><br><span class="line">        <span class="comment"># 更新 U 中与新插入到 S 中的点对其相邻点到起点的距离值</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">list</span>(U.keys()):</span><br><span class="line">            <span class="keyword">if</span> graph[min_dis_node][key] != MAX: <span class="comment"># 找到与新插入点相连的顶点</span></span><br><span class="line">                U[key] = <span class="built_in">min</span>(U[key], min_dis + graph[min_dis_node][key])</span><br><span class="line">    <span class="keyword">return</span> S</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    </span><br><span class="line">    graph = [[<span class="number">0</span>, <span class="number">4</span>, MAX, MAX, MAX, MAX, MAX, <span class="number">8</span>, MAX],</span><br><span class="line">            [<span class="number">4</span>, <span class="number">0</span>, <span class="number">8</span>, MAX, MAX, MAX, MAX, <span class="number">3</span>, MAX],</span><br><span class="line">            [MAX, <span class="number">8</span>, <span class="number">0</span>, <span class="number">7</span>, MAX, <span class="number">4</span>, MAX, MAX, <span class="number">2</span>],</span><br><span class="line">            [MAX, MAX, <span class="number">7</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">14</span>, MAX, MAX, MAX],</span><br><span class="line">            [MAX, MAX, MAX, <span class="number">9</span>, <span class="number">0</span>, <span class="number">10</span>, MAX, MAX, MAX],</span><br><span class="line">            [MAX, MAX, <span class="number">4</span>, <span class="number">14</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">2</span>, MAX, MAX],</span><br><span class="line">            [MAX, MAX, MAX, MAX, MAX, <span class="number">2</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">6</span>],</span><br><span class="line">            [<span class="number">8</span>, <span class="number">3</span>, MAX, MAX, MAX, MAX, <span class="number">6</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">            [MAX, MAX, <span class="number">2</span>, MAX, MAX, MAX, <span class="number">6</span>, <span class="number">1</span>, <span class="number">0</span>]]</span><br><span class="line">    pairs = Dijkstra(<span class="number">0</span>, <span class="number">4</span>, graph)</span><br><span class="line">    <span class="built_in">print</span>(pairs)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;0→4 的最短距离为 &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(pairs[<span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果">测试结果</h3>
+<p><img src="/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy\图论\代码\1.png" style="zoom: 67%;"></p>
+<h2 id="fleury寻找欧拉回路算法">Fleury寻找欧拉回路算法</h2>
+<h3 id="算法原理-1">算法原理</h3>
+<ol type="1">
+<li><p>如果要找欧拉回路，可以从任意点开始，如果要找欧拉路径，需要从有着奇数度的两个及顶点中的一个开始，如果有奇数度顶点的话</p></li>
+<li><p>选择当前点相连的边，确保删除该边，不会将欧拉图分成两个不同的联通分量</p></li>
+<li><p>将该边加入到路径中，并将该边从欧拉图中删除，如果当前的选择有一个桥与非桥的边时候，优先选非桥的边，不到万不得已，不选桥</p></li>
+<li><p>持续该过程直到路径收集完成</p></li>
+</ol>
+<h3 id="代码实现-1">代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isEulerGraph</span>(<span class="params">graph</span>):</span></span><br><span class="line">    degree = &#123; i+<span class="number">1</span>:graph[i].count(<span class="number">1</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(graph))&#125;</span><br><span class="line">    <span class="keyword">for</span> deg <span class="keyword">in</span> degree.values():</span><br><span class="line">        <span class="keyword">if</span> deg % <span class="number">2</span> == <span class="number">1</span>: <span class="comment"># 当度数有为奇数的节点，就不是欧拉图</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isBridge</span>(<span class="params">v1,v2</span>):</span> <span class="comment"># 判断从v1从v2是否还有其他路径</span></span><br><span class="line">    visited = [-<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(length)] <span class="comment"># 初始化访问过节点为-1</span></span><br><span class="line">    ind = pos = <span class="number">0</span></span><br><span class="line">    visited[ind] = v1 <span class="comment"># 收录进起点</span></span><br><span class="line">    <span class="keyword">while</span> visited[ind] !=-<span class="number">1</span>: <span class="comment"># 当起点为有效节点时，循环</span></span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> <span class="built_in">range</span>(length):</span><br><span class="line">            <span class="keyword">if</span> graph[visited[ind]][v] == <span class="number">1</span> <span class="keyword">and</span> v == v2: <span class="comment"># 从图中的起点开始，如果存在其他边能连接到终点，则不是桥</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> graph[visited[ind]][v] == <span class="number">1</span> <span class="keyword">and</span> v <span class="keyword">not</span> <span class="keyword">in</span> visited: <span class="comment"># 起点到v有边，并且v还没被访问过</span></span><br><span class="line">                pos += <span class="number">1</span></span><br><span class="line">                visited[pos] = v <span class="comment"># 收录进来</span></span><br><span class="line">        ind +=<span class="number">1</span> <span class="comment"># ind作为新起点</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span> <span class="comment"># 如果没有找到，那么一定为桥</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fleury</span>(<span class="params">graph</span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">    path = <span class="built_in">list</span>() <span class="comment"># 欧拉路径</span></span><br><span class="line">    <span class="keyword">global</span> length</span><br><span class="line">    length = <span class="built_in">len</span>(graph)</span><br><span class="line">    cur = <span class="number">0</span> <span class="comment"># 设置起点为0</span></span><br><span class="line">    path.append(cur)</span><br><span class="line">    bridge = <span class="literal">True</span> <span class="comment"># 判断是否为桥的标记</span></span><br><span class="line">    visited = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(length)] <span class="comment"># 收录访问节点</span></span><br><span class="line">    edges = <span class="built_in">len</span>( [ graph[i][j] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(length) <span class="keyword">if</span> graph[i][j] ==<span class="number">1</span>] ) // <span class="number">2</span> <span class="comment"># 计算边数</span></span><br><span class="line">    <span class="keyword">for</span> e <span class="keyword">in</span> <span class="built_in">range</span>(edges):</span><br><span class="line">        <span class="keyword">for</span> adj <span class="keyword">in</span> <span class="built_in">range</span>(length): <span class="comment"># 枚举图中的所有节点找到邻接点</span></span><br><span class="line">            <span class="keyword">if</span> graph[visited[cur]][adj] == <span class="number">1</span>:</span><br><span class="line">                graph[visited[cur]][adj] = graph[adj][visited[cur]] = <span class="number">0</span> <span class="comment"># 删去边</span></span><br><span class="line">                <span class="keyword">if</span> isBridge(visited[cur],adj): <span class="comment"># 判断当前节点和邻接点之间是否为桥</span></span><br><span class="line">                    bn = adj <span class="comment"># 保存当前邻接点作为桥的一个端点</span></span><br><span class="line">                    graph[visited[cur]][adj] = graph[adj][visited[cur]] = <span class="number">1</span> <span class="comment"># 补上这条边，实际上是等把所有的邻接点遍历完之后，只要能找到还有不构成桥的边，就不过桥</span></span><br><span class="line">                <span class="keyword">else</span>: <span class="comment"># 找到不构成桥的邻接点，添加到访问过的结点中</span></span><br><span class="line">                    cur += <span class="number">1</span></span><br><span class="line">                    visited[cur] = adj <span class="comment"># 收录当前结点</span></span><br><span class="line">                    bridge = <span class="literal">False</span></span><br><span class="line">                    path.append(adj)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> bridge: <span class="comment"># 最后如果只能过桥，就把桥删去</span></span><br><span class="line">            graph[visited[cur]][bn] = graph[bn][visited[cur]] = <span class="number">0</span></span><br><span class="line">            cur += <span class="number">1</span></span><br><span class="line">            visited[cur] = bn</span><br><span class="line">            path.append(bn)</span><br><span class="line">        bridge = <span class="literal">True</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;欧拉回路为:&quot;</span>,path)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">   </span><br><span class="line">    graph = [[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">            [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">            [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">if</span> isEulerGraph(graph):</span><br><span class="line">        Fleury(graph)</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果-1">测试结果</h3>
+<p><img src="/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy\图论\代码\2.png" style="zoom:67%;"></p>
+<h2 id="霍夫曼树">霍夫曼树</h2>
+<h3 id="算法原理-2">算法原理</h3>
+<ol type="1">
+<li>选取权值最小的两个节点构造新的二叉树，其权值为两个节点权值之和；</li>
+<li>将新生成的节点加入到原来的节点集合中，重复执行<strong>步骤</strong>一和<strong>步骤</strong>二，直到只剩下一个节点，这个节点就是<strong>哈夫曼树</strong>的根节点。</li>
+</ol>
+<h3 id="代码实现-2">代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Huffman编码</span></span><br><span class="line"><span class="string">根据每个字母出现的频率，构造二叉树，写出对应的字母的编码</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造节点类(频率，字符，左子，右子，编码)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, f = <span class="literal">None</span>, char = <span class="literal">None</span>, left = <span class="literal">None</span>, right = <span class="literal">None</span>, code = <span class="literal">None</span></span>):</span></span><br><span class="line">        self.f = f  <span class="comment"># 频率</span></span><br><span class="line">        self.char = char  <span class="comment"># 字符</span></span><br><span class="line">        self.left = left  <span class="comment"># 左子</span></span><br><span class="line">        self.right = right  <span class="comment"># 右子</span></span><br><span class="line">        self.code = code  <span class="comment"># 编码</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 重载小于运算符，用于比较节点的频率</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span>(<span class="params">self, other</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.f &lt; other.f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造二叉树</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Heap</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._queue = []  <span class="comment"># 初始化一个空队列</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将元素添加到堆中</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self, priorty, item</span>):</span></span><br><span class="line">        heapq.heappush(self._queue, (priorty, item))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 从堆中弹出元素</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self._queue:</span><br><span class="line">            <span class="keyword">return</span> heapq.heappop(self._queue)[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Huffman编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Huffman</span>(<span class="params">C</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(C)</span><br><span class="line">    q = Heap()</span><br><span class="line">    <span class="comment"># 将每个字母的单独成树，后面再合并</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        q.push(C[i], node(C[i], <span class="built_in">chr</span>(<span class="number">97</span>+i)))</span><br><span class="line">    <span class="comment"># 合并,比较</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">        x = q.pop()</span><br><span class="line">        y = q.pop()</span><br><span class="line">        z = node(x.f+y.f, <span class="literal">None</span>, x, y, <span class="literal">None</span>)</span><br><span class="line">        q.push(x.f+y.f, z)</span><br><span class="line">    <span class="keyword">return</span> q.pop()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对排好序的二叉树进行编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Traceback</span>(<span class="params">root, code</span>):</span></span><br><span class="line">    <span class="keyword">if</span> root == <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    root.code = code</span><br><span class="line">    Traceback(root.left, code+<span class="string">&#x27;0&#x27;</span>)  <span class="comment"># 左编码添加0</span></span><br><span class="line">    Traceback(root.right, code+<span class="string">&#x27;1&#x27;</span>)  <span class="comment"># 右编码添加1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Print</span>(<span class="params">root,n</span>):</span></span><br><span class="line">    q = queue.Queue()</span><br><span class="line">    q.put(root)</span><br><span class="line">    l = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> q.empty():</span><br><span class="line">        node = q.get()</span><br><span class="line">        <span class="keyword">if</span> node.char:</span><br><span class="line">            l[node.char] = node.code</span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            q.put(node.left)</span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            q.put(node.right)</span><br><span class="line">    <span class="comment"># 按照字母顺序输出</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> l.keys():</span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">chr</span>(<span class="number">97</span>+j):</span><br><span class="line">                <span class="built_in">print</span>(i, l[i])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 输入的频率列表</span></span><br><span class="line">    C = [<span class="number">45</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">16</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="comment"># 构造Huffman树</span></span><br><span class="line">    root = Huffman(C)</span><br><span class="line">    <span class="comment"># 对Huffman树进行编码</span></span><br><span class="line">    Traceback(root, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="comment"># 打印编码结果</span></span><br><span class="line">    Print(root, <span class="built_in">len</span>(C))</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果-2">测试结果</h3>
+<p><img src="/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy\图论\代码\3.png" style="zoom:67%;"></p>
+<h2 id="kruskal最小生成树算法">Kruskal最小生成树算法</h2>
+<h3 id="算法原理-3">算法原理</h3>
+<ol type="1">
+<li>新建图G，G中拥有原图中相同的节点，但没有边</li>
+<li>将原图中所有的边按权值从小到大排序</li>
+<li>从权值最小的边开始，如果这条边连接的两个节点于图G中不在同一个连通分量中，则添加这条边到图G中</li>
+<li>重复3，直至图G中所有的节点都在同一个连通分量中</li>
+</ol>
+<h3 id="代码实现-3">代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以全局变量X定义节点集合，即类似&#123;&#x27;A&#x27;:&#x27;A&#x27;,&#x27;B&#x27;:&#x27;B&#x27;,&#x27;C&#x27;:&#x27;C&#x27;,&#x27;D&#x27;:&#x27;D&#x27;&#125;,如果A、B两点连通，</span></span><br><span class="line"><span class="comment"># 则会更改为&#123;&#x27;A&#x27;:&#x27;B&#x27;,&#x27;B&#x27;:&#x27;B&quot;,...&#125;,即任何两点连通之后，两点的值value将相同。</span></span><br><span class="line">X = <span class="built_in">dict</span>()</span><br><span class="line">R = <span class="built_in">dict</span>() <span class="comment"># 各点的初始等级均为0,如果被做为连接的的末端，则增加1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_set</span>(<span class="params">point</span>):</span></span><br><span class="line">    X[point] = point</span><br><span class="line">    R[point] = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">point</span>):</span></span><br><span class="line">    <span class="keyword">if</span> X[point] != point:</span><br><span class="line">        X[point] = find(X[point])</span><br><span class="line">    <span class="keyword">return</span> X[point]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">point1, point2</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;连接两个分量（节点）</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    r1 = find(point1)</span><br><span class="line">    r2 = find(point2)</span><br><span class="line">    <span class="keyword">if</span> r1 != r2:</span><br><span class="line">        <span class="keyword">if</span> R[r1] &gt; R[r2]:</span><br><span class="line">            X[r2] = r1</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            X[r1] = r2</span><br><span class="line">            <span class="keyword">if</span> R[r1] == R[r2]:</span><br><span class="line">                R[r2] += <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kruskal</span>(<span class="params">vertices,edges</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;KRUSKAL算法实现</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> vertice <span class="keyword">in</span> vertices:</span><br><span class="line">        make_set(vertice)</span><br><span class="line">    minu_tree = []</span><br><span class="line">    edges.sort()  <span class="comment"># 按照权重从小到大排序</span></span><br><span class="line">    <span class="keyword">for</span> edge <span class="keyword">in</span> edges:</span><br><span class="line">        weight, vertice1, vertice2 = edge</span><br><span class="line">        <span class="keyword">if</span> find(vertice1) != find(vertice2):</span><br><span class="line">            merge(vertice1, vertice2)</span><br><span class="line">            minu_tree.append(edge)</span><br><span class="line">    <span class="keyword">return</span> minu_tree</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    vertices = [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;G&#x27;</span>]</span><br><span class="line">    edges = [(<span class="number">7</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>),</span><br><span class="line">                (<span class="number">5</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;D&#x27;</span>),</span><br><span class="line">                (<span class="number">8</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>),</span><br><span class="line">                (<span class="number">9</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;D&#x27;</span>),</span><br><span class="line">                (<span class="number">7</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">                (<span class="number">5</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">                (<span class="number">15</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">                (<span class="number">6</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;F&#x27;</span>),</span><br><span class="line">                (<span class="number">8</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;F&#x27;</span>),</span><br><span class="line">                (<span class="number">9</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;G&#x27;</span>),</span><br><span class="line">                (<span class="number">11</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;G&#x27;</span>),</span><br><span class="line">                ]</span><br><span class="line">    <span class="built_in">print</span>(kruskal(vertices,edges))</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果-3">测试结果</h3>
+<p><img src="/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy\图论\代码\4.png" style="zoom:67%;"></p>
+<h2 id="prim最小生成树算法">Prim最小生成树算法</h2>
+<h3 id="算法原理-4">算法原理</h3>
+<ol type="1">
+<li><p>输入：一个加权连通图，顶点集合为V，边集合为E</p></li>
+<li><p>初始化：Vnew={x}，其中x是V中任一节点，作为起始点，Enew={}</p></li>
+<li><p>在E中选择权重最小的边(u,v)，其中u为集合Vnew中的元素，而v则是V中没有加入Vnew的顶点(如果权重相同就任选一个)</p></li>
+<li><p>将v加入集合Vnew中，将(u,v)加入集合Enew中</p></li>
+<li><p>重复步骤3-4，知道Vnew=V</p></li>
+<li><p>输出：使用Enew和Vnew描述得到的最小生成树</p></li>
+</ol>
+<h3 id="代码实现-4">代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prim</span>(<span class="params">vertexs, edges,start=<span class="string">&#x27;D&#x27;</span></span>):</span></span><br><span class="line">    adjacent_dict = defaultdict(<span class="built_in">list</span>) <span class="comment"># 注意：defaultdict(list)必须以list做为变量</span></span><br><span class="line">    <span class="keyword">for</span> weight,v1, v2 <span class="keyword">in</span> edges:</span><br><span class="line">        adjacent_dict[v1].append((weight, v1, v2))</span><br><span class="line">        adjacent_dict[v2].append((weight, v2, v1))</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    经过上述操作，将图转化为以下邻接表形式：</span></span><br><span class="line"><span class="string">    &#123;&#x27;A&#x27;: [(7, &#x27;A&#x27;, &#x27;B&#x27;), (5, &#x27;A&#x27;, &#x27;D&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;C&#x27;: [(8, &#x27;C&#x27;, &#x27;B&#x27;), (5, &#x27;C&#x27;, &#x27;E&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;B&#x27;: [(7, &#x27;B&#x27;, &#x27;A&#x27;), (8, &#x27;B&#x27;, &#x27;C&#x27;), (9, &#x27;B&#x27;, &#x27;D&#x27;), (7, &#x27;B&#x27;, &#x27;E&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;E&#x27;: [(7, &#x27;E&#x27;, &#x27;B&#x27;), (5, &#x27;E&#x27;, &#x27;C&#x27;), (15, &#x27;E&#x27;, &#x27;D&#x27;), (8, &#x27;E&#x27;, &#x27;F&#x27;), (9, &#x27;E&#x27;, &#x27;G&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;D&#x27;: [(5, &#x27;D&#x27;, &#x27;A&#x27;), (9, &#x27;D&#x27;, &#x27;B&#x27;), (15, &#x27;D&#x27;, &#x27;E&#x27;), (6, &#x27;D&#x27;, &#x27;F&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;G&#x27;: [(9, &#x27;G&#x27;, &#x27;E&#x27;), (11, &#x27;G&#x27;, &#x27;F&#x27;)], </span></span><br><span class="line"><span class="string">     &#x27;F&#x27;: [(6, &#x27;F&#x27;, &#x27;D&#x27;), (8, &#x27;F&#x27;, &#x27;E&#x27;), (11, &#x27;F&#x27;, &#x27;G&#x27;)]&#125;)</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    minu_tree = []  <span class="comment"># 存储最小生成树结果</span></span><br><span class="line">    visited = [start] <span class="comment"># 存储访问过的顶点，注意指定起始点</span></span><br><span class="line">    adjacent_vertexs_edges = adjacent_dict[start]</span><br><span class="line">    heapify(adjacent_vertexs_edges) <span class="comment"># 转化为小顶堆，便于找到权重最小的边</span></span><br><span class="line">    <span class="keyword">while</span> adjacent_vertexs_edges:</span><br><span class="line">        weight, v1, v2 = heappop(adjacent_vertexs_edges) <span class="comment"># 权重最小的边，并同时从堆中删除。 </span></span><br><span class="line">        <span class="keyword">if</span> v2 <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">            visited.append(v2)  <span class="comment"># 在used中有第一选定的点&#x27;A&#x27;，上面得到了距离A点最近的点&#x27;D&#x27;,举例是5。将&#x27;d&#x27;追加到used中</span></span><br><span class="line">            minu_tree.append((weight, v1, v2))</span><br><span class="line">            <span class="comment"># 再找与d相邻的点，如果没有在heap中，则应用heappush压入堆内，以加入排序行列</span></span><br><span class="line">            <span class="keyword">for</span> next_edge <span class="keyword">in</span> adjacent_dict[v2]: <span class="comment"># 找到v2相邻的边</span></span><br><span class="line">                <span class="keyword">if</span> next_edge[<span class="number">2</span>] <span class="keyword">not</span> <span class="keyword">in</span> visited: <span class="comment"># 如果v2还未被访问过，就加入堆中</span></span><br><span class="line">                    heappush(adjacent_vertexs_edges, next_edge)</span><br><span class="line">    <span class="keyword">return</span> minu_tree</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    vertices = [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;G&#x27;</span>]</span><br><span class="line">    edges = [(<span class="number">7</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>),</span><br><span class="line">            (<span class="number">5</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;D&#x27;</span>),</span><br><span class="line">            (<span class="number">8</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>),</span><br><span class="line">            (<span class="number">9</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;D&#x27;</span>),</span><br><span class="line">            (<span class="number">7</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">            (<span class="number">5</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">            (<span class="number">15</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>),</span><br><span class="line">            (<span class="number">6</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;F&#x27;</span>),</span><br><span class="line">            (<span class="number">8</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;F&#x27;</span>),</span><br><span class="line">            (<span class="number">9</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;G&#x27;</span>),</span><br><span class="line">            (<span class="number">11</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;G&#x27;</span>),</span><br><span class="line">            ]</span><br><span class="line">    <span class="built_in">print</span>(prim(vertices, edges ,start=<span class="string">&#x27;D&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果-4">测试结果</h3>
+<p><img src="/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/yStudy\图论\代码\5.png" style="zoom:67%;"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/05/06/%E6%95%B0%E5%AD%A6/%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81/" title="图论算法代码">http://example.com/2024/05/06/数学/图论算法代码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/26/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/K%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/" rel="prev" title="K个一组翻转链表">
+      <i class="fa fa-chevron-left"></i> K个一组翻转链表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/06/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E9%9A%8F%E6%9C%BA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/" rel="next" title="随机链表的复制">
+      随机链表的复制 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">Dijkstra最短路径算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text">测试结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fleury%E5%AF%BB%E6%89%BE%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Fleury寻找欧拉回路算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86-1"><span class="nav-number">2.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C-1"><span class="nav-number">2.3.</span> <span class="nav-text">测试结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%8D%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">霍夫曼树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86-2"><span class="nav-number">3.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C-2"><span class="nav-number">3.3.</span> <span class="nav-text">测试结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kruskal%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">Kruskal最小生成树算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86-3"><span class="nav-number">4.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C-3"><span class="nav-number">4.3.</span> <span class="nav-text">测试结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prim%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">Prim最小生成树算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86-4"><span class="nav-number">5.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-4"><span class="nav-number">5.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C-4"><span class="nav-number">5.3.</span> <span class="nav-text">测试结果</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">435k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

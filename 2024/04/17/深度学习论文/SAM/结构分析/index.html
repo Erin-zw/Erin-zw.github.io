@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"home":"/","about":"/about","tags":"/tags"}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="整体结构  图像编码器 相较于普通的VIT添加了可选的相对位置编码&#x2F;绝对位置编码和窗口局部注意力&#x2F;全局注意力。 图片嵌入选择的是卷积。 提示编码器 对三种类型提示进行分类Embedding和随机空间频率位置编码。最后返回稀疏嵌入和稠密嵌入 点分类嵌入选用的是torch自带的nn.Embedding函数 掩膜解码器 123456789101112131415161718192021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sam结构">
+<meta property="og:url" content="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Erin枫">
+<meta property="og:description" content="整体结构  图像编码器 相较于普通的VIT添加了可选的相对位置编码&#x2F;绝对位置编码和窗口局部注意力&#x2F;全局注意力。 图片嵌入选择的是卷积。 提示编码器 对三种类型提示进行分类Embedding和随机空间频率位置编码。最后返回稀疏嵌入和稠密嵌入 点分类嵌入选用的是torch自带的nn.Embedding函数 掩膜解码器 123456789101112131415161718192021">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/深度学习论文/SAM/1.png">
+<meta property="article:published_time" content="2024-04-17T12:07:38.297Z">
+<meta property="article:modified_time" content="2024-05-28T07:41:47.552Z">
+<meta property="article:author" content="Erin-zw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/深度学习论文/SAM/1.png">
+
+<link rel="canonical" href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sam结构 | Erin枫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="Erin枫" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+       
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Erin枫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Erin-zw">
+      <meta itemprop="description" content="来者犹可追">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Erin枫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sam结构
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-17 20:07:38" itemprop="dateCreated datePublished" datetime="2024-04-17T20:07:38+08:00">2024-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 15:41:47" itemprop="dateModified" datetime="2024-05-28T15:41:47+08:00">2024-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">深度学习论文</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="整体结构">整体结构</h3>
+<p><img src="/../../images/深度学习论文/SAM/1.png"></p>
+<h3 id="图像编码器">图像编码器</h3>
+<p>相较于普通的VIT添加了可选的<strong>相对位置编码</strong>/绝对位置编码和<strong>窗口局部注意力</strong>/全局注意力。</p>
+<p>图片嵌入选择的是卷积。</p>
+<h3 id="提示编码器">提示编码器</h3>
+<p>对三种类型提示进行分类Embedding和随机空间频率位置编码。最后返回稀疏嵌入和稠密嵌入</p>
+<p>点分类嵌入选用的是torch自带的nn.Embedding函数</p>
+<h3 id="掩膜解码器">掩膜解码器</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_masks</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    self,</span></span></span><br><span class="line"><span class="params"><span class="function">    image_embeddings: torch.Tensor, <span class="comment"># 1x(embed_dim=256 in vit-h)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    image_pe: torch.Tensor, <span class="comment"># 1x(embed_dim=256 in vit-h)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    sparse_prompt_embeddings: torch.Tensor, <span class="comment"># 1xNx(embed_dim)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    dense_prompt_embeddings: torch.Tensor, <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) -&gt; <span class="type">Tuple</span>[torch.Tensor, torch.Tensor]:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Predicts masks. See &#x27;forward&#x27; for more details.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Concatenate output tokens</span></span><br><span class="line">    output_tokens = torch.cat([self.iou_token.weight, self.mask_tokens.weight], dim=<span class="number">0</span>)  <span class="comment"># 5x256</span></span><br><span class="line">    output_tokens = output_tokens.unsqueeze(<span class="number">0</span>).expand(sparse_prompt_embeddings.size(<span class="number">0</span>), -<span class="number">1</span>, -<span class="number">1</span>)  <span class="comment"># 1xNx256</span></span><br><span class="line">    tokens = torch.cat((output_tokens, sparse_prompt_embeddings), dim=<span class="number">1</span>)    <span class="comment"># 1x(N+5)x256</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Expand per-image data in batch direction to be per-mask</span></span><br><span class="line">    src = torch.repeat_interleave(image_embeddings, tokens.shape[<span class="number">0</span>], dim=<span class="number">0</span>)     <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    src = src + dense_prompt_embeddings                                     <span class="comment"># 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    pos_src = torch.repeat_interleave(image_pe, tokens.shape[<span class="number">0</span>], dim=<span class="number">0</span>)     <span class="comment"># 1×(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    b, c, h, w = src.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run the transformer</span></span><br><span class="line">    hs, src = self.transformer(src, pos_src, tokens)      <span class="comment"># hs: 1x(num_mask_tokens)x(embed_dim), src: 1x(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    iou_token_out = hs[:, <span class="number">0</span>, :]                             <span class="comment">#</span></span><br><span class="line">    mask_tokens_out = hs[:, <span class="number">1</span> : (<span class="number">1</span> + self.num_mask_tokens), :]          <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Upscale mask embeddings and predict masks using the mask tokens</span></span><br><span class="line">    src = src.transpose(<span class="number">1</span>, <span class="number">2</span>).view(b, c, h, w)                  <span class="comment"># Bx(embed_dim)x(embed_H)x(embed_W)</span></span><br><span class="line">    upscaled_embedding = self.output_upscaling(src)             <span class="comment"># Bx(embed_dim//8)x(embed_H*4)x(embed_W*4)</span></span><br><span class="line">    hyper_in_list: <span class="type">List</span>[torch.Tensor] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.num_mask_tokens):</span><br><span class="line">        hyper_in_list.append(self.output_hypernetworks_mlps[i](mask_tokens_out[:, i, :]))</span><br><span class="line">    hyper_in = torch.stack(hyper_in_list, dim=<span class="number">1</span>)    <span class="comment"># Bx(num_mask_tokens)x(embed_dim//8)</span></span><br><span class="line">    b, c, h, w = upscaled_embedding.shape</span><br><span class="line">    masks = (hyper_in @ upscaled_embedding.view(b, c, h * w)).view(b, -<span class="number">1</span>, h, w)  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Generate mask quality predictions</span></span><br><span class="line">    iou_pred = self.iou_prediction_head(iou_token_out)  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> masks, iou_pred</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>输出tokens：由<code>iou_token</code>和<code>mask_tokens</code>组成，这些token在模型内部起到类似于模板或者指导信号的作用，用于引导模型生成具有特定含义（例如IoU分数或分割掩码）的输出。</li>
+<li>提示tokens：来自<code>sparse_prompt_embeddings</code>和<code>dense_prompt_embeddings</code>，它们分别代表了稀疏和密集形式的用户提供的提示信息，如点坐标、框坐标、文本描述等。这些提示被转化为embedding形式后参与到Transformer的计算中，帮助模型理解应该在哪里、如何生成目标对象的分割掩码。</li>
+</ol>
+<p><code>hyper_in</code> 是经过 MLP 处理后的张量，其维度为
+<code>Bxnum_mask_tokensx(embed_dim//8)</code>，表示对于每一批次的每一个输入图像，模型为每一个预测的掩码生成了一组权重系数（或者说决策参数）。这里的
+<code>num_mask_tokens</code> 表示模型可能为每个输入预测多个掩码。</p>
+<p><code>upscaled_embedding</code> 是经过上采样后的图像特征嵌入，维度为
+<code>Bx(embed_dim//8)x(embed_H)x(embed_W)</code>，意味着每个像素点都有一个降维后的特征向量表示。</p>
+<p>当进行矩阵乘法
+<code>hyper_in @ upscaled_embedding.view(b, c, h * w)</code>
+时，实际上是将 <code>hyper_in</code>
+中的掩码决策参数与每个像素点的特征向量进行点积运算。这样的操作允许模型根据不同掩码预测的需求，动态地调整每个像素点的预测概率，进而形成一个具体的二值掩码预测结果，每个掩码预测都对应着一个不同的背景/前景划分方案。</p>
+<h3 id="模型总体">模型总体</h3>
+<p>SAM模型输入传入batched_input，尺寸为B(batch)，是一个字典列表，</p>
+<p>包含batched_input: 输入图像列表,每个图像是一个字典,包含: # - 'image':
+输入图像,形状为 3xHxW, 已经转换为模型输入。 # - 'original_size':
+转换前的原始图像大小, 形状为 (H, W)。 # - 'point_coords':
+批量点提示,形状为 BxNx2, 已经转换为模型输入空间。 # - 'point_labels':
+批量点提示标签,形状为 BxN。 # - 'boxes': 批量框提示,形状为 Bx4,
+已经转换为模型输入空间。 # - 'mask_inputs': 批量掩码输入, 形状为
+Bx1xHxW。</p>
+<ul>
+<li>先进行图像预处理，插值到img_size并进行标准化接着堆叠成需要形状的张量。输入图像编码器获得图像嵌入。输出形状为（B，C，img_size//patch_size，img_size//patch_size）C经过一个neck层由embedded_size变成output_channels为prompt_embed_dim。</li>
+</ul>
+<p>最后精确形状为(B,prompt_embed_dim,image_embedding_size,image_embedding_size)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input_images = torch.stack([self.preprocess(x[&quot;image&quot;]) for x in batched_input], dim=0)     # BxCxHxW</span><br><span class="line">image_embeddings = self.image_encoder(input_images)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接着组合输入和图像的嵌入向量，先处理点框掩码提示，经过提示编码器分别获得稀疏和稠密提示嵌入向量。稀疏输出的形状为(B,N,prompt_embed_dim),稠密输出形状为(B,prompt_embed_dim,embed_H,embed_W)</li>
+<li>然后和图像嵌入向量一起送入掩码解码器获得低分辨率的mask和预测的IOU。接着把low_res_masks恢复成原始图像大小并和threshold概率进行比较输出掩码。最后合并成和输入同样格式的字典列表。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> image_record, curr_embedding <span class="keyword">in</span> <span class="built_in">zip</span>(batched_input, image_embeddings):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;point_coords&quot;</span> <span class="keyword">in</span> image_record:</span><br><span class="line">        points = (image_record[<span class="string">&quot;point_coords&quot;</span>], image_record[<span class="string">&quot;point_labels&quot;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        points = <span class="literal">None</span></span><br><span class="line">    sparse_embeddings, dense_embeddings = self.prompt_encoder(</span><br><span class="line">        points=points,</span><br><span class="line">        boxes=image_record.get(<span class="string">&quot;boxes&quot;</span>, <span class="literal">None</span>),</span><br><span class="line">        masks=image_record.get(<span class="string">&quot;mask_inputs&quot;</span>, <span class="literal">None</span>),</span><br><span class="line">    )</span><br><span class="line">    low_res_masks, iou_predictions = self.mask_decoder(</span><br><span class="line">        image_embeddings=curr_embedding.unsqueeze(<span class="number">0</span>),</span><br><span class="line">        image_pe=self.prompt_encoder.get_dense_pe(),</span><br><span class="line">        sparse_prompt_embeddings=sparse_embeddings,</span><br><span class="line">        dense_prompt_embeddings=dense_embeddings,</span><br><span class="line">        multimask_output=multimask_output,</span><br><span class="line">    )</span><br><span class="line">    masks = self.postprocess_masks(</span><br><span class="line">        low_res_masks,                                  <span class="comment"># 代表了低分辨率的掩码</span></span><br><span class="line">        input_size=image_record[<span class="string">&quot;image&quot;</span>].shape[-<span class="number">2</span>:],</span><br><span class="line">        original_size=image_record[<span class="string">&quot;original_size&quot;</span>],</span><br><span class="line">    )</span><br><span class="line">    masks = masks &gt; self.mask_threshold</span><br><span class="line">    outputs.append(</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;masks&quot;</span>: masks,</span><br><span class="line">            <span class="string">&quot;iou_predictions&quot;</span>: iou_predictions,</span><br><span class="line">            <span class="string">&quot;low_res_logits&quot;</span>: low_res_masks,</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Erin-zw 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Erin-zw 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Erin-zw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87/SAM/%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90/" title="sam结构">http://example.com/2024/04/17/深度学习论文/SAM/结构分析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/17/%E5%8A%9B%E6%89%A3/%E9%93%BE%E8%A1%A8/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/" rel="prev" title="回文链表">
+      <i class="fa fa-chevron-left"></i> 回文链表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/" rel="next" title="类型注解">
+      类型注解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">整体结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">图像编码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">提示编码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A9%E8%86%9C%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">掩膜解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%80%BB%E4%BD%93"><span class="nav-number">5.</span> <span class="nav-text">模型总体</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Erin-zw"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Erin-zw</p>
+  <div class="site-description" itemprop="description">来者犹可追</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Erin-zw" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Erin-zw" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zw93918@gmail.com" title="E-Mail → mailto:zw93918@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Erin-zw</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">435k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
